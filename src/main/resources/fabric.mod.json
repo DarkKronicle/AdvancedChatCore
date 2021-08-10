@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "advancedchatcore",
+  "version": "${version}",
+  "name": "AdvancedChatCore",
+  "description": "The core of all AdvancedChat features",
+  "authors": [
+    "DarkKronicle"
+  ],
+  "contact": {
+    "sources": "https://github.com/DarkKronicle/AdvancedChat",
+    "discord": "https://discord.gg/WnaE3uZxDA"
+  },
+  "license": "MPL-v2",
+  "icon": "assets/advancedchatcore/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "io.github.darkkronicle.advancedchatcore.AdvancedChatCore"
+    ],
+    "modmenu": [
+      "io.github.darkkronicle.advancedchatcore.config.gui.ModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "advancedchatcore.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.8.9+build.204",
+    "fabric": "*",
+    "minecraft": ">=1.17.0",
+    "malilib": ">=0.10.0-dev.20"
+  },
+  "custom": {
+    "modmenu:clientsideOnly": true,
+    "modupdater": {
+      "strategy": "curseforge",
+      "projectID": 387825,
+      "strict": false
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.idea/
+*.iml
+*.ipr
+*.iws
+lib/
+run/
+out/
+build/
+.gradle/
+classes/
+lombok.config
+extra.properties
