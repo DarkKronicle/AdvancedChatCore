@@ -4,7 +4,7 @@ plugins {
     id 'fabric-loom' version '0.8-SNAPSHOT'
     id 'maven-publish'
     id "io.freefair.lombok" version "6.0.0-m2"
-    id 'com.github.johnrengelman.shadow' version '4.0.2'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
 sourceCompatibility = JavaVersion.VERSION_16
