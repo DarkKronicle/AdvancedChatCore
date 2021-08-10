@@ -275,62 +275,6 @@ public class ConfigStorage implements IConfigHandler {
     }
 
 
-    public enum HudLineType implements IConfigOptionListEntry {
-        FULL("full"),
-        COMPACT("compact")
-        ;
-
-        public final String configString;
-
-        private static String translate(String key) {
-            return StringUtils.translate("advancedchat.config.hudlinetype." + key);
-        }
-
-        HudLineType(String configString) {
-            this.configString = configString   ;
-        }
-
-        @Override
-        public String getStringValue() {
-            return configString;
-        }
-
-        @Override
-        public String getDisplayName() {
-            return translate(configString);
-        }
-
-        @Override
-        public IConfigOptionListEntry cycle(boolean forward) {
-            int id = this.ordinal();
-            if (forward) {
-                id++;
-            } else {
-                id--;
-            }
-            if (id >= values().length) {
-                id = 0;
-            } else if (id < 0) {
-                id = values().length - 1;
-            }
-            return values()[id % values().length];
-        }
-
-        @Override
-        public IConfigOptionListEntry fromString(String value) {
-            return fromHudLineTypeString(value);
-        }
-
-        public static HudLineType fromHudLineTypeString(String hudlinetype) {
-            for (HudLineType h : HudLineType.values()) {
-                if (h.configString.equals(hudlinetype)) {
-                    return h;
-                }
-            }
-            return HudLineType.FULL;
-        }
-    }
-
     public enum Easing implements IConfigOptionListEntry, EasingMethod {
         LINEAR("linear", Method.LINEAR),
         SINE("sine", Method.SINE),
