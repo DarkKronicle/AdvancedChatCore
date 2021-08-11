@@ -84,7 +84,7 @@ public class ConfigStorage implements IConfigHandler {
                 new ConfigSimpleColor(translate("timecolor"), ColorUtil.WHITE, translate("info.timecolor")));
 
         public final static SaveableConfig<ConfigBoolean> SHOW_TIME = SaveableConfig.fromConfig("show_time",
-                new ConfigBoolean(translate("showtime"), false, translate("info.show_time")));
+                new ConfigBoolean(translate("showtime"), false, translate("info.showtime")));
 
         public final static SaveableConfig<ConfigBoolean> CLEAR_ON_DISCONNECT = SaveableConfig.fromConfig("clearOnDisconnect",
                 new ConfigBoolean(translate("clearondisconnect"), true, translate("info.clearondisconnect")));
