@@ -68,7 +68,7 @@ public class GuiConfigHandler {
 
     private ButtonGeneric createButton(int x, int y, int width, Tab tab) {
         ButtonGeneric button = new ButtonGeneric(x, y, width, 20, tab.getName());
-        button.setEnabled(!isTabActive(tab));
+//        button.setEnabled(!isTabActive(tab));
         return button;
     }
 
