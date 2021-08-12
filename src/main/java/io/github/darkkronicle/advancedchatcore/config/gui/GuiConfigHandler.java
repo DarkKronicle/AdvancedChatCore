@@ -22,11 +22,17 @@ public class GuiConfigHandler {
 
     private final static GuiConfigHandler INSTANCE = new GuiConfigHandler();
 
+    public String activeTab = "";
+
     @Getter
     private final List<Tab> tabs = new ArrayList<>();
 
     private GuiConfigHandler() {
 
+    }
+
+    public boolean isTabActive(GuiConfigHandler.Tab button) {
+        return button.getName().equals(activeTab);
     }
 
     public static GuiConfigHandler getInstance() {
@@ -62,7 +68,7 @@ public class GuiConfigHandler {
 
     private ButtonGeneric createButton(int x, int y, int width, Tab tab) {
         ButtonGeneric button = new ButtonGeneric(x, y, width, 20, tab.getName());
-        button.setEnabled(!GuiConfig.isTabActive(tab));
+        button.setEnabled(isTabActive(tab));
         return button;
     }
 
@@ -110,6 +116,7 @@ public class GuiConfigHandler {
 
         @Override
         default Screen getScreen(List<TabButton> buttons) {
+            GuiConfigHandler.getInstance().activeTab = this.getName();
             return new GuiConfig(buttons, getOptions());
         }
     }

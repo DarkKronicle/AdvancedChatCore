@@ -17,7 +17,7 @@ allprojects {
 
 ```
 dependencies {
-	modImplementation 'com.github.DarkKronicle:AdvancedChatCore:v1.0.1-beta1'
+	modImplementation 'com.github.DarkKronicle:AdvancedChatCore:VERSION'
 }
 ```
  

@@ -13,11 +13,6 @@ import java.util.List;
 // Released under GNU LGPL
 public class GuiConfig extends GuiConfigsBase {
 
-    public static String tab = "";
-
-    public static boolean isTabActive(GuiConfigHandler.Tab button) {
-        return button.getName().equals(tab);
-    }
 
     private List<GuiConfigHandler.TabButton> tabButtons;
     private List<IConfigBase> configs;
@@ -75,7 +70,7 @@ public class GuiConfig extends GuiConfigsBase {
 
         @Override
         public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
-            GuiConfig.tab = this.tabButton.getTab().getName();
+            GuiConfigHandler.getInstance().activeTab = this.tabButton.getTab().getName();
             GuiBase.openGui(this.tabButton.getTab().getScreen(GuiConfigHandler.getInstance().getButtons()));
 
         }
