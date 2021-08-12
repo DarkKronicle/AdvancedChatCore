@@ -20,6 +20,17 @@ dependencies {
 	modImplementation 'com.github.DarkKronicle:AdvancedChatCore:VERSION'
 }
 ```
+
+To have the core reference the mod as a module, int `fabric.mod.json` in `custom` put `"acmodule: true"`
+
+```JSON
+{
+  ...
+  "custom": {
+    "acmodule": true
+  }
+}
+```
  
  Reference the [example mod](https://github.com/DarkKronicle/AdvancedChatModuleTemplate) for individual use cases.
 
