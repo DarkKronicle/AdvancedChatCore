@@ -9,12 +9,16 @@ import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.CustomValue;
 
 @Environment(EnvType.CLIENT)
 public class InitHandler implements IInitializationHandler {
 
     @Override
     public void registerModHandlers() {
+        ModuleHandler.getInstance().registerModules();
         ConfigManager.getInstance().registerConfigHandler(AdvancedChatCore.MOD_ID, new ConfigStorage());
         MessageDispatcher.getInstance().register(new ChatHistoryProcessor(), -1);
         GuiConfigHandler.getInstance().addGuiSection(GuiConfigHandler.createGuiConfigSection(StringUtils.translate("advancedchat.config.tab.general"), ConfigStorage.General.OPTIONS));
