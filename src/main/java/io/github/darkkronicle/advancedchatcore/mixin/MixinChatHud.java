@@ -1,6 +1,7 @@
 package io.github.darkkronicle.advancedchatcore.mixin;
 
 import io.github.darkkronicle.advancedchatcore.chat.MessageDispatcher;
+import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.hud.ChatHud;
@@ -17,8 +18,21 @@ public class MixinChatHud {
 
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("HEAD"), cancellable = true)
     private void addMessage(Text text, int id, CallbackInfo ci) {
+        // Pass forward messages to dispatcher
         MessageDispatcher.getInstance().handleText(text);
         ci.cancel();
+    }
+
+    @Inject(method = "clear", at = @At("HEAD"), cancellable = true)
+    private void clearMessages(boolean clearTextHistory, CallbackInfo ci) {
+        if (!clearTextHistory) {
+            // This only get's called if it is the keybind f3 + d
+            return;
+        }
+        if (!ConfigStorage.General.CLEAR_ON_DISCONNECT.config.getBooleanValue()) {
+            // Cancel clearing if it's turned off
+            ci.cancel();
+        }
     }
 
 }

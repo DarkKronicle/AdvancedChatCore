@@ -129,7 +129,7 @@ public class WidgetRegistryOptionEntry<T extends ConfigRegistryOption<?>> extend
             }
 
             private static String translate(String key) {
-                return "advancedchat.config.filtermenu." + key;
+                return "advancedchat.config.button." + key;
             }
 
             public String getDisplayName() {
