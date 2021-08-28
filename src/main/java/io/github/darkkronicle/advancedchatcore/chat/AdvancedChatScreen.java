@@ -46,7 +46,10 @@ public class AdvancedChatScreen extends GuiBase {
         super();
         this.originalChatText = originalChatText;
         for (Function<AdvancedChatScreen, AdvancedChatScreenSection> supplier : ChatScreenSectionHolder.getInstance().getSectionSuppliers()) {
-            sections.add(supplier.apply(this));
+            AdvancedChatScreenSection section = supplier.apply(this);
+            if (section != null) {
+                sections.add(section);
+            }
         }
     }
 
