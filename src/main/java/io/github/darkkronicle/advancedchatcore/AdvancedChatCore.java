@@ -2,6 +2,7 @@ package io.github.darkkronicle.advancedchatcore;
 
 import fi.dy.masa.malilib.event.InitializationHandler;
 import fi.dy.masa.malilib.gui.GuiBase;
+import io.github.darkkronicle.advancedchatcore.chat.AdvancedSleepingChatScreen;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import io.github.darkkronicle.advancedchatcore.util.SyncTaskQueue;
 import net.fabricmc.api.ClientModInitializer;
@@ -9,6 +10,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -26,7 +28,8 @@ public class AdvancedChatCore implements ClientModInitializer {
 
     public static final String MOD_ID = "advancedchatcore";
 
-    public static final boolean FORWARD_TO_HUD = true;
+    public static boolean FORWARD_TO_HUD = true;
+    public static boolean CREATE_SUGGESTOR = true;
 
     private final static Random RANDOM = new Random();
 
@@ -42,11 +45,15 @@ public class AdvancedChatCore implements ClientModInitializer {
                 "advancedchat.category.keys"
         );
         KeyBindingHelper.registerKeyBinding(keyBinding);
+        MinecraftClient client = MinecraftClient.getInstance();
         ClientTickEvents.START_CLIENT_TICK.register(s -> {
             if (keyBinding.wasPressed()) {
                 GuiBase.openGui(GuiConfigHandler.getInstance().getDefaultScreen());
             }
             SyncTaskQueue.getInstance().update(s.inGameHud.getTicks());
+            if (client.currentScreen instanceof AdvancedSleepingChatScreen && !client.player.isSleeping()) {
+                GuiBase.openGui(null);
+            }
         });
     }
 

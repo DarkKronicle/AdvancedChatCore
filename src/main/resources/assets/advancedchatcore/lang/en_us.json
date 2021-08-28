@@ -25,5 +25,9 @@
   "advancedchat.config.general.info.messageownerregex": "The §6regular expression§r used to detect the head used for chat heads \n§cDon't mess with this unless you §c§oreally §cunderstand what you're working with!",
 
   "advancedchat.config.button.configure": "§bConfigure",
-  "advancedchat.config.button.active": "%s"
+  "advancedchat.config.button.active": "%s",
+  "advancedchatfilters.config.findtype.literal": "§6Literal",
+  "advancedchatfilters.config.findtype.upperlower": "§eUpper-Lower",
+  "advancedchatfilters.config.findtype.regex": "§bRegEx",
+  "advancedchatfilters.config.findtype.all": "§dAll"
 }

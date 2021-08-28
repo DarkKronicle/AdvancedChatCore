@@ -8,7 +8,9 @@
     "MixinChatHud",
     "MixinChatHudInvoker",
     "MixinKeyboard",
-    "MixinMinecraftClient"
+    "MixinMinecraftClient",
+    "MixinChatScreen",
+    "MixinSleepingChatScreen"
   ],
   "injectors": {
     "defaultRequire": 1

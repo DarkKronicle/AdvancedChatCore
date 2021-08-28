@@ -112,6 +112,33 @@ public class ConfigStorage implements IConfigHandler {
 
     }
 
+    public static class ChatScreen {
+
+        public static final String NAME = "chatscreen";
+
+        public static String translate(String key) {
+            return StringUtils.translate("advancedchat.config.chatscreen." + key);
+        }
+
+        public final static SaveableConfig<ConfigBoolean> PERSISTENT_TEXT = SaveableConfig.fromConfig("persistentText",
+                new ConfigBoolean(translate("persistenttext"), false, translate("info.persistenttext")));
+
+        public final static SaveableConfig<ConfigSimpleColor> COLOR = SaveableConfig.fromConfig("color",
+                new ConfigSimpleColor(translate("color"), ColorUtil.BLACK.withAlpha(100), translate("info.color")));
+
+        public final static SaveableConfig<ConfigBoolean> MORE_TEXT = SaveableConfig.fromConfig("moreText",
+                new ConfigBoolean(translate("moretext"), false, translate("info.moretext")));
+
+        public final static ImmutableList<SaveableConfig<? extends IConfigBase>> OPTIONS = ImmutableList.of(
+                PERSISTENT_TEXT,
+                COLOR,
+                MORE_TEXT
+        );
+
+
+
+    }
+
 
 
 
@@ -132,6 +159,7 @@ public class ConfigStorage implements IConfigHandler {
                 JsonObject root = element.getAsJsonObject();
 
                 readOptions(root, General.NAME, General.OPTIONS);
+                readOptions(root, ChatScreen.NAME, ChatScreen.OPTIONS);
 
                 int version = JsonUtils.getIntegerOrDefault(root, "configVersion", 0);
 
@@ -166,6 +194,7 @@ public class ConfigStorage implements IConfigHandler {
             JsonObject root = new JsonObject();
 
             writeOptions(root, General.NAME, General.OPTIONS);
+            writeOptions(root, ChatScreen.NAME, ChatScreen.OPTIONS);
 
             root.add("config_version", new JsonPrimitive(CONFIG_VERSION));
 
