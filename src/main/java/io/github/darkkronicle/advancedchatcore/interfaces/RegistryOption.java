@@ -38,6 +38,10 @@ public interface RegistryOption<TYPE> {
         return copy(null);
     }
 
+    /**
+     * If this value should be hidden in the menu
+     * @return If it should be hidden
+     */
     default boolean isHidden() {
         return false;
     }

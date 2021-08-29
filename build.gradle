@@ -51,9 +51,6 @@ shadowJar {
     duplicatesStrategy = 'include'
     destinationDir = file("${buildDir}/tmp/allJar")
     configurations = [project.configurations.shadow]
-    relocate 'com.softcorporation', 'io.github.darkkronicle.inscribe.shadow.com.softcorporation'
-    relocate 'com.github.maowcraft', 'io.github.darkkronicle.inscribe.shadow.com.github.maowcraft'
-    relocate 'org.mariuszgromada', 'io.github.darkkronicle.inscribe.shadow.org.mariusgromada'
     relocate 'com.google.code', 'io.github.darkkronicle.inscribe.shadow.com.google.code'
 
     from('.') {

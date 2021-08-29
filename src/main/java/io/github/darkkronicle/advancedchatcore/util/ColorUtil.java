@@ -6,6 +6,7 @@ import lombok.Value;
 import lombok.With;
 import lombok.experimental.Accessors;
 import lombok.experimental.UtilityClass;
+import net.minecraft.util.Formatting;
 
 /**
  * A static utility class that helps when dealing with colors that use bit shifting, like Minecraft.
@@ -51,15 +52,19 @@ public class ColorUtil {
         return color.withAlpha((int) Math.floor((alpha * percent)));
     }
 
+    public SimpleColor fromFormatting(Formatting formatting) {
+        return new SimpleColor(formatting.getColorValue());
+    }
+
     // Standard quick reference colors
     public final SimpleColor WHITE = new SimpleColor(255, 255, 255, 255);
     public final SimpleColor BLACK = new SimpleColor(0, 0, 0, 255);
     public final SimpleColor GRAY = new SimpleColor(128, 128, 128, 255);
+
     /**
      * Simple class that uses Lombok's many features to simplify.
      * You can convert at anytime from the color, to an int.
      */
-
     @Value
     @Accessors(fluent = true)
     public static class SimpleColor {

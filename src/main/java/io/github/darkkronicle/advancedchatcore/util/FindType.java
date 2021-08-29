@@ -3,12 +3,34 @@ package io.github.darkkronicle.advancedchatcore.util;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.util.StringUtils;
 
+/**
+ * Different methods of searching strings for matches.
+ */
 public enum FindType implements IConfigOptionListEntry {
+    /**
+     * An exact match found in the input
+     */
     LITERAL("literal"),
+
+    /**
+     * A match found in the input that is case insensitive
+     */
     UPPERLOWER("upperlower"),
+
+    /**
+     * A regex match found in the input
+     */
     REGEX("regex"),
+
+    /**
+     * Will always return true
+     */
     ALL("all")
     ;
+
+    /**
+     * Serialized name of the {@link FindType}
+     */
     public final String configString;
 
     private static String translate(String key) {
@@ -19,18 +41,31 @@ public enum FindType implements IConfigOptionListEntry {
         this.configString = configString   ;
     }
 
+    /**
+     * Get's the serialized name of the object.
+     * @return The config string
+     */
     @Override
     public String getStringValue() {
         return configString;
     }
 
+    /**
+     * Get's the human readable form of the object.
+     * @return String that is for the display name.
+     */
     @Override
     public String getDisplayName() {
         return translate(configString);
     }
 
+    /**
+     * Get's the next {@link FindType} from the previous one.
+     * @param forward Should cycle forward
+     * @return Next {@link FindType}
+     */
     @Override
-    public IConfigOptionListEntry cycle(boolean forward) {
+    public FindType cycle(boolean forward) {
         int id = this.ordinal();
         if (forward) {
             id++;
@@ -45,8 +80,13 @@ public enum FindType implements IConfigOptionListEntry {
         return values()[id % values().length];
     }
 
+    /**
+     * De-serializes a string to {@link FindType}
+     * @param value Serialized string
+     * @return The found {@link FindType}, null if none
+     */
     @Override
-    public IConfigOptionListEntry fromString(String value) {
+    public FindType fromString(String value) {
         return fromFindType(value);
     }
 

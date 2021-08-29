@@ -3,7 +3,11 @@ package io.github.darkkronicle.advancedchatcore.util;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * An object that will enforce limits on an integer value
+ */
 public class LimitedInteger {
+
     @Getter
     private Integer value;
     @Getter
@@ -58,10 +62,20 @@ public class LimitedInteger {
         return true;
     }
 
+    /**
+     * A method to see if it is possible to increment. This does not change any values.
+     *
+     * @param increment Value to increment
+     * @return If it can increment
+     */
     public boolean isPossible(int increment) {
         return !(value + increment >= limit);
     }
 
+    /**
+     * Force set's the current value. Ignores limits.
+     * @param value Integer to set
+     */
     public void setValue(int value) {
         this.value = value;
     }

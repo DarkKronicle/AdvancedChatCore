@@ -17,10 +17,14 @@ public class InitHandler implements IInitializationHandler {
 
     @Override
     public void registerModHandlers() {
+        // Setup modules
         ModuleHandler.getInstance().registerModules();
         ConfigManager.getInstance().registerConfigHandler(AdvancedChatCore.MOD_ID, new ConfigStorage());
+        // Setup chat history
         MessageDispatcher.getInstance().register(new ChatHistoryProcessor(), -1);
         GuiConfigHandler.getInstance().addGuiSection(GuiConfigHandler.createGuiConfigSection(StringUtils.translate("advancedchat.config.tab.general"), ConfigStorage.General.OPTIONS));
+
+        // This constructs the default chat suggestor
         ChatScreenSectionHolder.getInstance().addSectionSupplier((advancedChatScreen -> {
             if (AdvancedChatCore.CREATE_SUGGESTOR) {
                 return new DefaultChatSuggestor(advancedChatScreen);

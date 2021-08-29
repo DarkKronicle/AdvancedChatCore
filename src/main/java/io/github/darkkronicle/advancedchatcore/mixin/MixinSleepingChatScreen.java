@@ -16,6 +16,7 @@ public class MixinSleepingChatScreen {
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     public void sleepInit(CallbackInfo ci) {
+        // Open the Advanced sleeping screen
         GuiBase.openGui(new AdvancedSleepingChatScreen());
         ci.cancel();
     }

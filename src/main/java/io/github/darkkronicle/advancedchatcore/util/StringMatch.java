@@ -3,6 +3,11 @@ package io.github.darkkronicle.advancedchatcore.util;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * A class to store data about a match.
+ *
+ * This class is comparable based on where it starts.
+ */
 @AllArgsConstructor
 public class StringMatch implements Comparable<StringMatch> {
     /**

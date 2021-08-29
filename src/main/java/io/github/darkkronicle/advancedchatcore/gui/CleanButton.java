@@ -10,6 +10,9 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 
+/**
+ * A simple button
+ */
 @EqualsAndHashCode(callSuper = false)
 @ToString
 @Environment(EnvType.CLIENT)
@@ -18,6 +21,15 @@ public class CleanButton extends ButtonBase {
 
     private MinecraftClient client = MinecraftClient.getInstance();
 
+    /**
+     * Constructs a new simple clean button
+     * @param x X
+     * @param y Y
+     * @param width Width
+     * @param height Height
+     * @param baseColor Color that it should render when not hovered
+     * @param text Text to render
+     */
     public CleanButton(int x, int y, int width, int height, ColorUtil.SimpleColor baseColor, String text) {
         super(x, y, width, height, text);
         this.x = x;

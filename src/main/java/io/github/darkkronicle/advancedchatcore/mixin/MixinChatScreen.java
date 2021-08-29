@@ -23,12 +23,14 @@ public class MixinChatScreen {
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     public void chatInit(CallbackInfo ci) {
+        // Open the AdvancedChatScreen instead
         GuiBase.openGui(new AdvancedChatScreen(this.originalChatText));
         ci.cancel();
     }
 
     @Inject(method = "addScreenNarrations", at = @At("HEAD"), cancellable = true)
     public void screenNarrations(NarrationMessageBuilder builder, CallbackInfo ci) {
+        // Don't cause random narrations to happen/crashes
         ci.cancel();
     }
 

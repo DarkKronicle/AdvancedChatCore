@@ -97,6 +97,14 @@ public class SearchUtils {
         return Optional.empty();
     }
 
+    /**
+     * Get's first match found based off of conditions
+     *
+     * @param input String to search
+     * @param toMatch Search content
+     * @param type {@link FindType} way to search
+     * @return Optional of a {@link StringMatch} if found
+     */
     public Optional<StringMatch> getMatch(String input, String toMatch, FindType type) {
         if (type == FindType.ALL) {
             return Optional.of(new StringMatch(input, 0, input.length()));
@@ -105,8 +113,10 @@ public class SearchUtils {
         if (pattern == null) {
             return Optional.empty();
         }
+        // Use treeset to sort the matches
         Set<StringMatch> matches = new TreeSet<>();
         Matcher matcher = pattern.matcher(input);
+        // Add and sort matches
         addMatches(matches, matcher, 1);
         if (matches.size() != 0) {
             return Optional.of(matches.toArray(new StringMatch[0])[0]);
@@ -121,7 +131,6 @@ public class SearchUtils {
             i++;
         }
     }
-
 
 
     /**
@@ -180,6 +189,11 @@ public class SearchUtils {
         return null;
     }
 
+    /**
+     * Strip color codes from a String
+     * @param string String to strip
+     * @return String stripped of colorcodes
+     */
     public String stripColorCodes(String string) {
         return string.replaceAll("§.", "");
     }

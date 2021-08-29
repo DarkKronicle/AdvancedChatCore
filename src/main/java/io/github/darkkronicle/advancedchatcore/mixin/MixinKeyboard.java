@@ -15,6 +15,7 @@ public class MixinKeyboard {
 
     @Inject(method = "processF3", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;clear(Z)V"))
     public void processF3Chat(int key, CallbackInfoReturnable<Boolean> ci) {
+        // Make it so that history can still be cleared
         ChatHistory.getInstance().clearAll();
     }
 

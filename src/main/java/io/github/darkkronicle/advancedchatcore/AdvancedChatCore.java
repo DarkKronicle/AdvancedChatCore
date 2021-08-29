@@ -28,7 +28,14 @@ public class AdvancedChatCore implements ClientModInitializer {
 
     public static final String MOD_ID = "advancedchatcore";
 
+    /**
+     * Whether or not messages should be sent to the HUD. Used for other modules overwriting HUD.
+     */
     public static boolean FORWARD_TO_HUD = true;
+
+    /**
+     * Whether or not the default chat suggestor should be created. Used for modules overwriting the suggestor.
+     */
     public static boolean CREATE_SUGGESTOR = true;
 
     private final static Random RANDOM = new Random();
@@ -50,7 +57,9 @@ public class AdvancedChatCore implements ClientModInitializer {
             if (keyBinding.wasPressed()) {
                 GuiBase.openGui(GuiConfigHandler.getInstance().getDefaultScreen());
             }
+            // Allow for delayed tasks to be added
             SyncTaskQueue.getInstance().update(s.inGameHud.getTicks());
+            // Make sure we're not in the sleeping screen while awake
             if (client.currentScreen instanceof AdvancedSleepingChatScreen && !client.player.isSleeping()) {
                 GuiBase.openGui(null);
             }
