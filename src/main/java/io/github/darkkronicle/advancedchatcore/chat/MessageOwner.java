@@ -16,9 +16,21 @@ import net.minecraft.util.Identifier;
 @AllArgsConstructor
 @Environment(EnvType.CLIENT)
 public class MessageOwner {
+
+    /**
+     * Player name
+     */
     String name;
+
+    /**
+     * Entry that has player data
+     */
     PlayerListEntry entry;
 
+    /**
+     * The texture of the player's skin
+     * @return Identifier with texture data
+     */
     public Identifier getTexture() {
         return entry.getSkinTexture();
     }

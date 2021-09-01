@@ -135,11 +135,7 @@ public class ConfigStorage implements IConfigHandler {
                 MORE_TEXT
         );
 
-
-
     }
-
-
 
 
     public static void loadFromFile() {
@@ -167,7 +163,12 @@ public class ConfigStorage implements IConfigHandler {
         }
     }
 
-    private static void applyRegistry(JsonElement element, AbstractRegistry<?, ? extends ConfigRegistryOption<?>> registry) {
+    /**
+     * Applies a JSON element into a registry
+     * @param element Element in key
+     * @param registry Registry to apply too
+     */
+    public static void applyRegistry(JsonElement element, AbstractRegistry<?, ? extends ConfigRegistryOption<?>> registry) {
         if (element == null || !element.isJsonObject()) {
             return;
         }
@@ -179,7 +180,12 @@ public class ConfigStorage implements IConfigHandler {
         }
     }
 
-    private static JsonObject saveRegistry(AbstractRegistry<?, ? extends ConfigRegistryOption<?>> registry) {
+    /**
+     * Creates a {@link JsonObject} containing registry data
+     * @param registry
+     * @return
+     */
+    public static JsonObject saveRegistry(AbstractRegistry<?, ? extends ConfigRegistryOption<?>> registry) {
         JsonObject object = new JsonObject();
         for (ConfigRegistryOption<?> option : registry.getAll()) {
             object.add(option.getSaveString(), option.save());
@@ -303,7 +309,9 @@ public class ConfigStorage implements IConfigHandler {
         saveFromFile();
     }
 
-
+    /**
+     * Serializable easing data
+     */
     public enum Easing implements IConfigOptionListEntry, EasingMethod {
         LINEAR("linear", Method.LINEAR),
         SINE("sine", Method.SINE),

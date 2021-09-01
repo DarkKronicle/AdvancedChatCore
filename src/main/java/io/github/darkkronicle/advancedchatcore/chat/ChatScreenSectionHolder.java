@@ -7,10 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * A class to handle the construction and distribution of {@link AdvancedChatScreenSection} when
+ * {@link AdvancedChatScreen} is created.
+ */
 public class ChatScreenSectionHolder {
 
     private final static ChatScreenSectionHolder INSTANCE = new ChatScreenSectionHolder();
 
+    /**
+     * All suppliers for the sections
+     */
     @Getter
     private final List<Function<AdvancedChatScreen, AdvancedChatScreenSection>> sectionSuppliers = new ArrayList<>();
 

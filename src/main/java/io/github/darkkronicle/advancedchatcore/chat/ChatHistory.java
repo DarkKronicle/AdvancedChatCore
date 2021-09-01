@@ -20,16 +20,28 @@ public class ChatHistory {
 
     private final static ChatHistory INSTANCE = new ChatHistory();
 
+    /**
+     * Stored lines
+     */
     @Getter
     private final List<ChatMessage> messages = new ArrayList<>();
 
+    /**
+     * Maximum lines for storage
+     */
     @Getter
     @Setter
     private int maxLines = 500;
 
+    /**
+     * Runnable's to run when chat history is cleared
+     */
     @Getter
     private final List<Runnable> onClear = new ArrayList<>();
 
+    /**
+     * {@link IChatMessageProcessor} for when history is updated.
+     */
     @Getter
     private final List<IChatMessageProcessor> onUpdate = new ArrayList<>();
 
@@ -89,6 +101,7 @@ public class ChatHistory {
     public boolean add(ChatMessage message) {
         sendUpdate(message, IChatMessageProcessor.UpdateType.NEW);
         for (int i = 0; i < ConfigStorage.General.CHAT_STACK.config.getIntegerValue() && i < messages.size(); i++) {
+            // Check for stacks
             ChatMessage chatLine = messages.get(i);
             if (message.isSimilar(chatLine)) {
                 chatLine.setStacks(chatLine.getStacks() + 1);

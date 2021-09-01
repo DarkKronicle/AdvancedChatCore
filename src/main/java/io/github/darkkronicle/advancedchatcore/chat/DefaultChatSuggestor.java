@@ -7,6 +7,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.CommandSuggestor;
 import net.minecraft.client.util.math.MatrixStack;
 
+/**
+ * Handles the CommandSuggestor for the chat
+ */
 @Environment(EnvType.CLIENT)
 public class DefaultChatSuggestor extends AdvancedChatScreenSection {
 

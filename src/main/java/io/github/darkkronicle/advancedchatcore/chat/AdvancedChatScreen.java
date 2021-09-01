@@ -25,9 +25,16 @@ import java.util.function.Function;
 public class AdvancedChatScreen extends GuiBase {
     private String finalHistory = "";
     private int messageHistorySize = -1;
+
+    /**
+     * Chat field at the bottom of the screen
+     */
     @Getter
     protected TextFieldWidget chatField;
 
+    /**
+     * What the chat box started out with
+     */
     @Getter
     private String originalChatText = "";
 
@@ -82,6 +89,7 @@ public class AdvancedChatScreen extends GuiBase {
 
         ColorUtil.SimpleColor baseColor = getColor();
         int x = client.getWindow().getScaledWidth() - 1;
+        // Add settings button
         String settings = StringUtils.translate("advancedchat.gui.button.settings");
         int settingsWidth = StringUtils.getStringWidth(settings) + 5;
         x -= settingsWidth + 5;
@@ -136,11 +144,13 @@ public class AdvancedChatScreen extends GuiBase {
             return true;
         }
         if (keyCode == KeyCodes.KEY_ESCAPE) {
+            // Exit out
             GuiBase.openGui(null);
             return true;
         }
         if (keyCode == KeyCodes.KEY_ENTER || keyCode == KeyCodes.KEY_KP_ENTER) {
             String string = this.chatField.getText().trim();
+            // Strip message and send
             if (!string.isEmpty()) {
                 if (string.length() > 256) {
                     string = string.substring(0, 256);
@@ -149,22 +159,27 @@ public class AdvancedChatScreen extends GuiBase {
             }
             this.chatField.setText("");
             last = "";
+            // Exit
             GuiBase.openGui(null);
             return true;
         }
         if (keyCode == KeyCodes.KEY_UP) {
+            // Go through previous history
             this.setChatFromHistory(-1);
             return true;
         }
         if (keyCode == KeyCodes.KEY_DOWN) {
+            // Go through previous history
             this.setChatFromHistory(1);
             return true;
         }
         if (keyCode == KeyCodes.KEY_PAGE_UP) {
+            // Scroll
             client.inGameHud.getChatHud().scroll(this.client.inGameHud.getChatHud().getVisibleLineCount() - 1);
             return true;
         }
         if (keyCode == KeyCodes.KEY_PAGE_DOWN) {
+            // Scroll
             client.inGameHud.getChatHud().scroll(-this.client.inGameHud.getChatHud().getVisibleLineCount() + 1);
             return true;
         }
@@ -189,6 +204,7 @@ public class AdvancedChatScreen extends GuiBase {
             amount *= 7.0D;
         }
 
+        // Send to hud to scroll
         client.inGameHud.getChatHud().scroll(amount);
         return true;
     }
@@ -236,24 +252,24 @@ public class AdvancedChatScreen extends GuiBase {
     }
 
     public void setChatFromHistory(int i) {
-        int j = this.messageHistorySize + i;
-        int k = this.client.inGameHud.getChatHud().getMessageHistory().size();
-        j = MathHelper.clamp(j, 0, k);
-        if (j != this.messageHistorySize) {
-            if (j == k) {
-                this.messageHistorySize = k;
+        int targetIndex = this.messageHistorySize + i;
+        int maxIndex = this.client.inGameHud.getChatHud().getMessageHistory().size();
+        targetIndex = MathHelper.clamp(targetIndex, 0, maxIndex);
+        if (targetIndex != this.messageHistorySize) {
+            if (targetIndex == maxIndex) {
+                this.messageHistorySize = maxIndex;
                 this.chatField.setText(this.finalHistory);
             } else {
-                if (this.messageHistorySize == k) {
+                if (this.messageHistorySize == maxIndex) {
                     this.finalHistory = this.chatField.getText();
                 }
 
-                String hist = this.client.inGameHud.getChatHud().getMessageHistory().get(j);
+                String hist = this.client.inGameHud.getChatHud().getMessageHistory().get(targetIndex);
                 this.chatField.setText(hist);
                 for (AdvancedChatScreenSection section : sections) {
                     section.setChatFromHistory(hist);
                 }
-                this.messageHistorySize = j;
+                this.messageHistorySize = targetIndex;
             }
         }
     }

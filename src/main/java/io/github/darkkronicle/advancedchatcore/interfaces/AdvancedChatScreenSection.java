@@ -2,6 +2,7 @@ package io.github.darkkronicle.advancedchatcore.interfaces;
 
 import io.github.darkkronicle.advancedchatcore.chat.AdvancedChatScreen;
 import lombok.Getter;
+import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.util.math.MatrixStack;
 
 /**
@@ -9,7 +10,7 @@ import net.minecraft.client.util.math.MatrixStack;
  *
  * This is used so that many modules can add onto the screen without problems occuring.
  */
-public abstract class AdvancedChatScreenSection {
+public abstract class AdvancedChatScreenSection implements Drawable {
 
     /**
      * The {@link AdvancedChatScreen} that is linked to this section
