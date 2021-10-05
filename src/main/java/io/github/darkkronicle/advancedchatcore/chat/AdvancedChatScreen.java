@@ -216,8 +216,15 @@ public class AdvancedChatScreen extends GuiBase {
                 return true;
             }
         }
-        if (client.inGameHud.getChatHud().mouseClicked(mouseX, mouseY)) {
+        ChatHud hud = client.inGameHud.getChatHud();
+        if (hud.mouseClicked(mouseX, mouseY)) {
             return true;
+        }
+        Style style = hud.getText(mouseX, mouseY);
+        if (style != null && style.getClickEvent() != null) {
+            if (this.handleTextClick(style)) {
+                return true;
+            }
         }
         return this.chatField.mouseClicked(mouseX, mouseY, button) || super.mouseClicked(mouseX, mouseY, button);
     }

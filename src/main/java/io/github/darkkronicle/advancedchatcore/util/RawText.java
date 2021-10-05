@@ -103,7 +103,8 @@ public class RawText implements MutableText {
     @Deprecated
     @Override
     public List<Text> getSiblings() {
-        return new ArrayList<>(Collections.singleton(this));
+        // This can cause recursion in some situations
+        return new ArrayList<>();
     }
 
     /**

@@ -82,6 +82,14 @@ public class GuiConfigHandler {
     }
 
     public Screen getDefaultScreen() {
+        if (activeTab.isEmpty()) {
+            activeTab = tabs.get(0).getName();
+        }
+        for (Tab tab : tabs) {
+            if (tab.getName().equalsIgnoreCase(activeTab)) {
+                return tab.getScreen(getButtons());
+            }
+        }
         return tabs.get(0).getScreen(getButtons());
     }
 
