@@ -3,6 +3,7 @@ package io.github.darkkronicle.advancedchatcore.config.gui;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
+import fi.dy.masa.malilib.util.StringUtils;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -111,7 +112,7 @@ public class GuiConfigHandler {
 
             @Override
             public String getName() {
-                return name;
+                return StringUtils.translate(name);
             }
         };
     }

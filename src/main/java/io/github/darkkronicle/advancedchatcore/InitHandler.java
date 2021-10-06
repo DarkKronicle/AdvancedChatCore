@@ -30,17 +30,10 @@ public class InitHandler implements IInitializationHandler {
         for (ConfigStorage.SaveableConfig<? extends IConfigBase> saveable : ConfigStorage.General.OPTIONS) {
             configBases.add(saveable.config);
         }
-        GuiConfigHandler.getInstance().addGuiSection(new GuiConfigHandler.GuiConfigSection() {
-            @Override
-            public List<IConfigBase> getOptions() {
-                return configBases;
-            }
-
-            @Override
-            public String getName() {
-                return StringUtils.translate("advancedchat.config.tab.general");
-            }
-        });
+        GuiConfigHandler.getInstance().addGuiSection(GuiConfigHandler.createGuiConfigSection(
+                "advancedchat.config.tab.general",
+                ConfigStorage.General.OPTIONS
+        ));
 
         // This constructs the default chat suggestor
         ChatScreenSectionHolder.getInstance().addSectionSupplier((advancedChatScreen -> {
