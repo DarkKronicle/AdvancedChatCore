@@ -17,7 +17,7 @@ You can either manually edit the config file, located in `~.minecraft/config/adv
 
 ## About AdvancedChat Modules
 
-AdvancedChat Modules splits the features of [AdvancedChat](https://www.curseforge.com/minecraft/mc-mods/advancedchat/) into several different mods, all of which depend on AdvancedChatCore. This simplifies development, and also allows for the user to pick-and-choose what features of AdvancedChat they want or don't want. The main AdvancedChat mod will eventually serve as a bundle of all AdvancedChat modules. 
+AdvancedChat Modules splits the features of [AdvancedChat](https://www.curseforge.com/minecraft/mc-mods/advancedchat/) into several different mods, all of which depend on AdvancedChatCore. This simplifies development, and also allows for the user to pick-and-choose what features of AdvancedChat they want or don't want. The main AdvancedChat mod will eventually serve as a bundle of all AdvancedChat modules. [Full list](https://github.com/DarkKronicle/AdvancedChatCore/wiki/Modules-List)
 
 ## Developers
 
