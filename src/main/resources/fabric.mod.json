@@ -8,7 +8,9 @@
     "DarkKronicle"
   ],
   "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/advancedchatcore",
     "sources": "https://github.com/DarkKronicle/AdvancedChat",
+    "issues": "https://github.com/DarkKronicle/AdvancedChat/issues",
     "discord": "https://discord.gg/WnaE3uZxDA"
   },
   "license": "MPL-v2",
