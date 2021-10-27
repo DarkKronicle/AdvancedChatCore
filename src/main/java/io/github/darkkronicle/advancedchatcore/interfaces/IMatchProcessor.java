@@ -3,7 +3,7 @@ package io.github.darkkronicle.advancedchatcore.interfaces;
 import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.SearchResult;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * An interface to receive text and matches to process.

@@ -6,7 +6,7 @@ import io.github.darkkronicle.advancedchatcore.util.AbstractRegistry;
 import io.github.darkkronicle.advancedchatcore.interfaces.ConfigRegistryOption;
 import net.minecraft.client.gui.screen.Screen;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.stream.Collectors;
 

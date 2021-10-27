@@ -2,7 +2,7 @@ package io.github.darkkronicle.advancedchatcore.interfaces;
 
 import net.minecraft.client.gui.screen.Screen;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 /**
