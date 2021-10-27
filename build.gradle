@@ -37,13 +37,9 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
 
-    modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.0:${project.malilib_version}"
+    modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:${project.malilib_version}"
 
     modCompileOnly "io.github.prospector:modmenu:1.16.8"
-
-    shadow 'com.google.code.findbugs:jsr305:3.0.0'
-
-    shadow 'com.google.code.gson:gson:2.8.6'
 
 }
 
@@ -51,7 +47,6 @@ shadowJar {
     duplicatesStrategy = 'include'
     destinationDir = file("${buildDir}/tmp/allJar")
     configurations = [project.configurations.shadow]
-    relocate 'com.google.code', 'io.github.darkkronicle.inscribe.shadow.com.google.code'
 
     from('.') {
         include 'LICENSE.txt'

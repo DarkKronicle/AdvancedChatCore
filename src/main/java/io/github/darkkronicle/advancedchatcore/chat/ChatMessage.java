@@ -8,8 +8,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
