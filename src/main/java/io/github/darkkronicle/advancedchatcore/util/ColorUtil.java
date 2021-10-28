@@ -15,9 +15,11 @@ import net.minecraft.util.Formatting;
 @UtilityClass
 public class ColorUtil {
 
-    // Probably my best hope for color... https://github.com/parzivail/StarWarsMod/blob/master/src/main/java/com/parzivail/util/ui/GLPalette.java
+    // Probably my best hope for color...
+    // https://github.com/parzivail/StarWarsMod/blob/master/src/main/java/com/parzivail/util/ui/GLPalette.java
     // I don't like color ints :(
-    // intToColor and colorToInt from parzivail https://github.com/parzivail (slightly modified to account for Alpha)
+    // intToColor and colorToInt from parzivail https://github.com/parzivail (slightly modified to
+    // account for Alpha)
 
     /**
      * Turns a packed RGB color into a Color
@@ -62,23 +64,24 @@ public class ColorUtil {
     public final SimpleColor GRAY = new SimpleColor(128, 128, 128, 255);
 
     /**
-     * Simple class that uses Lombok's many features to simplify.
-     * You can convert at anytime from the color, to an int.
+     * Simple class that uses Lombok's many features to simplify. You can convert at anytime from
+     * the color, to an int.
      */
     @Value
     @Accessors(fluent = true)
     public static class SimpleColor {
-        @Getter
-        int red;
-        @Getter
-        int green;
-        @Getter
-        int blue;
+
+        @Getter int red;
+
+        @Getter int green;
+
+        @Getter int blue;
+
         @Getter
         @With(AccessLevel.PUBLIC)
         int alpha;
-        @Getter
-        int color;
+
+        @Getter int color;
 
         public SimpleColor(int color) {
             this.color = color;
@@ -109,10 +112,7 @@ public class ColorUtil {
             this.color = colorToInt(this);
         }
 
-
-        /**
-         * Generated for use of Lombok's @With
-         */
+        /** Generated for use of Lombok's @With */
         public SimpleColor(int red, int green, int blue, int alpha, int color) {
             this.red = red;
             this.green = green;
@@ -124,7 +124,5 @@ public class ColorUtil {
         public String getString() {
             return String.format("#%08X", color);
         }
-
     }
-
 }

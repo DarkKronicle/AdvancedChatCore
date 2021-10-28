@@ -8,54 +8,42 @@ import net.minecraft.client.util.math.MatrixStack;
 /**
  * A class meant to extend onto the {@link AdvancedChatScreen}
  *
- * This is used so that many modules can add onto the screen without problems occuring.
+ * <p>This is used so that many modules can add onto the screen without problems occuring.
  */
 public abstract class AdvancedChatScreenSection implements Drawable {
 
-    /**
-     * The {@link AdvancedChatScreen} that is linked to this section
-     */
-    @Getter
-    private final AdvancedChatScreen screen;
+    /** The {@link AdvancedChatScreen} that is linked to this section */
+    @Getter private final AdvancedChatScreen screen;
 
     public AdvancedChatScreenSection(AdvancedChatScreen screen) {
         this.screen = screen;
     }
 
-    /**
-     * Triggers when the gui is initiated
-     */
-    public void initGui() {
-
-    }
+    /** Triggers when the gui is initiated */
+    public void initGui() {}
 
     /**
      * Triggered when the window is resized
+     *
      * @param width Window width
      * @param height Window height
      */
-    public void resize(int width, int height) {
+    public void resize(int width, int height) {}
 
-    }
-
-    /**
-     * Triggered when the GUI is closed
-     */
-    public void removed() {
-
-    }
+    /** Triggered when the GUI is closed */
+    public void removed() {}
 
     /**
      * Triggered when the chatfield text is pudated
+     *
      * @param chatText Updated value (?)
      * @param text The text of the chatfield
      */
-    public void onChatFieldUpdate(String chatText, String text) {
-
-    }
+    public void onChatFieldUpdate(String chatText, String text) {}
 
     /**
      * Triggered when a key is pressed
+     *
      * @param keyCode Keycode
      * @param scanCode Scancode
      * @param modifiers Modifiers
@@ -67,6 +55,7 @@ public abstract class AdvancedChatScreenSection implements Drawable {
 
     /**
      * Triggered when the mouse is scrolled
+     *
      * @param mouseX MouseX
      * @param mouseY MouseY
      * @param amount Scroll amount
@@ -78,6 +67,7 @@ public abstract class AdvancedChatScreenSection implements Drawable {
 
     /**
      * Triggered when the mouse is clicked
+     *
      * @param mouseX MouseX
      * @param mouseY MouseY
      * @param button Mouse button
@@ -89,6 +79,7 @@ public abstract class AdvancedChatScreenSection implements Drawable {
 
     /**
      * Triggered when the mouse click is released
+     *
      * @param mouseX MouseX
      * @param mouseY MouseY
      * @param mouseButton Mouse button
@@ -99,7 +90,6 @@ public abstract class AdvancedChatScreenSection implements Drawable {
     }
 
     /**
-     *
      * @param mouseX
      * @param mouseY
      * @param button
@@ -107,26 +97,25 @@ public abstract class AdvancedChatScreenSection implements Drawable {
      * @param deltaY
      * @return If it was handled and should stop.
      */
-    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+    public boolean mouseDragged(
+            double mouseX, double mouseY, int button, double deltaX, double deltaY) {
         return false;
     }
 
     /**
      * Called when the chat field gets set due to history (up arrows)
+     *
      * @param hist History set from
      */
-    public void setChatFromHistory(String hist) {
-
-    }
+    public void setChatFromHistory(String hist) {}
 
     /**
      * Called when the screen renders.
+     *
      * @param matrixStack MatrixStack
      * @param mouseX MouseX
      * @param mouseY MouseY
      * @param partialTicks Partial tick from the last tick
      */
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-
-    }
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {}
 }

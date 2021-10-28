@@ -1,15 +1,11 @@
 package io.github.darkkronicle.advancedchatcore.interfaces;
 
-import net.minecraft.client.gui.screen.Screen;
-
-import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
+import net.minecraft.client.gui.screen.Screen;
+import org.jetbrains.annotations.Nullable;
 
-/**
- * An interface to supply a screen.
- */
+/** An interface to supply a screen. */
 public interface IScreenSupplier {
-
     /**
      * Get's a supplier of a screen based off of a parent.
      *
@@ -17,5 +13,4 @@ public interface IScreenSupplier {
      * @return Supplier of a screen
      */
     Supplier<Screen> getScreen(@Nullable Screen parent);
-
 }

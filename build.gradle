@@ -1,10 +1,8 @@
-import net.fabricmc.loom.task.RemapJarTask
-
 plugins {
-    id 'fabric-loom' version '0.8-SNAPSHOT'
-    id 'maven-publish'
-    id "io.freefair.lombok" version "6.0.0-m2"
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'maven-publish'
+	id "io.freefair.lombok" version "6.0.0-m2"
+	id "com.diffplug.spotless" version "5.17.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_16
@@ -13,102 +11,89 @@ targetCompatibility = JavaVersion.VERSION_16
 archivesBaseName = project.archives_base_name
 version = "${project.mod_version}-${project.minecraft_version}"
 group = project.maven_group
-// Private keys
-Properties additionalProperties = new Properties()
-if (file("extra.properties").exists()) {
-    additionalProperties.load(file("extra.properties").newReader())
-}
 
 minecraft {
 }
 
 repositories {
-    mavenCentral()
-    maven { url 'https://masa.dy.fi/maven' }
-    maven { url 'https://jitpack.io' }
+	mavenCentral()
+	maven { url 'https://masa.dy.fi/maven' }
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    //Fabric api
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-
-
-    modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:${project.malilib_version}"
-
-    modCompileOnly "io.github.prospector:modmenu:1.16.8"
-
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:${project.malilib_version}"
+	modCompileOnly "io.github.prospector:modmenu:1.16.8"
 }
 
-shadowJar {
-    duplicatesStrategy = 'include'
-    destinationDir = file("${buildDir}/tmp/allJar")
-    configurations = [project.configurations.shadow]
-
-    from('.') {
-        include 'LICENSE.txt'
-    }
-    minimize()
-}
-
-task remapShadowJar(type: RemapJarTask) {
-    dependsOn shadowJar
-    addNestedDependencies = false
-    input = shadowJar.archivePath
-}
-
-
-build {
-    dependsOn remapShadowJar
-}
 
 processResources {
-    inputs.property "version", project.version
+	inputs.property "version", project.version
 
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
 }
 
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 16
 }
 
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
+	classifier = "sources"
+	from sourceSets.main.allSource
 }
 
 jar {
-    from "LICENSE"
+	from "LICENSE.txt"
+}
+
+spotless {
+	// optional: limit format enforcement to just the files changed by this feature branch
+	format 'misc', {
+		// define the files to apply `misc` to
+		target '*.gradle', '*.md', '.gitignore'
+
+		// define the steps to apply to those files
+		trimTrailingWhitespace()
+		indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+		endWithNewline()
+	}
+	java {
+		target 'src/*/java/**/*.java'
+
+		// apply a specific flavor of google-java-format
+		googleJavaFormat('1.12.0').aosp().reflowLongStrings()
+		removeUnusedImports()
+		// make sure every file has the following copyright header.
+		// optionally, Spotless can set copyright years by digging
+		// through git history (see "license" section below)
+//        licenseHeader '/* (C)$YEAR */'
+	}
 }
 
 // configure the maven publication
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
+	publications {
+		mavenJava(MavenPublication) {
+			// add all the jars that should be included when publishing to maven
+			artifact(remapJar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
 
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
-    }
+	// select the repositories you want to publish to
+	repositories {
+		// uncomment to publish to the local maven
+		// mavenLocal()
+	}
 }

@@ -10,7 +10,6 @@ public class ModMenuImpl implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return (parent) -> GuiConfigHandler.getInstance().getDefaultScreen();
+        return parent -> GuiConfigHandler.getInstance().getDefaultScreen();
     }
-
 }

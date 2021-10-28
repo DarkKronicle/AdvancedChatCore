@@ -5,7 +5,6 @@ import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import io.github.darkkronicle.advancedchatcore.config.gui.widgets.WidgetToggle;
 import io.github.darkkronicle.advancedchatcore.interfaces.Translatable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +56,8 @@ public class OnOffListListener<T extends Translatable> implements IButtonActionL
         return list;
     }
 
-    public static <T extends Translatable> HashMap<T, Boolean> getOnOff(List<T> all, List<T> active) {
+    public static <T extends Translatable> HashMap<T, Boolean> getOnOff(
+            List<T> all, List<T> active) {
         HashMap<T, Boolean> map = new HashMap<>();
         for (T a : all) {
             map.put(a, active.contains(a));
@@ -69,5 +69,4 @@ public class OnOffListListener<T extends Translatable> implements IButtonActionL
     public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
         next();
     }
-
 }

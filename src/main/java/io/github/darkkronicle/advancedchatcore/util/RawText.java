@@ -1,5 +1,8 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,32 +17,21 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
 /**
  * Class that allows for easy mutable objects that are like minecraft Text.
  *
- * Contains only a {@link String} and {@link Style}
+ * <p>Contains only a {@link String} and {@link Style}
  */
 @Accessors(chain = true)
 @AllArgsConstructor
 @Environment(EnvType.CLIENT)
 public class RawText implements MutableText {
 
-    /**
-     * The message of the {@link RawText}
-     */
-    @Getter @Setter @With
-    private String message;
+    /** The message of the {@link RawText} */
+    @Getter @Setter @With private String message;
 
-    /**
-     * The style of the {@link RawText}
-     */
-    @Getter @Setter @With
-    private Style style;
+    /** The style of the {@link RawText} */
+    @Getter @Setter @With private Style style;
 
     private RawText(RawText text) {
         this.style = text.withStyle(text.getStyle()).getStyle();
@@ -48,6 +40,7 @@ public class RawText implements MutableText {
 
     /**
      * Apply a color to the RawText
+     *
      * @param string Content
      * @param color Color that will get transfered over
      * @return New RawText
@@ -63,6 +56,7 @@ public class RawText implements MutableText {
 
     /**
      * Constructs a RawText based off of {@link Formatting}
+     *
      * @param string Content
      * @param formatting {@link Formatting} values
      * @return New RawText
@@ -74,6 +68,7 @@ public class RawText implements MutableText {
 
     /**
      * Constructs a new RawText with a string and style.
+     *
      * @param string Message
      * @param base {@link Style} of the message
      * @return Constructed RawText
@@ -84,6 +79,7 @@ public class RawText implements MutableText {
 
     /**
      * Return's the content
+     *
      * @return Content of the RawText
      */
     @Override
@@ -93,6 +89,7 @@ public class RawText implements MutableText {
 
     /**
      * Return's the content
+     *
      * @return Content of the RawText
      */
     @Override
@@ -109,6 +106,7 @@ public class RawText implements MutableText {
 
     /**
      * Deep copies the {@link RawText}
+     *
      * @return Copy of RawText
      */
     @Override
@@ -118,6 +116,7 @@ public class RawText implements MutableText {
 
     /**
      * Deep copies the {@link RawText}
+     *
      * @return Copy of RawText
      */
     @Override
@@ -127,6 +126,7 @@ public class RawText implements MutableText {
 
     /**
      * Get's the RawText as {@link OrderedText}
+     *
      * @return {@link OrderedText} of the RawText
      */
     @Override
@@ -136,7 +136,9 @@ public class RawText implements MutableText {
 
     /**
      * Applies the content and style to a visitor
-     * @param styledVisitor {@link net.minecraft.text.StringVisitable.StyledVisitor} to accept style and string
+     *
+     * @param styledVisitor {@link net.minecraft.text.StringVisitable.StyledVisitor} to accept style
+     *     and string
      * @param style Default {@link Style} to apply blank values to
      * @param <T> Type returned from the visitor
      * @return The value returned from the visitor
@@ -148,6 +150,7 @@ public class RawText implements MutableText {
 
     /**
      * Applies the content to a visitor
+     *
      * @param visitor {@link net.minecraft.text.StringVisitable.Visitor} to accept the string
      * @param <T> Type returned from the visitor
      * @return Value returned from the visitor
@@ -159,7 +162,9 @@ public class RawText implements MutableText {
 
     /**
      * Applies the content and style to a visitor
-     * @param visitor {@link net.minecraft.text.StringVisitable.StyledVisitor} to accept style and string
+     *
+     * @param visitor {@link net.minecraft.text.StringVisitable.StyledVisitor} to accept style and
+     *     string
      * @param style Default {@link Style} to apply blank values to
      * @param <T> Type returned from the visitor
      * @return The value returned from the visitor
@@ -171,6 +176,7 @@ public class RawText implements MutableText {
 
     /**
      * Applies the content to a visitor
+     *
      * @param visitor {@link net.minecraft.text.StringVisitable.Visitor} to accept the string
      * @param <T> Type returned from the visitor
      * @return Value returned from the visitor
@@ -182,6 +188,7 @@ public class RawText implements MutableText {
 
     /**
      * Appends the message content to the message.
+     *
      * @param text Text message to add
      * @return MutableText that was added on
      */

@@ -1,10 +1,11 @@
 package io.github.darkkronicle.advancedchatcore.config.gui;
 
 import fi.dy.masa.malilib.config.IConfigBase;
-import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.util.StringUtils;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
@@ -13,24 +14,16 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
-
-
 @Environment(EnvType.CLIENT)
 public class GuiConfigHandler {
 
-    private final static GuiConfigHandler INSTANCE = new GuiConfigHandler();
+    private static final GuiConfigHandler INSTANCE = new GuiConfigHandler();
 
     public String activeTab = "";
 
-    @Getter
-    private final List<Tab> tabs = new ArrayList<>();
+    @Getter private final List<Tab> tabs = new ArrayList<>();
 
-    private GuiConfigHandler() {
-
-    }
+    private GuiConfigHandler() {}
 
     public boolean isTabActive(GuiConfigHandler.Tab button) {
         return button.getName().equals(activeTab);
@@ -96,10 +89,12 @@ public class GuiConfigHandler {
 
     public interface Tab {
         String getName();
+
         Screen getScreen(List<TabButton> buttons);
     }
 
-    public static GuiConfigSection createGuiConfigSection(String name, List<ConfigStorage.SaveableConfig<? extends IConfigBase>> configs) {
+    public static GuiConfigSection createGuiConfigSection(
+            String name, List<ConfigStorage.SaveableConfig<? extends IConfigBase>> configs) {
         List<IConfigBase> configBases = new ArrayList<>();
         for (ConfigStorage.SaveableConfig<? extends IConfigBase> saveable : configs) {
             configBases.add(saveable.config);
@@ -118,7 +113,6 @@ public class GuiConfigHandler {
     }
 
     public interface GuiConfigSection extends Tab {
-
         List<IConfigBase> getOptions();
 
         String getName();
@@ -133,8 +127,8 @@ public class GuiConfigHandler {
     @AllArgsConstructor
     @Value
     public static class TabButton {
+
         Tab tab;
         ButtonGeneric button;
     }
-
 }

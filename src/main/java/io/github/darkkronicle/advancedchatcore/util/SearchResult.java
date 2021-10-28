@@ -1,47 +1,33 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
-import lombok.Getter;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.Getter;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
-/**
- * An object that holds information about a search.
- */
+/** An object that holds information about a search. */
 @Environment(EnvType.CLIENT)
 public class SearchResult {
 
-    /**
-     * All the {@link StringMatch} that were found in the input
-     */
-    @Getter
-    private final List<StringMatch> matches;
+    /** All the {@link StringMatch} that were found in the input */
+    @Getter private final List<StringMatch> matches;
 
-    /**
-     * The {@link Matcher} that was used to find the matches
-     */
-    @Getter
-    private final Matcher matcher;
+    /** The {@link Matcher} that was used to find the matches */
+    @Getter private final Matcher matcher;
 
-    /**
-     * The input string
-     */
-    @Getter
-    private final String input;
+    /** The input string */
+    @Getter private final String input;
 
-    /**
-     * The condition search
-     */
-    @Getter
-    private final String search;
+    /** The condition search */
+    @Getter private final String search;
 
     /**
      * Constructs a search result based off of found information.
+     *
      * @param input Input to search
      * @param search Search value
      * @param matcher {@link Matcher} used to serach
@@ -61,9 +47,12 @@ public class SearchResult {
 
     /**
      * Replaces the groups with a specified match
+     *
      * @param string Contents to replace to
-     * @param onlyFirst If it will replace/return only the first group. If false it will return the full string.
-     * @return The replaced values in context. If onlyFirst it will only do the context of the first group.
+     * @param onlyFirst If it will replace/return only the first group. If false it will return the
+     *     full string.
+     * @return The replaced values in context. If onlyFirst it will only do the context of the first
+     *     group.
      */
     public String getGroupReplacements(String string, boolean onlyFirst) {
         if (onlyFirst) {
@@ -123,5 +112,4 @@ public class SearchResult {
         matcher.reset();
         return new SearchResult(input, match, matcher, matches);
     }
-
 }

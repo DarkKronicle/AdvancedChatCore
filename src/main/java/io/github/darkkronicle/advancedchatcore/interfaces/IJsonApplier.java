@@ -3,11 +3,8 @@ package io.github.darkkronicle.advancedchatcore.interfaces;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-/**
- * An interface to serialize and deserialize classes into themselves.
- */
+/** An interface to serialize and deserialize classes into themselves. */
 public interface IJsonApplier {
-
     /**
      * Serializes the object into a JsonObject.
      *

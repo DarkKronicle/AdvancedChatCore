@@ -7,9 +7,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.CommandSuggestor;
 import net.minecraft.client.util.math.MatrixStack;
 
-/**
- * Handles the CommandSuggestor for the chat
- */
+/** Handles the CommandSuggestor for the chat */
 @Environment(EnvType.CLIENT)
 public class DefaultChatSuggestor extends AdvancedChatScreenSection {
 
@@ -59,7 +57,18 @@ public class DefaultChatSuggestor extends AdvancedChatScreenSection {
     public void initGui() {
         MinecraftClient client = MinecraftClient.getInstance();
         AdvancedChatScreen screen = getScreen();
-        this.commandSuggestor = new CommandSuggestor(client, screen, screen.chatField, client.textRenderer, false, false, 1, 10, true, -805306368);
+        this.commandSuggestor =
+                new CommandSuggestor(
+                        client,
+                        screen,
+                        screen.chatField,
+                        client.textRenderer,
+                        false,
+                        false,
+                        1,
+                        10,
+                        true,
+                        -805306368);
         this.commandSuggestor.refresh();
     }
 }

@@ -12,7 +12,13 @@ public class WidgetColor extends GuiTextFieldGeneric {
     private int colorX;
     private ColorUtil.SimpleColor currentColor;
 
-    public WidgetColor(int x, int y, int width, int height, ColorUtil.SimpleColor color, TextRenderer textRenderer) {
+    public WidgetColor(
+            int x,
+            int y,
+            int width,
+            int height,
+            ColorUtil.SimpleColor color,
+            TextRenderer textRenderer) {
         super(x, y, width - 22, height, textRenderer);
         this.colorX = x + width - 20;
         this.currentColor = color;
@@ -23,7 +29,7 @@ public class WidgetColor extends GuiTextFieldGeneric {
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         int y = this.y;
-        RenderUtils.drawRect(this.colorX    , y, 19, 19, 0xFFFFFFFF);
+        RenderUtils.drawRect(this.colorX, y, 19, 19, 0xFFFFFFFF);
         RenderUtils.drawRect(this.colorX + 1, y + 1, 17, 17, 0xFF000000);
         RenderUtils.drawRect(this.colorX + 2, y + 2, 15, 15, this.currentColor.color());
     }

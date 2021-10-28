@@ -5,6 +5,7 @@
 
   "advancedchat.screen.main": "§3Advanced§5Chat§f Config",
   "advancedchat.config.tab.general": "§7General",
+  "advancedchat.config.tab.chatscreen": "§bChat Screen",
 
 
   "advancedchat.config.general.timeformat": "Time Format",
@@ -25,6 +26,13 @@
   "advancedchat.config.general.info.chatheads": "Whether or not the §6head of the message sender§r displays beside their message",
   "advancedchat.config.general.messageownerregex": "Message Owner Regex",
   "advancedchat.config.general.info.messageownerregex": "The §6regular expression§r used to detect the head used for chat heads \n§cDon't mess with this unless you §c§oreally §cunderstand what you're working with!",
+
+  "advancedchat.config.chatscreen.persistenttext": "Persistent Text",
+  "advancedchat.config.chatscreen.info.persistenttext": "Whether or not messages that are §6typed but not sent§r are kept after closing the §9Chat Box",
+  "advancedchat.config.chatscreen.moretext": "Extended Text Limit",
+  "advancedchat.config.chatscreen.info.moretext": "Whether or not messages that are §6over the 256 character limit§r are broken into multiple chat messages",
+  "advancedchat.config.chatscreen.color": "Chat Color",
+  "advancedchat.config.chatscreen.info.color": "Changes color of the §6chat box§r and buttons nearby.",
 
   "advancedchat.config.button.configure": "§bConfigure",
   "advancedchat.config.button.active": "%s",

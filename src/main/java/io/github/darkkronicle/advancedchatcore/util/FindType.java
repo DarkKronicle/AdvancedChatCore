@@ -3,34 +3,21 @@ package io.github.darkkronicle.advancedchatcore.util;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.util.StringUtils;
 
-/**
- * Different methods of searching strings for matches.
- */
+/** Different methods of searching strings for matches. */
 public enum FindType implements IConfigOptionListEntry {
-    /**
-     * An exact match found in the input
-     */
+    /** An exact match found in the input */
     LITERAL("literal"),
 
-    /**
-     * A match found in the input that is case insensitive
-     */
+    /** A match found in the input that is case insensitive */
     UPPERLOWER("upperlower"),
 
-    /**
-     * A regex match found in the input
-     */
+    /** A regex match found in the input */
     REGEX("regex"),
 
-    /**
-     * Will always return true
-     */
-    ALL("all")
-    ;
+    /** Will always return true */
+    ALL("all");
 
-    /**
-     * Serialized name of the {@link FindType}
-     */
+    /** Serialized name of the {@link FindType} */
     public final String configString;
 
     private static String translate(String key) {
@@ -38,11 +25,12 @@ public enum FindType implements IConfigOptionListEntry {
     }
 
     FindType(String configString) {
-        this.configString = configString   ;
+        this.configString = configString;
     }
 
     /**
      * Get's the serialized name of the object.
+     *
      * @return The config string
      */
     @Override
@@ -52,6 +40,7 @@ public enum FindType implements IConfigOptionListEntry {
 
     /**
      * Get's the human readable form of the object.
+     *
      * @return String that is for the display name.
      */
     @Override
@@ -61,6 +50,7 @@ public enum FindType implements IConfigOptionListEntry {
 
     /**
      * Get's the next {@link FindType} from the previous one.
+     *
      * @param forward Should cycle forward
      * @return Next {@link FindType}
      */
@@ -82,6 +72,7 @@ public enum FindType implements IConfigOptionListEntry {
 
     /**
      * De-serializes a string to {@link FindType}
+     *
      * @param value Serialized string
      * @return The found {@link FindType}, null if none
      */

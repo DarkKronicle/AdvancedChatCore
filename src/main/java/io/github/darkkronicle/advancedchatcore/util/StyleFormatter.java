@@ -1,5 +1,8 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
@@ -11,13 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Unit;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-/**
- * Class to format text without losing data
- */
+/** Class to format text without losing data */
 @Environment(EnvType.CLIENT)
 public class StyleFormatter {
 
@@ -26,7 +23,6 @@ public class StyleFormatter {
      * combined with standard {@link Text} formatting.
      */
     public interface FormattingVisitable {
-
         /**
          * Accepts a character with information about current formatting
          *
@@ -37,7 +33,8 @@ public class StyleFormatter {
          * @param formattingStyle The style that combines text formatting and formatting symbols
          * @return Whether to continue
          */
-        boolean accept(char c, int currentIndex, int realIndex, Style textStyle, Style formattingStyle);
+        boolean accept(
+                char c, int currentIndex, int realIndex, Style textStyle, Style formattingStyle);
     }
 
     private int currentIndex;
@@ -47,35 +44,25 @@ public class StyleFormatter {
     private final FormattingVisitable visitor;
     private final int length;
 
-    /**
-     * Results of different parts of formatting
-     */
+    /** Results of different parts of formatting */
     private enum Result {
-        /**
-         * Go up a character
-         */
+        /** Go up a character */
         INCREMENT,
 
-        /**
-         * It worked!
-         */
+        /** It worked! */
         SUCCESS,
 
-        /**
-         * Go to the next {@link StringVisitable}
-         */
+        /** Go to the next {@link StringVisitable} */
         SKIP,
 
-        /**
-         * STOP
-         */
-        TERMINATE
+        /** STOP */
+        TERMINATE,
     }
 
     /**
      * Creates a StyleFormatter for a given length and a {@link FormattingVisitable}
      *
-     * This class is meant to be updated with a {@link StringVisitable.StyledVisitor}
+     * <p>This class is meant to be updated with a {@link StringVisitable.StyledVisitor}
      *
      * @param visitor {@link FormattingVisitable} to get updated with each visible character
      * @param length Length of the string
@@ -88,16 +75,12 @@ public class StyleFormatter {
         this.length = length;
     }
 
-    /**
-     * Sends the current character with the current information to the visitor.
-     */
+    /** Sends the current character with the current information to the visitor. */
     private boolean sendToVisitor(char c, Style textStyle) {
         return visitor.accept(c, currentIndex, realIndex, textStyle, currentStyle);
     }
 
-    /**
-     * Handles how section symbols get processed
-     */
+    /** Handles how section symbols get processed */
     private Result updateSection(Style textStyle, Character nextChar) {
         if (nextChar == null) {
             return Result.SKIP;
@@ -112,7 +95,8 @@ public class StyleFormatter {
                     // If it's empty or different rely on just the current text style
                     currentStyle = textStyle.withExclusiveFormatting(formatting);
                 } else {
-                    // Styles are different so we take what happened before. This allows us to chain formatting symbols.
+                    // Styles are different so we take what happened before. This allows us to chain
+                    // formatting symbols.
                     currentStyle = currentStyle.withExclusiveFormatting(formatting);
                 }
             }
@@ -127,7 +111,8 @@ public class StyleFormatter {
     /**
      * Updates current visitable data as well as signifies whether to end.
      *
-     * Calling this method will result in each 'visible' character being sent to the {@link FormattingVisitable}
+     * <p>Calling this method will result in each 'visible' character being sent to the {@link
+     * FormattingVisitable}
      *
      * @param textStyle Style of the current string
      * @param string The current string
@@ -168,8 +153,8 @@ public class StyleFormatter {
     /**
      * Formats text that contains styling data as well as formatting symbols
      *
-     * This method is used to remove section symbols while maintaining previous formatting
-     * as well as new formatting.
+     * <p>This method is used to remove section symbols while maintaining previous formatting as
+     * well as new formatting.
      *
      * @param text Text to reformat
      * @return Formatted text
@@ -177,10 +162,13 @@ public class StyleFormatter {
     public static FluidText formatText(FluidText text) {
         FluidText t = new FluidText();
         int length = text.getString().length();
-        StyleFormatter formatter = new StyleFormatter((c, index, formattedIndex, style, formattedStyle) -> {
-            t.append(new RawText(String.valueOf(c), formattedStyle), false);
-            return true;
-        }, length);
+        StyleFormatter formatter =
+                new StyleFormatter(
+                        (c, index, formattedIndex, style, formattedStyle) -> {
+                            t.append(new RawText(String.valueOf(c), formattedStyle), false);
+                            return true;
+                        },
+                        length);
         text.visit(formatter::updateStyle, Style.EMPTY);
         return t;
     }
@@ -195,10 +183,10 @@ public class StyleFormatter {
      */
     public static List<Text> wrapText(TextRenderer textRenderer, int scaledWidth, Text text) {
         ArrayList<Text> lines = new ArrayList<>();
-        for (OrderedText breakRenderedChatMessageLine : ChatMessages.breakRenderedChatMessageLines(text, scaledWidth, textRenderer)) {
+        for (OrderedText breakRenderedChatMessageLine :
+                ChatMessages.breakRenderedChatMessageLines(text, scaledWidth, textRenderer)) {
             lines.add(new FluidText(breakRenderedChatMessageLine));
         }
         return lines;
     }
-
 }

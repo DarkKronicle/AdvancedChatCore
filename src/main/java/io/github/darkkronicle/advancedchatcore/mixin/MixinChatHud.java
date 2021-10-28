@@ -7,7 +7,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +22,10 @@ public class MixinChatHud {
 
     @Shadow @Final private MinecraftClient client;
 
-    @Inject(method = "addMessage(Lnet/minecraft/text/Text;I)V", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "addMessage(Lnet/minecraft/text/Text;I)V",
+            at = @At("HEAD"),
+            cancellable = true)
     private void addMessage(Text text, int id, CallbackInfo ci) {
         // Pass forward messages to dispatcher
         MessageDispatcher.getInstance().handleText(text);
@@ -47,5 +49,4 @@ public class MixinChatHud {
         // If the chat is focused
         ci.setReturnValue(client.currentScreen instanceof AdvancedChatScreen);
     }
-
 }

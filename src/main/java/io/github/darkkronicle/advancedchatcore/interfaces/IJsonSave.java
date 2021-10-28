@@ -4,10 +4,10 @@ import com.google.gson.JsonObject;
 
 /**
  * Json serializer for other classes.
+ *
  * @param <T> Class that this class serializes.
  */
 public interface IJsonSave<T> {
-
     /**
      * Returns a new object from a JsonObject to deserialize from.
      *
@@ -23,5 +23,4 @@ public interface IJsonSave<T> {
      * @return Serialized {@link JsonObject}
      */
     JsonObject save(T t);
-
 }

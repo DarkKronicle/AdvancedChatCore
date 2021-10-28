@@ -2,7 +2,7 @@
 
 This is the base mod of all AdvancedChat modules and features. This mod provides the necessary foundation and framework for AdvancedChat mod's to work.
 
-This mod primarily adds internal features used by other modules, as well as the ability to display the time that a message was sent. 
+This mod primarily adds internal features used by other modules, as well as the ability to display the time that a message was sent.
 
 ## Dependencies
 [MaLiLib](https://www.curseforge.com/minecraft/mc-mods/malilib) and [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api/) are **required** for this mod to run
@@ -22,7 +22,7 @@ AdvancedChat Modules splits the features of [AdvancedChat](https://www.curseforg
 ## Developers
 
 To use AdvancedChatCore within your own mod you can use [jitpack](https://jitpack.io/) with maven to download and implement it.
- 
+
 ```
 allprojects {
 	repositories {
@@ -42,14 +42,14 @@ To have the core reference the mod as a module, int `fabric.mod.json` in `custom
 
 ```JSON
 {
-  ...
-  "custom": {
-    "acmodule": true
-  }
+...
+"custom": {
+	"acmodule": true
+}
 }
 ```
- 
- Reference the [example mod](https://github.com/DarkKronicle/AdvancedChatModuleTemplate) for individual use cases.
+
+Reference the [example mod](https://github.com/DarkKronicle/AdvancedChatModuleTemplate) for individual use cases.
 
 ## Credits n' more
 

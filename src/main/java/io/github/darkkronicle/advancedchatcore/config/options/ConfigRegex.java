@@ -7,5 +7,4 @@ public class ConfigRegex extends ConfigString {
     public ConfigRegex(String name, String defaultValue, String comment) {
         super(name, defaultValue, comment);
     }
-
 }

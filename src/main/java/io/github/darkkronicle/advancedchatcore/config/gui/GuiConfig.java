@@ -6,13 +6,12 @@ import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
-
 import java.util.List;
 
-// Based off of https://github.com/maruohon/minihud/blob/fabric_1.16_snapshots_temp/src/main/java/fi/dy/masa/minihud/gui/GuiConfigs.java
+// Based off of
+// https://github.com/maruohon/minihud/blob/fabric_1.16_snapshots_temp/src/main/java/fi/dy/masa/minihud/gui/GuiConfigs.java
 // Released under GNU LGPL
 public class GuiConfig extends GuiConfigsBase {
-
 
     private List<GuiConfigHandler.TabButton> tabButtons;
     private List<IConfigBase> configs;
@@ -54,14 +53,13 @@ public class GuiConfig extends GuiConfigsBase {
         return button.getButton().getY();
     }
 
-
     @Override
     public List<ConfigOptionWrapper> getConfigs() {
         return ConfigOptionWrapper.createFor(configs);
     }
 
-
     private static class ButtonListenerConfigTabs implements IButtonActionListener {
+
         private final GuiConfigHandler.TabButton tabButton;
 
         public ButtonListenerConfigTabs(GuiConfigHandler.TabButton tabButton) {
@@ -71,9 +69,8 @@ public class GuiConfig extends GuiConfigsBase {
         @Override
         public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
             GuiConfigHandler.getInstance().activeTab = this.tabButton.getTab().getName();
-            GuiBase.openGui(this.tabButton.getTab().getScreen(GuiConfigHandler.getInstance().getButtons()));
-
+            GuiBase.openGui(
+                    this.tabButton.getTab().getScreen(GuiConfigHandler.getInstance().getButtons()));
         }
     }
-
 }

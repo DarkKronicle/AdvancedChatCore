@@ -1,12 +1,11 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
 import io.github.darkkronicle.advancedchatcore.interfaces.RegistryOption;
-import lombok.Getter;
-import lombok.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * Create a registry with options that can be added from anywhere.
@@ -22,11 +21,11 @@ public abstract class AbstractRegistry<TYPE, OPTION extends RegistryOption<TYPE>
         return options;
     }
 
-    @Getter
-    private OPTION defaultOption;
+    @Getter private OPTION defaultOption;
 
     /**
      * Add's an option directly. Recommended to use register
+     *
      * @param option Option to add
      */
     protected void add(OPTION option) {
@@ -36,16 +35,38 @@ public abstract class AbstractRegistry<TYPE, OPTION extends RegistryOption<TYPE>
         options.add(option);
     }
 
-    public void register(Supplier<TYPE> replace, String saveString, String translation, String infoTranslation) {
+    public void register(
+            Supplier<TYPE> replace, String saveString, String translation, String infoTranslation) {
         register(replace, saveString, translation, infoTranslation, true, false);
     }
 
-    public void register(Supplier<TYPE> replace, String saveString, String translation, String infoTranslation, boolean active, boolean setDefault) {
+    public void register(
+            Supplier<TYPE> replace,
+            String saveString,
+            String translation,
+            String infoTranslation,
+            boolean active,
+            boolean setDefault) {
         register(replace, saveString, translation, infoTranslation, active, setDefault, false);
     }
 
-    public void register(Supplier<TYPE> replace, String saveString, String translation, String infoTranslation, boolean active, boolean setDefault, boolean hidden) {
-        OPTION option = constructOption(replace, saveString, translation, infoTranslation, active, setDefault, hidden);
+    public void register(
+            Supplier<TYPE> replace,
+            String saveString,
+            String translation,
+            String infoTranslation,
+            boolean active,
+            boolean setDefault,
+            boolean hidden) {
+        OPTION option =
+                constructOption(
+                        replace,
+                        saveString,
+                        translation,
+                        infoTranslation,
+                        active,
+                        setDefault,
+                        hidden);
         options.add(option);
         if (setDefault || defaultOption == null) {
             defaultOption = option;
@@ -54,7 +75,14 @@ public abstract class AbstractRegistry<TYPE, OPTION extends RegistryOption<TYPE>
 
     public abstract AbstractRegistry<TYPE, OPTION> clone();
 
-    public abstract OPTION constructOption(Supplier<TYPE> type, String saveString, String translation, String infoTranslation, boolean active, boolean setDefault, boolean hidden);
+    public abstract OPTION constructOption(
+            Supplier<TYPE> type,
+            String saveString,
+            String translation,
+            String infoTranslation,
+            boolean active,
+            boolean setDefault,
+            boolean hidden);
 
     public void setDefaultOption(@NonNull OPTION newDefault) {
         defaultOption = newDefault;
@@ -90,5 +118,4 @@ public abstract class AbstractRegistry<TYPE, OPTION extends RegistryOption<TYPE>
         }
         return options.get(i);
     }
-
 }

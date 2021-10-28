@@ -3,16 +3,12 @@ package io.github.darkkronicle.advancedchatcore.util;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * An object that will enforce limits on an integer value
- */
+/** An object that will enforce limits on an integer value */
 public class LimitedInteger {
 
-    @Getter
-    private Integer value;
-    @Getter
-    @Setter
-    private Integer limit;
+    @Getter private Integer value;
+
+    @Getter @Setter private Integer limit;
 
     public LimitedInteger(int limit) {
         this(limit, 0);
@@ -74,6 +70,7 @@ public class LimitedInteger {
 
     /**
      * Force set's the current value. Ignores limits.
+     *
      * @param value Integer to set
      */
     public void setValue(int value) {

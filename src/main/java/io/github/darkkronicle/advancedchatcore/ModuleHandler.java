@@ -1,24 +1,20 @@
 package io.github.darkkronicle.advancedchatcore;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import lombok.Getter;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.CustomValue;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 public class ModuleHandler {
 
     private static final ModuleHandler INSTANCE = new ModuleHandler();
 
-    @Getter
-    private final List<Module> modules = new ArrayList<>();
+    @Getter private final List<Module> modules = new ArrayList<>();
 
-    private ModuleHandler() {
-
-    }
+    private ModuleHandler() {}
 
     public static ModuleHandler getInstance() {
         return INSTANCE;
@@ -42,7 +38,8 @@ public class ModuleHandler {
     /**
      * Retrieves a {@link Module} based off of a mod ID.
      *
-     * This is useful for incompatible features or enabling others.
+     * <p>This is useful for incompatible features or enabling others.
+     *
      * @param modID Mod id of the mod
      * @return An optional containing the module if found.
      */
@@ -54,5 +51,4 @@ public class ModuleHandler {
         }
         return Optional.empty();
     }
-
 }

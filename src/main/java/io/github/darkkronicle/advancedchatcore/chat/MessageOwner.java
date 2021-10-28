@@ -8,27 +8,22 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.util.Identifier;
 
-/**
- * Stores data about a message owner
- */
+/** Stores data about a message owner */
 @Data
 @Value
 @AllArgsConstructor
 @Environment(EnvType.CLIENT)
 public class MessageOwner {
 
-    /**
-     * Player name
-     */
+    /** Player name */
     String name;
 
-    /**
-     * Entry that has player data
-     */
+    /** Entry that has player data */
     PlayerListEntry entry;
 
     /**
      * The texture of the player's skin
+     *
      * @return Identifier with texture data
      */
     public Identifier getTexture() {

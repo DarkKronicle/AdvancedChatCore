@@ -30,13 +30,21 @@ public class ConfigSimpleColor extends ConfigColor {
         {
             try {
                 if (element.isJsonPrimitive()) {
-                    this.value = this.getClampedValue(StringUtils.getColor(element.getAsString(), 0));
+                    this.value =
+                            this.getClampedValue(StringUtils.getColor(element.getAsString(), 0));
                     this.setIntegerValue(value);
                 } else {
-                    MaLiLib.logger.warn("Failed to set config value for '{}' from the JSON element '{}'", this.getName(), element);
+                    MaLiLib.logger.warn(
+                            "Failed to set config value for '{}' from the JSON element '{}'",
+                            this.getName(),
+                            element);
                 }
             } catch (Exception e) {
-                MaLiLib.logger.warn("Failed to set config value for '{}' from the JSON element '{}'", this.getName(), element, e);
+                MaLiLib.logger.warn(
+                        "Failed to set config value for '{}' from the JSON element '{}'",
+                        this.getName(),
+                        element,
+                        e);
             }
         }
     }
@@ -44,5 +52,4 @@ public class ConfigSimpleColor extends ConfigColor {
     public ColorUtil.SimpleColor getSimpleColor() {
         return color;
     }
-
 }

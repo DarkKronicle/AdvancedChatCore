@@ -20,5 +20,4 @@ public class MixinSleepingChatScreen {
         GuiBase.openGui(new AdvancedSleepingChatScreen());
         ci.cancel();
     }
-
 }

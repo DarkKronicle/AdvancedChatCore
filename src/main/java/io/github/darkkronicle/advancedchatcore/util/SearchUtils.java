@@ -2,12 +2,6 @@ package io.github.darkkronicle.advancedchatcore.util;
 
 import io.github.darkkronicle.advancedchatcore.chat.MessageOwner;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
-import lombok.experimental.UtilityClass;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.network.PlayerListEntry;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,19 +13,24 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.experimental.UtilityClass;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.network.PlayerListEntry;
 
 /**
-* A class used for helping filters find matches and act on them.
-* Helps with Regular Expressions and means that we don't need this in each class.
+ * A class used for helping filters find matches and act on them. Helps with Regular Expressions and
+ * means that we don't need this in each class.
  */
 @Environment(EnvType.CLIENT)
 @UtilityClass
 public class SearchUtils {
 
     /**
-     * Method to see if there is a match somewhere with a string with an expression.
-     * Is similar to {@link #findMatches(String, String, FindType)} just less expensive since
-     * it doesn't need to find every match.
+     * Method to see if there is a match somewhere with a string with an expression. Is similar to
+     * {@link #findMatches(String, String, FindType)} just less expensive since it doesn't need to
+     * find every match.
      *
      * @param input String to search.
      * @param toMatch Expression to find.
@@ -71,9 +70,8 @@ public class SearchUtils {
     }
 
     /**
-     * Method to find all matches within a string.
-     * Is similar to {@link #isMatch(String, String, FindType)}}. This method just finds every
-     * match and returns it.
+     * Method to find all matches within a string. Is similar to {@link #isMatch(String, String,
+     * FindType)}}. This method just finds every match and returns it.
      *
      * @param input String to search.
      * @param toMatch Expression to find.
@@ -82,7 +80,8 @@ public class SearchUtils {
      */
     public Optional<List<StringMatch>> findMatches(String input, String toMatch, FindType type) {
         if (type == FindType.ALL) {
-            return Optional.of(Collections.singletonList(new StringMatch(input, 0, input.length())));
+            return Optional.of(
+                    Collections.singletonList(new StringMatch(input, 0, input.length())));
         }
         Pattern pattern = compilePattern(toMatch, type);
         if (pattern == null) {
@@ -132,7 +131,6 @@ public class SearchUtils {
         }
     }
 
-
     /**
      * Get the author of a message using regex
      *
@@ -144,7 +142,11 @@ public class SearchUtils {
         if (networkHandler == null) {
             return null;
         }
-        Optional<List<StringMatch>> words = SearchUtils.findMatches(stripColorCodes(text), ConfigStorage.General.MESSAGE_OWNER_REGEX.config.getStringValue(), FindType.REGEX);
+        Optional<List<StringMatch>> words =
+                SearchUtils.findMatches(
+                        stripColorCodes(text),
+                        ConfigStorage.General.MESSAGE_OWNER_REGEX.config.getStringValue(),
+                        FindType.REGEX);
         if (!words.isPresent()) {
             return null;
         }
@@ -157,7 +159,9 @@ public class SearchUtils {
             }
             for (PlayerListEntry e : networkHandler.getPlayerList()) {
                 // Easy mode
-                if ((e.getDisplayName() != null && m.match.equals(stripColorCodes(e.getDisplayName().getString()))) || m.match.equals(e.getProfile().getName())) {
+                if ((e.getDisplayName() != null
+                                && m.match.equals(stripColorCodes(e.getDisplayName().getString())))
+                        || m.match.equals(e.getProfile().getName())) {
                     player = e;
                     match = m;
                     break;
@@ -167,8 +171,16 @@ public class SearchUtils {
         // Check for ***everything***
         HashMap<PlayerListEntry, List<StringMatch>> entryMatches = new HashMap<>();
         for (PlayerListEntry e : networkHandler.getPlayerList()) {
-            String name = stripColorCodes(e.getDisplayName() == null ? e.getProfile().getName() : e.getDisplayName().getString());
-            Optional<List<StringMatch>> nameWords = SearchUtils.findMatches(name, ConfigStorage.General.MESSAGE_OWNER_REGEX.config.getStringValue(), FindType.REGEX);
+            String name =
+                    stripColorCodes(
+                            e.getDisplayName() == null
+                                    ? e.getProfile().getName()
+                                    : e.getDisplayName().getString());
+            Optional<List<StringMatch>> nameWords =
+                    SearchUtils.findMatches(
+                            name,
+                            ConfigStorage.General.MESSAGE_OWNER_REGEX.config.getStringValue(),
+                            FindType.REGEX);
             if (!nameWords.isPresent()) {
                 continue;
             }
@@ -191,6 +203,7 @@ public class SearchUtils {
 
     /**
      * Strip color codes from a String
+     *
      * @param string String to strip
      * @return String stripped of colorcodes
      */
@@ -219,9 +232,9 @@ public class SearchUtils {
     /**
      * Turns a number into a Roman Numeral.
      *
-     * Example: 4 -> IV
+     * <p>Example: 4 -> IV
      *
-     * https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java/12968022
+     * <p>https://stackoverflow.com/questions/12967896/converting-integers-to-roman-numerals-java/12968022
      *
      * @param number Example to convert to
      * @return String or Roman Numeral
@@ -245,5 +258,4 @@ public class SearchUtils {
             return map.get(l) + toRoman(number - l);
         }
     }
-
 }

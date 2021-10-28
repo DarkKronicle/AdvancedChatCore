@@ -7,21 +7,22 @@ import io.github.darkkronicle.advancedchatcore.mixin.MixinChatHudInvoker;
 import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
 import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.SearchUtils;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
-
 import org.jetbrains.annotations.Nullable;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 @Environment(EnvType.CLIENT)
 public class ChatHistoryProcessor implements IMessageProcessor {
 
     private static boolean sendToHud(Text text) {
         if (AdvancedChatCore.FORWARD_TO_HUD) {
-            ((MixinChatHudInvoker) MinecraftClient.getInstance().inGameHud.getChatHud()).invokeAddMessage(text, 0, MinecraftClient.getInstance().inGameHud.getTicks(), false);
+            ((MixinChatHudInvoker) MinecraftClient.getInstance().inGameHud.getChatHud())
+                    .invokeAddMessage(
+                            text, 0, MinecraftClient.getInstance().inGameHud.getTicks(), false);
             return true;
         }
         return false;
@@ -40,27 +41,31 @@ public class ChatHistoryProcessor implements IMessageProcessor {
         // Store original so we can get stuff without the time
         Text original = text.copy();
         if (showtime) {
-            DateTimeFormatter format = DateTimeFormatter.ofPattern(ConfigStorage.General.TIME_FORMAT.config.getStringValue());
+            DateTimeFormatter format =
+                    DateTimeFormatter.ofPattern(
+                            ConfigStorage.General.TIME_FORMAT.config.getStringValue());
             text.addTime(format, time);
         }
 
         int width = 0;
         // Find player
-        MessageOwner player = SearchUtils.getAuthor(MinecraftClient.getInstance().getNetworkHandler(), unfiltered.getString());
-        ChatMessage line = ChatMessage.builder()
-                .displayText(text)
-                .originalText(original)
-                .owner(player)
-                .id(0)
-                .width(width)
-                .creationTick(MinecraftClient.getInstance().inGameHud.getTicks())
-                .time(time)
-                .background(backcolor)
-                .build();
+        MessageOwner player =
+                SearchUtils.getAuthor(
+                        MinecraftClient.getInstance().getNetworkHandler(), unfiltered.getString());
+        ChatMessage line =
+                ChatMessage.builder()
+                        .displayText(text)
+                        .originalText(original)
+                        .owner(player)
+                        .id(0)
+                        .width(width)
+                        .creationTick(MinecraftClient.getInstance().inGameHud.getTicks())
+                        .time(time)
+                        .background(backcolor)
+                        .build();
         if (ChatHistory.getInstance().add(line)) {
             sendToHud(line.getDisplayText());
         }
         return true;
     }
-
 }
