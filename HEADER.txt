@@ -1,6 +1,4 @@
 /*
- * Mozilla Public License v2.0
- *
  * Copyright (C) $YEAR DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
