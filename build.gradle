@@ -54,7 +54,7 @@ jar {
 }
 
 spotless {
-//	ratchetFrom 'origin/main'
+	ratchetFrom 'origin/main'
 	format 'misc', {
 		// define the files to apply `misc` to
 		target '*.gradle', '*.md', '.gitignore'
