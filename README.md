@@ -57,6 +57,8 @@ To develop, all dependencies should automatically be processed through gradle. T
 
 `ln -s ../../pre-commit.sh .git/hooks/pre-commit`
 
+To run spotless at any point it's recommended to execute `pre-commit.sh`.
+
 ## Credits n' more
 
 Code & Mastermind: DarkKronicle
