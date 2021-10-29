@@ -9,8 +9,8 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/advancedchatcore",
-    "sources": "https://github.com/DarkKronicle/AdvancedChat",
-    "issues": "https://github.com/DarkKronicle/AdvancedChat/issues",
+    "sources": "https://github.com/DarkKronicle/AdvancedChatCore",
+    "issues": "https://github.com/DarkKronicle/AdvancedChatCore/issues",
     "discord": "https://discord.gg/WnaE3uZxDA"
   },
   "license": "MPL-v2",
@@ -34,11 +34,10 @@
     "malilib": ">=0.10.0-dev.20"
   },
   "custom": {
-    "modmenu:clientsideOnly": true,
-    "modupdater": {
-      "strategy": "curseforge",
-      "projectID": 387825,
-      "strict": false
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/WnaE3uZxDA"
+      }
     }
   }
 }
