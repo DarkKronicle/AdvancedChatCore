@@ -121,8 +121,8 @@ public abstract class WidgetConfigListEntry<TYPE> extends WidgetListEntryBase<TY
             return false;
         }
         for (TextFieldWrapper<GuiTextFieldGeneric> field : getTextFields()) {
-            if (field != null && field.onKeyTyped(keyCode, scanCode, modifiers)) {
-                return true;
+            if (field != null && field.isFocused()) {
+                return field.onKeyTyped(keyCode, scanCode, modifiers);
             }
         }
         return false;
@@ -132,7 +132,7 @@ public abstract class WidgetConfigListEntry<TYPE> extends WidgetListEntryBase<TY
     protected boolean onCharTypedImpl(char charIn, int modifiers) {
         if (getTextFields() != null) {
             for (TextFieldWrapper<GuiTextFieldGeneric> field : getTextFields()) {
-                if (field != null && field.getTextField().charTyped(charIn, modifiers)) {
+                if (field != null && field.onCharTyped(charIn, modifiers)) {
                     return true;
                 }
             }

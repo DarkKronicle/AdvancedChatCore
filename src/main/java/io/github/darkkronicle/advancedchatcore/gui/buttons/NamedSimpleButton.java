@@ -18,7 +18,7 @@ public class NamedSimpleButton extends ButtonGeneric {
 
     public NamedSimpleButton(int x, int y, String text, boolean alineLeft) {
         super(x, y, 5, 20, text);
-        setWidth(StringUtils.getStringWidth(text) + 2);
+        setWidth(StringUtils.getStringWidth(text) + 10);
         if (!alineLeft) {
             setX(this.x - this.width);
         }
