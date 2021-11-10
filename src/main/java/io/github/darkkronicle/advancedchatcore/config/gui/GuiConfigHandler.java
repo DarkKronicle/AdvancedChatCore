@@ -11,6 +11,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.util.StringUtils;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
+import io.github.darkkronicle.advancedchatcore.gui.buttons.ConfigTabsButtonListener;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -137,5 +138,9 @@ public class GuiConfigHandler {
 
         Tab tab;
         ButtonGeneric button;
+
+        public ConfigTabsButtonListener createListener() {
+            return new ConfigTabsButtonListener(this);
+        }
     }
 }
