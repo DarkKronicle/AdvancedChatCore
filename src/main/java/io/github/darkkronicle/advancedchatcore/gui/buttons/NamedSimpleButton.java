@@ -13,7 +13,14 @@ import fi.dy.masa.malilib.util.StringUtils;
 public class NamedSimpleButton extends ButtonGeneric {
 
     public NamedSimpleButton(int x, int y, String text) {
+        this(x, y, text, true);
+    }
+
+    public NamedSimpleButton(int x, int y, String text, boolean alineLeft) {
         super(x, y, 5, 20, text);
         setWidth(StringUtils.getStringWidth(text) + 2);
+        if (!alineLeft) {
+            setX(this.x - this.width);
+        }
     }
 }

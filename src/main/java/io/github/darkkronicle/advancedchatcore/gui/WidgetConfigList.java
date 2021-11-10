@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.screen.Screen;
 
-public abstract class ConfigList<TYPE, WIDGET extends ConfigListEntry<TYPE>>
+public abstract class WidgetConfigList<TYPE, WIDGET extends WidgetConfigListEntry<TYPE>>
         extends WidgetListBase<TYPE, WIDGET> {
 
     protected List<TextFieldWrapper<GuiTextFieldGeneric>> textFields = new ArrayList<>();
 
-    public ConfigList(
+    public WidgetConfigList(
             int x,
             int y,
             int width,
@@ -61,7 +61,7 @@ public abstract class ConfigList<TYPE, WIDGET extends ConfigListEntry<TYPE>>
 
     @Override
     public boolean onKeyTyped(int keyCode, int scanCode, int modifiers) {
-        for (ConfigListEntry<TYPE> widget : this.listWidgets) {
+        for (WidgetConfigListEntry<TYPE> widget : this.listWidgets) {
             if (widget.onKeyTyped(keyCode, scanCode, modifiers)) {
                 return true;
             }

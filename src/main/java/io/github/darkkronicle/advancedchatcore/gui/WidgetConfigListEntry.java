@@ -22,19 +22,19 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 
 @Environment(EnvType.CLIENT)
-public abstract class ConfigListEntry<TYPE> extends WidgetListEntryBase<TYPE> {
+public abstract class WidgetConfigListEntry<TYPE> extends WidgetListEntryBase<TYPE> {
 
     private final boolean odd;
     private final List<String> hoverLines;
 
     @Setter @Getter private int buttonStartX;
 
-    public ConfigListEntry(
+    public WidgetConfigListEntry(
             int x, int y, int width, int height, boolean isOdd, TYPE entry, int listIndex) {
         this(x, y, width, height, isOdd, entry, listIndex, null);
     }
 
-    public ConfigListEntry(
+    public WidgetConfigListEntry(
             int x,
             int y,
             int width,
@@ -49,7 +49,10 @@ public abstract class ConfigListEntry<TYPE> extends WidgetListEntryBase<TYPE> {
         this.buttonStartX = x + width;
     }
 
-    public abstract String getName();
+    /** Get's the name to render for the entry. */
+    public String getName() {
+        return "";
+    }
 
     public List<TextFieldWrapper<GuiTextFieldGeneric>> getTextFields() {
         return null;
@@ -114,6 +117,9 @@ public abstract class ConfigListEntry<TYPE> extends WidgetListEntryBase<TYPE> {
 
     @Override
     protected boolean onKeyTypedImpl(int keyCode, int scanCode, int modifiers) {
+        if (getTextFields() == null) {
+            return false;
+        }
         for (TextFieldWrapper<GuiTextFieldGeneric> field : getTextFields()) {
             if (field != null && field.onKeyTyped(keyCode, scanCode, modifiers)) {
                 return true;
