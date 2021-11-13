@@ -9,30 +9,47 @@ package io.github.darkkronicle.advancedchatcore.util;
 
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.util.StringUtils;
+import io.github.darkkronicle.advancedchatcore.finder.CustomFinder;
+import io.github.darkkronicle.advancedchatcore.finder.LiteralFinder;
+import io.github.darkkronicle.advancedchatcore.finder.RegexFinder;
+import io.github.darkkronicle.advancedchatcore.finder.UpperLowerFinder;
+import io.github.darkkronicle.advancedchatcore.interfaces.IFinder;
+import java.util.function.Supplier;
 
 /** Different methods of searching strings for matches. */
 public enum FindType implements IConfigOptionListEntry {
     /** An exact match found in the input */
-    LITERAL("literal"),
+    LITERAL("literal", LiteralFinder::new),
 
     /** A match found in the input that is case insensitive */
-    UPPERLOWER("upperlower"),
+    UPPERLOWER("upperlower", UpperLowerFinder::new),
 
     /** A regex match found in the input */
-    REGEX("regex"),
+    REGEX("regex", RegexFinder::new),
 
-    /** Will always return true */
-    ALL("all");
+    /**
+     * Use custom ones that mods can create. Defined in {@link
+     * io.github.darkkronicle.advancedchatcore.finder.CustomFinder}
+     */
+    CUSTOM("all", CustomFinder::getInstance);
 
     /** Serialized name of the {@link FindType} */
     public final String configString;
+
+    private final Supplier<IFinder> finder;
 
     private static String translate(String key) {
         return StringUtils.translate("advancedchat.config.findtype." + key);
     }
 
-    FindType(String configString) {
+    FindType(String configString, Supplier<IFinder> finder) {
         this.configString = configString;
+        this.finder = finder;
+    }
+
+    /** Get's the finder associated with this */
+    public IFinder getFinder() {
+        return finder.get();
     }
 
     /**

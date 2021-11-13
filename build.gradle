@@ -53,6 +53,17 @@ jar {
 	from "LICENSE.txt"
 }
 
+tasks.register('downloadExtra') {
+	def f = new File('./src/main/resources/profanity.txt')
+	if (!f.exists()) {
+		new URL('https://raw.githubusercontent.com/surge-ai/profanity/main/profanity_en-us.csv').withInputStream{ i -> f.withOutputStream{ it << i }}
+	}
+}
+
+build {
+	dependsOn 'downloadExtra'
+}
+
 spotless {
 	ratchetFrom 'origin/main'
 	format 'misc', {

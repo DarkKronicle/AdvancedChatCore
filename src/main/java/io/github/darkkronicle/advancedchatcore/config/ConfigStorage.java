@@ -128,6 +128,14 @@ public class ConfigStorage implements IConfigHandler {
                                 "[A-Za-z0-9_§]{3,16}",
                                 translate("info.messageownerregex")));
 
+        public static final SaveableConfig<ConfigBoolean> FILTER_PROFANITY =
+                SaveableConfig.fromConfig(
+                        "filterProfanity",
+                        new ConfigBoolean(
+                                translate("filterprofanity"),
+                                false,
+                                translate("info.filterprofanity")));
+
         public static final ImmutableList<SaveableConfig<? extends IConfigBase>> OPTIONS =
                 ImmutableList.of(
                         TIME_FORMAT,
@@ -137,7 +145,8 @@ public class ConfigStorage implements IConfigHandler {
                         CLEAR_ON_DISCONNECT,
                         CHAT_STACK,
                         CHAT_STACK_UPDATE,
-                        MESSAGE_OWNER_REGEX);
+                        MESSAGE_OWNER_REGEX,
+                        FILTER_PROFANITY);
     }
 
     public static class ChatScreen {

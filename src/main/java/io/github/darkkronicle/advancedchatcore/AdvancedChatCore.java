@@ -27,6 +27,8 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
@@ -44,6 +46,8 @@ public class AdvancedChatCore implements ClientModInitializer {
      * suggestor.
      */
     public static boolean CREATE_SUGGESTOR = true;
+
+    public static final Logger LOGGER = LogManager.getLogger();
 
     private static final Random RANDOM = new Random();
 

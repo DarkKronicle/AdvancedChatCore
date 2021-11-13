@@ -7,11 +7,11 @@
  */
 package io.github.darkkronicle.advancedchatcore.util;
 
+import io.github.darkkronicle.advancedchatcore.finder.RegexFinder;
+import io.github.darkkronicle.advancedchatcore.interfaces.IFinder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import lombok.Getter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -23,8 +23,8 @@ public class SearchResult {
     /** All the {@link StringMatch} that were found in the input */
     @Getter private final List<StringMatch> matches;
 
-    /** The {@link Matcher} that was used to find the matches */
-    @Getter private final Matcher matcher;
+    /** The finder used to find matches */
+    @Getter private final IFinder finder;
 
     /** The input string */
     @Getter private final String input;
@@ -37,13 +37,13 @@ public class SearchResult {
      *
      * @param input Input to search
      * @param search Search value
-     * @param matcher {@link Matcher} used to serach
+     * @param finder {@link IFinder} used to search
      * @param matches {@link List} of {@link StringMatch} that were found
      */
-    public SearchResult(String input, String search, Matcher matcher, List<StringMatch> matches) {
+    public SearchResult(String input, String search, IFinder finder, List<StringMatch> matches) {
         this.input = input;
         this.search = search;
-        this.matcher = matcher;
+        this.finder = finder;
         this.matches = new ArrayList<>(matches);
         Collections.sort(this.matches);
     }
@@ -63,42 +63,26 @@ public class SearchResult {
      */
     public String getGroupReplacements(String string, boolean onlyFirst) {
         if (onlyFirst) {
-            int start = matches.get(0).start;
-            int end = matches.get(0).end;
+            if (finder instanceof RegexFinder) {
+                try {
+                    return ((RegexFinder) finder)
+                            .getPattern(search)
+                            .matcher(matches.get(0).match)
+                            .replaceAll(string);
+                } catch (Exception e) {
+                    // Didn't work
+                }
+            }
+            return SearchUtils.replaceGroups(Collections.singletonList(matches.get(0)), string);
+        }
+        if (finder instanceof RegexFinder) {
             try {
-                return matcher.pattern().matcher(input.substring(start, end)).replaceAll(string);
+                ((RegexFinder) finder).getPattern(search).matcher(input).replaceAll(string);
             } catch (Exception e) {
-                // Didn't work
-                return input.substring(start, end);
+                // Did not work
             }
         }
-        try {
-            return matcher.replaceAll(string);
-        } catch (Exception e) {
-            // Didn't work
-            return string;
-        }
-    }
-
-    /**
-     * A method to construct a SearchResult based off of an input and a {@link Matcher} to reuse.
-     *
-     * @param input Input string to search
-     * @param oldMatcher {@link Matcher} containing pattern and search
-     * @return A SearchResult with the new matches
-     */
-    public static SearchResult searchOf(String input, Matcher oldMatcher) {
-        // Grab pattern and make new matcher
-        Pattern pattern = oldMatcher.pattern();
-        Matcher matcher = pattern.matcher(input);
-        List<StringMatch> matches = new ArrayList<>();
-        while (matcher.find()) {
-            // Compile all the matches
-            matches.add(new StringMatch(matcher.group(), matcher.start(), matcher.end()));
-        }
-        // Reset back to the begging
-        matcher.reset();
-        return new SearchResult(input, pattern.pattern(), matcher, matches);
+        return SearchUtils.replaceGroups(matches, string);
     }
 
     /**
@@ -110,13 +94,8 @@ public class SearchResult {
      * @return SearchResult with compiled searches
      */
     public static SearchResult searchOf(String input, String match, FindType type) {
-        Pattern pattern = SearchUtils.compilePattern(match, type);
-        Matcher matcher = pattern.matcher(input);
-        List<StringMatch> matches = new ArrayList<>();
-        while (matcher.find()) {
-            matches.add(new StringMatch(matcher.group(), matcher.start(), matcher.end()));
-        }
-        matcher.reset();
-        return new SearchResult(input, match, matcher, matches);
+        IFinder finder = type.getFinder();
+        List<StringMatch> matches = finder.getMatches(input, match);
+        return new SearchResult(input, match, finder, matches);
     }
 }

@@ -9,8 +9,8 @@ package io.github.darkkronicle.advancedchatcore.util;
 
 import io.github.darkkronicle.advancedchatcore.chat.MessageOwner;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
+import io.github.darkkronicle.advancedchatcore.interfaces.IFinder;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,8 +18,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import lombok.experimental.UtilityClass;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -45,35 +43,45 @@ public class SearchUtils {
      * @return If a match is found.
      */
     public boolean isMatch(String input, String toMatch, FindType type) {
-        if (type == FindType.ALL) {
-            return true;
-        }
-        Pattern pattern = compilePattern(toMatch, type);
-        if (pattern == null) {
+        IFinder finder = type.getFinder();
+        if (finder == null) {
             return false;
         }
-        return pattern.matcher(input).find();
+        return finder.isMatch(input, toMatch);
     }
 
     /**
-     * Compiles a {@link Pattern} for the specified {@link FindType}
+     * Get's replacements for a string and matches following the format $\<number\>
      *
-     * @param toMatch Match string
-     * @param type Find type
-     * @return Compiled pattern
+     * @param groups Matches that are found, will replace
+     * @param input Input with group replacements
+     * @return String with replaced groups
      */
-    public Pattern compilePattern(String toMatch, FindType type) {
-        switch (type) {
-            case UPPERLOWER:
-                return Pattern.compile(Pattern.quote(toMatch), Pattern.CASE_INSENSITIVE);
-            case LITERAL:
-                return Pattern.compile(Pattern.quote(toMatch));
-            case REGEX:
-                return Pattern.compile(toMatch);
-            case ALL:
-                return Pattern.compile(".+");
+    public String replaceGroups(List<StringMatch> groups, String input) {
+        // Checks to make it so we don't always have to regex
+        if (input.length() < 2 || !input.contains("$")) {
+            return input;
         }
-        return null;
+        Optional<List<StringMatch>> replace = findMatches(input, "\\$[0-9]", FindType.REGEX);
+        if (replace.isEmpty()) {
+            return input;
+        }
+        // Ensure sort
+        TreeSet<StringMatch> replaceMatches = new TreeSet<>(replace.get());
+        int last = 0;
+        StringBuilder edited = new StringBuilder();
+        for (StringMatch m : replaceMatches) {
+            int digit = Integer.parseInt(m.match.substring(1, 2));
+            if (digit == 0 || digit > groups.size()) {
+                continue;
+            }
+            edited.append(input, last, m.start).append(groups.get(digit));
+            last = m.end;
+        }
+        if (last != input.length()) {
+            edited.append(input.substring(last));
+        }
+        return edited.toString();
     }
 
     /**
@@ -86,17 +94,11 @@ public class SearchUtils {
      * @return An Optional containing a list of {@link StringMatch}
      */
     public Optional<List<StringMatch>> findMatches(String input, String toMatch, FindType type) {
-        if (type == FindType.ALL) {
-            return Optional.of(
-                    Collections.singletonList(new StringMatch(input, 0, input.length())));
-        }
-        Pattern pattern = compilePattern(toMatch, type);
-        if (pattern == null) {
+        IFinder finder = type.getFinder();
+        if (finder == null) {
             return Optional.empty();
         }
-        Set<StringMatch> matches = new TreeSet<>();
-        Matcher matcher = pattern.matcher(input);
-        addMatches(matches, matcher, 1000);
+        Set<StringMatch> matches = new TreeSet<>(finder.getMatches(input, toMatch));
         if (matches.size() != 0) {
             return Optional.of(new ArrayList<>(matches));
         }
@@ -112,30 +114,17 @@ public class SearchUtils {
      * @return Optional of a {@link StringMatch} if found
      */
     public Optional<StringMatch> getMatch(String input, String toMatch, FindType type) {
-        if (type == FindType.ALL) {
-            return Optional.of(new StringMatch(input, 0, input.length()));
-        }
-        Pattern pattern = compilePattern(toMatch, type);
-        if (pattern == null) {
+        IFinder finder = type.getFinder();
+        if (finder == null) {
             return Optional.empty();
         }
         // Use treeset to sort the matches
-        Set<StringMatch> matches = new TreeSet<>();
-        Matcher matcher = pattern.matcher(input);
+        Set<StringMatch> matches = new TreeSet<>(finder.getMatches(input, toMatch));
         // Add and sort matches
-        addMatches(matches, matcher, 1);
         if (matches.size() != 0) {
             return Optional.of(matches.toArray(new StringMatch[0])[0]);
         }
         return Optional.empty();
-    }
-
-    private void addMatches(Set<StringMatch> matches, Matcher matcher, int limit) {
-        int i = 0;
-        while (matcher.find() && i < limit) {
-            matches.add(new StringMatch(matcher.group(), matcher.start(), matcher.end()));
-            i++;
-        }
     }
 
     /**
