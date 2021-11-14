@@ -52,14 +52,14 @@ public class ProfanityUtil {
                     FileUtils.getConfigDirectory()
                             .toPath()
                             .resolve("advancedchat")
-                            .resolve("profanity.txt")
+                            .resolve("swear_words.txt")
                             .toFile();
             if (!file.exists()) {
                 // Use built in
                 lines =
                         new BufferedReader(
                                         new InputStreamReader(
-                                                AdvancedChatCore.getResource("profanity.txt"),
+                                                AdvancedChatCore.getResource("swear_words.txt"),
                                                 StandardCharsets.UTF_8))
                                 .lines()
                                 .collect(Collectors.toList());
@@ -97,7 +97,7 @@ public class ProfanityUtil {
             AdvancedChatCore.LOGGER.log(
                     Level.INFO, "Loaded " + counter + " words to profanity filter.");
         } catch (URISyntaxException | IOException e) {
-            AdvancedChatCore.LOGGER.log(Level.ERROR, "Couldn't access profanity.txt", e);
+            AdvancedChatCore.LOGGER.log(Level.ERROR, "Couldn't access swear_words.txt", e);
         }
     }
 

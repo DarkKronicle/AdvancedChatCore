@@ -54,7 +54,7 @@ jar {
 }
 
 tasks.register('downloadExtra') {
-	def f = new File('./src/main/resources/profanity.txt')
+	def f = new File('./src/main/resources/swear_words.txt')
 	if (!f.exists()) {
 		new URL('https://raw.githubusercontent.com/surge-ai/profanity/main/profanity_en-us.csv').withInputStream{ i -> f.withOutputStream{ it << i }}
 	}

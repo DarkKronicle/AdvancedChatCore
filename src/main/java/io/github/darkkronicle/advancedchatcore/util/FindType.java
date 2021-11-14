@@ -31,7 +31,7 @@ public enum FindType implements IConfigOptionListEntry {
      * Use custom ones that mods can create. Defined in {@link
      * io.github.darkkronicle.advancedchatcore.finder.CustomFinder}
      */
-    CUSTOM("all", CustomFinder::getInstance);
+    CUSTOM("custom", CustomFinder::getInstance);
 
     /** Serialized name of the {@link FindType} */
     public final String configString;

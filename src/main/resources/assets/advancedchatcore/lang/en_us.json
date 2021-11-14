@@ -26,6 +26,8 @@
   "advancedchat.config.general.info.chatheads": "Whether or not the §6head of the message sender§r displays beside their message",
   "advancedchat.config.general.messageownerregex": "Message Owner Regex",
   "advancedchat.config.general.info.messageownerregex": "The §6regular expression§r used to detect the head used for chat heads \n§cDon't mess with this unless you §c§oreally §cunderstand what you're working with!",
+  "advancedchat.config.general.filterprofanity": "Filter Profanity",
+  "advancedchat.config.general.info.filterprofanity": "Filter's out §9swear words§r and replaces them with *'s.\n\nTo use your own swear word list have each line be a swear word\nin a file in §7~minecraft/config/advancedchat/swear_words.txt",
 
   "advancedchat.config.chatscreen.persistenttext": "Persistent Text",
   "advancedchat.config.chatscreen.info.persistenttext": "Whether or not messages that are §6typed but not sent§r are kept after closing the §9Chat Box",
@@ -39,5 +41,5 @@
   "advancedchat.config.findtype.literal": "§6Literal",
   "advancedchat.config.findtype.upperlower": "§eUpper-Lower",
   "advancedchat.config.findtype.regex": "§bRegEx",
-  "advancedchat.config.findtype.all": "§dAll"
+  "advancedchat.config.findtype.custom": "§dCustom"
 }

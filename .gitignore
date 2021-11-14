@@ -10,4 +10,4 @@ build/
 classes/
 lombok.config
 extra.properties
-profanity.txt
+swear_words.txt
