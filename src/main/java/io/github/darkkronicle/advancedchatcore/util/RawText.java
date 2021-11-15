@@ -52,13 +52,18 @@ public class RawText implements MutableText {
      * @param color Color that will get transfered over
      * @return New RawText
      */
-    public static RawText withColor(String string, ColorUtil.SimpleColor color) {
+    public static RawText withColor(String string, Color color) {
         if (color == null) {
             return new RawText(string, Style.EMPTY);
         }
         Style style = Style.EMPTY;
         TextColor textColor = TextColor.fromRgb(color.color());
         return RawText.withStyle(string, style.withColor(textColor));
+    }
+
+    @Deprecated
+    public static RawText withColor(String string, ColorUtil.SimpleColor color) {
+        return withColor(string, color.toColor());
     }
 
     /**

@@ -11,7 +11,7 @@ import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.interfaces.IMessageProcessor;
 import io.github.darkkronicle.advancedchatcore.mixin.MixinChatHudInvoker;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
+import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.SearchUtils;
 import java.time.LocalTime;
@@ -40,7 +40,7 @@ public class ChatHistoryProcessor implements IMessageProcessor {
         if (unfiltered == null) {
             unfiltered = text;
         }
-        ColorUtil.SimpleColor backcolor = text.getBackgroundColor();
+        Color backcolor = text.getBackground();
 
         // Put the time in
         LocalTime time = LocalTime.now();

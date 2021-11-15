@@ -28,6 +28,9 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:${project.malilib_version}"
 	modCompileOnly "io.github.prospector:modmenu:1.16.8"
+	implementation 'com.electronwill.night-config:toml:3.6.5'
+	// Transitive
+	include 'com.electronwill.night-config:core:3.6.5'
 }
 
 

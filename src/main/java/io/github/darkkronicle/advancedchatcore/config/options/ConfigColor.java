@@ -9,16 +9,14 @@ package io.github.darkkronicle.advancedchatcore.config.options;
 
 import com.google.gson.JsonElement;
 import fi.dy.masa.malilib.MaLiLib;
-import fi.dy.masa.malilib.config.options.ConfigColor;
 import fi.dy.masa.malilib.util.StringUtils;
+import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
 
-@Deprecated
-public class ConfigSimpleColor extends ConfigColor {
+public class ConfigColor extends fi.dy.masa.malilib.config.options.ConfigColor {
+    private Color color;
 
-    private ColorUtil.SimpleColor color;
-
-    public ConfigSimpleColor(String name, ColorUtil.SimpleColor defaultValue, String comment) {
+    public ConfigColor(String name, Color defaultValue, String comment) {
         super(name, defaultValue.getString(), comment);
         this.color = defaultValue;
     }
@@ -26,11 +24,11 @@ public class ConfigSimpleColor extends ConfigColor {
     @Override
     public void setIntegerValue(int value) {
         super.setIntegerValue(value);
-        setSimpleColor();
+        setColor();
     }
 
-    private void setSimpleColor() {
-        this.color = new ColorUtil.SimpleColor(getIntegerValue());
+    private void setColor() {
+        this.color = new Color(getIntegerValue());
     }
 
     @Override
@@ -57,7 +55,12 @@ public class ConfigSimpleColor extends ConfigColor {
         }
     }
 
-    public ColorUtil.SimpleColor getSimpleColor() {
+    public Color get() {
         return color;
+    }
+
+    @Deprecated
+    public ColorUtil.SimpleColor getSimpleColor() {
+        return ColorUtil.SimpleColor.fromColor(color);
     }
 }

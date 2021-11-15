@@ -7,6 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatcore.chat;
 
+import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
 import io.github.darkkronicle.advancedchatcore.util.StyleFormatter;
 import java.time.LocalTime;
@@ -42,7 +43,7 @@ public class ChatMessage {
     protected LocalTime time;
 
     /** The background color of the message. */
-    protected ColorUtil.SimpleColor background;
+    protected Color backgroundColor;
 
     /** The amount of times the message has been stacked. */
     protected int stacks;
@@ -67,6 +68,16 @@ public class ChatMessage {
         formatChildren(width);
     }
 
+    @Deprecated
+    public void setBackground(ColorUtil.SimpleColor color) {
+        this.backgroundColor = color.toColor();
+    }
+
+    @Deprecated
+    public ColorUtil.SimpleColor getBackground() {
+        return ColorUtil.SimpleColor.fromColor(backgroundColor);
+    }
+
     /**
      * Clones the object
      *
@@ -81,7 +92,7 @@ public class ChatMessage {
                         originalText,
                         id,
                         time,
-                        background,
+                        backgroundColor,
                         width,
                         owner);
         message.setStacks(getStacks());
@@ -110,6 +121,7 @@ public class ChatMessage {
         }
     }
 
+    @Deprecated
     @Builder
     protected ChatMessage(
             int creationTick,
@@ -120,11 +132,24 @@ public class ChatMessage {
             ColorUtil.SimpleColor background,
             int width,
             MessageOwner owner) {
+        this(creationTick, displayText, originalText, id, time, background.toColor(), width, owner);
+    }
+
+    @Builder
+    protected ChatMessage(
+            int creationTick,
+            Text displayText,
+            Text originalText,
+            int id,
+            LocalTime time,
+            Color backgroundColor,
+            int width,
+            MessageOwner owner) {
         this.creationTick = creationTick;
         this.displayText = displayText;
         this.id = id;
         this.time = time;
-        this.background = background;
+        this.backgroundColor = backgroundColor;
         this.stacks = 0;
         this.uuid = UUID.randomUUID();
         this.owner = owner;

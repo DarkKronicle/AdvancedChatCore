@@ -34,12 +34,12 @@ public class ColorUtil {
      * @param rgb The color to unpack
      * @return The new Color
      */
-    public SimpleColor intToColor(int rgb) {
+    public Color intToColor4f(int rgb) {
         int alpha = rgb >> 24 & 0xFF;
         int red = rgb >> 16 & 0xFF;
         int green = rgb >> 8 & 0xFF;
         int blue = rgb & 0xFF;
-        return new SimpleColor(red, green, blue, alpha);
+        return new Color(red, green, blue, alpha);
     }
 
     /**
@@ -48,7 +48,7 @@ public class ColorUtil {
      * @param c The color to pack
      * @return The packed int
      */
-    public int colorToInt(SimpleColor c) {
+    public int colorToInt4f(Color c) {
         int rgb = c.alpha();
         rgb = (rgb << 8) + c.red();
         rgb = (rgb << 8) + c.green();
@@ -56,24 +56,50 @@ public class ColorUtil {
         return rgb;
     }
 
-    public SimpleColor fade(SimpleColor color, float percent) {
+    public Color fade(Color color, float percent) {
         float alpha = (float) color.alpha();
         return color.withAlpha((int) Math.floor((alpha * percent)));
     }
 
-    public SimpleColor fromFormatting(Formatting formatting) {
-        return new SimpleColor(formatting.getColorValue());
+    public Color colorFromFormatting(Formatting formatting) {
+        return new Color(formatting.getColorValue());
     }
 
-    // Standard quick reference colors
-    public final SimpleColor WHITE = new SimpleColor(255, 255, 255, 255);
-    public final SimpleColor BLACK = new SimpleColor(0, 0, 0, 255);
-    public final SimpleColor GRAY = new SimpleColor(128, 128, 128, 255);
+    // Deprecated
+    @Deprecated
+    public SimpleColor intToColor(int rgb) {
+        return SimpleColor.fromColor(intToColor4f(rgb));
+    }
+
+    @Deprecated
+    public int colorToInt(SimpleColor c) {
+        return colorToInt4f(c.toColor());
+    }
+
+    @Deprecated
+    public SimpleColor fade(SimpleColor color, float percent) {
+        return SimpleColor.fromColor(fade(color.toColor(), percent));
+    }
+
+    @Deprecated
+    public SimpleColor fromFormatting(Formatting formatting) {
+        return SimpleColor.fromColor(colorFromFormatting(formatting));
+    }
+
+    /** @deprecated Use {@link Colors} */
+    @Deprecated public final SimpleColor WHITE = new SimpleColor(255, 255, 255, 255);
+    /** @deprecated Use {@link Colors} */
+    @Deprecated public final SimpleColor BLACK = new SimpleColor(0, 0, 0, 255);
+    /** @deprecated Use {@link Colors} */
+    @Deprecated public final SimpleColor GRAY = new SimpleColor(128, 128, 128, 255);
 
     /**
      * Simple class that uses Lombok's many features to simplify. You can convert at anytime from
      * the color, to an int.
+     *
+     * <p>New class in {@link Color}
      */
+    @Deprecated
     @Value
     @Accessors(fluent = true)
     public static class SimpleColor {
@@ -130,6 +156,19 @@ public class ColorUtil {
 
         public String getString() {
             return String.format("#%08X", color);
+        }
+
+        /** Will be removed */
+        @Deprecated
+        public Color toColor() {
+            return new Color(red, green, blue, alpha, color);
+        }
+
+        /** Will be removed */
+        @Deprecated
+        public static SimpleColor fromColor(Color color) {
+            return new SimpleColor(
+                    color.red(), color.green(), color.blue(), color.alpha(), color.color());
         }
     }
 }

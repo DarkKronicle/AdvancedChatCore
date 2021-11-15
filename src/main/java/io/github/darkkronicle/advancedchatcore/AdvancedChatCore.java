@@ -11,6 +11,7 @@ import fi.dy.masa.malilib.event.InitializationHandler;
 import fi.dy.masa.malilib.gui.GuiBase;
 import io.github.darkkronicle.advancedchatcore.chat.AdvancedSleepingChatScreen;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
 import io.github.darkkronicle.advancedchatcore.util.SyncTaskQueue;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -117,6 +118,8 @@ public class AdvancedChatCore implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        // Important to get first since configuration options depend on colors
+        Colors.getInstance().load();
         InitializationHandler.getInstance().registerInitializationHandler(new InitHandler());
         KeyBinding keyBinding =
                 new KeyBinding(

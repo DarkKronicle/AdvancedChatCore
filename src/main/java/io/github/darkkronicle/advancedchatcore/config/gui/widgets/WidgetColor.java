@@ -10,6 +10,7 @@ package io.github.darkkronicle.advancedchatcore.config.gui.widgets;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
+import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,7 +18,7 @@ import net.minecraft.client.util.math.MatrixStack;
 public class WidgetColor extends GuiTextFieldGeneric {
 
     private int colorX;
-    private ColorUtil.SimpleColor currentColor;
+    private Color currentColor;
 
     public WidgetColor(
             int x,
@@ -26,6 +27,11 @@ public class WidgetColor extends GuiTextFieldGeneric {
             int height,
             ColorUtil.SimpleColor color,
             TextRenderer textRenderer) {
+        this(x, y, width, height, color.toColor(), textRenderer);
+    }
+
+    public WidgetColor(
+            int x, int y, int width, int height, Color color, TextRenderer textRenderer) {
         super(x, y, width - 22, height, textRenderer);
         this.colorX = x + width - 20;
         this.currentColor = color;
@@ -44,7 +50,7 @@ public class WidgetColor extends GuiTextFieldGeneric {
     @Override
     public void write(String text) {
         super.write(text);
-        getAndRefreshColor();
+        getAndRefreshColor4f();
     }
 
     @Override
@@ -52,8 +58,13 @@ public class WidgetColor extends GuiTextFieldGeneric {
         return super.getWidth() + 22;
     }
 
+    @Deprecated
     public ColorUtil.SimpleColor getAndRefreshColor() {
-        this.currentColor = new ColorUtil.SimpleColor(StringUtils.getColor(getText(), 0));
+        return ColorUtil.SimpleColor.fromColor(getAndRefreshColor4f());
+    }
+
+    public Color getAndRefreshColor4f() {
+        this.currentColor = new Color(StringUtils.getColor(getText(), 0));
         return this.currentColor;
     }
 }

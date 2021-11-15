@@ -23,10 +23,10 @@ import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
-import io.github.darkkronicle.advancedchatcore.config.options.ConfigSimpleColor;
+import io.github.darkkronicle.advancedchatcore.config.options.ConfigColor;
 import io.github.darkkronicle.advancedchatcore.interfaces.ConfigRegistryOption;
 import io.github.darkkronicle.advancedchatcore.util.AbstractRegistry;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
 import io.github.darkkronicle.advancedchatcore.util.EasingMethod;
 import java.io.File;
 import java.io.FileInputStream;
@@ -84,12 +84,12 @@ public class ConfigStorage implements IConfigHandler {
                                 "[%TIME%] ",
                                 translate("info.timetextformat")));
 
-        public static final SaveableConfig<ConfigSimpleColor> TIME_COLOR =
+        public static final SaveableConfig<ConfigColor> TIME_COLOR =
                 SaveableConfig.fromConfig(
                         "time_color",
-                        new ConfigSimpleColor(
+                        new ConfigColor(
                                 translate("timecolor"),
-                                ColorUtil.WHITE,
+                                Colors.getInstance().getColor("white").get(),
                                 translate("info.timecolor")));
 
         public static final SaveableConfig<ConfigBoolean> SHOW_TIME =
@@ -165,12 +165,12 @@ public class ConfigStorage implements IConfigHandler {
                                 false,
                                 translate("info.persistenttext")));
 
-        public static final SaveableConfig<ConfigSimpleColor> COLOR =
+        public static final SaveableConfig<ConfigColor> COLOR =
                 SaveableConfig.fromConfig(
                         "color",
-                        new ConfigSimpleColor(
+                        new ConfigColor(
                                 translate("color"),
-                                ColorUtil.BLACK.withAlpha(100),
+                                Colors.getInstance().getColor("black").get().withAlpha(100),
                                 translate("info.color")));
 
         public static final SaveableConfig<ConfigBoolean> MORE_TEXT =

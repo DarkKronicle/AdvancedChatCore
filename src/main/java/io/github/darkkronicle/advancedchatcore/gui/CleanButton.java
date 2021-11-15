@@ -9,7 +9,9 @@ package io.github.darkkronicle.advancedchatcore.gui;
 
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.render.RenderUtils;
+import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.fabricmc.api.EnvType;
@@ -23,7 +25,7 @@ import net.minecraft.client.util.math.MatrixStack;
 @Environment(EnvType.CLIENT)
 public class CleanButton extends ButtonBase {
 
-    protected ColorUtil.SimpleColor baseColor;
+    protected Color baseColor;
 
     private MinecraftClient client = MinecraftClient.getInstance();
 
@@ -37,12 +39,17 @@ public class CleanButton extends ButtonBase {
      * @param baseColor Color that it should render when not hovered
      * @param text Text to render
      */
-    public CleanButton(
-            int x, int y, int width, int height, ColorUtil.SimpleColor baseColor, String text) {
+    public CleanButton(int x, int y, int width, int height, Color baseColor, String text) {
         super(x, y, width, height, text);
         this.x = x;
         this.y = y;
         this.baseColor = baseColor;
+    }
+
+    @Deprecated
+    public CleanButton(
+            int x, int y, int width, int height, ColorUtil.SimpleColor baseColor, String text) {
+        this(x, y, width, height, baseColor.toColor(), text);
     }
 
     @Override
@@ -50,9 +57,9 @@ public class CleanButton extends ButtonBase {
         int relMX = mouseX - x;
         int relMY = mouseY - y;
         hovered = relMX >= 0 && relMX <= width && relMY >= 0 && relMY <= height;
-        ColorUtil.SimpleColor color = baseColor;
+        Color color = baseColor;
         if (hovered) {
-            color = ColorUtil.WHITE.withAlpha(color.alpha());
+            color = Colors.getInstance().getColor("white").get().withAlpha(color.alpha());
         }
         RenderUtils.drawRect(x, y, width, height, color.color());
         drawCenteredString(

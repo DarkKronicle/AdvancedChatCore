@@ -14,7 +14,7 @@ import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import io.github.darkkronicle.advancedchatcore.gui.CleanButton;
 import io.github.darkkronicle.advancedchatcore.interfaces.AdvancedChatScreenSection;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
+import io.github.darkkronicle.advancedchatcore.util.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -62,8 +62,8 @@ public class AdvancedChatScreen extends GuiBase {
         }
     }
 
-    private ColorUtil.SimpleColor getColor() {
-        return ConfigStorage.ChatScreen.COLOR.config.getSimpleColor();
+    private Color getColor() {
+        return ConfigStorage.ChatScreen.COLOR.config.get();
     }
 
     public void initGui() {
@@ -96,7 +96,7 @@ public class AdvancedChatScreen extends GuiBase {
         }
         this.chatField.setChangedListener(this::onChatFieldUpdate);
 
-        ColorUtil.SimpleColor baseColor = getColor();
+        Color baseColor = getColor();
         int x = client.getWindow().getScaledWidth() - 1;
         // Add settings button
         String settings = StringUtils.translate("advancedchat.gui.button.settings");

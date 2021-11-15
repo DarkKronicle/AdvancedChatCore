@@ -36,7 +36,17 @@ public class FluidText implements MutableText {
 
     private ArrayList<RawText> rawTexts = new ArrayList<>();
 
-    @Setter @Getter private ColorUtil.SimpleColor backgroundColor = null;
+    @Setter @Getter private Color background = null;
+
+    @Deprecated
+    public ColorUtil.SimpleColor getBackgroundColor() {
+        return ColorUtil.SimpleColor.fromColor(background);
+    }
+
+    @Deprecated
+    public void setBackgroundColor(ColorUtil.SimpleColor color) {
+        background = color.toColor();
+    }
 
     /**
      * Takes a Text and splits it into a list of {@link RawText}.
@@ -485,7 +495,7 @@ public class FluidText implements MutableText {
     public void addTime(DateTimeFormatter format, LocalTime time) {
         String replaceFormat =
                 ConfigStorage.General.TIME_TEXT_FORMAT.config.getStringValue().replaceAll("&", "§");
-        ColorUtil.SimpleColor color = ConfigStorage.General.TIME_COLOR.config.getSimpleColor();
+        Color color = ConfigStorage.General.TIME_COLOR.config.get();
         Style style = Style.EMPTY;
         TextColor textColor = TextColor.fromRgb(color.color());
         style = style.withColor(textColor);

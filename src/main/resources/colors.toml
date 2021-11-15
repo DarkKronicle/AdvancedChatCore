@@ -1,0 +1,54 @@
+# ------------------------------------------------
+#
+#         -=- Color Configuration -=-
+#
+#     Colors used throughout AdvancedChat.
+#     These Colors can be referenced in
+#     different locations
+#
+# ------------------------------------------------
+
+# ------------------------------------------------
+# To add a color follow:
+#
+#    color.<name> = '#rrggbb'
+#
+# rrggbb should be the hex value. It HAS to start
+# with #. The name can be anything TOML allows
+#         https://toml.io/en/v1.0.0
+# ------------------------------------------------
+color.white = '#ffffff'
+color.black = '#000000'
+color.gray = '#3F3F3F'
+color.blue = '#0000FF'
+
+# Default palette. This has to be one that is declared.
+default_palette = "pastel_blue_magenta"
+
+# ------------------------------------------------
+# Palettes are similar to colors:
+#
+#    palettes.<name> = [<colors>]
+#
+# Colors can be a hex value, #rrggbb, or they can
+# reference predefined colors, such as `white`.
+# To reference defined colors do not include `color.`
+#
+# Palettes can have any amount of colors.
+# ------------------------------------------------
+palettes.pastel_rgb = [
+    "#f19fa9", "#62e2d7", "#eaa5e1", "#81dba7", "#90a9f4", "#dfcb74", "#74aff3", "#b7da8c",
+    "#c7b8eb", "#ecae81", "#5bcfeb", "#d0ca97", "#92bde8", "#cdecc8", "#dec0d2", "#a4c2a3",
+    "#b2cce1", "#e4ccb7", "#95c3be", "#bbeae7"
+]
+
+palettes.pastel_blue_magenta = [
+    "#bddbee", "#eaa8a7", "#67c6f2", "#eac8c8", "#77d4e4", "#e1b0dd", "#9cbfdc",
+    "#c9b5f7", "#a2acbd", "#b4bcf7", "#b6c0d2", "#9fa8e1", "#d0bfd4", "#95bbef", "#c0bbe4"
+]
+
+palettes.fluo = [
+    "#5feba0", "#f4b374", "#4ed9f6", "#dbeb3a", "#4ee9da", "#edcd42", "#61e6bb",
+    "#7de843", "#ded579", "#6eeb77", "#c6e59a", "#bee155", "#98e8a8", "#b2e67d",
+    "#90cf90"
+]
