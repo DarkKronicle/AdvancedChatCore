@@ -121,20 +121,6 @@ public class ChatMessage {
         }
     }
 
-    @Deprecated
-    @Builder
-    protected ChatMessage(
-            int creationTick,
-            Text displayText,
-            Text originalText,
-            int id,
-            LocalTime time,
-            ColorUtil.SimpleColor background,
-            int width,
-            MessageOwner owner) {
-        this(creationTick, displayText, originalText, id, time, background.toColor(), width, owner);
-    }
-
     @Builder
     protected ChatMessage(
             int creationTick,

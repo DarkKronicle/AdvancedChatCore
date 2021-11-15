@@ -67,7 +67,7 @@ public class Colors {
         }
 
         // Use night-config toml parsing
-        FileConfig config = TomlUtil.loadFileWithDefaults(file, "config.toml");
+        FileConfig config = TomlUtil.loadFileWithDefaults(file, "colors.toml");
 
         // Assign colors
         Optional<Config> customColors = config.getOptional("color");
