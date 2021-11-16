@@ -129,18 +129,23 @@ public class Colors {
     }
 
     private static Color hexToSimple(String string) {
-        if (string.length() != 7) {
+        if (string.length() != 7 && string.length() != 9) {
             // Not #ffffff (so invalid!)
             AdvancedChatCore.LOGGER.log(
-                    Level.WARN, "Color " + string + " isn't formatted correctly! (#ffffff)");
+                    Level.WARN,
+                    "Color " + string + " isn't formatted correctly! (#ffffff) (#ffffffff)");
             return new Color(255, 255, 255, 255);
         }
         string = string.substring(1);
         try {
             int red = Integer.parseInt(string.substring(0, 2), 16);
             int green = Integer.parseInt(string.substring(2, 4), 16);
-            int blue = Integer.parseInt(string.substring(4), 16);
-            return new Color(red, green, blue, 255);
+            int blue = Integer.parseInt(string.substring(4, 6), 16);
+            int alpha = 255;
+            if (string.length() == 8) {
+                alpha = Integer.parseInt(string.substring(6));
+            }
+            return new Color(red, green, blue, alpha);
         } catch (Exception e) {
             AdvancedChatCore.LOGGER.log(
                     Level.WARN, "Couldn't convert " + string + " into a color!", e);
@@ -153,6 +158,10 @@ public class Colors {
             return Optional.of(colors.get(key));
         }
         return Optional.empty();
+    }
+
+    public Color getColorOrWhite(String key) {
+        return getColor(key).orElse(new Color(255, 255, 255, 255));
     }
 
     public static class Palette {

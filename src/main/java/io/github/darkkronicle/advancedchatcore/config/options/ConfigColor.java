@@ -8,23 +8,69 @@
 package io.github.darkkronicle.advancedchatcore.config.options;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import fi.dy.masa.malilib.MaLiLib;
 import fi.dy.masa.malilib.util.StringUtils;
 import io.github.darkkronicle.advancedchatcore.util.Color;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
+import java.util.Optional;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
+@Environment(EnvType.CLIENT)
 public class ConfigColor extends fi.dy.masa.malilib.config.options.ConfigColor {
     private Color color;
+    private final String defaultReference;
+    private String reference = null;
 
     public ConfigColor(String name, Color defaultValue, String comment) {
         super(name, defaultValue.getString(), comment);
         this.color = defaultValue;
+        this.defaultReference = null;
+    }
+
+    public ConfigColor(String name, String referenceDefault, String comment) {
+        super(name, Colors.getInstance().getColorOrWhite(referenceDefault).toString(), comment);
+        this.color = Colors.getInstance().getColorOrWhite(referenceDefault);
+        this.defaultReference = referenceDefault;
     }
 
     @Override
-    public void setIntegerValue(int value) {
-        super.setIntegerValue(value);
-        setColor();
+    public void resetToDefault() {
+        if (defaultReference != null) {
+            this.setValueFromString(defaultReference);
+        } else {
+            this.setValueFromString(new Color(defaultValue).getString());
+        }
+        onValueChanged();
+    }
+
+    @Override
+    public String getDefaultStringValue() {
+        if (defaultReference == null) {
+            return super.getDefaultStringValue();
+        }
+        return defaultReference;
+    }
+
+    @Override
+    public void setValueFromString(String value) {
+        Optional<Color> color = Colors.getInstance().getColor(value);
+        if (color.isPresent()) {
+            this.setIntegerValue(color.get().color());
+            this.reference = value;
+            return;
+        }
+        this.reference = null;
+        super.setValueFromString(value);
+    }
+
+    @Override
+    public String getStringValue() {
+        if (reference != null) {
+            return this.reference;
+        }
+        return super.getStringValue();
     }
 
     private void setColor() {
@@ -33,34 +79,38 @@ public class ConfigColor extends fi.dy.masa.malilib.config.options.ConfigColor {
 
     @Override
     public void setValueFromJsonElement(JsonElement element) {
-        {
-            try {
-                if (element.isJsonPrimitive()) {
-                    this.value =
-                            this.getClampedValue(StringUtils.getColor(element.getAsString(), 0));
-                    this.setIntegerValue(value);
-                } else {
-                    MaLiLib.logger.warn(
-                            "Failed to set config value for '{}' from the JSON element '{}'",
-                            this.getName(),
-                            element);
+        try {
+            if (element.isJsonPrimitive()) {
+                String value = element.getAsString();
+                Optional<Color> color = Colors.getInstance().getColor(value);
+                if (color.isPresent()) {
+                    this.setIntegerValue(color.get().color());
+                    this.reference = value;
+                    return;
                 }
-            } catch (Exception e) {
+                this.value = this.getClampedValue(StringUtils.getColor(value, 0));
+                this.setIntegerValue(this.value);
+            } else {
                 MaLiLib.logger.warn(
                         "Failed to set config value for '{}' from the JSON element '{}'",
                         this.getName(),
-                        element,
-                        e);
+                        element);
             }
+        } catch (Exception e) {
+            MaLiLib.logger.warn(
+                    "Failed to set config value for '{}' from the JSON element '{}'",
+                    this.getName(),
+                    element,
+                    e);
         }
+    }
+
+    @Override
+    public JsonElement getAsJsonElement() {
+        return new JsonPrimitive(getStringValue());
     }
 
     public Color get() {
         return color;
-    }
-
-    @Deprecated
-    public ColorUtil.SimpleColor getSimpleColor() {
-        return ColorUtil.SimpleColor.fromColor(color);
     }
 }

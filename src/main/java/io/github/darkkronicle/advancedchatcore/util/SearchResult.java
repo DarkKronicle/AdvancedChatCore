@@ -56,18 +56,18 @@ public class SearchResult {
      * Replaces the groups with a specified match
      *
      * @param string Contents to replace to
-     * @param onlyFirst If it will replace/return only the first group. If false it will return the
-     *     full string.
+     * @param matchIndex If it will replace/return only the first group. -1 will return the full
+     *     string.
      * @return The replaced values in context. If onlyFirst it will only do the context of the first
      *     group.
      */
-    public String getGroupReplacements(String string, boolean onlyFirst) {
-        if (onlyFirst) {
+    public String getGroupReplacements(String string, int matchIndex) {
+        if (matchIndex >= 0) {
             if (finder instanceof RegexFinder) {
                 try {
                     return ((RegexFinder) finder)
                             .getPattern(search)
-                            .matcher(matches.get(0).match)
+                            .matcher(matches.get(matchIndex).match)
                             .replaceAll(string);
                 } catch (Exception e) {
                     // Didn't work

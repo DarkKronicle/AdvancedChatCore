@@ -15,6 +15,7 @@ import io.github.darkkronicle.advancedchatcore.chat.ChatScreenSectionHolder;
 import io.github.darkkronicle.advancedchatcore.chat.DefaultChatSuggestor;
 import io.github.darkkronicle.advancedchatcore.chat.MessageDispatcher;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
+import io.github.darkkronicle.advancedchatcore.config.SaveableConfig;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import io.github.darkkronicle.advancedchatcore.finder.CustomFinder;
 import io.github.darkkronicle.advancedchatcore.finder.custom.ProfanityFinder;
@@ -41,8 +42,7 @@ public class InitHandler implements IInitializationHandler {
         // Setup chat history
         MessageDispatcher.getInstance().register(new ChatHistoryProcessor(), -1);
         List<IConfigBase> configBases = new ArrayList<>();
-        for (ConfigStorage.SaveableConfig<? extends IConfigBase> saveable :
-                ConfigStorage.General.OPTIONS) {
+        for (SaveableConfig<? extends IConfigBase> saveable : ConfigStorage.General.OPTIONS) {
             configBases.add(saveable.config);
         }
         GuiConfigHandler.getInstance()

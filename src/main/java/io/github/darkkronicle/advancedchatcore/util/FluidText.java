@@ -38,16 +38,6 @@ public class FluidText implements MutableText {
 
     @Setter @Getter private Color background = null;
 
-    @Deprecated
-    public ColorUtil.SimpleColor getBackgroundColor() {
-        return ColorUtil.SimpleColor.fromColor(background);
-    }
-
-    @Deprecated
-    public void setBackgroundColor(ColorUtil.SimpleColor color) {
-        background = color.toColor();
-    }
-
     /**
      * Takes a Text and splits it into a list of {@link RawText}.
      *

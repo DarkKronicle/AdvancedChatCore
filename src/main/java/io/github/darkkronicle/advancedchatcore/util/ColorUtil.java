@@ -7,11 +7,6 @@
  */
 package io.github.darkkronicle.advancedchatcore.util;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Value;
-import lombok.With;
-import lombok.experimental.Accessors;
 import lombok.experimental.UtilityClass;
 import net.minecraft.util.Formatting;
 
@@ -63,112 +58,5 @@ public class ColorUtil {
 
     public Color colorFromFormatting(Formatting formatting) {
         return new Color(formatting.getColorValue());
-    }
-
-    // Deprecated
-    @Deprecated
-    public SimpleColor intToColor(int rgb) {
-        return SimpleColor.fromColor(intToColor4f(rgb));
-    }
-
-    @Deprecated
-    public int colorToInt(SimpleColor c) {
-        return colorToInt4f(c.toColor());
-    }
-
-    @Deprecated
-    public SimpleColor fade(SimpleColor color, float percent) {
-        return SimpleColor.fromColor(fade(color.toColor(), percent));
-    }
-
-    @Deprecated
-    public SimpleColor fromFormatting(Formatting formatting) {
-        return SimpleColor.fromColor(colorFromFormatting(formatting));
-    }
-
-    /** @deprecated Use {@link Colors} */
-    @Deprecated public final SimpleColor WHITE = new SimpleColor(255, 255, 255, 255);
-    /** @deprecated Use {@link Colors} */
-    @Deprecated public final SimpleColor BLACK = new SimpleColor(0, 0, 0, 255);
-    /** @deprecated Use {@link Colors} */
-    @Deprecated public final SimpleColor GRAY = new SimpleColor(128, 128, 128, 255);
-
-    /**
-     * Simple class that uses Lombok's many features to simplify. You can convert at anytime from
-     * the color, to an int.
-     *
-     * <p>New class in {@link Color}
-     */
-    @Deprecated
-    @Value
-    @Accessors(fluent = true)
-    public static class SimpleColor {
-
-        @Getter int red;
-
-        @Getter int green;
-
-        @Getter int blue;
-
-        @Getter
-        @With(AccessLevel.PUBLIC)
-        int alpha;
-
-        @Getter int color;
-
-        public SimpleColor(int color) {
-            this.color = color;
-            SimpleColor completeColor = intToColor(color);
-            this.red = completeColor.red();
-            this.green = completeColor.green();
-            this.blue = completeColor.blue();
-            this.alpha = completeColor.alpha();
-        }
-
-        public SimpleColor(int red, int green, int blue, int alpha) {
-            if (red > 255) {
-                red = 255;
-            }
-            if (green > 255) {
-                green = 255;
-            }
-            if (blue > 255) {
-                blue = 255;
-            }
-            if (alpha > 255) {
-                alpha = 255;
-            }
-            this.red = red;
-            this.green = green;
-            this.blue = blue;
-            this.alpha = alpha;
-            this.color = colorToInt(this);
-        }
-
-        /** Generated for use of Lombok's @With */
-        public SimpleColor(int red, int green, int blue, int alpha, int color) {
-            this.red = red;
-            this.green = green;
-            this.blue = blue;
-            this.alpha = alpha;
-            this.color = colorToInt(this);
-        }
-
-        public String getString() {
-            return String.format("#%08X", color);
-        }
-
-        /** Will be removed */
-        @Deprecated
-        public Color toColor() {
-            return new Color(red, green, blue, alpha, color);
-        }
-
-        /** Will be removed */
-        @Deprecated
-        public static SimpleColor fromColor(Color color) {
-            return new SimpleColor(
-                    color.red(), color.green(), color.blue(), color.alpha(), color.color());
-        }
     }
 }

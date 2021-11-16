@@ -21,6 +21,8 @@ color.white = '#ffffff'
 color.black = '#000000'
 color.gray = '#3F3F3F'
 color.blue = '#0000FF'
+color.darkk_purple = '#9d0df0'
+color.chronos_blue = '#0248e9'
 
 # Default palette. This has to be one that is declared.
 default_palette = "pastel_blue_magenta"

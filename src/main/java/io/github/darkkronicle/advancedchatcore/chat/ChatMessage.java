@@ -8,7 +8,6 @@
 package io.github.darkkronicle.advancedchatcore.chat;
 
 import io.github.darkkronicle.advancedchatcore.util.Color;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
 import io.github.darkkronicle.advancedchatcore.util.StyleFormatter;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -66,16 +65,6 @@ public class ChatMessage {
     public void setDisplayText(Text text, int width) {
         this.displayText = text;
         formatChildren(width);
-    }
-
-    @Deprecated
-    public void setBackground(ColorUtil.SimpleColor color) {
-        this.backgroundColor = color.toColor();
-    }
-
-    @Deprecated
-    public ColorUtil.SimpleColor getBackground() {
-        return ColorUtil.SimpleColor.fromColor(backgroundColor);
     }
 
     /**

@@ -10,7 +10,7 @@ package io.github.darkkronicle.advancedchatcore.config.gui;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.util.StringUtils;
-import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
+import io.github.darkkronicle.advancedchatcore.config.SaveableConfig;
 import io.github.darkkronicle.advancedchatcore.gui.buttons.ConfigTabsButtonListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,9 +102,9 @@ public class GuiConfigHandler {
     }
 
     public static GuiConfigSection createGuiConfigSection(
-            String name, List<ConfigStorage.SaveableConfig<? extends IConfigBase>> configs) {
+            String name, List<SaveableConfig<? extends IConfigBase>> configs) {
         List<IConfigBase> configBases = new ArrayList<>();
-        for (ConfigStorage.SaveableConfig<? extends IConfigBase> saveable : configs) {
+        for (SaveableConfig<? extends IConfigBase> saveable : configs) {
             configBases.add(saveable.config);
         }
         return new GuiConfigSection() {

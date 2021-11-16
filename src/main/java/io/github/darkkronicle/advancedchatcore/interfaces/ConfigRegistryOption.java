@@ -11,7 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
-import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
+import io.github.darkkronicle.advancedchatcore.config.SaveableConfig;
 import java.util.Map;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -29,7 +29,7 @@ public interface ConfigRegistryOption<TYPE>
      *
      * @return Configurable boolean
      */
-    ConfigStorage.SaveableConfig<ConfigBoolean> getActive();
+    SaveableConfig<ConfigBoolean> getActive();
 
     /**
      * Get's if the option is currently active.

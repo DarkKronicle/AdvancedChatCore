@@ -61,11 +61,6 @@ public class RawText implements MutableText {
         return RawText.withStyle(string, style.withColor(textColor));
     }
 
-    @Deprecated
-    public static RawText withColor(String string, ColorUtil.SimpleColor color) {
-        return withColor(string, color.toColor());
-    }
-
     /**
      * Constructs a RawText based off of {@link Formatting}
      *

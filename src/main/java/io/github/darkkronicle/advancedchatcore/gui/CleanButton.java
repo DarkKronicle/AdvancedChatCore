@@ -10,7 +10,6 @@ package io.github.darkkronicle.advancedchatcore.gui;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import io.github.darkkronicle.advancedchatcore.util.Color;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
 import io.github.darkkronicle.advancedchatcore.util.Colors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -46,12 +45,6 @@ public class CleanButton extends ButtonBase {
         this.baseColor = baseColor;
     }
 
-    @Deprecated
-    public CleanButton(
-            int x, int y, int width, int height, ColorUtil.SimpleColor baseColor, String text) {
-        this(x, y, width, height, baseColor.toColor(), text);
-    }
-
     @Override
     public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
         int relMX = mouseX - x;
@@ -65,7 +58,7 @@ public class CleanButton extends ButtonBase {
         drawCenteredString(
                 (x + (width / 2)),
                 (y + (height / 2) - 3),
-                ColorUtil.WHITE.color(),
+                Colors.getInstance().getColorOrWhite("white").color(),
                 displayString,
                 matrixStack);
     }
