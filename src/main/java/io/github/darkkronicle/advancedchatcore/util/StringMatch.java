@@ -8,12 +8,14 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
 /**
  * A class to store data about a match.
  *
  * <p>This class is comparable based on where it starts.
  */
+@EqualsAndHashCode
 @AllArgsConstructor
 public class StringMatch implements Comparable<StringMatch> {
 

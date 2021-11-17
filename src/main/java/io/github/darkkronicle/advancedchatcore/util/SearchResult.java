@@ -12,6 +12,7 @@ import io.github.darkkronicle.advancedchatcore.interfaces.IFinder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
 import lombok.Getter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -50,6 +51,33 @@ public class SearchResult {
 
     public int size() {
         return matches.size();
+    }
+
+    /**
+     * Get's a group from the result. This only works if it's a {@link RegexFinder}, otherwise it
+     * returns the entire string.
+     *
+     * @param num Group number
+     * @return StringMatch from group. It references the original string.
+     */
+    public StringMatch getGroup(StringMatch match, int num) {
+        if (!matches.contains(match)) {
+            return null;
+        }
+        if (!(finder instanceof RegexFinder)) {
+            return match;
+        }
+        try {
+            // TODO abstract in some way to make it not cast a ton
+            RegexFinder regex = (RegexFinder) finder;
+            Matcher matcher = regex.getPattern(input).matcher(match.match);
+            String group = matcher.group(num);
+            int start = matcher.start(num);
+            int end = matcher.start(num);
+            return new StringMatch(group, start, end);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**

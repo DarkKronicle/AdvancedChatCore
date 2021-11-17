@@ -13,7 +13,7 @@ import fi.dy.masa.malilib.gui.widgets.WidgetBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
 import fi.dy.masa.malilib.gui.wrappers.TextFieldWrapper;
 import fi.dy.masa.malilib.render.RenderUtils;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -69,13 +69,21 @@ public abstract class WidgetConfigListEntry<TYPE> extends WidgetListEntryBase<TY
                     this.y,
                     this.width,
                     this.height,
-                    ColorUtil.WHITE.withAlpha(150).color());
+                    Colors.getInstance().getColorOrWhite("white").withAlpha(150).color());
         } else if (this.odd) {
             RenderUtils.drawRect(
-                    this.x, this.y, this.width, this.height, ColorUtil.WHITE.withAlpha(70).color());
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height,
+                    Colors.getInstance().getColorOrWhite("white").withAlpha(70).color());
         } else {
             RenderUtils.drawRect(
-                    this.x, this.y, this.width, this.height, ColorUtil.WHITE.withAlpha(50).color());
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height,
+                    Colors.getInstance().getColorOrWhite("white").withAlpha(50).color());
         }
 
         renderEntry(mouseX, mouseY, selected, matrixStack);
@@ -96,7 +104,12 @@ public abstract class WidgetConfigListEntry<TYPE> extends WidgetListEntryBase<TY
      */
     public void renderEntry(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
         String name = getName();
-        this.drawString(this.x + 4, this.y + 7, ColorUtil.WHITE.color(), name, matrixStack);
+        this.drawString(
+                this.x + 4,
+                this.y + 7,
+                Colors.getInstance().getColorOrWhite("white").color(),
+                name,
+                matrixStack);
     }
 
     @Override

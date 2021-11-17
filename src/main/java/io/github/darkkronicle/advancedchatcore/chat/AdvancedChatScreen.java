@@ -21,7 +21,6 @@ import java.util.function.Function;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -34,7 +33,7 @@ public class AdvancedChatScreen extends GuiBase {
     private int messageHistorySize = -1;
 
     /** Chat field at the bottom of the screen */
-    @Getter protected TextFieldWidget chatField;
+    @Getter protected AdvancedTextField chatField;
 
     /** What the chat box started out with */
     @Getter private String originalChatText = "";
@@ -71,7 +70,7 @@ public class AdvancedChatScreen extends GuiBase {
         this.client.keyboard.setRepeatEvents(true);
         this.messageHistorySize = this.client.inGameHud.getChatHud().getMessageHistory().size();
         this.chatField =
-                new TextFieldWidget(
+                new AdvancedTextField(
                         this.textRenderer,
                         4,
                         this.height - 12,

@@ -17,7 +17,7 @@ import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
 import io.github.darkkronicle.advancedchatcore.interfaces.ConfigRegistryOption;
-import io.github.darkkronicle.advancedchatcore.util.ColorUtil;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
 import java.util.List;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -85,16 +85,29 @@ public class WidgetRegistryOptionEntry<T extends ConfigRegistryOption<?>>
                     this.y,
                     this.width,
                     this.height,
-                    ColorUtil.WHITE.withAlpha(150).color());
+                    Colors.getInstance().getColorOrWhite("white").withAlpha(150).color());
         } else if (this.isOdd) {
             RenderUtils.drawRect(
-                    this.x, this.y, this.width, this.height, ColorUtil.WHITE.withAlpha(70).color());
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height,
+                    Colors.getInstance().getColorOrWhite("white").withAlpha(70).color());
         } else {
             RenderUtils.drawRect(
-                    this.x, this.y, this.width, this.height, ColorUtil.WHITE.withAlpha(50).color());
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height,
+                    Colors.getInstance().getColorOrWhite("white").withAlpha(50).color());
         }
         String name = this.option.getDisplayName();
-        this.drawString(this.x + 4, this.y + 7, ColorUtil.WHITE.color(), name, matrixStack);
+        this.drawString(
+                this.x + 4,
+                this.y + 7,
+                Colors.getInstance().getColorOrWhite("white").color(),
+                name,
+                matrixStack);
 
         RenderUtils.color(1f, 1f, 1f, 1f);
         RenderSystem.disableBlend();
