@@ -12,6 +12,7 @@
 # To add a color follow:
 #
 #    color.<name> = '#rrggbb'
+#    color.<name> = '#rrggbbaa'
 #
 # rrggbb should be the hex value. It HAS to start
 # with #. The name can be anything TOML allows
@@ -23,6 +24,13 @@ color.gray = '#3F3F3F'
 color.blue = '#0000FF'
 color.darkk_purple = '#9d0df0'
 color.chronos_blue = '#0248e9'
+
+# GUI Elements
+color.hover = '#ffffff'
+color.background = '#000000'
+color.list1 = '#ffffff46'
+color.list2 = '#ffffff32'
+color.listhover = '#ffffff96'
 
 # Default palette. This has to be one that is declared.
 default_palette = "pastel_blue_magenta"
