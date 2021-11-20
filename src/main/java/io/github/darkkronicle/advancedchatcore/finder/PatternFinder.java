@@ -20,13 +20,13 @@ public abstract class PatternFinder implements IFinder {
 
     @Override
     public boolean isMatch(String input, String toMatch) {
-        Pattern pattern = Pattern.compile(Pattern.quote(toMatch));
+        Pattern pattern = getPattern(toMatch);
         return pattern.matcher(input).find();
     }
 
     @Override
     public List<StringMatch> getMatches(String input, String toMatch) {
-        Pattern pattern = Pattern.compile(Pattern.quote(toMatch));
+        Pattern pattern = getPattern(toMatch);
         Matcher matcher = pattern.matcher(input);
         List<StringMatch> matches = new ArrayList<>();
         while (matcher.find()) {
