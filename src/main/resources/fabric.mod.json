@@ -30,8 +30,8 @@
   "depends": {
     "fabricloader": ">=0.8.9+build.204",
     "fabric": "*",
-    "minecraft": ">=1.17.0",
-    "malilib": ">=0.10.0-dev.20"
+    "minecraft": ">=1.18",
+    "malilib": ">=0.10.0-dev.26"
   },
   "custom": {
     "modmenu": {

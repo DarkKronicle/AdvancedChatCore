@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.10.+'
 	id 'maven-publish'
 	id "io.freefair.lombok" version "6.0.0-m2"
 	id "com.diffplug.spotless" version "5.17.1"
@@ -26,7 +26,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.1:${project.malilib_version}"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.18.0:${project.malilib_version}"
 	modCompileOnly "io.github.prospector:modmenu:1.16.8"
 	implementation 'com.electronwill.night-config:toml:3.6.5'
 	// Transitive
