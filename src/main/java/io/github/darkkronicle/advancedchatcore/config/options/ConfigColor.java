@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -59,10 +59,12 @@ public class ConfigColor extends fi.dy.masa.malilib.config.options.ConfigColor {
         if (color.isPresent()) {
             this.setIntegerValue(color.get().color());
             this.reference = value;
+            this.setColor();
             return;
         }
         this.reference = null;
         super.setValueFromString(value);
+        this.setColor();
     }
 
     @Override
@@ -86,10 +88,12 @@ public class ConfigColor extends fi.dy.masa.malilib.config.options.ConfigColor {
                 if (color.isPresent()) {
                     this.setIntegerValue(color.get().color());
                     this.reference = value;
+                    this.setColor();
                     return;
                 }
                 this.value = this.getClampedValue(StringUtils.getColor(value, 0));
                 this.setIntegerValue(this.value);
+                this.setColor();
             } else {
                 MaLiLib.logger.warn(
                         "Failed to set config value for '{}' from the JSON element '{}'",
