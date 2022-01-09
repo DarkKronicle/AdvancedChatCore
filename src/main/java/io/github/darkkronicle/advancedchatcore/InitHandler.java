@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8,21 +8,19 @@
 package io.github.darkkronicle.advancedchatcore;
 
 import fi.dy.masa.malilib.config.ConfigManager;
-import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.interfaces.IInitializationHandler;
 import io.github.darkkronicle.advancedchatcore.chat.ChatHistoryProcessor;
 import io.github.darkkronicle.advancedchatcore.chat.ChatScreenSectionHolder;
 import io.github.darkkronicle.advancedchatcore.chat.DefaultChatSuggestor;
 import io.github.darkkronicle.advancedchatcore.chat.MessageDispatcher;
+import io.github.darkkronicle.advancedchatcore.config.CommandsHandler;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
-import io.github.darkkronicle.advancedchatcore.config.SaveableConfig;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import io.github.darkkronicle.advancedchatcore.finder.CustomFinder;
 import io.github.darkkronicle.advancedchatcore.finder.custom.ProfanityFinder;
 import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.ProfanityUtil;
 import io.github.darkkronicle.advancedchatcore.util.StringMatch;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,10 +39,7 @@ public class InitHandler implements IInitializationHandler {
                 .registerConfigHandler(AdvancedChatCore.MOD_ID, new ConfigStorage());
         // Setup chat history
         MessageDispatcher.getInstance().register(new ChatHistoryProcessor(), -1);
-        List<IConfigBase> configBases = new ArrayList<>();
-        for (SaveableConfig<? extends IConfigBase> saveable : ConfigStorage.General.OPTIONS) {
-            configBases.add(saveable.config);
-        }
+
         GuiConfigHandler.getInstance()
                 .addGuiSection(
                         GuiConfigHandler.createGuiConfigSection(
@@ -102,5 +97,7 @@ public class InitHandler implements IInitializationHandler {
                         "profanity",
                         "advancedchatcore.findtype.custom.profanity",
                         "advancedchatcore.findtype.custom.info.profanity");
+
+        CommandsHandler.getInstance().setup();
     }
 }
