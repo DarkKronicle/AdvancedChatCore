@@ -86,7 +86,6 @@ spotless {
 	}
 	java {
 		target 'src/*/java/**/*.java'
-		googleJavaFormat('1.12.0').aosp().reflowLongStrings()
 		removeUnusedImports()
 		licenseHeaderFile "HEADER.txt"
 	}
