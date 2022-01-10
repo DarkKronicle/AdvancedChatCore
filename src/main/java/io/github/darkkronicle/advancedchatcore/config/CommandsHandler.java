@@ -20,6 +20,7 @@ import fi.dy.masa.malilib.config.options.ConfigDouble;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.config.options.ConfigString;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
 import io.github.darkkronicle.kommandlib.CommandManager;
 import io.github.darkkronicle.kommandlib.command.ClientCommand;
 import io.github.darkkronicle.kommandlib.command.CommandInvoker;
@@ -144,6 +145,11 @@ public class CommandsHandler {
                 "advancedchat",
                 CommandUtil.literal("advancedchat").executes(ClientCommand.of(context -> InfoUtil.sendChatMessage("AdvancedChatCore by DarkKronicle"))).build()
         );
+        command.addChild(CommandUtil.literal("reloadColors").executes(ClientCommand.of((context) -> {
+            InfoUtil.sendChatMessage("Reloading colors...");
+            Colors.getInstance().load();
+            InfoUtil.sendChatMessage("Reloaded!", Formatting.GREEN);
+        })).build());
         CommandManager.getInstance().addCommand(command);
         addOptions(getOrCreateSubs("coreconfig", "general"), ConfigStorage.General.OPTIONS);
         addOptions(getOrCreateSubs("coreconfig", "chatScreen"), ConfigStorage.ChatScreen.OPTIONS);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -48,20 +48,17 @@ public class Colors {
         palettes.clear();
 
         // Get file or create if it doesn't exist
-        File file =
-                FileUtils.getConfigDirectory()
+        File file = FileUtils.getConfigDirectory()
                         .toPath()
                         .resolve("advancedchat")
                         .resolve("colors.toml")
                         .toFile();
         if (!file.exists()) {
             try {
-                org.apache.commons.io.FileUtils.copyInputStreamToFile(
-                        AdvancedChatCore.getResource("colors.toml"), file);
+                org.apache.commons.io.FileUtils.copyInputStreamToFile(AdvancedChatCore.getResource("colors.toml"), file);
             } catch (Exception e) {
                 // Rip
-                AdvancedChatCore.LOGGER.log(
-                        Level.ERROR, "Colors could not be loaded correctly!", e);
+                AdvancedChatCore.LOGGER.log(Level.ERROR, "Colors could not be loaded correctly!", e);
                 return;
             }
         }

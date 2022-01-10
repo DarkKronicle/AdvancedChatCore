@@ -30,12 +30,19 @@ dependencies {
 	modCompileOnly "io.github.prospector:modmenu:1.16.8"
 
 	modImplementation "com.github.DarkKronicle:KommandLib:${project.kommandlib_version}"
+
+	implementation "com.github.DarkKronicle.Konstruct:addons:${project.konstruct_version}"
+	implementation "com.github.DarkKronicle.Konstruct:core:${project.konstruct_version}"
 	include "com.github.DarkKronicle:KommandLib:${project.kommandlib_version}"
 
 	implementation 'com.electronwill.night-config:toml:3.6.5'
 	// Transitive
 	include 'com.electronwill.night-config:toml:3.6.5'
 	include 'com.electronwill.night-config:core:3.6.5'
+
+
+	include "com.github.DarkKronicle.Konstruct:addons:${project.konstruct_version}"
+	include "com.github.DarkKronicle.Konstruct:core:${project.konstruct_version}"
 }
 
 

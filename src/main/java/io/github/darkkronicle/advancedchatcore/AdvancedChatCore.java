@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -53,67 +53,14 @@ public class AdvancedChatCore implements ClientModInitializer {
     private static final Random RANDOM = new Random();
 
     private static final String[] RANDOM_STRINGS = {
-        "yes",
-        "maybe",
-        "no",
-        "potentially",
-        "hello",
-        "goodbye",
-        "tail",
-        "pop",
-        "water",
-        "headphone",
-        "head",
-        "scissor",
-        "paper",
-        "burger",
-        "clock",
-        "peg",
-        "speaker",
-        "computer",
-        "mouse",
-        "mat",
-        "keyboard",
-        "soda",
-        "mac",
-        "cheese",
-        "home",
-        "pillow",
-        "couch",
-        "drums",
-        "drumstick",
-        "math",
-        "Euler",
-        "Chronos",
-        "DarkKronicle",
-        "Kron",
-        "pain",
-        "suffer",
-        "bridge",
-        "Annevdl",
-        "MaLiLib",
-        "pog",
-        "music",
-        "pants",
-        "glockenspiel",
-        "marimba",
-        "chimes",
-        "vibraphone",
-        "vibe",
-        "snare",
-        "monkeymode",
-        "shades",
-        "cactus",
-        "shaker",
-        "pit",
-        "band",
-        "percussion",
-        "foot",
-        "leg",
-        "Kurt",
-        "bruh",
-        "gamer",
-        "gaming"
+        "yes", "maybe", "no", "potentially", "hello", "goodbye", "tail", "pop", "water",
+        "headphone", "head", "scissor", "paper", "burger", "clock", "peg", "speaker",
+        "computer", "mouse", "mat", "keyboard", "soda", "mac", "cheese", "home",
+        "pillow", "couch", "drums", "drumstick", "math", "Euler", "Chronos", "DarkKronicle",
+        "Kron", "pain", "suffer", "bridge", "Annevdl", "MaLiLib", "pog", "music",
+        "pants", "glockenspiel", "marimba", "chimes", "vibraphone", "vibe", "snare",
+        "monkeymode", "shades", "cactus", "shaker", "pit", "band", "percussion",
+        "foot", "leg", "Kurt", "bruh", "gamer", "gaming"
     };
 
     @Override

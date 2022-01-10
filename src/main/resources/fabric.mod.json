@@ -31,7 +31,8 @@
     "fabricloader": ">=0.8.9+build.204",
     "fabric": "*",
     "minecraft": ">=1.18",
-    "malilib": ">=0.10.0-dev.26"
+    "malilib": ">=0.10.0-dev.26",
+    "kommandlib": "*"
   },
   "custom": {
     "modmenu": {

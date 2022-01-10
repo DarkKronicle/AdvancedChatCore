@@ -52,34 +52,25 @@ public class InitHandler implements IInitializationHandler {
                                 ConfigStorage.ChatScreen.OPTIONS));
 
         ProfanityUtil.getInstance().loadConfigs();
-        MessageDispatcher.getInstance()
-                .registerPreFilter(
-                        text -> {
-                            if (ConfigStorage.General.FILTER_PROFANITY.config.getBooleanValue()) {
-                                List<StringMatch> profanity =
-                                        ProfanityUtil.getInstance().getBadWords(text.getString());
-                                if (profanity.size() == 0) {
-                                    return Optional.empty();
-                                }
-                                Map<StringMatch, FluidText.StringInsert> insertions =
-                                        new HashMap<>();
-                                for (StringMatch bad : profanity) {
-                                    insertions.put(
-                                            bad,
-                                            (current, match) ->
-                                                    new FluidText(
-                                                            current.withMessage(
-                                                                    "*"
-                                                                            .repeat(
-                                                                                    bad.end
-                                                                                            - bad.start))));
-                                }
-                                text.replaceStrings(insertions);
-                                return Optional.of(text);
-                            }
-                            return Optional.empty();
-                        },
-                        -1);
+        MessageDispatcher.getInstance().registerPreFilter(text -> {
+            if (ConfigStorage.General.FILTER_PROFANITY.config.getBooleanValue()) {
+                List<StringMatch> profanity =
+                        ProfanityUtil.getInstance().getBadWords(text.getString());
+                if (profanity.size() == 0) {
+                    return Optional.empty();
+                }
+                Map<StringMatch, FluidText.StringInsert> insertions =
+                        new HashMap<>();
+                for (StringMatch bad : profanity) {
+                    insertions.put(bad, (current, match) ->
+                            new FluidText(current.withMessage("*".repeat(bad.end - bad.start)))
+                    );
+                }
+                text.replaceStrings(insertions);
+                return Optional.of(text);
+            }
+            return Optional.empty();
+        }, -1);
 
         // This constructs the default chat suggestor
         ChatScreenSectionHolder.getInstance()
