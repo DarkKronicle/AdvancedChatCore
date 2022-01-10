@@ -7,11 +7,13 @@
  */
 package io.github.darkkronicle.advancedchatcore.chat;
 
+import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 import io.github.darkkronicle.advancedchatcore.interfaces.IStringFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.client.MinecraftClient;
+import org.apache.logging.log4j.Level;
 
 public class MessageSender {
 
@@ -39,13 +41,18 @@ public class MessageSender {
         for (IStringFilter filter : filters) {
             Optional<String> filtered = filter.filter(string);
             if (filtered.isPresent()) {
-                string = filtered.get();
+                string = filtered.get().strip();
             }
         }
         if (string.length() > 256) {
             string = string.substring(0, 256);
         }
         this.client.inGameHud.getChatHud().addToMessageHistory(unfiltered);
+
+        if (string.length() == 0) {
+            AdvancedChatCore.LOGGER.log(Level.WARN, "Blank message was attempted to be sent. " + unfiltered);
+            return;
+        }
 
         if (client.player != null) {
             this.client.player.sendChatMessage(string);

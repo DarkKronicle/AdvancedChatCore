@@ -48,7 +48,7 @@ public class AdvancedChatCore implements ClientModInitializer {
      */
     public static boolean CREATE_SUGGESTOR = true;
 
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     private static final Random RANDOM = new Random();
 
