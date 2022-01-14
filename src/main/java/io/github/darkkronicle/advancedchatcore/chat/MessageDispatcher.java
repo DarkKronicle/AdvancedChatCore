@@ -72,13 +72,10 @@ public class MessageDispatcher {
                                     }
                                     if (current.getStyle().getClickEvent() == null) {
                                         return new FluidText(
-                                                current.withStyle(
-                                                        current.getStyle()
-                                                                .withClickEvent(
-                                                                        new ClickEvent(
-                                                                                ClickEvent.Action
-                                                                                        .OPEN_URL,
-                                                                                url))));
+                                                current.withStyle(current.getStyle().withClickEvent(
+                                                        new ClickEvent(ClickEvent.Action.OPEN_URL, url)
+                                                )).withMessage(match1.match)
+                                        );
                                     }
                                     return new FluidText(current);
                                 });
