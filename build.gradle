@@ -1,3 +1,6 @@
+import javax.net.ssl.HttpsURLConnection
+import java.nio.file.Files
+
 plugins {
 	id 'fabric-loom' version '0.10.+'
 	id 'maven-publish'
@@ -9,8 +12,13 @@ sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
-version = "${project.mod_version}-${project.minecraft_version}"
+version = "${project.minecraft_version}-${project.mod_version}"
 group = project.maven_group
+
+Properties additionalProperties = new Properties()
+if (file("extra.properties").exists()) {
+	additionalProperties.load(file("extra.properties").newReader())
+}
 
 minecraft {
 }
@@ -117,4 +125,50 @@ publishing {
 		// uncomment to publish to the local maven
 		// mavenLocal()
 	}
+}
+
+task discord {
+	dependsOn build
+
+	doLast {
+		String webhook
+		if (additionalProperties["discord_webhook"] != null) {
+			webhook = additionalProperties["discord_webhook"]
+		} else if (System.getenv("discord_webhook") != null) {
+			webhook = System.getenv("discord_webhook")
+		} else {
+			return
+		}
+
+		File file = remapJar.archiveFile.get().asFile
+		String text = "<:Kronos:799707832399691867> **AdvancedChat v${project.mod_version} for ${project.minecraft_version}**"
+		URL url = new URL(webhook)
+		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection()
+
+		def cmdLine = "git log --format=%B -n 1"
+		def procCommit = cmdLine.execute()
+		String changeLog = procCommit.in.getText()
+		text = text + "\n" + changeLog
+
+		String boundary = UUID.randomUUID().toString()
+		connection.setRequestMethod("POST")
+		connection.setDoOutput(true)
+		connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary)
+		DataOutputStream stream = new DataOutputStream(connection.getOutputStream());
+
+		stream.writeBytes("--" + boundary + "\r\n")
+		stream.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + file.name + "\"\r\n\r\n")
+		stream.write(Files.readAllBytes(file.toPath()))
+		stream.writeBytes("\r\n")
+		stream.writeBytes("--" + boundary + "\r\n");
+		stream.writeBytes('Content-Disposition: form-data; name="content"\r\n\r\n' + text + '\r\n')
+		stream.writeBytes("--" + boundary + "--\r\n")
+
+		stream.flush()
+		stream.close()
+
+		connection.getInputStream().close()
+		connection.disconnect()
+	}
+
 }
