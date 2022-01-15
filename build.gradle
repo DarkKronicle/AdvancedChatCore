@@ -137,6 +137,7 @@ task discord {
 		} else if (System.getenv("discord_webhook") != null) {
 			webhook = System.getenv("discord_webhook")
 		} else {
+			System.out.println("No webhook found...")
 			return
 		}
 
