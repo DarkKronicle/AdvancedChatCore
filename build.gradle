@@ -142,7 +142,7 @@ task discord {
 		}
 
 		File file = remapJar.archiveFile.get().asFile
-		String text = "<:Kronos:799707832399691867> **AdvancedChat v${project.mod_version} for ${project.minecraft_version}**"
+		String text = "<:Kronos:799707832399691867> **${project.archives_base_name} v${project.mod_version} for ${project.minecraft_version}**"
 		URL url = new URL(webhook)
 		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection()
 
