@@ -67,4 +67,8 @@ Update to 1.16.3: lmichaelis
 
 Logo & Proofreading: Chronos22
 
+Libraries:
+- [MathParser](http://mathparser.org/)
+- [OwO](https://github.com/maowcraft/owo)
+
 For more help join the [Discord](https://discord.gg/WnaE3uZxDA)

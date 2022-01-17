@@ -51,6 +51,13 @@ dependencies {
 
 	include "com.github.DarkKronicle.Konstruct:addons:${project.konstruct_version}"
 	include "com.github.DarkKronicle.Konstruct:core:${project.konstruct_version}"
+
+	implementation "org.mariuszgromada.math:MathParser.org-mXparser:${project.mxparser_version}"
+	include "org.mariuszgromada.math:MathParser.org-mXparser:${project.mxparser_version}"
+
+	implementation "io.github.maowimpl:owo:${project.owo_version}"
+	include "io.github.maowimpl:owo:${project.owo_version}"
+
 }
 
 
