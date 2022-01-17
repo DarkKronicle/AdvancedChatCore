@@ -120,4 +120,19 @@ public class AdvancedChatCore implements ClientModInitializer {
     public static String getRandomString() {
         return RANDOM_STRINGS[RANDOM.nextInt(RANDOM_STRINGS.length)];
     }
+
+    /**
+     * Returns the server address that the client is currently connected to.
+     * @return The server address if connected, 'singleplayer' if singleplayer, 'none' if none.
+     */
+    public static String getServer() {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.isInSingleplayer()) {
+            return "singleplayer";
+        }
+        if (client.getCurrentServerEntry() == null) {
+            return "none";
+        }
+        return client.getCurrentServerEntry().address;
+    }
 }
