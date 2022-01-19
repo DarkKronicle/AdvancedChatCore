@@ -151,7 +151,7 @@ task discord {
 		String commitHash = 'git rev-parse --verify --short HEAD'.execute().text.trim()
 
 		File file = remapJar.archiveFile.get().asFile
-		String fileName = "$project.archives_base_name}-${project.mod_version}-${commitHash}"
+		String fileName = "$project.archives_base_name}-${project.mod_version}-${commitHash}.jar"
 		String text = "<:Kronos:799707832399691867> **${project.archives_base_name} v${project.mod_version}-${commitHash} for ${project.minecraft_version}**"
 		URL url = new URL(webhook)
 		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection()
