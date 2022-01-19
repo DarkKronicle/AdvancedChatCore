@@ -9,6 +9,7 @@ import io.github.darkkronicle.Konstruct.functions.NamedFunction;
 import io.github.darkkronicle.Konstruct.functions.Variable;
 import io.github.darkkronicle.Konstruct.nodes.Node;
 import io.github.darkkronicle.addons.*;
+import io.github.darkkronicle.addons.conditions.BooleanFunction;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 import lombok.Getter;
 import net.minecraft.util.Util;
@@ -36,6 +37,10 @@ public class AdvancedChatKonstruct {
         addFunction(new RoundFunction());
         addFunction(new OwOFunction());
         addFunction(new RomanNumeralFunction());
+        addFunction(new IsMatchFunction());
+        BooleanFunction.addAllConditionalFunctions(processor);
+        addFunction(new TimeFunction());
+        addFunction(new NullFunction());
         addVariable("server", AdvancedChatCore::getServer);
         addFunction("randomString", new Function() {
             @Override
