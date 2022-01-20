@@ -1,8 +1,6 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
-import io.github.darkkronicle.Konstruct.IntRange;
-import io.github.darkkronicle.Konstruct.NodeProcessor;
-import io.github.darkkronicle.Konstruct.ParseContext;
+import io.github.darkkronicle.Konstruct.*;
 import io.github.darkkronicle.Konstruct.builder.NodeBuilder;
 import io.github.darkkronicle.Konstruct.functions.Function;
 import io.github.darkkronicle.Konstruct.functions.NamedFunction;
@@ -40,12 +38,11 @@ public class AdvancedChatKonstruct {
         addFunction(new IsMatchFunction());
         BooleanFunction.addAllConditionalFunctions(processor);
         addFunction(new TimeFunction());
-        addFunction(new NullFunction());
         addVariable("server", AdvancedChatCore::getServer);
         addFunction("randomString", new Function() {
             @Override
-            public String parse(ParseContext context, List<Node> input) {
-                return AdvancedChatCore.getRandomString();
+            public Result parse(ParseContext context, List<Node> input) {
+                return Result.success(AdvancedChatCore.getRandomString());
             }
 
             @Override
@@ -55,9 +52,11 @@ public class AdvancedChatKonstruct {
         });
         addFunction("getColor", new Function() {
             @Override
-            public String parse(ParseContext context, List<Node> input) {
-                Color color = Colors.getInstance().getColorOrWhite(Function.parseArgument(context, input, 0));
-                return color.getString();
+            public Result parse(ParseContext context, List<Node> input) {
+                Result res = Function.parseArgument(context, input, 0);
+                if (Function.shouldReturn(res)) return res;
+                Color color = Colors.getInstance().getColorOrWhite(res.getContent());
+                return Result.success(color.getString());
             }
 
             @Override
@@ -67,14 +66,16 @@ public class AdvancedChatKonstruct {
         });
         addFunction("superscript", new Function() {
             @Override
-            public String parse(ParseContext context, List<Node> input) {
+            public Result parse(ParseContext context, List<Node> input) {
                 int number;
                 try {
-                    number = Integer.parseInt(Function.parseArgument(context, input, 0).strip());
+                    Result res = Function.parseArgument(context, input, 0);
+                    if (Function.shouldReturn(res)) return res;
+                    number = Integer.parseInt(res.getContent().strip());
                 } catch (NumberFormatException e) {
-                    return "NaN";
+                    return Result.success("NaN");
                 }
-                return TextUtil.toSuperscript(number);
+                return Result.success(TextUtil.toSuperscript(number));
             }
 
             @Override
@@ -85,7 +86,7 @@ public class AdvancedChatKonstruct {
         addVariable("ms", () -> String.valueOf(Util.getMeasuringTimeMs()));
     }
 
-    public String parse(Node node) {
+    public ParseResult parse(Node node) {
         return processor.parse(node);
     }
 
