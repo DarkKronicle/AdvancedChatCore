@@ -1,19 +1,19 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
-import io.github.darkkronicle.Konstruct.*;
-import io.github.darkkronicle.Konstruct.builder.NodeBuilder;
 import io.github.darkkronicle.Konstruct.functions.Function;
 import io.github.darkkronicle.Konstruct.functions.NamedFunction;
 import io.github.darkkronicle.Konstruct.functions.Variable;
 import io.github.darkkronicle.Konstruct.nodes.Node;
+import io.github.darkkronicle.Konstruct.parser.*;
+import io.github.darkkronicle.Konstruct.reader.builder.NodeBuilder;
+import io.github.darkkronicle.Konstruct.type.IntegerObject;
+import io.github.darkkronicle.Konstruct.type.StringObject;
 import io.github.darkkronicle.addons.*;
-import io.github.darkkronicle.addons.conditions.BooleanFunction;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 import lombok.Getter;
 import net.minecraft.util.Util;
 
 import java.util.List;
-import java.util.Optional;
 
 public class AdvancedChatKonstruct {
 
@@ -36,9 +36,8 @@ public class AdvancedChatKonstruct {
         addFunction(new OwOFunction());
         addFunction(new RomanNumeralFunction());
         addFunction(new IsMatchFunction());
-        BooleanFunction.addAllConditionalFunctions(processor);
         addFunction(new TimeFunction());
-        addVariable("server", AdvancedChatCore::getServer);
+        addVariable("server", () -> new StringObject(AdvancedChatCore.getServer()));
         addFunction("randomString", new Function() {
             @Override
             public Result parse(ParseContext context, List<Node> input) {
@@ -55,7 +54,7 @@ public class AdvancedChatKonstruct {
             public Result parse(ParseContext context, List<Node> input) {
                 Result res = Function.parseArgument(context, input, 0);
                 if (Function.shouldReturn(res)) return res;
-                Color color = Colors.getInstance().getColorOrWhite(res.getContent());
+                Color color = Colors.getInstance().getColorOrWhite(res.getContent().getString());
                 return Result.success(color.getString());
             }
 
@@ -71,7 +70,7 @@ public class AdvancedChatKonstruct {
                 try {
                     Result res = Function.parseArgument(context, input, 0);
                     if (Function.shouldReturn(res)) return res;
-                    number = Integer.parseInt(res.getContent().strip());
+                    number = Integer.parseInt(res.getContent().getString().strip());
                 } catch (NumberFormatException e) {
                     return Result.success("NaN");
                 }
@@ -83,7 +82,7 @@ public class AdvancedChatKonstruct {
                 return IntRange.of(1);
             }
         });
-        addVariable("ms", () -> String.valueOf(Util.getMeasuringTimeMs()));
+        addVariable("ms", () -> new IntegerObject((int) Util.getMeasuringTimeMs()));
     }
 
     public ParseResult parse(Node node) {
