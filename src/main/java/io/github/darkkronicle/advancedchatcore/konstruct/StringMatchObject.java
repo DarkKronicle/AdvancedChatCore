@@ -69,6 +69,7 @@ public class StringMatchObject extends KonstructObject<StringMatchObject> {
     );
 
     public StringMatchObject(StringMatch result) {
+        super(FUNCTIONS);
         this.result = result;
     }
 
