@@ -1,4 +1,4 @@
-package io.github.darkkronicle.advancedchatcore.util;
+package io.github.darkkronicle.advancedchatcore.konstruct;
 
 import io.github.darkkronicle.Konstruct.functions.Function;
 import io.github.darkkronicle.Konstruct.functions.NamedFunction;
@@ -10,6 +10,9 @@ import io.github.darkkronicle.Konstruct.type.IntegerObject;
 import io.github.darkkronicle.Konstruct.type.StringObject;
 import io.github.darkkronicle.addons.*;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
+import io.github.darkkronicle.advancedchatcore.util.Color;
+import io.github.darkkronicle.advancedchatcore.util.Colors;
+import io.github.darkkronicle.advancedchatcore.util.TextUtil;
 import lombok.Getter;
 import net.minecraft.util.Util;
 
@@ -29,7 +32,6 @@ public class AdvancedChatKonstruct {
     private AdvancedChatKonstruct() {
         reset();
         addFunction(new CalculatorFunction());
-        addFunction(new GetFunction());
         addFunction(new RandomFunction());
         addFunction(new ReplaceFunction());
         addFunction(new RoundFunction());
