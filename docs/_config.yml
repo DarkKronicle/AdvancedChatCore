@@ -1,0 +1,23 @@
+remote_theme: pmarsceill/just-the-docs
+color_scheme: dark
+title: AdvancedChat
+description: Documentation for AdvancedChat
+aux_links:
+  "AdvancedChat on GitHub":
+    - "https://github.com/DarkKronicle/AdvancedChatCore"
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: "https://github.com/DarkKronicle/AdvancedChatCore"
+gh_edit_branch: "main"
+gh_edit_source: docs
+gh_edit_view_mode: "tree"
+
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 2
+  preview_words_before: 5
+  preview_words_after: 5
+  tokenizer_separator: /[\s\-/]+/
+  rel_url: true
+  button: true
