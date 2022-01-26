@@ -27,9 +27,8 @@ public class ChatHistoryProcessor implements IMessageProcessor {
 
     private static boolean sendToHud(Text text) {
         if (AdvancedChatCore.FORWARD_TO_HUD) {
-            ((MixinChatHudInvoker) MinecraftClient.getInstance().inGameHud.getChatHud())
-                    .invokeAddMessage(
-                            text, 0, MinecraftClient.getInstance().inGameHud.getTicks(), false);
+            ((MixinChatHudInvoker) MinecraftClient.getInstance().inGameHud.getChatHud()).invokeAddMessage(
+                    text, 0, MinecraftClient.getInstance().inGameHud.getTicks(), false);
             return true;
         }
         return false;
@@ -59,17 +58,16 @@ public class ChatHistoryProcessor implements IMessageProcessor {
         MessageOwner player =
                 SearchUtils.getAuthor(
                         MinecraftClient.getInstance().getNetworkHandler(), unfiltered.getString());
-        ChatMessage line =
-                ChatMessage.builder()
-                        .displayText(text)
-                        .originalText(original)
-                        .owner(player)
-                        .id(0)
-                        .width(width)
-                        .creationTick(MinecraftClient.getInstance().inGameHud.getTicks())
-                        .time(time)
-                        .backgroundColor(backcolor)
-                        .build();
+        ChatMessage line = ChatMessage.builder()
+                .displayText(text)
+                .originalText(original)
+                .owner(player)
+                .id(0)
+                .width(width)
+                .creationTick(MinecraftClient.getInstance().inGameHud.getTicks())
+                .time(time)
+                .backgroundColor(backcolor)
+                .build();
         if (ChatHistory.getInstance().add(line)) {
             sendToHud(line.getDisplayText());
         }

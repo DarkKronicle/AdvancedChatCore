@@ -10,10 +10,12 @@ package io.github.darkkronicle.advancedchatcore.gui.buttons;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
+import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfig;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
+@Deprecated
 @Environment(EnvType.CLIENT)
 public class ConfigTabsButtonListener implements IButtonActionListener {
 
@@ -25,8 +27,7 @@ public class ConfigTabsButtonListener implements IButtonActionListener {
 
     @Override
     public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
-        GuiConfigHandler.getInstance().activeTab = this.tabButton.getTab().getName();
-        GuiBase.openGui(
-                this.tabButton.getTab().getScreen(GuiConfigHandler.getInstance().getButtons()));
+        GuiConfig.TAB = tabButton.getTab();
+        GuiBase.openGui(new GuiConfig());
     }
 }

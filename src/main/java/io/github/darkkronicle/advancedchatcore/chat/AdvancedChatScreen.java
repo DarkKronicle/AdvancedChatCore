@@ -8,16 +8,19 @@
 package io.github.darkkronicle.advancedchatcore.chat;
 
 import fi.dy.masa.malilib.gui.GuiBase;
+import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.util.KeyCodes;
-import fi.dy.masa.malilib.util.StringUtils;
+import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
-import io.github.darkkronicle.advancedchatcore.gui.CleanButton;
+import io.github.darkkronicle.advancedchatcore.gui.IconButton;
 import io.github.darkkronicle.advancedchatcore.interfaces.AdvancedChatScreenSection;
 import io.github.darkkronicle.advancedchatcore.util.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+
+import io.github.darkkronicle.advancedchatcore.util.RowList;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
@@ -25,6 +28,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public class AdvancedChatScreen extends GuiBase {
@@ -40,6 +44,12 @@ public class AdvancedChatScreen extends GuiBase {
 
     private static String last = "";
     private final List<AdvancedChatScreenSection> sections = new ArrayList<>();
+
+    @Getter
+    private final RowList<ButtonBase> rightSideButtons = new RowList<>();
+
+    @Getter
+    private final RowList<ButtonBase> leftSideButtons = new RowList<>();
 
     @Override
     protected void closeGui(boolean showParent) {
@@ -95,24 +105,8 @@ public class AdvancedChatScreen extends GuiBase {
         }
         this.chatField.setChangedListener(this::onChatFieldUpdate);
 
-        Color baseColor = getColor();
-        int x = client.getWindow().getScaledWidth() - 1;
         // Add settings button
-        String settings = StringUtils.translate("advancedchat.gui.button.settings");
-        int settingsWidth = StringUtils.getStringWidth(settings) + 5;
-        x -= settingsWidth + 5;
-        CleanButton settingsButton =
-                new CleanButton(
-                        x,
-                        client.getWindow().getScaledHeight() - 27,
-                        settingsWidth,
-                        11,
-                        baseColor,
-                        settings);
-        this.addButton(
-                settingsButton,
-                (button, mouseButton) ->
-                        GuiBase.openGui(GuiConfigHandler.getInstance().getDefaultScreen()));
+        rightSideButtons.add("settings", new IconButton(0, 0, 14, 64, new Identifier(AdvancedChatCore.MOD_ID, "textures/gui/settings.png"), (button) -> GuiBase.openGui(GuiConfigHandler.getInstance().getDefaultScreen())));
 
         this.addSelectableChild(this.chatField);
 
@@ -120,6 +114,35 @@ public class AdvancedChatScreen extends GuiBase {
 
         for (AdvancedChatScreenSection section : sections) {
             section.initGui();
+        }
+
+        int originalX = client.getWindow().getScaledWidth() - 1;
+        int y = client.getWindow().getScaledHeight() - 30;
+        for (int i = 0; i < rightSideButtons.rowSize(); i++) {
+            List<ButtonBase> buttonList = rightSideButtons.get(i);
+            int maxHeight = 0;
+            int x = originalX;
+            for (ButtonBase button : buttonList) {
+                maxHeight = Math.max(maxHeight, button.getHeight());
+                x -= button.getWidth() + 1;
+                button.setPosition(x, y);
+                addButton(button, null);
+            }
+            y -= maxHeight + 1;
+        }
+        originalX = 1;
+        y = client.getWindow().getScaledHeight() - 30;
+        for (int i = 0; i < leftSideButtons.rowSize(); i++) {
+            List<ButtonBase> buttonList = leftSideButtons.get(i);
+            int maxHeight = 0;
+            int x = originalX;
+            for (ButtonBase button : buttonList) {
+                maxHeight = Math.max(maxHeight, button.getHeight());
+                button.setPosition(x, y);
+                addButton(button, null);
+                x += button.getWidth() + 1;
+            }
+            y -= maxHeight + 1;
         }
     }
 

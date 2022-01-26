@@ -9,6 +9,7 @@ package io.github.darkkronicle.advancedchatcore.gui;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetListBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
+import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfig;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import java.util.List;
 
@@ -19,15 +20,16 @@ public abstract class ConfigGuiListBase<
                 WIDGETLIST extends WidgetListBase<TYPE, WIDGET>>
         extends CoreGuiListBase<TYPE, WIDGET, WIDGETLIST> {
 
-    private List<GuiConfigHandler.TabButton> tabButtons;
-
     public ConfigGuiListBase(List<GuiConfigHandler.TabButton> tabButtons) {
         this(10, 60, tabButtons);
     }
 
+    public ConfigGuiListBase() {
+        this(10, 60, null);
+    }
+
     public ConfigGuiListBase(int listX, int listY, List<GuiConfigHandler.TabButton> tabButtons) {
         super(listX, listY);
-        this.tabButtons = tabButtons;
     }
 
     @Override
@@ -37,28 +39,17 @@ public abstract class ConfigGuiListBase<
         int x = 10;
         int y = 26;
 
-        int rows = 1;
-
-        for (GuiConfigHandler.TabButton tab : tabButtons) {
-            int newY = this.createButton(tab, y);
-            if (newY != y) {
-                rows++;
-                y = newY;
-            }
+        y += (22 * GuiConfig.addTabButtons(this, 10, y));
+        if (GuiConfig.TAB.getChildren() != null && GuiConfig.TAB.getChildren().size() > 0) {
+            y += (22 * GuiConfig.addAllChildrenButtons(this, GuiConfig.TAB, 10, y));
         }
-
-        this.setListPosition(this.getListX(), 68 + (rows - 1) * 22);
+        this.setListPosition(this.getListX(), y);
         this.reCreateListWidget();
         this.getListWidget().refreshEntries();
 
         y += 24;
 
         initGuiConfig(x, y);
-    }
-
-    private int createButton(GuiConfigHandler.TabButton button, int y) {
-        this.addButton(button.getButton(), button.createListener());
-        return button.getButton().getY();
     }
 
     /** Method when the GUI is initialized. This one takes an X,Y that is away from the buttons */

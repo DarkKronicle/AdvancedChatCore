@@ -8,6 +8,7 @@
 package io.github.darkkronicle.advancedchatcore;
 
 import fi.dy.masa.malilib.config.ConfigManager;
+import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.interfaces.IInitializationHandler;
 import io.github.darkkronicle.advancedchatcore.chat.ChatHistoryProcessor;
 import io.github.darkkronicle.advancedchatcore.chat.ChatScreenSectionHolder;
@@ -40,16 +41,21 @@ public class InitHandler implements IInitializationHandler {
         // Setup chat history
         MessageDispatcher.getInstance().register(new ChatHistoryProcessor(), -1);
 
-        GuiConfigHandler.getInstance()
-                .addGuiSection(
-                        GuiConfigHandler.createGuiConfigSection(
-                                "advancedchat.config.tab.general", ConfigStorage.General.OPTIONS));
-
-        GuiConfigHandler.getInstance()
-                .addGuiSection(
-                        GuiConfigHandler.createGuiConfigSection(
-                                "advancedchat.config.tab.chatscreen",
-                                ConfigStorage.ChatScreen.OPTIONS));
+        GuiConfigHandler.getInstance().addTab(
+                GuiConfigHandler.children(
+                        "advancedchatcore",
+                        "advancedchat.tab.advancedchatcore",
+                GuiConfigHandler.wrapOptions(
+                        "core_general",
+                        "advancedchatcore.tab.general",
+                        ConfigStorage.General.OPTIONS.stream().map((saveableConfig) -> (IConfigBase) saveableConfig.config).toList()
+                ),
+                GuiConfigHandler.wrapOptions(
+                        "chatscreen",
+                        "advancedchatcore.tab.chatscreen",
+                        ConfigStorage.ChatScreen.OPTIONS.stream().map((saveableConfig) -> (IConfigBase) saveableConfig.config).toList()
+                ))
+        );
 
         ProfanityUtil.getInstance().loadConfigs();
         MessageDispatcher.getInstance().registerPreFilter(text -> {

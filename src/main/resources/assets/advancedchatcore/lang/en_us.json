@@ -4,9 +4,9 @@
   "advancedchat.gui.button.settings": "Settings",
 
   "advancedchat.screen.main": "§3Advanced§5Chat§f Config",
-  "advancedchat.config.tab.general": "§7General",
-  "advancedchat.config.tab.chatscreen": "§bChat Screen",
-
+  "advancedchatcore.tab.general": "§7General",
+  "advancedchatcore.tab.chatscreen": "§bChat Screen",
+  "advancedchat.tab.advancedchatcore": "Core",
 
   "advancedchat.config.general.timeformat": "Time Format",
   "advancedchat.config.general.info.timeformat": "How time is displayed if §6Show Time§r is enabled for both the §9Chat HUD§r and the §aChat Log§r. \nSee the §6SimpleDateFormat§r class for the format ",

@@ -14,6 +14,9 @@ import io.github.darkkronicle.advancedchatcore.config.SaveableConfig;
 import io.github.darkkronicle.advancedchatcore.gui.buttons.ConfigTabsButtonListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
@@ -27,12 +30,14 @@ public class GuiConfigHandler {
 
     private static final GuiConfigHandler INSTANCE = new GuiConfigHandler();
 
+    @Deprecated
     public String activeTab = "";
 
-    @Getter private final List<Tab> tabs = new ArrayList<>();
+    @Getter private final List<TabSupplier> tabs = new ArrayList<>();
 
     private GuiConfigHandler() {}
 
+    @Deprecated
     public boolean isTabActive(GuiConfigHandler.Tab button) {
         return button.getName().equals(activeTab);
     }
@@ -41,10 +46,39 @@ public class GuiConfigHandler {
         return INSTANCE;
     }
 
+    @Deprecated
     public void addGuiSection(Tab section) {
-        tabs.add(section);
+        if (section instanceof GuiConfigSection gui) {
+            addTab(new TabSupplier(section.getName(), section.getName()) {
+                @Override
+                public List<IConfigBase> getOptions() {
+                    return gui.getOptions();
+                }
+            });
+            return;
+        }
+        tabs.add(new TabSupplier(section.getName(), section.getName()) {
+            @Override
+            public Screen getScreen(Screen parent) {
+                return section.getScreen(getButtons());
+            }
+        });
     }
 
+    public void addTab(TabSupplier tab) {
+        tabs.add(tab);
+    }
+
+    public TabSupplier get(String name) {
+        for (TabSupplier child : tabs) {
+            if (child.getName().equals(name)) {
+                return child;
+            }
+        }
+        return null;
+    }
+
+    @Deprecated
     public List<TabButton> getButtons() {
         int x = 10;
         int y = 26;
@@ -52,7 +86,7 @@ public class GuiConfigHandler {
         ArrayList<TabButton> buttons = new ArrayList<>();
         MinecraftClient client = MinecraftClient.getInstance();
         int windowWidth = client.getWindow().getScaledWidth();
-        for (Tab tab : tabs) {
+        for (TabSupplier tab : tabs) {
             int width = client.textRenderer.getWidth(tab.getName()) + 10;
 
             if (x >= windowWidth - width - 10) {
@@ -68,14 +102,14 @@ public class GuiConfigHandler {
         return buttons;
     }
 
-    private ButtonGeneric createButton(int x, int y, int width, Tab tab) {
+    private ButtonGeneric createButton(int x, int y, int width, TabSupplier tab) {
         ButtonGeneric button = new ButtonGeneric(x, y, width, 20, tab.getName());
-        button.setEnabled(!isTabActive(tab));
+        button.setEnabled(!GuiConfig.TAB.equals(tab));
         return button;
     }
 
-    public Tab getTab(String name) {
-        for (Tab b : tabs) {
+    public TabSupplier getTab(String name) {
+        for (TabSupplier b : tabs) {
             if (b.getName().equals(name)) {
                 return b;
             }
@@ -84,23 +118,10 @@ public class GuiConfigHandler {
     }
 
     public Screen getDefaultScreen() {
-        if (activeTab.isEmpty()) {
-            activeTab = tabs.get(0).getName();
-        }
-        for (Tab tab : tabs) {
-            if (tab.getName().equalsIgnoreCase(activeTab)) {
-                return tab.getScreen(getButtons());
-            }
-        }
-        return tabs.get(0).getScreen(getButtons());
+        return new GuiConfig();
     }
 
-    public interface Tab {
-        String getName();
-
-        Screen getScreen(List<TabButton> buttons);
-    }
-
+    @Deprecated
     public static GuiConfigSection createGuiConfigSection(
             String name, List<SaveableConfig<? extends IConfigBase>> configs) {
         List<IConfigBase> configBases = new ArrayList<>();
@@ -120,6 +141,81 @@ public class GuiConfigHandler {
         };
     }
 
+    @Deprecated
+    @AllArgsConstructor
+    @Value
+    public static class TabButton {
+        TabSupplier tab;
+        ButtonGeneric button;
+
+        public ConfigTabsButtonListener createListener() {
+            return new ConfigTabsButtonListener(this);
+        }
+    }
+
+    public static TabSupplier wrapSaveableOptions(String name, String translationKey, Supplier<List<SaveableConfig<? extends IConfigBase>>> supplier) {
+        Supplier<List<IConfigBase>> configSupplier = () -> {
+            List<IConfigBase> config = new ArrayList<>();
+            List<SaveableConfig<? extends IConfigBase>> options = supplier.get();
+            for (SaveableConfig<? extends IConfigBase> s : options) {
+                config.add(s.config);
+            }
+            return config;
+        };
+        return wrapOptions(name, translationKey, configSupplier);
+    }
+
+    public static TabSupplier wrapSaveableOptions(String name, String translationKey, List<SaveableConfig<? extends IConfigBase>> options) {
+        List<IConfigBase> config = new ArrayList<>();
+        for (SaveableConfig<? extends IConfigBase> s : options) {
+            config.add(s.config);
+        }
+        return wrapOptions(name, translationKey, config);
+    }
+
+    public static TabSupplier wrapOptions(String name, String translationKey, List<IConfigBase> configs) {
+        return wrapOptions(name, translationKey, () -> configs);
+    }
+
+    public static TabSupplier wrapOptions(String name, String translationKey, Supplier<List<IConfigBase>> options) {
+        return new TabSupplier(name, translationKey) {
+            @Override
+            public List<IConfigBase> getOptions() {
+                return options.get();
+            }
+        };
+    }
+
+    public static TabSupplier wrapScreen(String name, String translationKey, Function<Screen, Screen> screenSupplier) {
+        return new TabSupplier(name, translationKey) {
+            @Override
+            public Screen getScreen(Screen parent) {
+                return screenSupplier.apply(parent);
+            }
+        };
+    }
+
+    public static TabSupplier children(String name, String translationKey, TabSupplier... children) {
+        TabSupplier tab = new TabSupplier(name, translationKey) {
+            @Override
+            public String getName() {
+                return super.getName();
+            }
+        };
+        for (TabSupplier child : children) {
+            tab.addChild(child);
+        }
+        return tab;
+    }
+
+    @Deprecated
+    public interface Tab {
+        String getName();
+
+        Screen getScreen(List<TabButton> buttons);
+    }
+
+    @Deprecated
     public interface GuiConfigSection extends Tab {
         List<IConfigBase> getOptions();
 
@@ -128,19 +224,7 @@ public class GuiConfigHandler {
         @Override
         default Screen getScreen(List<TabButton> buttons) {
             GuiConfigHandler.getInstance().activeTab = this.getName();
-            return new GuiConfig(buttons, getOptions());
-        }
-    }
-
-    @AllArgsConstructor
-    @Value
-    public static class TabButton {
-
-        Tab tab;
-        ButtonGeneric button;
-
-        public ConfigTabsButtonListener createListener() {
-            return new ConfigTabsButtonListener(this);
+            return new GuiConfig();
         }
     }
 }
