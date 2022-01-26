@@ -96,5 +96,7 @@ public class InitHandler implements IInitializationHandler {
                         "advancedchatcore.findtype.custom.info.profanity");
 
         CommandsHandler.getInstance().setup();
+
+        ModuleHandler.getInstance().load();
     }
 }

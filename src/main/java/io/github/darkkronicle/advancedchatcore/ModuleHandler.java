@@ -8,12 +8,18 @@
 package io.github.darkkronicle.advancedchatcore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import fi.dy.masa.malilib.interfaces.IInitializationHandler;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Value;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.CustomValue;
+import org.jetbrains.annotations.NotNull;
 
 public class ModuleHandler {
 
@@ -22,6 +28,8 @@ public class ModuleHandler {
     @Getter private final List<Module> modules = new ArrayList<>();
 
     private ModuleHandler() {}
+
+    private List<LoadOrder> toLoad = new ArrayList<>();
 
     public static ModuleHandler getInstance() {
         return INSTANCE;
@@ -42,6 +50,19 @@ public class ModuleHandler {
         }
     }
 
+    public void registerInitHandler(String name, int priority, IInitializationHandler handler) {
+        toLoad.add(new LoadOrder(name, priority, handler));
+    }
+
+    /** Do not call */
+    public void load() {
+        Collections.sort(toLoad);
+        for (LoadOrder load : toLoad) {
+            load.getHandler().registerModHandlers();
+        }
+        toLoad = null;
+    }
+
     /**
      * Retrieves a {@link Module} based off of a mod ID.
      *
@@ -57,5 +78,18 @@ public class ModuleHandler {
             }
         }
         return Optional.empty();
+    }
+
+    @AllArgsConstructor
+    @Value
+    public static class LoadOrder implements Comparable<LoadOrder> {
+        String name;
+        Integer order;
+        IInitializationHandler handler;
+
+        @Override
+        public int compareTo(@NotNull ModuleHandler.LoadOrder o) {
+            return order.compareTo(o.order);
+        }
     }
 }
