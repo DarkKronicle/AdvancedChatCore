@@ -89,7 +89,11 @@ public class ModuleHandler {
 
         @Override
         public int compareTo(@NotNull ModuleHandler.LoadOrder o) {
-            return order.compareTo(o.order);
+            int compared = order.compareTo(o.order);
+            if (compared == 0) {
+                return name.compareTo(o.getName());
+            }
+            return compared;
         }
     }
 }
