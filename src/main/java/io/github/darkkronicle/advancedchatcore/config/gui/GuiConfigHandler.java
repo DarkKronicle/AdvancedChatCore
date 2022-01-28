@@ -108,7 +108,22 @@ public class GuiConfigHandler {
         return button;
     }
 
-    public TabSupplier getTab(String name) {
+    public Tab getTab(String name) {
+        TabSupplier supplier = getTabSupplier(name);
+        return new Tab() {
+            @Override
+            public String getName() {
+                return supplier.getDisplayName();
+            }
+
+            @Override
+            public Screen getScreen(List<TabButton> buttons) {
+                return getDefaultScreen();
+            }
+        };
+    }
+
+    public TabSupplier getTabSupplier(String name) {
         for (TabSupplier b : tabs) {
             if (b.getName().equals(name)) {
                 return b;
