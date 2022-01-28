@@ -7,6 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatcore.finder.custom;
 
+import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.interfaces.IFinder;
 import io.github.darkkronicle.advancedchatcore.util.ProfanityUtil;
 import io.github.darkkronicle.advancedchatcore.util.StringMatch;
@@ -23,6 +24,6 @@ public class ProfanityFinder implements IFinder {
 
     @Override
     public List<StringMatch> getMatches(String input, String toMatch) {
-        return ProfanityUtil.getInstance().getBadWords(input);
+        return ProfanityUtil.getInstance().getBadWords(input, (float) ConfigStorage.General.PROFANITY_ABOVE.config.getDoubleValue(), ConfigStorage.General.PROFANITY_ON_WORD_BOUNDARIES.config.getBooleanValue());
     }
 }

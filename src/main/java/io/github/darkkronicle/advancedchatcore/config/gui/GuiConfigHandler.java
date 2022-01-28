@@ -49,7 +49,7 @@ public class GuiConfigHandler {
     @Deprecated
     public void addGuiSection(Tab section) {
         if (section instanceof GuiConfigSection gui) {
-            addTab(new TabSupplier(section.getName(), section.getName()) {
+            addTab(new TabSupplier(section.getName(), StringUtils.translate(section.getName())) {
                 @Override
                 public List<IConfigBase> getOptions() {
                     return gui.getOptions();
@@ -137,8 +137,7 @@ public class GuiConfigHandler {
     }
 
     @Deprecated
-    public static GuiConfigSection createGuiConfigSection(
-            String name, List<SaveableConfig<? extends IConfigBase>> configs) {
+    public static GuiConfigSection createGuiConfigSection(String name, List<SaveableConfig<? extends IConfigBase>> configs) {
         List<IConfigBase> configBases = new ArrayList<>();
         for (SaveableConfig<? extends IConfigBase> saveable : configs) {
             configBases.add(saveable.config);
@@ -160,8 +159,23 @@ public class GuiConfigHandler {
     @AllArgsConstructor
     @Value
     public static class TabButton {
-        TabSupplier tab;
+        TabSupplier tabSupplier;
         ButtonGeneric button;
+
+        @Deprecated
+        public Tab getTab() {
+            return new Tab() {
+                @Override
+                public String getName() {
+                    return tabSupplier.getDisplayName();
+                }
+
+                @Override
+                public Screen getScreen(List<TabButton> buttons) {
+                    return new GuiConfig();
+                }
+            };
+        }
 
         public ConfigTabsButtonListener createListener() {
             return new ConfigTabsButtonListener(this);

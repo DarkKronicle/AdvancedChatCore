@@ -61,7 +61,7 @@ public class InitHandler implements IInitializationHandler {
         MessageDispatcher.getInstance().registerPreFilter(text -> {
             if (ConfigStorage.General.FILTER_PROFANITY.config.getBooleanValue()) {
                 List<StringMatch> profanity =
-                        ProfanityUtil.getInstance().getBadWords(text.getString());
+                        ProfanityUtil.getInstance().getBadWords(text.getString(), (float) ConfigStorage.General.PROFANITY_ABOVE.config.getDoubleValue(), ConfigStorage.General.PROFANITY_ON_WORD_BOUNDARIES.config.getBooleanValue());
                 if (profanity.size() == 0) {
                     return Optional.empty();
                 }

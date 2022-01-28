@@ -27,7 +27,7 @@ public class ConfigTabsButtonListener implements IButtonActionListener {
 
     @Override
     public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
-        GuiConfig.TAB = tabButton.getTab();
+        GuiConfig.TAB = tabButton.getTabSupplier();
         GuiBase.openGui(new GuiConfig());
     }
 }

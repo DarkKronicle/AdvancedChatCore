@@ -7,13 +7,13 @@
  */
 package io.github.darkkronicle.advancedchatcore.util;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvValidationException;
 import fi.dy.masa.malilib.util.FileUtils;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import org.apache.logging.log4j.Level;
  */
 @Environment(EnvType.CLIENT)
 public class ProfanityUtil {
-    @Getter private final Map<String, String[]> words = new HashMap<>();
+    @Getter private final Map<Float, List<String>> words = new HashMap<>();
 
     @Getter private int largestWordLength = 0;
 
@@ -48,46 +48,35 @@ public class ProfanityUtil {
     public void loadConfigs() {
         try {
             List<String> lines;
-            File file =
-                    FileUtils.getConfigDirectory()
-                            .toPath()
-                            .resolve("advancedchat")
-                            .resolve("swear_words.txt")
-                            .toFile();
+            File file = FileUtils.getConfigDirectory()
+                    .toPath()
+                    .resolve("advancedchat")
+                    .resolve("swear_words.csv")
+                    .toFile();
+
+            Reader fileReader;
             if (!file.exists()) {
                 // Use built in
-                lines =
-                        new BufferedReader(
-                                        new InputStreamReader(
-                                                AdvancedChatCore.getResource("swear_words.txt"),
-                                                StandardCharsets.UTF_8))
-                                .lines()
-                                .collect(Collectors.toList());
+                fileReader = new InputStreamReader(AdvancedChatCore.getResource("swear_words.csv"), StandardCharsets.UTF_8);
             } else {
-                lines =
-                        new BufferedReader(new FileReader(file))
-                                .lines()
-                                .collect(Collectors.toList());
+                fileReader = new FileReader(file);
             }
+            CSVReader csv = new CSVReaderBuilder(fileReader).withSkipLines(1).build();
             int counter = 0;
-            for (String line : lines) {
+            String[] nextLine;
+            while((nextLine = csv.readNext()) != null) {
                 counter++;
-                String[] content;
                 try {
-                    content = line.split(",");
-                    if (content.length == 0) {
-                        continue;
-                    }
-                    String word = content[0];
-                    String[] ignore_in_combination_with_words = new String[] {};
-                    if (content.length > 1) {
-                        ignore_in_combination_with_words = content[1].split("_");
-                    }
+                    String word = nextLine[0];
+                    float severity = Float.parseFloat(nextLine[7]);
 
                     if (word.length() > largestWordLength) {
                         largestWordLength = word.length();
                     }
-                    words.put(word.replaceAll(" ", ""), ignore_in_combination_with_words);
+                    if (!words.containsKey(severity)) {
+                        words.put(severity, new ArrayList<>());
+                    }
+                    words.get(severity).add(word);
 
                 } catch (Exception e) {
                     AdvancedChatCore.LOGGER.log(
@@ -96,8 +85,8 @@ public class ProfanityUtil {
             }
             AdvancedChatCore.LOGGER.log(
                     Level.INFO, "Loaded " + counter + " words to profanity filter.");
-        } catch (URISyntaxException | IOException e) {
-            AdvancedChatCore.LOGGER.log(Level.ERROR, "Couldn't access swear_words.txt", e);
+        } catch (URISyntaxException | IOException | CsvValidationException e) {
+            AdvancedChatCore.LOGGER.log(Level.ERROR, "Error loading swear_words.csv", e);
         }
     }
 
@@ -105,48 +94,62 @@ public class ProfanityUtil {
      * Iterates over a String input and checks whether a cuss word was found in a list, then checks
      * if the word should be ignored (e.g. bass contains the word *ss).
      */
-    public List<StringMatch> getBadWords(String input) {
+    public List<StringMatch> getBadWords(String input, float severity, boolean onlyWordBoundaries) {
         if (input == null) {
             return new ArrayList<>();
         }
 
-        input = input.replaceAll("1", "i");
-        input = input.replaceAll("!", "i");
-        input = input.replaceAll("3", "e");
-        input = input.replaceAll("4", "a");
-        input = input.replaceAll("@", "a");
-        input = input.replaceAll("5", "s");
-        input = input.replaceAll("7", "t");
-        input = input.replaceAll("0", "o");
-        input = input.replaceAll("9", "g");
-
-        ArrayList<StringMatch> badWords = new ArrayList<>();
+        List<StringMatch> badWords = new ArrayList<>();
         input = input.toLowerCase();
 
+        List<Integer> wordBoundaries;
+        if (onlyWordBoundaries) {
+            wordBoundaries = SearchUtils.findMatches(input, "\\b", FindType.REGEX)
+                    .map(matches -> matches.stream().map(m -> m.start).toList())
+                    .orElseGet(ArrayList::new);
+            if (wordBoundaries.size() == 0) {
+                return new ArrayList<>();
+            }
+        } else {
+            wordBoundaries = new ArrayList<>();
+        }
+
+
+        List<String> wordsToFind = getAboveSeverity(severity);
+
         // iterate over each letter in the word
-        for (int start = 0; start < input.length(); start++) {
+        int boundaryIndex = 0;
+        int index = onlyWordBoundaries ? wordBoundaries.get(0) : 0;
+        while (index < input.length()) {
             // from each letter, keep going to find bad words until either the end of the sentence
             // is reached, or the max word length is reached.
-            for (int offset = 1;
-                    offset < (input.length() + 1 - start) && offset < largestWordLength;
-                    offset++) {
-                String wordToCheck = input.substring(start, start + offset);
-                if (words.containsKey(wordToCheck)) {
+            for (int offset = 1; offset < (input.length() + 1 - index) && offset < largestWordLength; offset++) {
+                String wordToCheck = input.substring(index, index + offset);
+                if (wordsToFind.contains(wordToCheck) && (!onlyWordBoundaries || (wordBoundaries.contains(index + offset)))) {
                     // for example, if you want to say the word bass, that should be possible.
-                    String[] ignoreCheck = words.get(wordToCheck);
-                    boolean ignore = false;
-                    for (String value : ignoreCheck) {
-                        if (input.contains(value)) {
-                            ignore = true;
-                            break;
-                        }
-                    }
-                    if (!ignore) {
-                        badWords.add(new StringMatch(wordToCheck, start, start + offset));
-                    }
+                    badWords.add(new StringMatch(wordToCheck, index, index + offset));
                 }
+            }
+            if (onlyWordBoundaries) {
+                boundaryIndex++;
+                if (boundaryIndex >= wordBoundaries.size()) {
+                    break;
+                }
+                index = wordBoundaries.get(boundaryIndex);
+            } else {
+                index++;
             }
         }
         return badWords;
+    }
+
+    public List<String> getAboveSeverity(float severity) {
+        List<String> list = new ArrayList<>();
+        for (Map.Entry<Float, List<String>> entry : words.entrySet()) {
+            if (entry.getKey() >= severity) {
+                list.addAll(entry.getValue());
+            }
+        }
+        return list;
     }
 }

@@ -17,6 +17,7 @@ import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
+import fi.dy.masa.malilib.config.options.ConfigDouble;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.config.options.ConfigString;
 import fi.dy.masa.malilib.util.FileUtils;
@@ -121,6 +122,24 @@ public class ConfigStorage implements IConfigHandler {
                                 false,
                                 translate("info.filterprofanity")));
 
+        public static final SaveableConfig<ConfigBoolean> PROFANITY_ON_WORD_BOUNDARIES =
+                SaveableConfig.fromConfig(
+                        "profanityWordBoundaries",
+                        new ConfigBoolean(
+                                translate("profanitywordboundaries"),
+                                false,
+                                translate("info.profanitywordboundaries")));
+
+        public static final SaveableConfig<ConfigDouble> PROFANITY_ABOVE =
+                SaveableConfig.fromConfig(
+                        "profanityAbove",
+                        new ConfigDouble(
+                                translate("profanityabove"),
+                                0,
+                                0,
+                                3,
+                                translate("info.profanityabove")));
+
         public static final ImmutableList<SaveableConfig<? extends IConfigBase>> OPTIONS =
                 ImmutableList.of(
                         TIME_FORMAT,
@@ -131,7 +150,10 @@ public class ConfigStorage implements IConfigHandler {
                         CHAT_STACK,
                         CHAT_STACK_UPDATE,
                         MESSAGE_OWNER_REGEX,
-                        FILTER_PROFANITY);
+                        FILTER_PROFANITY,
+                        PROFANITY_ABOVE,
+                        PROFANITY_ON_WORD_BOUNDARIES
+                );
     }
 
     public static class ChatScreen {

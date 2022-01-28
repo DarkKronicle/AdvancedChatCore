@@ -28,6 +28,10 @@
   "advancedchat.config.general.info.messageownerregex": "The §6regular expression§r used to detect the head used for chat heads \n§cDon't mess with this unless you §c§oreally §cunderstand what you're working with!",
   "advancedchat.config.general.filterprofanity": "Filter Profanity",
   "advancedchat.config.general.info.filterprofanity": "Filter's out §9swear words§r and replaces them with *'s.\n\nTo use your own swear word list have each line be a swear word\nin a file in §7~minecraft/config/advancedchat/swear_words.txt",
+  "advancedchat.config.general.profanityabove": "Profanity Threshold",
+  "advancedchat.config.general.info.profanityabove": "The §6minimum level of severity§r before AdvancedChat filters a word. Ranges from §b0§r to §b3§r.\n1 includes common swear words, and progressively gets more explicit",
+  "advancedchat.config.general.profanitywordboundaries": "Disable Partial Matches",
+  "advancedchat.config.general.info.profanitywordboundaries": "Whether or not the profanity filter does not §6match words that contain swears§r, such as §6grass§r",
 
   "advancedchat.config.chatscreen.persistenttext": "Persistent Text",
   "advancedchat.config.chatscreen.info.persistenttext": "Whether or not messages that are §6typed but not sent§r are kept after closing the §9Chat Box",

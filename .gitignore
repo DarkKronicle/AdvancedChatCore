@@ -10,4 +10,4 @@ build/
 classes/
 lombok.config
 extra.properties
-swear_words.txt
+swear_words.csv
