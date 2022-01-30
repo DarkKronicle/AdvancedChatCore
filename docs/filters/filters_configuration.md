@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Core Configuration
-has_children: AdvancedChatCore
+title: Filter Configuration
+has_children: AdvancedChatFilters
 nav_order: 0
 ---
