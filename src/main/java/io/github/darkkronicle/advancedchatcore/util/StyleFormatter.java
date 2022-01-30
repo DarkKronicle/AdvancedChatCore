@@ -14,10 +14,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.util.ChatMessages;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.StringVisitable;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
+import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Unit;
 
@@ -46,6 +43,7 @@ public class StyleFormatter {
 
     private int currentIndex;
     private int realIndex;
+    private int skipBy = 0;
     private Style currentStyle;
     private Style lastTextStyle = null;
     private final FormattingVisitable visitor;
@@ -55,9 +53,6 @@ public class StyleFormatter {
     private enum Result {
         /** Go up a character */
         INCREMENT,
-
-        /** It worked! */
-        SUCCESS,
 
         /** Go to the next {@link StringVisitable} */
         SKIP,
@@ -88,9 +83,37 @@ public class StyleFormatter {
     }
 
     /** Handles how section symbols get processed */
-    private Result updateSection(Style textStyle, Character nextChar) {
+    private Result updateSection(Style textStyle, Character nextChar, String rest) {
         if (nextChar == null) {
             return Result.SKIP;
+        }
+        if (nextChar == '#') {
+            if (rest.length() > 6) {
+                String format = rest.substring(1, 7);
+                if (!SearchUtils.isMatch(format, "^[0-9a-fA-F]{6}", FindType.REGEX)) {
+                    currentIndex++;
+                    return Result.INCREMENT;
+                }
+                int red = Integer.parseInt(format.substring(0, 2), 16);
+                int green = Integer.parseInt(format.substring(2, 4), 16);
+                int blue = Integer.parseInt(format.substring(4, 6), 16);
+                TextColor color = TextColor.fromRgb(new Color(red, green, blue, 255).color());
+                if (currentStyle.equals(Style.EMPTY) || currentStyle.equals(textStyle)) {
+                    // If it's empty or different rely on just the current text style
+                    // Arbitrary color
+                    currentStyle = textStyle.withExclusiveFormatting(Formatting.BLACK);
+                } else {
+                    // Styles are different so we take what happened before. This allows us to chain
+                    // formatting symbols.
+
+                    // Arbitrary color to reset
+                    currentStyle = currentStyle.withExclusiveFormatting(Formatting.BLACK);
+                }
+                currentStyle = currentStyle.withColor(color);
+                currentIndex += 7;
+                skipBy = 6;
+            }
+            return Result.INCREMENT;
         }
         Formatting formatting = Formatting.byCode(nextChar);
         if (formatting != null) {
@@ -138,7 +161,8 @@ public class StyleFormatter {
                 nextChar = string.charAt(i + 1);
             }
             if (c == '§') {
-                switch (updateSection(textStyle, nextChar)) {
+                skipBy = 0;
+                switch (updateSection(textStyle, nextChar, string.substring(i + 1))) {
                     case SKIP:
                         return Optional.empty();
                     case TERMINATE:
@@ -146,6 +170,7 @@ public class StyleFormatter {
                     case INCREMENT:
                         i++;
                 }
+                i += skipBy;
             } else if (sendToVisitor(c, textStyle)) {
                 realIndex++;
             } else {
