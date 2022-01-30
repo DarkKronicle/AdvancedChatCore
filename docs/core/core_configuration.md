@@ -1,6 +1,6 @@
 ---
 layout: default
 title: Core Configuration
-has_children: AdvancedChatCore
+parent: AdvancedChatCore
 nav_order: 0
 ---
