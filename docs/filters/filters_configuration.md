@@ -1,6 +1,6 @@
 ---
 layout: default
 title: Filter Configuration
-has_children: AdvancedChatFilters
+parent: AdvancedChatFilters
 nav_order: 0
 ---
