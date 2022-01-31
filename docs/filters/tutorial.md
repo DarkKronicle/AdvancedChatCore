@@ -33,10 +33,23 @@ Regular expressions are one of the best ways to implement find and replace searc
 4. [Cheat Sheet](https://cheatography.com/davechild/cheat-sheets/regular-expressions/)
 5. [Basics Video](https://www.youtube.com/watch?v=sXQxhojSdZM])
 
-A few things to keep in mind - 
+Keep in mind that the code runs on Java 8, so make sure to select that option while testing regex.  
+Currently, the regex does not support `/regex/flags` syntax. Use `(?flags)regex` instead.  
+
 Let's go over some quick regex tips.
 
-## Player Regex
+## Players
 
-Oftentimes with ACF we find the need for regex that matches valid players. `[A-Za-z0-9_§]{3,16}` matches valid playernames. You can use this for [message regex](FILE SOON) and more.  
-Another thing we can do with regex is make more complicated name highlights. This will vary for everyone, but the regex for me is `(?i)furr?y(?:[_ ]?101)?`. 
+Oftentimes with ACF we find the need for regex that matches any valid playername. `[A-Za-z0-9_§]{3,16}` matches valid playernames. You can use this for [message regex](FILE SOON) and more.  
+
+Another thing we can do with regex is make more complicated name highlights. This will vary for everyone, but the regex for me is `(?i)furr?y(?:[_ ]?101)?`.
+
+---
+
+That's all the basic tutorial has to offer. Consider looking at our [filter examples](FILES SOON) before moving onto advanced filters.
+
+
+
+Questions? Comments? Concerns? Join the discord for more help or just to hang out.
+
+<sub><sup><sub><sup>Poke Fury if something is wrong with the page</sub></sup></sub></sup>
