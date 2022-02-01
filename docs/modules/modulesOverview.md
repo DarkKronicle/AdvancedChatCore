@@ -171,7 +171,6 @@ Chat Tabs have the following options to configure as well as the option to expor
 
 ---
 ![ACC-ChatMacrosIcon](/docs/modules/assets/images/ACC-ChatMacros_Icon.png)  
-*Icon is writers rendition that is subject to change once a real icon is made*
 <!--Why is it that my art can never please you father Kron? Is it because its made of dried macaroni noodles and crayons and not some fancy art program like Xylo :sob: -->
 ### AdvancedChatMacros (**Planned**)
 {:toc}
