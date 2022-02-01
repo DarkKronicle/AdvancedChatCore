@@ -68,19 +68,9 @@ public class AdvancedChatCore implements ClientModInitializer {
         // Important to get first since configuration options depend on colors
         Colors.getInstance().load();
         InitializationHandler.getInstance().registerInitializationHandler(new InitHandler());
-        KeyBinding keyBinding =
-                new KeyBinding(
-                        "advancedchat.key.openlog",
-                        InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_Y,
-                        "advancedchat.category.keys");
-        KeyBindingHelper.registerKeyBinding(keyBinding);
         MinecraftClient client = MinecraftClient.getInstance();
         ClientTickEvents.START_CLIENT_TICK.register(
                 s -> {
-                    if (keyBinding.wasPressed()) {
-                        GuiBase.openGui(GuiConfigHandler.getInstance().getDefaultScreen());
-                    }
                     // Allow for delayed tasks to be added
                     SyncTaskQueue.getInstance().update(s.inGameHud.getTicks());
                     // Make sure we're not in the sleeping screen while awake

@@ -9,6 +9,9 @@ package io.github.darkkronicle.advancedchatcore;
 
 import fi.dy.masa.malilib.config.ConfigManager;
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.config.options.ConfigHotkey;
+import fi.dy.masa.malilib.event.InputEventHandler;
+import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.interfaces.IInitializationHandler;
 import io.github.darkkronicle.advancedchatcore.chat.ChatHistoryProcessor;
 import io.github.darkkronicle.advancedchatcore.chat.ChatScreenSectionHolder;
@@ -16,16 +19,18 @@ import io.github.darkkronicle.advancedchatcore.chat.DefaultChatSuggestor;
 import io.github.darkkronicle.advancedchatcore.chat.MessageDispatcher;
 import io.github.darkkronicle.advancedchatcore.config.CommandsHandler;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
+import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfig;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
+import io.github.darkkronicle.advancedchatcore.config.gui.TabSupplier;
 import io.github.darkkronicle.advancedchatcore.finder.CustomFinder;
 import io.github.darkkronicle.advancedchatcore.finder.custom.ProfanityFinder;
+import io.github.darkkronicle.advancedchatcore.hotkeys.InputHandler;
 import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.ProfanityUtil;
 import io.github.darkkronicle.advancedchatcore.util.StringMatch;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -96,7 +101,30 @@ public class InitHandler implements IInitializationHandler {
                         "advancedchatcore.findtype.custom.info.profanity");
 
         CommandsHandler.getInstance().setup();
-
         ModuleHandler.getInstance().load();
+        InputHandler.getInstance().addDisplayName("core_general", "advancedchatcore.config.tab.hotkeysgeneral");
+        InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.OPEN_SETTINGS.config, (action, key) -> {
+            GuiBase.openGui(new GuiConfig());
+            return true;
+        });
+
+        InputEventHandler.getKeybindManager().registerKeybindProvider(InputHandler.getInstance());
+        InputEventHandler.getInputManager().registerKeyboardInputHandler(InputHandler.getInstance());
+        InputEventHandler.getInputManager().registerMouseInputHandler(InputHandler.getInstance());
+
+        List<TabSupplier> children = new ArrayList<>();
+
+        for (Map.Entry<String, List<ConfigHotkey>> hotkeys : InputHandler.getInstance().getHotkeys().entrySet()) {
+            List<IConfigBase> configs = hotkeys.getValue().stream().map(hotkey -> (IConfigBase) hotkey).toList();
+            children.add(GuiConfigHandler.wrapOptions(hotkeys.getKey(), InputHandler.getInstance().getDisplayName(hotkeys.getKey()), configs));
+        }
+
+        GuiConfigHandler.getInstance().addTab(
+                GuiConfigHandler.children(
+                        "hotkeys",
+                        "advancedchat.tab.hotkeys",
+                        children.toArray(new TabSupplier[0])
+                )
+        );
     }
 }

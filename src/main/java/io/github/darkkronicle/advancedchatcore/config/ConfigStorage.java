@@ -16,10 +16,9 @@ import fi.dy.masa.malilib.MaLiLib;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.config.IConfigHandler;
 import fi.dy.masa.malilib.config.IConfigOptionListEntry;
-import fi.dy.masa.malilib.config.options.ConfigBoolean;
-import fi.dy.masa.malilib.config.options.ConfigDouble;
-import fi.dy.masa.malilib.config.options.ConfigInteger;
-import fi.dy.masa.malilib.config.options.ConfigString;
+import fi.dy.masa.malilib.config.options.*;
+import fi.dy.masa.malilib.hotkeys.KeyAction;
+import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.StringUtils;
@@ -190,6 +189,25 @@ public class ConfigStorage implements IConfigHandler {
                 ImmutableList.of(PERSISTENT_TEXT, COLOR, MORE_TEXT);
     }
 
+    public static class Hotkeys {
+        public static final String NAME = "hotkeys";
+
+        public static String translate(String key) {
+            return StringUtils.translate("advancedchat.config.hotkeys." + key);
+        }
+
+        public static final SaveableConfig<ConfigHotkey> OPEN_SETTINGS = SaveableConfig.fromConfig("openSettings",
+                new ConfigHotkey(translate("opensettings"), "", KeybindSettings.create(
+                        KeybindSettings.Context.ANY, KeyAction.PRESS, false, true, false, true
+                ), translate("info.opensettings")));
+
+        public static final ImmutableList<ConfigHotkey> HOTKEYS =
+                ImmutableList.of(OPEN_SETTINGS.config);
+
+        public static final ImmutableList<SaveableConfig<? extends IConfigBase>> OPTIONS =
+                ImmutableList.of(OPEN_SETTINGS);
+    }
+
     public static void loadFromFile() {
         File v3 = FileUtils.getConfigDirectory().toPath().resolve(CONFIG_FILE_NAME).toFile();
         File configFile;
@@ -218,6 +236,7 @@ public class ConfigStorage implements IConfigHandler {
 
                 readOptions(root, General.NAME, General.OPTIONS);
                 readOptions(root, ChatScreen.NAME, ChatScreen.OPTIONS);
+                readOptions(root, Hotkeys.NAME, Hotkeys.OPTIONS);
 
                 int version = JsonUtils.getIntegerOrDefault(root, "configVersion", 0);
             }
@@ -266,6 +285,7 @@ public class ConfigStorage implements IConfigHandler {
 
             writeOptions(root, General.NAME, General.OPTIONS);
             writeOptions(root, ChatScreen.NAME, ChatScreen.OPTIONS);
+            writeOptions(root, Hotkeys.NAME, Hotkeys.OPTIONS);
 
             root.add("config_version", new JsonPrimitive(CONFIG_VERSION));
 

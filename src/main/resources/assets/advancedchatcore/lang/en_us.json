@@ -8,6 +8,11 @@
   "advancedchatcore.tab.chatscreen": "§bChat Screen",
   "advancedchat.tab.advancedchatcore": "Core",
 
+  "advancedchat.tab.hotkeys": "§cHotkeys",
+  "advancedchatcore.config.tab.hotkeysgeneral": "§bCore",
+  "advancedchat.config.hotkeys.opensettings": "Open Settings GUI",
+  "advancedchat.config.hotkeys.info.opensettings": "Opens the settings GUI",
+
   "advancedchat.config.general.timeformat": "Time Format",
   "advancedchat.config.general.info.timeformat": "How time is displayed if §6Show Time§r is enabled for both the §9Chat HUD§r and the §aChat Log§r. \nSee the §6SimpleDateFormat§r class for the format ",
   "advancedchat.config.general.timetextformat": "Complete Time Format",
