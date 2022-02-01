@@ -1,11 +1,11 @@
 ---
 layout: default
-title: AdvancedChat-Modules Overview
+title: AdvancedChat Modules Overview
 nav_order: 1
 has_children: true
 ---
 
-# AdvancedChat-Modules Overview
+# AdvancedChat Modules Overview
 <details open markdown="block">
   <summary>
     Table of contents
