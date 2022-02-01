@@ -5,7 +5,7 @@ nav_order: 0
 has_children: false
 ---
 
-# AdvancedChatCore
+# AdvancedChat
 
 Chat, but **epic**.
 

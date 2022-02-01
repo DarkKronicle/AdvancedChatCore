@@ -1,8 +1,8 @@
 ---
 layout: default
-title: ACC-Modules
+title: Overview
+parent: ACC Modules
 nav_order: 1
-has_children: true
 ---
 
 # ACC-Modules
@@ -167,5 +167,5 @@ Chat Tabs have the following options to configure as well as the option to expor
 
 ---
 ### AdvancedChatMacros (**Planned**)
-{:toc}
+
 - Be able to execute commands based on filters and keybinds.
