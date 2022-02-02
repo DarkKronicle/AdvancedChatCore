@@ -33,6 +33,8 @@ Once the mod is installed a <u>**Core**</u> tab will be added to the AdvancedCha
 - Update Stacked Messages - Whether or not stacked messages are shown again as new messages.  
 - Message Owner Regex - The regex used to detect the head used for Chat Heads (No touchy unless you know your jazz.)  
 - Filter Profanity - Whether or not to filter out swear words and replace them with asterixis (you can use your own swear word list in the swear_words.txt in the advancedchat config folder.)  
+- Profanity Threshold - The minimal level of severity before AdvancedChat filters a word. Ranges from 0 to 3. 1 includes common swear words, and progressively gets more explicit.
+- Disable Partial Matches - Whether or not the profanity filter does not match words that contain swears, such as grass.
 
 ***Chat Screen Tab***
 - Persistent Text - Whether or not messages that are typed but not sent are kept in the chat box.  
@@ -77,6 +79,7 @@ When a new filter is configured you are given the following options;
 	- **All**, Passes all text through the filter regardless of the string to find.
 - Text Color - The color of the replaced text when the filter is triggered, again using HEX+Alpha channels. (This setting gets overridden by legacy formatting codes)
 - Replace Text Color? - Whether or not the custom text color should be used when the filter is triggered.
+- Replace Background Color? - Whether or not the background should be replaced when the filter is triggered.
 - Replace to - The string that replaces what is set for replace type %Match% is replaced by whatever triggered the filter.
 - Replace Type - How the filter should replace matched messages. Currently available are 
 	- **None** - Does nothing, 		
@@ -87,12 +90,19 @@ When a new filter is configured you are given the following options;
 	- **Rainbow** - Converts the entire message to rainbow.
 	- **Roman Numeral** - Parses any numbers and converts them to roman numerals.
 	- **Reverse** - Reverses the entire message.  
-	
-As well as 3 additional buttons; Back, takes you to the previous page. Export, used to wrap all your settings into a neat file that can be given to others to import or just as a backup for yourself. The last button is Message Processor Settings which when clicked gives the following options that can either be turned on or off;
+- Test Input - Is a text entry box where you can test your created filter with the included listed information of the following outputs;   
+**Input Message:** the message input to test.   
+**Matched:** True/False on the message matching the filter.  
+**Output Message:** the input message with the filter applied.
+
+Once the filter has been made you have the option to configure it again, turn it off/on or delete it from the **Chat Filters Tab**  
+
+As well as 3 additional buttons; Back, takes you to the previous page. Export, used to wrap all your settings into a neat file that can be given to others to import or just as a backup for yourself. The last button is Message Processor Settings which when clicked gives the following options that can either be turned on, off, or configured;
 - Forward to Chat, whether or not the messages caught by the filter are sent to the Chat Box.
 - Action Bar, whether or not the messages caught by the filter are sent to the action bar.
 - Sound, whether or not the messages caught by the filter play a sound. This also has a configure option that you can change the sound volume, sound pitch, and the notifying sound used.
 - Narrator, whether or not the narrator say the messages caught by the filter. This also has a configure button that can be used to give the option to alter what is said by the narrator when the filter is triggered.
+- Konstruct, Runs a construct script. More info on the wiki.
 
 ---
 ![ACC-ChatBoxIcon](./assets/images/ACC-ChatBox_Icon.png)
