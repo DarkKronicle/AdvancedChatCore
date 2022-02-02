@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Overview
 parent: ACC Modules
+title: AdvancedChat Modules Overview
 nav_order: 1
 ---
 
-# ACC-Modules
+# AdvancedChat Modules Overview
 <details open markdown="block">
   <summary>
     Table of contents
@@ -16,7 +16,7 @@ nav_order: 1
 </details>
 
 ---
-
+![AdvancedChatCoreIcon](./assets/images/AdvancedChatCore_Icon.png)
 ### AdvancedChatCore
 {:toc}
 - The base mod and API
@@ -24,20 +24,21 @@ nav_order: 1
 ***General Tab***  
 - Time Format - SimpleDateFormat, 
 - Complete Time Format - How the text surrounding the time is formatted, 
-- Time Color - Color of the time using HEX+Alpha (You can use https://www.hexcolortool.com/ to make your life easy.) 
+- Time Color - Color of the time using HEX+Alpha (You can use [this](https://www.hexcolortool.com/) website to make your life easy.) 
 - Show time - Whether or not to show time next to chat messages.  
 - Clear Chat Messages on Disconnect - Whether or not to chat messages are kept when quitting servers or worlds. All messages are cleared regardless of this setting if you quit the game.  
 - Stack Duplicate Messages - How many previous lines are checked for stacking duplicate messages (set to zero to disable.)  
 - Update Stacked Messages - Whether or not stacked messages are shown again as new messages.  
 - Message Owner Regex - The regex used to detect the head used for Chat Heads (No touchy unless you know your jazz.)  
-- Filter Profanity - Whether or not to filter out swear words and replace them with astrixs (you can use your own swear word list in the swear_words.txt in the advancedchat config folder.)  
+- Filter Profanity - Whether or not to filter out swear words and replace them with asterixis (you can use your own swear word list in the swear_words.txt in the advancedchat config folder.)  
 
 ***Chat Screen Tab***
-- Presistent Text - Whether or not messages that are typed but not sent are kept in the chat box.  
+- Persistent Text - Whether or not messages that are typed but not sent are kept in the chat box.  
 - Chat Color - Changes the color of the chat box and buttons nearby using HEX+Alpha values.  
 - Extended Text Limit - Whether or not messages that are over the 256 limit are broken into multiple chat messages.
 
 ---
+![ACC-ChatLogIcon](./assets/images/ACC-ChatLog_Icon.png)
 ### AdvancedChatLog
 {:toc}
 - View and sort through mass amounts of previous messages.
@@ -48,6 +49,7 @@ nav_order: 1
 - Clean Saved Lines - Removes some styling information for the saved text such as click events and hover events reducing file size.
 
 ---
+![ACC-ChatFiltersIcon](./assets/images/ACC-ChatFilters_Icon.png)
 ### AdvancedChatFilters
 {:toc}
 - React to keywords in messages and act on them.
@@ -60,17 +62,17 @@ By default has 3 options; Import Filters, Advanced Filters and New Filter.
 
 When a new filter is configured you are given the following options;
 - Filter Name - What the filter shows up as in the config
-- Ignore Colors - Whether or not this filter will acount for the color of the matched string.
+- Ignore Colors - Whether or not this filter will account for the color of the matched string.
 - String to Find - The string that will be searched and filtered
-- Filter Type - How matches will be found. Avaliable options;
+- Filter Type - How matches will be found. Available options;
 	- **Literal**, exact match. 
 	- **Upper-Lower**, literal but not case-sensitive.
 	- **RegEx**, Parses the strings as Regular Expression.
 	- **All**, Passes all text through the filter regardless of the string to find.
 - Text Color - The color of the replaced text when the filter is triggered, again using HEX+Alpha channels. (This setting gets overridden by legacy formatting codes)
-- Replace Text Color? - Whether or not the cutom text color should be used when the filter is triggered.
+- Replace Text Color? - Whether or not the custom text color should be used when the filter is triggered.
 - Replace to - The string that replaces what is set for replace type %Match% is replaced by whatever triggered the filter.
-- Replace Type - How the filter should replace matched messages. Currently avaliable are 
+- Replace Type - How the filter should replace matched messages. Currently available are 
 	- **None** - Does nothing, 		
 	- **Children** - Sends the message to be modified by child friendly filters.
 	- **Full Message** - Replaces the whole message with the replace to string.
@@ -81,23 +83,24 @@ When a new filter is configured you are given the following options;
 	- **Reverse** - Reverses the entire message.  
 	
 As well as 3 additional buttons; Back, takes you to the previous page. Export, used to wrap all your settings into a neat file that can be given to others to import or just as a backup for yourself. The last button is Message Processor Settings which when clicked gives the following options that can either be turned on or off;
-- Forward to Chat, whether or not the messages caught byt the filter are sent to the Chat Box.
+- Forward to Chat, whether or not the messages caught by the filter are sent to the Chat Box.
 - Action Bar, whether or not the messages caught by the filter are sent to the action bar.
 - Sound, whether or not the messages caught by the filter play a sound. This also has a configure option that you can change the sound volume, sound pitch, and the notifying sound used.
-- Narrator, whether or not the narrotor say the messages caught by the filter. This also has a configure button that can be used to give the option to alter what is said by the narrator when the filter is triggered.
+- Narrator, whether or not the narrator say the messages caught by the filter. This also has a configure button that can be used to give the option to alter what is said by the narrator when the filter is triggered.
 
 ---
+![ACC-ChatBoxIcon](./assets/images/ACC-ChatBox_Icon.png)
 ### AdvancedChatBox
 {:toc}
 - Complex writing of messages and formatting in the text box.</b>
 
 ***Chat Suggestor Tab***  
-Has two avaliable buttons, Configure Suggestors, and Configure Formatters, as well as the following;
+Has two available buttons, Configure Suggestors, and Configure Formatters, as well as the following;
 - Highlight Color - What color selected suggestions should be using Hex+Alpha values.
 - Non-Highlighted Color - What color non-selected suggestions should be using Hex+Alpha values.
 - Background Color - What color the background of the Chat Suggestor should be using Hex+Alpha values.
 - Number of Suggestions - The maximum number of suggestions that the Chat Suggestor should display at once.
-- Remove Namespace - Whether or not the namespace should be omitted from the Chat Suggestor. (The namespace is the part of the ID that preceeds the colon and includes the colon, such as 'minecraft:' in minecraft:stone)
+- Remove Namespace - Whether or not the namespace should be omitted from the Chat Suggestor. (The namespace is the part of the ID that precedes the colon and includes the colon, such as 'minecraft:' in minecraft:stone)
 - Prune Player Suggestions - Whether or not non-real players are removed from Chat Suggestor. (Such as the fake players used in BungeeTabListPlus)
 - Available Suggestion Color - What color custom chat suggestors will show up as (Hex+Alpha values.)
 
@@ -121,6 +124,7 @@ For the two buttons, the options are as follows;
 - Spell Checker Hover Format - The format of the text that appears when you hover your mouse over a suggested spelling change.
 
 ---
+![ACC-ChatHUDIcon](./assets/images/ACC-ChatHUD_Icon.png)
 ### AdvancedChatHUD
 {:toc}
 - Create chat tabs and a good looking HUD.
@@ -154,8 +158,8 @@ Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a C
 - Stored Lines - The maximum amount of lines stored in Chat HUD (Excessively large values may cause memory errors)
 
 ***Chat Tabs Tab***  
-By default there is already the Main Chat Tab listed. Other than that there are two buttons avaliable. Import Tab, and New Chat Tab.
-The import tab just like with the other modules is used to import an already made Chat Tab. The New Chat Tab provides a new chat tabe to configure or delete.
+By default there is already the Main Chat Tab listed. Other than that there are two buttons available. Import Tab, and New Chat Tab.
+The import tab just like with the other modules is used to import an already made Chat Tab. The New Chat Tab provides a new chat tab to configure or delete.
 Chat Tabs have the following options to configure as well as the option to export;  
 - Tab Name - What the tab shows up as in the config.
 - Starting Message - What text shows up when the tab is focused.
@@ -166,6 +170,10 @@ Chat Tabs have the following options to configure as well as the option to expor
 - Show Unread Messages - Whether or not the number of unread messages are displayed for the chat tab.
 
 ---
+![ACC-ChatMacrosIcon](./assets/images/ACC-ChatMacros_Icon.png)  
+<!--Why is it that my art can never please you father Kron? Is it because its made of dried macaroni noodles and crayons and not some fancy art program like Xylo :sob: -->
 ### AdvancedChatMacros (**Planned**)
 
 - Be able to execute commands based on filters and keybinds.
+
+<!--This documentation was written by Nomad on January 30th 2022-->
