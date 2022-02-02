@@ -16,7 +16,7 @@ has_children: true
 </details>
 
 ---
-![AdvancedChatCoreIcon](./modules/assets/images/AdvancedChatCore_Icon.png)
+![AdvancedChatCoreIcon](./assets/images/AdvancedChatCore_Icon.png)
 ### AdvancedChatCore
 {:toc}
 - The base mod and API
@@ -40,7 +40,7 @@ Once the mod is installed a <u>**Core**</u> tab will be added to the AdvancedCha
 - Extended Text Limit - Whether or not messages that are over the 256 limit are broken into multiple chat messages.
 
 ---
-![ACC-ChatLogIcon](./modules/assets/images/ACC-ChatLog_Icon.png)
+![ACC-ChatLogIcon](./assets/images/ACC-ChatLog_Icon.png)
 ### AdvancedChatLog
 {:toc}
 - View and sort through mass amounts of previous messages.
@@ -53,7 +53,7 @@ Once the mod is installed a <u>**Chat Log**</u> tab will be added to the Advance
 - Clean Saved Lines - Removes some styling information for the saved text such as click events and hover events reducing file size.
 
 ---
-![ACC-ChatFiltersIcon](./modules/assets/images/ACC-ChatFilters_Icon.png)
+![ACC-ChatFiltersIcon](./assets/images/ACC-ChatFilters_Icon.png)
 ### AdvancedChatFilters
 {:toc}
 - React to keywords in messages and act on them.
@@ -95,7 +95,7 @@ As well as 3 additional buttons; Back, takes you to the previous page. Export, u
 - Narrator, whether or not the narrator say the messages caught by the filter. This also has a configure button that can be used to give the option to alter what is said by the narrator when the filter is triggered.
 
 ---
-![ACC-ChatBoxIcon](./modules/assets/images/ACC-ChatBox_Icon.png)
+![ACC-ChatBoxIcon](./assets/images/ACC-ChatBox_Icon.png)
 ### AdvancedChatBox
 {:toc}
 - Complex writing of messages and formatting in the text box.</b>
@@ -132,7 +132,7 @@ For the two buttons, the options are as follows;
 - Spell Checker Hover Format - The format of the text that appears when you hover your mouse over a suggested spelling change.
 
 ---
-![ACC-ChatHUDIcon](./modules/assets/images/ACC-ChatHUD_Icon.png)
+![ACC-ChatHUDIcon](./assets/images/ACC-ChatHUD_Icon.png)
 ### AdvancedChatHUD
 {:toc}
 - Create chat tabs and a good looking Chat.
@@ -192,7 +192,7 @@ Chat Tabs have the following options to configure as well as the option to expor
 - Show Unread Messages - Whether or not the number of unread messages are displayed for the chat tab.
 
 ---
-![ACC-ChatMacrosIcon](./modules/assets/images/ACC-ChatMacros_Icon.png)  
+![ACC-ChatMacrosIcon](./assets/images/ACC-ChatMacros_Icon.png)  
 *Icon is writers rendition that is subject to change once a real icon is made*
 <!--Why is it that my art can never please you father Kron? Is it because its made of dried macaroni noodles and crayons and not some fancy art program like Xylo :sob: -->
 ### AdvancedChatMacros (**Planned**)
