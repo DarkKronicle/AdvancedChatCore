@@ -66,6 +66,7 @@ Once the mod is installed a <u>**Chat Filters**</u> tab will be added to the Adv
 By default has 3 options; Import Filters, Advanced Filters and New Filter.  
 - Import Filters - Allows you to import already made filters either by yourself or others.
 - Advanced Filters - Before activating and clicking the button you will be greeted by a message that gives fair warning on being careful with what you do and also instructing you on how to turn on Advanced Filters. 
+Once you enable it when clicking the button you will be given two buttons, Back and open directory. Opening the directory will bring you to the advancechat filters folder in your .Minecraft directory.
 - New Filter - Adds a filter that can either be turned on or off, Deleted or configured.
 
 When a new filter is configured you are given the following options;
