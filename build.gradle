@@ -59,7 +59,7 @@ dependencies {
 	include "io.github.maowimpl:owo:${project.owo_version}"
 
 	implementation'com.opencsv:opencsv:5.5.2'
-	include 'com.opencsv:opencsv:5.5.2'
+//	include 'com.opencsv:opencsv:5.5.2'
 
 }
 
