@@ -1,8 +1,8 @@
 ---
 layout: default
+parent: ACC Modules
 title: AdvancedChat Modules Overview
 nav_order: 1
-has_children: true
 ---
 
 # AdvancedChat Modules Overview
@@ -196,7 +196,7 @@ Chat Tabs have the following options to configure as well as the option to expor
 *Icon is writers rendition that is subject to change once a real icon is made*
 <!--Why is it that my art can never please you father Kron? Is it because its made of dried macaroni noodles and crayons and not some fancy art program like Xylo :sob: -->
 ### AdvancedChatMacros (**Planned**)
-{:toc}
+
 - Be able to execute commands based on filters and keybinds.
 
 <!--This documentation was written by Nomad on January 30th 2022-->

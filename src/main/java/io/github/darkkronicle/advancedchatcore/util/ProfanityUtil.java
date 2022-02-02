@@ -7,9 +7,6 @@
  */
 package io.github.darkkronicle.advancedchatcore.util;
 
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-import com.opencsv.exceptions.CsvValidationException;
 import fi.dy.masa.malilib.util.FileUtils;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 
@@ -20,10 +17,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.Getter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.apache.logging.log4j.Level;
 
 /**
@@ -61,14 +60,13 @@ public class ProfanityUtil {
             } else {
                 fileReader = new FileReader(file);
             }
-            CSVReader csv = new CSVReaderBuilder(fileReader).withSkipLines(1).build();
+            CSVParser csv = new CSVParser(fileReader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase());
             int counter = 0;
-            String[] nextLine;
-            while((nextLine = csv.readNext()) != null) {
+            for (CSVRecord record : csv) {
                 counter++;
                 try {
-                    String word = nextLine[0];
-                    float severity = Float.parseFloat(nextLine[7]);
+                    String word = record.get("text");
+                    float severity = Float.parseFloat(record.get("severity_rating"));
 
                     if (word.length() > largestWordLength) {
                         largestWordLength = word.length();
@@ -85,7 +83,7 @@ public class ProfanityUtil {
             }
             AdvancedChatCore.LOGGER.log(
                     Level.INFO, "Loaded " + counter + " words to profanity filter.");
-        } catch (URISyntaxException | IOException | CsvValidationException e) {
+        } catch (URISyntaxException | IOException  e) {
             AdvancedChatCore.LOGGER.log(Level.ERROR, "Error loading swear_words.csv", e);
         }
     }
