@@ -154,6 +154,8 @@ Once the mod is installed a <u>**HUD**</u> tab will be added to the AdvancedChat
 ***Chat HUD Tab***  
 - Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a Chat Window. (Vanilla Chat HUD can use Chat Tabs if you click on it and then change the tab)  
 - Display Chat Heads - Whether or not the head of the message sender displays besides their message.
+- Always Show Tab Buttons - Whether or not to constantly show the tab buttons. 
+- Right Tab Buttons - Whether or not to push the tab buttons to the right side of the screen.  
 - Default Chat Width - The width of the Chat HUD (Overrides vanilla chat width)
 - Default Chat Height - The height of the Chat HUD (Overrides vanilla chat height)
 - Default Chat X - The x-coordinate of the chat box, starting at the bottom-left side of the screen.
