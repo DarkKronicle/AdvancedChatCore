@@ -16,10 +16,12 @@ has_children: true
 </details>
 
 ---
-![AdvancedChatCoreIcon](./assets/images/AdvancedChatCore_Icon.png)
+![AdvancedChatCoreIcon](./modules/assets/images/AdvancedChatCore_Icon.png)
 ### AdvancedChatCore
 {:toc}
 - The base mod and API
+
+Once the mod is installed a <u>**Core**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***General Tab***  
 - Time Format - SimpleDateFormat, 
@@ -38,23 +40,27 @@ has_children: true
 - Extended Text Limit - Whether or not messages that are over the 256 limit are broken into multiple chat messages.
 
 ---
-![ACC-ChatLogIcon](./assets/images/ACC-ChatLog_Icon.png)
+![ACC-ChatLogIcon](./modules/assets/images/ACC-ChatLog_Icon.png)
 ### AdvancedChatLog
 {:toc}
 - View and sort through mass amounts of previous messages.
 
-***Chat Filters Tab***
+Once the mod is installed a <u>**Chat Log**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
+  
+***Chat Log Tab***  
 - Stored Lines - The maximum amount of lines stored in the Chat Log. (Excessively large values may cause memory errors)  
 - Saved Lines - Stores a specific amount of lines into a file and loads it when the game starts.  
 - Clean Saved Lines - Removes some styling information for the saved text such as click events and hover events reducing file size.
 
 ---
-![ACC-ChatFiltersIcon](./assets/images/ACC-ChatFilters_Icon.png)
+![ACC-ChatFiltersIcon](./modules/assets/images/ACC-ChatFilters_Icon.png)
 ### AdvancedChatFilters
 {:toc}
 - React to keywords in messages and act on them.
 
-***Chat Filters Tab***  
+Once the mod is installed a <u>**Chat Filters**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+
+***Chat Filter Buttons***  
 By default has 3 options; Import Filters, Advanced Filters and New Filter.  
 - Import Filters - Allows you to import already made filters either by yourself or others.
 - Advanced Filters - Before activating and clicking the button you will be greeted by a message that gives fair warning on being careful with what you do and also instructing you on how to turn on Advanced Filters. 
@@ -89,12 +95,14 @@ As well as 3 additional buttons; Back, takes you to the previous page. Export, u
 - Narrator, whether or not the narrator say the messages caught by the filter. This also has a configure button that can be used to give the option to alter what is said by the narrator when the filter is triggered.
 
 ---
-![ACC-ChatBoxIcon](./assets/images/ACC-ChatBox_Icon.png)
+![ACC-ChatBoxIcon](./modules/assets/images/ACC-ChatBox_Icon.png)
 ### AdvancedChatBox
 {:toc}
 - Complex writing of messages and formatting in the text box.</b>
 
-***Chat Suggestor Tab***  
+Once the mod is installed a <u>**Box**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+
+***General Tab***  
 Has two available buttons, Configure Suggestors, and Configure Formatters, as well as the following;
 - Highlight Color - What color selected suggestions should be using Hex+Alpha values.
 - Non-Highlighted Color - What color non-selected suggestions should be using Hex+Alpha values.
@@ -124,13 +132,27 @@ For the two buttons, the options are as follows;
 - Spell Checker Hover Format - The format of the text that appears when you hover your mouse over a suggested spelling change.
 
 ---
-![ACC-ChatHUDIcon](./assets/images/ACC-ChatHUD_Icon.png)
+![ACC-ChatHUDIcon](./modules/assets/images/ACC-ChatHUD_Icon.png)
 ### AdvancedChatHUD
 {:toc}
-- Create chat tabs and a good looking HUD.
+- Create chat tabs and a good looking Chat.
+
+Once the mod is installed a <u>**HUD**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following tabs as well buttons outside of the AdvancedChat config menu when opening chat;  
+
+**Chat Buttons** 
+- Exclamation Mark (Location: Chat window) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
+	- Exclamation Mark - Vanilla default.  
+	- Thumbtack - Always focused. 
+	- Square - Never focus.
+- Nested 90° Lines (Location: Chat window) - For resizing the current chatbox.  
+- X (Location: Chat window)- This will remove the respective AdvancedChat Window. 
+- Plus Sign (Location: Relative to listed tabs above player text entry)- Will create a new chat window for the currently selected Tab.
+- Trash Can (Location: Relative to listed tabs above player text entry)- This will remove all currently open AdvancedChat boxes. 
+- Bars (Location: Bottom right)- A chat page with the option to filter at the top with a **Filter Type** button that cycles the options listed under AdvancedChatFilters>Chat Filters Tab>Filter Type.   
+- Cog Wheel (Location: Bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.  
 
 ***Chat HUD Tab***  
-Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a Chat Window. (Vanilla Chat HUD can use Chat Tabs if you click on it and then change the tab)  
+- Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a Chat Window. (Vanilla Chat HUD can use Chat Tabs if you click on it and then change the tab)  
 - Display Chat Heads - Whether or not the head of the message sender displays besides their message.
 - Default Chat Width - The width of the Chat HUD (Overrides vanilla chat width)
 - Default Chat Height - The height of the Chat HUD (Overrides vanilla chat height)
@@ -150,7 +172,7 @@ Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a C
 - Fade Speed - How quickly a message takes to fade-out.
 - Time Until Fade - The number of ticks before newly received messages begin to disappear.
 - Fade Style - The easing function used for the fade animation. (Vanilla uses linear easing)
--  Empty Text Color - The color of text without formatting using HEX+Alpha values.
+- Empty Text Color - The color of text without formatting using HEX+Alpha values.
 - Background Line Style - How the background of the unfocused Chat HUD is fitted to the messages. 
 	- **Full** - Fits the background width of the Chat HUD. 
 	- **Compact** - Fits the background to the length of each respective line.
@@ -170,10 +192,12 @@ Chat Tabs have the following options to configure as well as the option to expor
 - Show Unread Messages - Whether or not the number of unread messages are displayed for the chat tab.
 
 ---
-![ACC-ChatMacrosIcon](./assets/images/ACC-ChatMacros_Icon.png)  
+![ACC-ChatMacrosIcon](./modules/assets/images/ACC-ChatMacros_Icon.png)  
+*Icon is writers rendition that is subject to change once a real icon is made*
 <!--Why is it that my art can never please you father Kron? Is it because its made of dried macaroni noodles and crayons and not some fancy art program like Xylo :sob: -->
 ### AdvancedChatMacros (**Planned**)
 {:toc}
 - Be able to execute commands based on filters and keybinds.
 
 <!--This documentation was written by Nomad on January 30th 2022-->
+<!--Thanks to Fury for fixing the file pathing issues when pushing to the wiki page-->
