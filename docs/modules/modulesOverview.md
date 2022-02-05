@@ -21,7 +21,7 @@ has_children: true
 {:toc}
 - The base mod and API
 
-Once the mod is installed a <u>**Core**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+Once the mod is installed a **<u>Core</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***General Tab***  
 - Time Format - SimpleDateFormat, 
@@ -57,7 +57,7 @@ Once the mod is installed a <u>**Core**</u> tab will be added to the AdvancedCha
 {:toc}
 - View and sort through mass amounts of previous messages.
 
-Once the mod is installed a <u>**Chat Log**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
+Once the mod is installed a **<u>Chat Log</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
   
 ***Chat Log Tab***  
 - Stored Lines - The maximum amount of lines stored in the Chat Log. (Excessively large values may cause memory errors)  
@@ -70,7 +70,7 @@ Once the mod is installed a <u>**Chat Log**</u> tab will be added to the Advance
 {:toc}
 - React to keywords in messages and act on them.
 
-Once the mod is installed a <u>**Chat Filters**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+Once the mod is installed a **<u>Chat Filters</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***Chat Filter Buttons***  
 By default has 3 options; Import Filters, Advanced Filters and New Filter.  
@@ -121,7 +121,7 @@ As well as 3 additional buttons; Back, takes you to the previous page. Export, u
 {:toc}
 - Complex writing of messages and formatting in the text box.</b>
 
-Once the mod is installed a <u>**Box**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+Once the mod is installed a **<u>Box</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***General Tab***  
 Has two available buttons, Configure Suggestors, and Configure Formatters, as well as the following;
@@ -158,7 +158,7 @@ For the two buttons, the options are as follows;
 {:toc}
 - Create chat tabs and a good looking Chat.
 
-Once the mod is installed a <u>**HUD**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following tabs as well buttons outside of the AdvancedChat config menu when opening chat;  
+Once the mod is installed a **<u>HUD</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following tabs as well buttons outside of the AdvancedChat config menu when opening chat;  
 
 **Chat Buttons** 
 - Exclamation Mark (Location: Chat window) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
