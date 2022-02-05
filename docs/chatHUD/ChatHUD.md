@@ -33,6 +33,7 @@ The information on this page is for the features of the ChatHUD module of Advanc
 The following section will go over all the available tabs and settings in each tab that you can modify. This information can also be found [here](https://darkkronicle.github.io/AdvancedChatCore/modules/modulesOverview.html),
 in the AdvancedChat-Modules Overview section. As well as overviews for all other modules available as of January 31st 2022.  
 
+<u>ACC Page Guide</u>  
 ![ACC Page Help Map](./assets/images/ACC_Page.PNG)  
 
 **In Game Buttons**  
@@ -52,7 +53,8 @@ There is also an added right click context menu when your chat is open that has 
 - Remove All Windows - Removes all windows currently displayed.
 - Clear All Messages - Clears all messages from the chatbox.  
 - Duplicate Window - Duplicates the current window.
-  
+
+<u> Right Click Context Menu</u>  
 ![Right Click Context Menu](./assets/images/RightClickContextMenu.png)
 
 ***Chat HUD Tab***  
@@ -125,6 +127,7 @@ Pressing your chat key to open the chat, the following buttons will be available
 	- **All**, Passes all text through the filter regardless of the string to find.
 - <u>Cog Wheel</u> (bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.
 
+<u>Default View</u>
 ![Chat Buttons Image](./assets/images/ChatButtons.png)
 
 ***Chat Information Modifications:*** Any settings in the ChatHUD module that will modify the information in the Chatbox.
@@ -134,7 +137,8 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Right Tab Buttons</u> - Whether or not to push the tab buttons to the right side of the screen to make for a cleaner look.  
 
 ![Chat Heads Display Image](./assets/images/ChatHeadsDisplay.png)
-<!--![Chat Tab Buttons Display Image](./assets/images/ChatTabButtonsDisplay.png) Hasnt been added due to the function not working for me-->  
+<!--![Chat Tab Buttons Display Image](./assets/images/ChatTabButtonsDisplay.png) Hasnt been added due to the function not working for me-->
+<u>Chat Tab Buttons shifted Right</u>
 ![Chat Right Tab Buttons Image](./assets/images/ChatRightSideTabBtn.png)
 
 ***Chat Text Modifications:*** Any settings in the ChatHUD module that will modify the text within the Chatbox. 
@@ -182,7 +186,9 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Show Unread Messages</u> - This determines whether or not there is a counter on the tab of unread messages when you go back to the tab.
     
 <!--![Chat Naming Gif](./assets/images/ChatTabNaming.gif) Hasnt been added due to the Chat Tab reload button still displaying the advancedchathud.gui.button.reload-->
-![Chat Color Image](./assets/images/ChatColoring.png)
+<u>Chat Coloring</u>  
+![Chat Color Image](./assets/images/ChatColoring.png)  
+<u>Unread Messages</u>  
 ![Chat Unread Messages Image](./assets/images/ChatUnreadMsg.png)
 
 ---
