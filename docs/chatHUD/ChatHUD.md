@@ -17,7 +17,7 @@ has_children: true
 
 ---
 
-![ACC-ChatHUD Image](./chatHUD/assets/images/ACC-ChatHUD_Icon.png)
+![ACC-ChatHUD Image](./assets/images/ACC-ChatHUD_Icon.png)
 
 # AdvancedChatHUD
 {:toc}  
@@ -33,7 +33,7 @@ The information on this page is for the features of the ChatHUD module of Advanc
 The following section will go over all the available tabs and settings in each tab that you can modify. This information can also be found [here](https://darkkronicle.github.io/AdvancedChatCore/modules/modulesOverview.html),
 in the AdvancedChat-Modules Overview section. As well as overviews for all other modules available as of January 31st 2022.  
 
-![ACC_Page Help Map](./chatHUD/assets/images/ACC_Page.png)
+![ACC Page Help Map](./assets/images/ACCPage.png)  
 
 **In Game Buttons**  
 Pressing the chat key to open the chat, the following buttons will be available; 
@@ -53,7 +53,7 @@ There is also an added right click context menu when your chat is open that has 
 - Clear All Messages - Clears all messages from the chatbox.  
 - Duplicate Window - Duplicates the current window.
   
-![Right Click Context Menu](./chatHUD/assets/images/RightClickContextMenu.png)
+![Right Click Context Menu](./assets/images/RightClickContextMenu.png)
 
 ***Chat HUD Tab***  
 - Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a Chat Window. (Vanilla Chat HUD can use Chat Tabs if you click on it and then change the tab)  
@@ -85,7 +85,7 @@ There is also an added right click context menu when your chat is open that has 
 - Striped Messages - Whether or not the backgrounds of every other message is colored differently to create a striped effect.
 - Stored Lines - The maximum amount of lines stored in Chat HUD (Excessively large values may cause memory errors)
 
-`![Chat HUD Tab Image](./chatHUD/assets/images/ChatHUDTab.png) Hasnt been added due to Always Show Tab Buttons and Right Tab Buttons title still showing advancedchathud.config.general.XXX` 
+<!--![Chat HUD Tab Image](./assets/images/ChatHUDTab.png) Hasnt been added due to Always Show Tab Buttons and Right Tab Buttons title still showing advancedchathud.config.general.XXX--> 
 
 ***Chat Tabs Tab***  
 By default there is already the Main Chat Tab listed. Other than that there are two buttons available. Import Tab, and New Chat Tab.
@@ -99,7 +99,7 @@ Chat Tabs have the following options to configure as well as the option to expor
 - Background Color - The color of the background of the chat tab using HEX+Alpha values.
 - Show Unread Messages - Whether or not the number of unread messages are displayed for the chat tab.  
 
-`![Chat Tabs Tab Image](./chatHUD/assets/images/ChatTabsTab.png) Hasnt been added due to reload button still reading advancedchathud.gui.button.reload`  
+<!--![Chat Tabs Tab Image](./assets/images/ChatTabsTab.png) Hasnt been added due to reload button still reading advancedchathud.gui.button.reload-->  
 
 ---
 ## Settings Deep Dive
@@ -125,7 +125,7 @@ Pressing your chat key to open the chat, the following buttons will be available
 	- **All**, Passes all text through the filter regardless of the string to find.
 - <u>Cog Wheel</u> (bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.
 
-![Chat Buttons Image](./chatHUD/assets/images/ChatButtons.png)
+![Chat Buttons Image](./assets/images/ChatButtons.png)
 
 ***Chat Information Modifications:*** Any settings in the ChatHUD module that will modify the information in the Chatbox.
   
@@ -133,9 +133,9 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Always Show Tab Buttons</u> - Whether or not to constantly show the tab buttons that are located in your chat box. 
 - <u>Right Tab Buttons</u> - Whether or not to push the tab buttons to the right side of the screen to make for a cleaner look.  
 
-![Chat Heads Display Image](./chatHUD/assets/images/ChatHeadsDisplay.png)
-`![Chat Tab Buttons Display Image](./chatHUD/assets/images/ChatTabButtonsDisplay.png) Hasnt been added due to the function not working for me`  
-![Chat Right Tab Buttons Image](./ChatHUD/assets/images/ChatRightSideTabBtn.png)
+![Chat Heads Display Image](./assets/images/ChatHeadsDisplay.png)
+<!--![Chat Tab Buttons Display Image](./assets/images/ChatTabButtonsDisplay.png) Hasnt been added due to the function not working for me-->  
+![Chat Right Tab Buttons Image](./assets/images/ChatRightSideTabBtn.png)
 
 ***Chat Text Modifications:*** Any settings in the ChatHUD module that will modify the text within the Chatbox. 
   
@@ -154,8 +154,8 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Striped Messages</u> - This will basically highlight every other message to create a stripped effect to make chat easier to read.
 - <u>Stored Lines</u> - The amount of lines that can be stored in the chatbox to scroll back through. If you use a very large number it can cause memory issues.  
    
-`![Chat Padding UI Image](./chatHUD/assets/images/ChatPaddingUI.png) Hasnt been added due to the right padding not working`  
-![Chat Stripped Messages Image](./ChatHUD/assets/images/ChatStrippedMsg.png)
+<!--![Chat Padding UI Image](./assets/images/ChatPaddingUI.png) Hasnt been added due to the right padding not working--> 
+![Chat Stripped Messages Image](./assets/images/ChatStrippedMsg.png)
 
 ***Chat Box Modifications:*** Any settings in the ChatHUD module that will modify the Chatbox.  
  
@@ -167,9 +167,9 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Chat Visibility</u> - You can set how your chat box is seen with three available options. The default of **Vanilla**, **Always** where the chat is always shown, and **Focus Only** which will only show the chatbox when it is activated.  
 - <u>Background Line Style</u> - With this you can set the style of messages backgrounds where **Full** fits the background width of the chat, so a constant and consistent background. Where **compact** does it with each individual message.   
 
-`![Chat Height and Width UI Image](./chatHUD/assets/images/ChatHxW.png) Hasnt been added due to the Rendered Vanilla Chat not changing with settings applied`  
-`![Chat Position UI Image](./ChatHUD/assets/images/ChatPositionUI.png) Hasnt been added due to the Rendered Vanilla Chat not changing with settings applied`  
-`![Chat Background Line Style Image](./chatHUD/assets/images/ChatLineStyle.png) Hasnt been added due to the Rendered Vanilla Chat not changing with settings applied` 
+<!--![Chat Height and Width UI Image](./assets/images/ChatHxW.png) Hasnt been added due to the Rendered Vanilla Chat not changing with settings applied--> 
+<!--![Chat Position UI Image](./assets/images/ChatPositionUI.png) Hasnt been added due to the Rendered Vanilla Chat not changing with settings applied--> 
+<!--![Chat Background Line Style Image](./assets/images/ChatLineStyle.png) Hasnt been added due to the Rendered Vanilla Chat not changing with settings applied-->
 
 **Chat Tabs Modifications:** Any settings in the ChatHUD module that will modify the Chat Tab and corresponding Chatbox. It should be noted that there is a difference in Tabs and Windows. Think of it like your web browser, the browser itself is the window and can have many tabs to each window. See the Examples section if it is still unclear.
 
@@ -181,9 +181,9 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Background Color</u> - Again the same as the above two. The color of the chatbox background using HEX+Alpha Values. [Here](https://www.hexcolortool.com/) is a handy online tool.    
 - <u>Show Unread Messages</u> - This determines whether or not there is a counter on the tab of unread messages when you go back to the tab.
     
-`![Chat Naming Gif](./chatHUD/assets/images/ChatTabNaming.gif) Hasnt been added due to the Chat Tab reload button still displaying the advancedchathud.gui.button.reload`
-![Chat Color Image](./ChatHUD/assets/images/ChatColoring.png)
-![Chat Unread Messages Image](./ChatHUD/assets/images/ChatUnreadMsg.png)
+<!--![Chat Naming Gif](./assets/images/ChatTabNaming.gif) Hasnt been added due to the Chat Tab reload button still displaying the advancedchathud.gui.button.reload-->
+![Chat Color Image](./assets/images/ChatColoring.png)
+![Chat Unread Messages Image](./assets/images/ChatUnreadMsg.png)
 
 ---
 
