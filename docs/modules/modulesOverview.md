@@ -21,7 +21,7 @@ has_children: true
 {:toc}
 - The base mod and API
 
-Once the mod is installed a **<u>Core</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***General Tab***  
 - Time Format - SimpleDateFormat, 
