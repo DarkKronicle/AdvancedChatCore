@@ -21,7 +21,7 @@ has_children: true
 {:toc}
 - The base mod and API
 
-Once the mod is installed a <u>**Core**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***General Tab***  
 - Time Format - SimpleDateFormat, 
@@ -41,13 +41,23 @@ Once the mod is installed a <u>**Core**</u> tab will be added to the AdvancedCha
 - Chat Color - Changes the color of the chat box and buttons nearby using HEX+Alpha values.  
 - Extended Text Limit - Whether or not messages that are over the 256 limit are broken into multiple chat messages.
 
+***Hotkeys Tab***
+- Open Settings GUI - Opens the settings GUI with the available options of;
+	- Assigning a hotkey and then modifying how this reacts with the game in the following ways;
+	- Activate On - Does the keybind activate on press or release of the key combination.  
+	- Context - Cant the keybind be activated in-game or inside a GUI.  
+	- Allow Empty Keybind - Is an empty keybind valid (will always be considered to be active)  
+	- Allow Extra Keys - Are extra keys allowed to be held to still activate the keybind.  
+	- Order Sensitive - Should the keybind keys be pressed in the specific order they were defined in.  
+	- Exclusive - If true, then no other keybinds can have been activated before the keybind in question. This check resets when all keys are released.  
+	- Cancel Further Processing - Cancel further (vanilla) processing of the last pressed key, when the keybind activates.  
 ---
 ![ACC-ChatLogIcon](./assets/images/ACC-ChatLog_Icon.png)
 ### AdvancedChatLog
 {:toc}
 - View and sort through mass amounts of previous messages.
 
-Once the mod is installed a <u>**Chat Log**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
+Once the mod is installed a **<u>Chat Log</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
   
 ***Chat Log Tab***  
 - Stored Lines - The maximum amount of lines stored in the Chat Log. (Excessively large values may cause memory errors)  
@@ -60,7 +70,7 @@ Once the mod is installed a <u>**Chat Log**</u> tab will be added to the Advance
 {:toc}
 - React to keywords in messages and act on them.
 
-Once the mod is installed a <u>**Chat Filters**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+Once the mod is installed a **<u>Chat Filters</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***Chat Filter Buttons***  
 By default has 3 options; Import Filters, Advanced Filters and New Filter.  
@@ -111,7 +121,7 @@ As well as 3 additional buttons; Back, takes you to the previous page. Export, u
 {:toc}
 - Complex writing of messages and formatting in the text box.</b>
 
-Once the mod is installed a <u>**Box**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
+Once the mod is installed a **<u>Box</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
 
 ***General Tab***  
 Has two available buttons, Configure Suggestors, and Configure Formatters, as well as the following;
@@ -148,7 +158,7 @@ For the two buttons, the options are as follows;
 {:toc}
 - Create chat tabs and a good looking Chat.
 
-Once the mod is installed a <u>**HUD**</u> tab will be added to the AdvancedChat Config Menu. Located in that tab are the following tabs as well buttons outside of the AdvancedChat config menu when opening chat;  
+Once the mod is installed a **<u>HUD</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following tabs as well buttons outside of the AdvancedChat config menu when opening chat;  
 
 **Chat Buttons** 
 - Exclamation Mark (Location: Chat window) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
@@ -161,6 +171,11 @@ Once the mod is installed a <u>**HUD**</u> tab will be added to the AdvancedChat
 - Trash Can (Location: Relative to listed tabs above player text entry)- This will remove all currently open AdvancedChat boxes. 
 - Bars (Location: Bottom right)- A chat page with the option to filter at the top with a **Filter Type** button that cycles the options listed under AdvancedChatFilters>Chat Filters Tab>Filter Type.   
 - Cog Wheel (Location: Bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.  
+
+There is also an added right click context menu when your chat is open that has the following options; 
+- Remove All Windows - Removes all windows currently displayed.  
+- Clear All Messages - Clears all messages from the chatbox.  
+- Duplicate Window - Duplicates the current window.  
 
 ***Chat HUD Tab***  
 - Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a Chat Window. (Vanilla Chat HUD can use Chat Tabs if you click on it and then change the tab)  
