@@ -2,7 +2,7 @@
 layout: default
 title: AdvancedChat Modules Overview
 nav_order: 1
-has_children: true
+has_children: false
 ---
 
 # AdvancedChat Modules Overview
@@ -12,7 +12,6 @@ has_children: true
   </summary>
   {: .text-delta }
 1. TOC
-{:toc}
 </details>
 
 ---
@@ -51,6 +50,7 @@ Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>**
 	- Order Sensitive - Should the keybind keys be pressed in the specific order they were defined in.  
 	- Exclusive - If true, then no other keybinds can have been activated before the keybind in question. This check resets when all keys are released.  
 	- Cancel Further Processing - Cancel further (vanilla) processing of the last pressed key, when the keybind activates.  
+
 ---
 ![ACC-ChatLogIcon](./assets/images/ACC-ChatLog_Icon.png)
 ### AdvancedChatLog
