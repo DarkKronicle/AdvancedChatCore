@@ -4,7 +4,9 @@ title: AdvancedChat - ChatBox Module
 nav_order: 1
 has_children: false
 ---
-# AdvancedChat - ChatBox Module
+# AdvancedChat - ChatBox Module  
+![ACC-ChatBoxIcon](./assets/images/ACC-ChatBox_Icon.png)  
+
 <details open markdown="block">
   <summary>
     Table of contents
@@ -14,7 +16,6 @@ has_children: false
 {:toc}
 </details>
 
-![ACC-ChatBoxIcon](./assets/images/ACC-ChatBox_Icon.png)
 ---
 ### AdvancedChatBox
 - Complex writing of messages and formatting in the text box.</b>
@@ -62,8 +63,8 @@ For the two buttons, the options are as follows;
 - Spell Checker Hover Format - The format of the text that appears when you hover your mouse over a suggested spelling change.
 
 ---  
-## Settings Deep Dive
-{:toc}
+## Settings Deep Dive  
+{:toc}  
 This section will take the above section, Available Tabs and Settings, and break down each one into their own separate sections to help fully understand what each one does respectively and in more easy to understand terms. As well as providing screen shots of their locations and more in-depth media in the Examples Sections located below.   
 A note here quickly on the color values. ARGB and HEX+Alpha are the same, or rather very similar depending on who you ask. It's simply an 8 character string the comes after the pound sign(#) where the first two digits determine the alpha channel, aka the opacity of the color.
 
@@ -107,7 +108,7 @@ Assorted images and media to display different settings that are available to he
 ![Color Showcase](./assets/images/colorShowcaseMASS.png)  
 
 <u>Calculator (First image, 4+4, to show the color choice impact from the above Example Image. The other two images are default colors.)</u>   
-![Calculator](./assets/images/calculatorMASS.png)
+![Calculator](./assets/images/calculatorMASS.png)  
 
 <u>Shortcut</u>   
 ![Shortcut](./assets/images/shortcutMASS.png)  
