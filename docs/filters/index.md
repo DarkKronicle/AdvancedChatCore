@@ -1,6 +1,6 @@
 ---
 layout: default
-title: AdvancedChatFilters
+title: Filters
 nav_order: 2
 has_children: true
 ---
