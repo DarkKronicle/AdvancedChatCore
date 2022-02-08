@@ -12,12 +12,12 @@ has_children: false
   </summary>
   {: .text-delta }
 1. TOC
+{:toc}
 </details>
 
 ---
 ![AdvancedChatCoreIcon](./assets/images/AdvancedChatCore_Icon.png)
 ### AdvancedChatCore
-{:toc}
 - The base mod and API
 
 Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;  
