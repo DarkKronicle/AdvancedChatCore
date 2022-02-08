@@ -17,6 +17,7 @@ import io.github.darkkronicle.advancedchatcore.gui.IconButton;
 import io.github.darkkronicle.advancedchatcore.interfaces.AdvancedChatScreenSection;
 import io.github.darkkronicle.advancedchatcore.util.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
@@ -77,6 +78,8 @@ public class AdvancedChatScreen extends GuiBase {
 
     public void initGui() {
         super.initGui();
+        this.rightSideButtons.clear();
+        this.leftSideButtons.clear();
         this.client.keyboard.setRepeatEvents(true);
         this.messageHistorySize = this.client.inGameHud.getChatHud().getMessageHistory().size();
         this.chatField =

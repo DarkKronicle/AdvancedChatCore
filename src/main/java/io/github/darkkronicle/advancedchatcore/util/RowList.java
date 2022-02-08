@@ -58,4 +58,8 @@ public class RowList<T> {
         return list.size();
     }
 
+    public void clear() {
+        order.clear();
+        list.clear();
+    }
 }
