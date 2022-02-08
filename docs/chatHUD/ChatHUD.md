@@ -1,7 +1,7 @@
 ---
 layout: default
-title: ChatHUD
-nav_order: 1
+title: HUD
+nav_order: 3
 has_children: false
 ---
 

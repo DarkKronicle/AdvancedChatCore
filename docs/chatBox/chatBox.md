@@ -1,7 +1,7 @@
 ---
 layout: default
-title: ChatBox
-nav_order: 1
+title: Box
+nav_order: 4
 has_children: false
 ---
 # AdvancedChat - ChatBox Module  

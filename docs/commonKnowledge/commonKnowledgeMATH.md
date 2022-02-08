@@ -2,7 +2,7 @@
 layout: default
 title: Math
 nav_order: 1
-has_children: false
+parent: Common Knowledge
 ---
 
 # Common Knowledge - Math

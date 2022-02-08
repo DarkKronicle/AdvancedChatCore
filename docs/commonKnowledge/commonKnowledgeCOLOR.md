@@ -2,7 +2,7 @@
 layout: default
 title: Color
 nav_order: 2
-has_children: false
+parent: Common Knowledge
 ---
 
 # Common Knowledge - Color

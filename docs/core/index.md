@@ -1,6 +1,6 @@
 ---
 layout: default
-title: AdvancedChatCore
+title: Core
 nav_order: 1
 has_children: true
 ---
