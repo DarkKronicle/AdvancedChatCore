@@ -153,7 +153,7 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Fade Speed</u> - You can adjust how quickly or slowly it takes for a message to fade out.
 - <u>Time Until Fade</u> - This is similar to the above but is the timer before the fade starts. This is measured in ticks. (20 Minecraft ticks is 1 second here is a [*Tick calculator*](https://codepen.io/mrjohndoe69/full/ExPZpNb) as well.)  
 - <u>Fade Style</u> - This is the function used for the fading animation.By default it's a Linear easing. ([Resource](https://easings.net/) for easing functions. Though not all of these may be supported either by MC or the mod.)  
-- <u>Empty Text Color</u> - The color used for empty text. This uses HEX+Alpha values. [Here](https://www.hexcolortool.com) is an online color picker.   
+- <u>Empty Text Color</u> - The color used for empty text. This uses HEX+Alpha values. [Here](https://www.hexcolortool.com) is an online color picker. <!--This link will eventually point to the Common Knowledge page on the Wiki -->   
 - <u>Striped Messages</u> - This will basically highlight every other message to create a stripped effect to make chat easier to read.
 - <u>Stored Lines</u> - The amount of lines that can be stored in the chatbox to scroll back through. If you use a very large number it can cause memory issues.  
    
@@ -179,9 +179,9 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Tab Name</u> - The name of the tab how it will show in the config.   
 - <u>Starting Message</u> - The message that will show when you go to the tab.   
 - <u>Tab HUD Abbreviation</u> - The name of the tab as it will appear in game in the chatbox.   
-- <u>Accent Color</u> - This is the color of the tabs accents. It uses HEX+Alpha values so #ffffffff, where the first two values are alpha channels, basically the opacity. You can use [this](https://www.hexcolortool.com/) website to make your life easy.   
-- <u>Border Color</u> - Same as above but for the chatbox borders, again using HEX+Alpha values for the color. [Here](https://www.hexcolortool.com/) is a handy online tool.   
-- <u>Background Color</u> - Again the same as the above two. The color of the chatbox background using HEX+Alpha Values. [Here](https://www.hexcolortool.com/) is a handy online tool.    
+- <u>Accent Color</u> - This is the color of the tabs accents.  <!--This link will eventually point to the Common Knowledge page on the Wiki -->   
+- <u>Border Color</u> - Same as above but for the chatbox borders.  <!--This link will eventually point to the Common Knowledge page on the Wiki -->
+- <u>Background Color</u> - Again the same as the above two. The color of the chatbox background.  <!--This link will eventually point to the Common Knowledge page on the Wiki -->  
 - <u>Show Unread Messages</u> - This determines whether or not there is a counter on the tab of unread messages when you go back to the tab.
     
 <!--![Chat Naming Gif](./assets/images/ChatTabNaming.gif) Hasnt been added due to the Chat Tab reload button still displaying the advancedchathud.gui.button.reload-->
