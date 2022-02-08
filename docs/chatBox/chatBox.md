@@ -1,6 +1,6 @@
 ---
 layout: default
-title: AdvancedChat - ChatBox Module
+title: ChatBox
 nav_order: 1
 has_children: false
 ---
