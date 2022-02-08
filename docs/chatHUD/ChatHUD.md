@@ -1,6 +1,6 @@
 ---
 layout: default
-title: ACC Module - ChatHUD
+title: AdvancedChat - ChatHUD Module
 nav_order: 1
 has_children: false
 ---
