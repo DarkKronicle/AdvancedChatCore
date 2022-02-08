@@ -1,8 +1,8 @@
 ---
 layout: default
-title: ACC-Module-ChatHUD
+title: AdvancedChat - ChatHUD Module
 nav_order: 1
-has_children: true
+has_children: false
 ---
 
 # AdvancedChatHUD
@@ -20,7 +20,6 @@ has_children: true
 ![ACC-ChatHUD Image](./assets/images/ACC-ChatHUD_Icon.png)
 
 # AdvancedChatHUD
-{:toc}  
 - Create chat tabs and a good looking HUD.
 
 ## Overview
