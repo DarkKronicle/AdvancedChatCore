@@ -101,7 +101,6 @@ For spell checking typed words by default they will be underlined. At that point
 ---
 ## Images and Examples
 {:toc}
-
 Assorted images and media to display different settings that are available to help keep the above cleaner looking. There is, if not already released, a mod showcase project in the works as well.
 
 <u>Color Showcase</u>  
