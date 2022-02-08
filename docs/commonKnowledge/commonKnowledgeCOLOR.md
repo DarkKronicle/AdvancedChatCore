@@ -16,8 +16,8 @@ has_children: false
 </details>
 
 ---
-## Color in AdvancedChat
-{:toc}  
+## Color in AdvancedChat  
+{:toc}    
 AdvancedChat Project, the name given to encompass all of the AdvancedChat mods(Core, HUD, Box, Log, and Filters), has the option to change the color of certain things. Anytime you encounter the option to change the color of a setting it will use HEX values. Some will only use the 6 character format and others may use the 8 character format. The difference between these two is the alpha channel aka the opacity of your color.  
 
 A normal HEX code looks something like this #FF0000, which is bright red. The FF indicates the hue of the the RGB channels which are represented by the four zeros. But when using an 8 character HEX suddenly you unlock an additional two characters at the front of the string that represent opacity also called transparency.   
@@ -27,8 +27,8 @@ The proper format is #AARRGGBB where the A is alpha channels, R is red, G is gre
 So knowing all that; #CCFF0000 would be an 80% opacity to our bright red mentioned earlier making it a slightly lighter red. As 100% opacity would be our default value of bright red.  
 
 ---
-## Resources
-{:toc}
+## Resources  
+{:toc}  
 Here is a dumb of useful links to help get you on your way;  
 - Learning
 	- Incase you would like to learn more [here](https://learn.sparkfun.com/tutorials/hexadecimal/all) is a link to an article on HEX itself 
@@ -42,8 +42,8 @@ Here is a dumb of useful links to help get you on your way;
 It also has some information on things like color theory and shading. Pick your color and then just use the section below to add opacity if you'd like.  
 
 ---
-## HEX Opacity Table
-{:toc} 
+## HEX Opacity Table  
+{:toc}   
 Here is a complete table from 0% opacity all the way up to 100% opacity at single percent increments...It should be noted that you wont see much of a difference from say 1% to 3% and there is really no need to do 0-100, probably could've gotten away with 5% increments. But what can I say? I like ya, you got moxxy kid.  
 **Remember**, the closer to 100% the value is the less transparent it is.
 
