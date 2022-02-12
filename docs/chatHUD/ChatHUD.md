@@ -86,8 +86,8 @@ There is also an added right click context menu when your chat is open that has 
 - Striped Messages - Whether or not the backgrounds of every other message is colored differently to create a striped effect.
 - Stored Lines - The maximum amount of lines stored in Chat HUD (Excessively large values may cause memory errors)
 
-<!--<u>*Chat HUD TAB*</u>  
-![Chat HUD Tab Image](./assets/images/ChatHUDTab.png)--> 
+<u>*Chat HUD TAB*</u>  
+![Chat HUD Tab Image](./assets/images/ChatHUDTab.png)
 
 ***Chat Tabs Tab***  
 By default there is already the Main Chat Tab listed. Other than that there are two buttons available. Import Tab, and New Chat Tab.
@@ -101,8 +101,8 @@ Chat Tabs have the following options to configure as well as the option to expor
 - Background Color - The color of the background of the chat tab using HEX+Alpha values.
 - Show Unread Messages - Whether or not the number of unread messages are displayed for the chat tab.  
 
-<!--<u>*Chat Tabs TAB*</u>  
-![Chat Tabs Tab Image](./assets/images/ChatTabsTab.png)-->  
+<u>*Chat Tabs TAB*</u>  
+![Chat Tabs Tab Image](./assets/images/ChatTabsTab.png)
 
 ---
 ## Settings Deep Dive
@@ -140,7 +140,7 @@ Pressing your chat key to open the chat, the following buttons will be available
 <u>*Chat Heads*</u>
 ![Chat Heads Display Image](./assets/images/ChatHeadsDisplay.png)  
 <!--<u>*Chat TAB Buttons Display*</u>  
-![Chat Tab Buttons Display Image](./assets/images/ChatTabButtonsDisplay.png)-->
+![Chat Tab Buttons Display Image](./assets/images/ChatTabButtonsDisplay.png) Still no idea what this does-->
 <u>*Chat Tab Buttons shifted Right*</u>  
 ![Chat Right Tab Buttons Image](./assets/images/ChatRightSideTabBtn.png)  
 
@@ -158,13 +158,13 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Time Until Fade</u> - This is similar to the above but is the timer before the fade starts. This is measured in ticks. (*20 Minecraft ticks is 1 second here is a [Tick calculator](https://codepen.io/mrjohndoe69/full/ExPZpNb) as well.*)  
 - <u>Fade Style</u> - This is the function used for the fading animation.By default it's a Linear easing. ([Resource](https://easings.net/) for easing functions. Though not all of these may be supported either by MC or the mod.)  
 - <u>Empty Text Color</u> - The color used for empty text. (*Please see [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page of the wiki for all information on color format used in this mod*)    
-- <u>Striped Messages</u> - This will basically highlight every other message to create a stripped effect to make chat easier to read.
+- <u>Striped Messages</u> - This will basically highlight every other message to create a striped effect to make chat easier to read.
 - <u>Stored Lines</u> - The amount of lines that can be stored in the chatbox to scroll back through. If you use a very large number it can cause memory issues.  
    
-<!--<u>*Chat Padding*</u> 
-![Chat Padding UI Image](./assets/images/ChatPaddingUI.png) Hasnt been added due to the right padding not working--> 
-<u>*Stripped Messages*</u>
-![Chat Stripped Messages Image](./assets/images/ChatStrippedMsg.png)
+<u>*Chat Padding*</u> 
+![Chat Padding UI Image](./assets/images/ChatPaddingUI.png)
+<u>*Striped Messages*</u>
+![Chat Striped Messages Image](./assets/images/ChatStrippedMsg.png)
 
 ***Chat Box Modifications:*** Any settings in the ChatHUD module that will modify the Chatbox.  
  
@@ -176,12 +176,10 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Chat Visibility</u> - You can set how your chat box is seen with three available options. The default of **Vanilla**, **Always** where the chat is always shown, and **Focus Only** which will only show the chatbox when it is activated.  
 - <u>Background Line Style</u> - With this you can set the style of messages backgrounds where **Full** fits the background width of the chat, so a constant and consistent background. Where **compact** does it with each individual message.   
 
-<!--<u>*Chat Height and Width UI*</u>  
+<u>*Chat Height and Width UI*</u>  
 ![Chat Height and Width UI Image](./assets/images/ChatHxW.png)
-<u>*Chat Position UI*</u>  
-![Chat Position UI Image](./assets/images/ChatPositionUI.png)
 <u>*Chat Background Line Style*</u>  
-![Chat Background Line Style Image](./assets/images/ChatLineStyle.png)-->
+![Chat Background Line Style Image](./assets/images/ChatLineStyle.png)
 
 **Chat Tabs Modifications:** Any settings in the ChatHUD module that will modify the Chat Tab and corresponding Chatbox. It should be noted that there is a difference in Tabs and Windows. Think of it like your web browser, the browser itself is the window and can have many tabs to each window. See the Examples section if it is still unclear.
 
@@ -193,8 +191,6 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Background Color</u> - This will change the color of the chatbox background.  (*Please see [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page of the wiki for all information on color format used in this mod*)  
 - <u>Show Unread Messages</u> - This determines whether or not there is a counter on the tab of unread messages when you go back to the tab.
     
-<!--<u>*Chat Naming*</u>  
-![Chat Naming Gif](./assets/images/ChatTabNaming.gif) Hasnt been added due to the Chat Tab reload button still displaying the advancedchathud.gui.button.reload-->
 <u>*Chat Coloring*</u>  
 ![Chat Color Image](./assets/images/ChatColoring.png)  
 <u>*Unread Messages*</u>  
