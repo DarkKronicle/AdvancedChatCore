@@ -81,7 +81,7 @@ In this tab you will also find two buttons on the upper right side above the fir
  
 **Configure Suggestors Button**
 - Suggest Players - If you want player names to be suggested or not.
-- In-Chat Calculator - Whether or not you want an in chat calculator active or not. It can be used by simply putting a math expression in brackets and pressing TAB which will give your answer as a suggestion. It should be noted that the In-chat calculator uses [mXparser](https://darkkronicle.github.io/AdvancedChatCore/). <!--This link will eventually point to the Common Knowledge page on the Wiki -->
+- In-Chat Calculator - Whether or not you want an in chat calculator active or not. It can be used by simply putting a math expression in brackets and pressing TAB which will give your answer as a suggestion. It should be noted that the In-chat calculator uses mXparser. (*Please [see](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeMATH.html) page of the wiki for all information on the Maths format used in this mod.*)  
 - Suggest Shortcuts - When typing in chat you can have the option that when you type a certain string you can get a corresponding shortcut. So typing :happy then double tapping TAB will produce `o((*^▽^*))o`  
 	-When selecting the Configure option here you are taken to a page where you can see a full list of pre-added shortcuts which you can modify or remove. As well as the option to 'Add Shortcut' to modify.   
 	-To modify a shortcut simply click the corresponding text box and change the character as you please.
@@ -92,7 +92,7 @@ In this tab you will also find two buttons on the upper right side above the fir
 	- Command Color	- What color a command is by default.
 	- Error Color - The color that highlights an incorrect command.
 	-Default Palette - The palette used by the above Command Color option for parts of commands. Custom ones can be added at ~/minecraft/config/advancedchat/colors.toml
-- Highlight JSON in Commands - Whether or not you want your JSON parsed and highlighted in the [ChatHUD Module](https://darkkronicle.github.io/AdvancedChatCore/chatHUD/ChatHUD.html)
+- Highlight JSON in Commands - Whether or not you want your JSON parsed and highlighted in the [ChatHUD Module](https://darkkronicle.github.io/AdvancedChatCore/chatHUD/ChatHUD.html).  
 - Color Code Formatting - Decides if the color codes with & are parsed and highlighted in the correct color. 	
 	
 **Spell Checker Tab**  
