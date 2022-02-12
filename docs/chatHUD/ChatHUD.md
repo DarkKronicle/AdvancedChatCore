@@ -32,7 +32,7 @@ The information on this page is for the features of the ChatHUD module of Advanc
 The following section will go over all the available tabs and settings in each tab that you can modify. This information can also be found [here](https://darkkronicle.github.io/AdvancedChatCore/modules/modulesOverview.html),
 in the AdvancedChat-Modules Overview section. As well as overviews for all other modules available as of January 31st 2022.  
 
-<u>ACC Page Guide</u>  
+<u>*ACC Page Guide*</u>  
 ![ACC Page Help Map](./assets/images/ACC_Page.PNG)  
 
 **In Game Buttons**  
@@ -53,7 +53,7 @@ There is also an added right click context menu when your chat is open that has 
 - Clear All Messages - Clears all messages from the chatbox.  
 - Duplicate Window - Duplicates the current window.
 
-<u> Right Click Context Menu</u>  
+<u>*Right Click Context Menu*</u>  
 ![Right Click Context Menu](./assets/images/RightClickContextMenu.png)
 
 ***Chat HUD Tab***  
@@ -126,7 +126,7 @@ Pressing your chat key to open the chat, the following buttons will be available
 	- **All**, Passes all text through the filter regardless of the string to find.
 - <u>Cog Wheel</u> (bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.
 
-<u>Default View</u>
+<u>*Default View*</u>
 ![Chat Buttons Image](./assets/images/ChatButtons.png)
 
 ***Chat Information Modifications:*** Any settings in the ChatHUD module that will modify the information in the Chatbox.
@@ -135,10 +135,11 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Always Show Tab Buttons</u> - Whether or not to constantly show the tab buttons that are located in your chat box. 
 - <u>Right Tab Buttons</u> - Whether or not to push the tab buttons to the right side of the screen to make for a cleaner look.  
 
-![Chat Heads Display Image](./assets/images/ChatHeadsDisplay.png)
+<u>*Chat Heads*</u>
+![Chat Heads Display Image](./assets/images/ChatHeadsDisplay.png)  
 <!--![Chat Tab Buttons Display Image](./assets/images/ChatTabButtonsDisplay.png) Hasnt been added due to the function not working for me-->
-<u>Chat Tab Buttons shifted Right</u>
-![Chat Right Tab Buttons Image](./assets/images/ChatRightSideTabBtn.png)
+<u>*Chat Tab Buttons shifted Right*</u>  
+![Chat Right Tab Buttons Image](./assets/images/ChatRightSideTabBtn.png)  
 
 ***Chat Text Modifications:*** Any settings in the ChatHUD module that will modify the text within the Chatbox. 
   
@@ -153,11 +154,13 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Fade Speed</u> - You can adjust how quickly or slowly it takes for a message to fade out.
 - <u>Time Until Fade</u> - This is similar to the above but is the timer before the fade starts. This is measured in ticks. (20 Minecraft ticks is 1 second here is a [*Tick calculator*](https://codepen.io/mrjohndoe69/full/ExPZpNb) as well.)  
 - <u>Fade Style</u> - This is the function used for the fading animation.By default it's a Linear easing. ([Resource](https://easings.net/) for easing functions. Though not all of these may be supported either by MC or the mod.)  
-- <u>Empty Text Color</u> - The color used for empty text. This uses HEX+Alpha values. [Here](https://www.hexcolortool.com) is an online color picker. <!--This link will eventually point to the Common Knowledge page on the Wiki -->   
+- <u>Empty Text Color</u> - The color used for empty text. (*Please see [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page of the wiki for all information on color format used in this mod*)    
 - <u>Striped Messages</u> - This will basically highlight every other message to create a stripped effect to make chat easier to read.
 - <u>Stored Lines</u> - The amount of lines that can be stored in the chatbox to scroll back through. If you use a very large number it can cause memory issues.  
    
-<!--![Chat Padding UI Image](./assets/images/ChatPaddingUI.png) Hasnt been added due to the right padding not working--> 
+<!--<u>*Chat Padding*</u> 
+![Chat Padding UI Image](./assets/images/ChatPaddingUI.png) Hasnt been added due to the right padding not working--> 
+<u>*Stripped Messages*</u>
 ![Chat Stripped Messages Image](./assets/images/ChatStrippedMsg.png)
 
 ***Chat Box Modifications:*** Any settings in the ChatHUD module that will modify the Chatbox.  
@@ -179,15 +182,15 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>Tab Name</u> - The name of the tab how it will show in the config.   
 - <u>Starting Message</u> - The message that will show when you go to the tab.   
 - <u>Tab HUD Abbreviation</u> - The name of the tab as it will appear in game in the chatbox.   
-- <u>Accent Color</u> - This is the color of the tabs accents.  <!--This link will eventually point to the Common Knowledge page on the Wiki -->   
-- <u>Border Color</u> - Same as above but for the chatbox borders.  <!--This link will eventually point to the Common Knowledge page on the Wiki -->
-- <u>Background Color</u> - Again the same as the above two. The color of the chatbox background.  <!--This link will eventually point to the Common Knowledge page on the Wiki -->  
+- <u>Accent Color</u> - This is the color of the tabs accents. (*Please see [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page of the wiki for all information on color format used in this mod*)  
+- <u>Border Color</u> - Changes the color for the chatbox borders. (*Please see [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page of the wiki for all information on color format used in this mod*)  
+- <u>Background Color</u> - This will change the color of the chatbox background.  (*Please see [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page of the wiki for all information on color format used in this mod*)  
 - <u>Show Unread Messages</u> - This determines whether or not there is a counter on the tab of unread messages when you go back to the tab.
     
 <!--![Chat Naming Gif](./assets/images/ChatTabNaming.gif) Hasnt been added due to the Chat Tab reload button still displaying the advancedchathud.gui.button.reload-->
-<u>Chat Coloring</u>  
+<u>*Chat Coloring*</u>  
 ![Chat Color Image](./assets/images/ChatColoring.png)  
-<u>Unread Messages</u>  
+<u>*Unread Messages*</u>  
 ![Chat Unread Messages Image](./assets/images/ChatUnreadMsg.png)
 
 ---
