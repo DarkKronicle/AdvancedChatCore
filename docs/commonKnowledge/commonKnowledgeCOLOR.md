@@ -41,6 +41,13 @@ Here is a dumb of useful links to help get you on your way;
 	- If you don't want to google around for a decent HEX color picker [here](https://htmlcolorcodes.com/color-picker/) is my go to that offers HSL, CYMYK, RGB, and our needed HEX. 
 It also has some information on things like color theory and shading. Pick your color and then just use the section below to add opacity if you'd like.  
 
+<!-- 
+---
+## Common Hex Values
+{:toc}
+TO BE FILLED OUT AFTER I ADJUST THE OPACITY TABLE
+-->
+
 ---
 ## HEX Opacity Table  
 {:toc}   
