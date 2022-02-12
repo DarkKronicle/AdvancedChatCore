@@ -37,16 +37,16 @@ in the AdvancedChat-Modules Overview section. As well as overviews for all other
 
 **In Game Buttons**  
 Pressing the chat key to open the chat, the following buttons will be available; 
-- Exclamation Mark (Chat window) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
+- Exclamation Mark (*Chat window*) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
 	- Exclamation Mark - Vanilla default  
 	- Thumbtack - Always focused 
 	- Square - Never focus
-- Nested 90° Lines (Chat window) - For resizing the current chatbox.  
-- X (Chat window)- This will remove the respective AdvancedChat Window. 
-- Plus Sign (Relative to listed tabs above player text entry)- Will create a new chat window for the currently selected Tab.
-- Trash Can (Relative to listed tabs above player text entry)- This will remove all currently open AdvancedChat boxes. 
-- Bars (bottom right)- A chat page with the option to filter at the top with a **Filter Type** button that cycles the options listed under AdvancedChatFilters>Chat Filters Tab>Filter Type.   
-- Cog Wheel (bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.
+- Nested 90° Lines (*Chat window*) - For resizing the current chatbox.  
+- X (*Chat window*)- This will remove the respective AdvancedChat Window. 
+- Plus Sign (*Relative to listed tabs above player text entry*)- Will create a new chat window for the currently selected Tab.
+- Trash Can (*Relative to listed tabs above player text entry*)- This will remove all currently open AdvancedChat boxes. 
+- Bars (*bottom right*)- A chat page with the option to filter at the top with a **Filter Type** button that cycles the options listed under AdvancedChatFilters>Chat Filters Tab>Filter Type.   
+- Cog Wheel (*bottom right*)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.
 
 There is also an added right click context menu when your chat is open that has the following options;  
 - Remove All Windows - Removes all windows currently displayed.
@@ -57,7 +57,7 @@ There is also an added right click context menu when your chat is open that has 
 ![Right Click Context Menu](./assets/images/RightClickContextMenu.png)
 
 ***Chat HUD Tab***  
-- Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a Chat Window. (Vanilla Chat HUD can use Chat Tabs if you click on it and then change the tab)  
+- Enable Vanilla Chat HUD - Enables the Vanilla Chat HUD that acts mostly like a Chat Window. (*Vanilla Chat HUD can use Chat Tabs if you click on it and then change the tab*)  
 - Display Chat Heads - Whether or not the head of the message sender displays besides their message.
 - Always Show Tab Buttons - Whether or not to constantly show the tab buttons. 
 - Right Tab Buttons - Whether or not to push the tab buttons to the right side of the screen.  
@@ -113,7 +113,7 @@ When you get into the game after installing the mod you will have by default hav
 
 ***Buttons***  
 Pressing your chat key to open the chat, the following buttons will be available to you; 
-- <u>Exclamation Mark</u> - Located in the Chat window. This symbol when clicked has 3 options that modify the windows render of new messages (Like Chat Visibility listed in the above section **Chat HUD Tab**) and are as follows;
+- <u>Exclamation Mark</u> - Located in the Chat window. This symbol when clicked has 3 options that modify the windows render of new messages (*Like Chat Visibility listed in the above section* **Chat HUD Tab**) and are as follows;
 	- **Exclamation Mark** - Is the vanilla default. 
 	- **Thumbtack** - Will always keep chat open. 
 	- **Square** - Will never focus chat.
@@ -155,7 +155,7 @@ Pressing your chat key to open the chat, the following buttons will be available
 	- *Bottom* padding is the space between the newest message and the bottom of the chatbox.  
 - <u>Chat Scale</u> - This setting changes the size of the text without touching the size of the ChatHUD.
 - <u>Fade Speed</u> - You can adjust how quickly or slowly it takes for a message to fade out.
-- <u>Time Until Fade</u> - This is similar to the above but is the timer before the fade starts. This is measured in ticks. (20 Minecraft ticks is 1 second here is a [*Tick calculator*](https://codepen.io/mrjohndoe69/full/ExPZpNb) as well.)  
+- <u>Time Until Fade</u> - This is similar to the above but is the timer before the fade starts. This is measured in ticks. (*20 Minecraft ticks is 1 second here is a [Tick calculator](https://codepen.io/mrjohndoe69/full/ExPZpNb) as well.*)  
 - <u>Fade Style</u> - This is the function used for the fading animation.By default it's a Linear easing. ([Resource](https://easings.net/) for easing functions. Though not all of these may be supported either by MC or the mod.)  
 - <u>Empty Text Color</u> - The color used for empty text. (*Please see [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page of the wiki for all information on color format used in this mod*)    
 - <u>Striped Messages</u> - This will basically highlight every other message to create a stripped effect to make chat easier to read.
@@ -169,10 +169,10 @@ Pressing your chat key to open the chat, the following buttons will be available
 ***Chat Box Modifications:*** Any settings in the ChatHUD module that will modify the Chatbox.  
  
 - <u>Vanilla Chat HUD</u> - This will keep the vanilla chatbox rendered and can be used with tabs.   
-- <u>Default Chat Height</u> - The height of the vanilla chat box from top to bottom. This will overwrite vanilla chat settings for height.    
-- <u>Default Chat Width</u> - The width of the vanilla chat box from left to right. This will overwrite vanilla chat settings for width.   
-- <u>Default Chat X</u> - This modifies the vanilla chats position along the X axis (left and right, starting in the bottom left corner.)   
-- <u>Default Chat Y</u> - This modifies the vanilla chats position along the Y axis (up and down, starting in the bottom left corner.)   
+- <u>Default Chat Height</u> - The height of the chat box from top to bottom. (*This will overwrite vanilla chat settings for height.*)    
+- <u>Default Chat Width</u> - The width of the chat box from left to right. (*This will overwrite vanilla chat settings for width.*)   
+- <u>Default Chat X</u> - This modifies the chats position along the X axis (*left and right, starting in the bottom left corner.*)   
+- <u>Default Chat Y</u> - This modifies the chats position along the Y axis (*up and down, starting in the bottom left corner.*)   
 - <u>Chat Visibility</u> - You can set how your chat box is seen with three available options. The default of **Vanilla**, **Always** where the chat is always shown, and **Focus Only** which will only show the chatbox when it is activated.  
 - <u>Background Line Style</u> - With this you can set the style of messages backgrounds where **Full** fits the background width of the chat, so a constant and consistent background. Where **compact** does it with each individual message.   
 
