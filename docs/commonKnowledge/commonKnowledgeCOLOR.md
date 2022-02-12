@@ -51,11 +51,10 @@ TO BE FILLED OUT AFTER I ADJUST THE OPACITY TABLE
 ---
 ## HEX Opacity Table  
 {:toc}   
-Here is a complete table from 0% opacity all the way up to 100% opacity at single percent increments...It should be noted that you wont see much of a difference from say 1% to 3% and there is really no need to do 0-100, probably could've gotten away with 5% increments. But what can I say? I like ya, you got moxxy kid.  
-**Remember**, the closer to 100% the value is the less transparent it is.
+Here is a complete table from 0% opacity all the way up to 100% opacity at single percent increments...It should be noted that you wont see much of a difference from say 1% to 3%. You more than likely will see the best result when working at 5% increments. I included 1% increments incase you want to dial it in after getting in the ball park of where youd like it. <u>Remember</u>! The **closer** to 100% the value is the **less** transparent it is.
 
 <details>
-<summary> Click to expand the long <i>very</i> table of values </summary>
+<summary> Click to expand the Hex Opacity Values - <b>0% to 25%</b> </summary>
 
 |Transparency % | HEX Value|
 | :---: | :---: |
@@ -85,6 +84,13 @@ Here is a complete table from 0% opacity all the way up to 100% opacity at singl
 |23%|3A|
 |24%|3D|
 |25%|3F|
+</details>
+
+<details>
+<summary> Click to expand the Hex Opacity Values - <b>26% to 50%</b> </summary>
+
+|Transparency % | HEX Value|
+| :---: | :---: |
 |26%|42|
 |27%|44|
 |28%|47|
@@ -110,6 +116,13 @@ Here is a complete table from 0% opacity all the way up to 100% opacity at singl
 |48%|7A|
 |49%|7C|
 |50%|7F|
+</details>
+
+<details>
+<summary> Click to expand the Hex Opacity Values - <b>51% to 75%</b> </summary>
+
+|Transparency % | HEX Value|
+| :---: | :---: |
 |51%|82|
 |52%|84|
 |53%|87|
@@ -135,6 +148,13 @@ Here is a complete table from 0% opacity all the way up to 100% opacity at singl
 |73%|BA|
 |74%|BC|
 |75%|BF|
+</details>
+
+<details>
+<summary> Click to expand the Hex Opacity Values - <b>76% to 100%</b> </summary>
+
+|Transparency % | HEX Value|
+| :---: | :---: |
 |76%|C1|
 |77%|C4|
 |78%|C6|
