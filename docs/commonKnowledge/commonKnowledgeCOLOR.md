@@ -54,132 +54,13 @@ TO BE FILLED OUT AFTER I ADJUST THE OPACITY TABLE
 Here is a complete table from 0% opacity all the way up to 100% opacity at single percent increments...It should be noted that you wont see much of a difference from say 1% to 3%. You more than likely will see the best result when working at 5% increments. I included 1% increments incase you want to dial it in after getting in the ball park of where youd like it. <u>Remember</u>! The **closer** to 100% the value is the **less** transparent it is.
 
 <details>
-<summary> Click to expand the Hex Opacity Values - <b>0% to 25%</b> </summary>
+<summary> Click here to show the Opacity Table </summary>
 
-|Transparency % | HEX Value|
-| :---: | :---: |
-|0%|00|
-|1%|02|
-|2%|05|
-|3%|07|
-|4%|0A|
-|5%|0C|
-|6%|0F|
-|7%|11|
-|8%|14|
-|9%|16|
-|10%|19|
-|11%|1C|
-|12%|1E|
-|13%|21|
-|14%|23|
-|15%|26|
-|16%|28|
-|17%|2B|
-|18%|2D|
-|19%|30|
-|20%|33|
-|21%|35|
-|22%|38|
-|23%|3A|
-|24%|3D|
-|25%|3F|
-</details>
+|          |	 |     |     |	   |	 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |	   |     |     |	 |	   |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |	 |     |     |	   |	 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |	 |     |     |	   |	 |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |      |
+| ---      | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |  --- |
+|Opacity%  |  0% |  1% |  2% |	3% |  4% |  5% |  6% |  7% |  8% |  9% | 10% | 11% | 12% | 13% | 14% | 15% | 16% | 17% | 18% | 19% | 20% | 21% | 22% | 23% | 24% | 25% | 26% | 27% | 28% | 29% | 30% | 31% | 32% | 33% | 34% | 35% | 36% | 37% | 38% | 39% | 40% | 41% | 42% | 43% | 44% | 45% | 46% | 47% | 48% | 49% | 50% | 51% | 52% | 53% | 54% | 55% | 56% | 57% | 58% | 59% | 60% | 61% | 62% | 63% | 64% | 65% | 66% | 67% | 68% | 69% | 70% | 71% | 72% | 73% | 74% | 75% | 76% | 77% | 78% | 79% | 80% | 81% | 82% | 83% | 84% | 85% | 86% | 87% | 88% | 89% | 90% | 91% | 92% | 93% | 94% | 95% | 96% | 97% | 98% | 99% | 100% |
+|Hex#      |  00 |  02 |  05 |  07 |  0C |  0C |  0F |  11 |  14 |  16 |  19 |  1C |  1E |  21 |  23 |  26 |  28 |  2B |  2D |  30 |  33 |  35 |  38 |  3A |  3D |  3F |  42 |  44 |  47 |  49 |  4C |  4F |  51 |  54 |  56 |  59 |  5B |  5E |  60 |  63 |  66 |  68 |  6B |  6D |  70 |  72 |  75 |  77 |  7A |  7C |  7F |  82 |  84 |  87 |  89 |  8C |  8E |  91 |  93 |  96 |  99 |  9B |  9E |  A0 |  A3 |  A5 |  A8 |  AA |  AD |  AF |  B2 |  B5 |  B7 |  BA |  BC |  8F |  C1 |  C4 |  C6 |  C9 |  CC |  CE |  D1 |  D3 |  D6 |  D8 |  DB |  DD |  E0 |  E2 |  E5 |  E8 |  EA |  ED |  EF |  F2 |  F4 |  F7 |  F9 |  FC |   FF |
 
-<details>
-<summary> Click to expand the Hex Opacity Values - <b>26% to 50%</b> </summary>
-
-|Transparency % | HEX Value|
-| :---: | :---: |
-|26%|42|
-|27%|44|
-|28%|47|
-|29%|49|
-|30%|4C|
-|31%|4F|
-|32%|51|
-|33%|54|
-|34%|56|
-|35%|59|
-|36%|5B|
-|37%|5E|
-|38%|60|
-|39%|63|
-|40%|66|
-|41%|68|
-|42%|6B|
-|43%|6D|
-|44%|70|
-|45%|72|
-|46%|75|
-|47%|77|
-|48%|7A|
-|49%|7C|
-|50%|7F|
-</details>
-
-<details>
-<summary> Click to expand the Hex Opacity Values - <b>51% to 75%</b> </summary>
-
-|Transparency % | HEX Value|
-| :---: | :---: |
-|51%|82|
-|52%|84|
-|53%|87|
-|54%|89|
-|55%|8C|
-|56%|8E|
-|57%|91|
-|58%|93|
-|59%|96|
-|60%|99|
-|61%|9B|
-|62%|9E|
-|63%|A0|
-|64%|A3|
-|65%|A5|
-|66%|A8|
-|67%|AA|
-|68%|AD|
-|69%|AF|
-|70%|B2|
-|71%|B5|
-|72%|B7|
-|73%|BA|
-|74%|BC|
-|75%|BF|
-</details>
-
-<details>
-<summary> Click to expand the Hex Opacity Values - <b>76% to 100%</b> </summary>
-
-|Transparency % | HEX Value|
-| :---: | :---: |
-|76%|C1|
-|77%|C4|
-|78%|C6|
-|79%|C9|
-|80%|CC|
-|81%|CE|
-|82%|D1|
-|83%|D3|
-|84%|D6|
-|85%|D8|
-|86%|DB|
-|87%|DD|
-|88%|E0|
-|89%|E2|
-|90%|E5|
-|91%|E8|
-|92%|EA|
-|93%|ED|
-|94%|EF|
-|95%|F2|
-|96%|F4|
-|97%|F7|
-|98%|F9|
-|99%|FC|
-|100%|FF|
 </details>
 
 <!--This documentation was written by Nomad on February 8th 2022-->
