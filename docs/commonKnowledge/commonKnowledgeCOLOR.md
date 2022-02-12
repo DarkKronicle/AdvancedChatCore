@@ -54,6 +54,9 @@ TO BE FILLED OUT AFTER I ADJUST THE OPACITY TABLE
 Here is a complete table from 0% opacity all the way up to 100% opacity at single percent increments...It should be noted that you wont see much of a difference from say 1% to 3% and there is really no need to do 0-100, probably could've gotten away with 5% increments. But what can I say? I like ya, you got moxxy kid.  
 **Remember**, the closer to 100% the value is the less transparent it is.
 
+<details>
+<summary> Click to expand the long <i>very</i> table of values </summary>
+
 |Transparency % | HEX Value|
 | :---: | :---: |
 |0%|00|
@@ -157,5 +160,6 @@ Here is a complete table from 0% opacity all the way up to 100% opacity at singl
 |98%|F9|
 |99%|FC|
 |100%|FF|
+</details>
 
 <!--This documentation was written by Nomad on February 8th 2022-->
