@@ -64,7 +64,7 @@ Once the mod is installed a **<u>Chat Log</u>** tab will be added to the Advance
 	- **Literal**, exact match. 
 	- **Upper-Lower**, literal but not case-sensitive.
 	- **RegEx**, Parses the strings as Regular Expression.
-	- **All**, Passes all text through the filter regardless of the string to find.  
+	- **Custom**, Allows for custom search parameters.  
 
 ***Chat Log Tab***  
 - Stored Lines - The maximum amount of lines stored in the Chat Log. (Excessively large values may cause memory errors)  
