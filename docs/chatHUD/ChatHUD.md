@@ -32,9 +32,6 @@ The information on this page is for the features of the ChatHUD module of Advanc
 The following section will go over all the available tabs and settings in each tab that you can modify. This information can also be found [here](https://darkkronicle.github.io/AdvancedChatCore/modules/modulesOverview.html),
 in the AdvancedChat-Modules Overview section. As well as overviews for all other modules available as of January 31st 2022.  
 
-<u>*ACC Page Guide*</u>  
-![ACC Page Help Map](./assets/images/ACC_Page.PNG)  
-
 **In Game Buttons**  
 Pressing the chat key to open the chat, the following buttons will be available; 
 - Exclamation Mark (*Chat window*) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
