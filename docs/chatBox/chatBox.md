@@ -18,7 +18,7 @@ has_children: false
 
 ---
 ### AdvancedChatBox
-- Complex writing of messages and formatting in the text box.</b>
+- Complex writing of messages and formatting in the text box.
 
 The information on this page is for the features of the ChatBox module of AdvancedChat. You can see the available sections in the Table of Contents, listed above.
 
@@ -27,9 +27,6 @@ The information on this page is for the features of the ChatBox module of Advanc
 {:toc}  
 The following section will go over all the available tabs and settings in each tab that you can modify. This information can also be found [here](https://darkkronicle.github.io/AdvancedChatCore/modules/modulesOverview.html),
 in the AdvancedChat-Modules Overview section. As well as overviews for all other modules available as of January 31st 2022.  
-
-<u>ACC Page Guide</u>  
-![ACC Page Help Map](./assets/images/ACC_Page.PNG)  
 
 Once the mod is installed a **<u>Box</u>** tab will be added to the AdvancedChat Config Menu. As well as a cog button in the lower right of the screen when chat is opened that comes by default in the AdvancedChat Core. Located in that tab are the following;
 
