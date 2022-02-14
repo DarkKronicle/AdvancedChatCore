@@ -65,7 +65,7 @@ Once the mod is installed a **<u>Chat Log</u>** tab will be added to the Advance
 - Clean Saved Lines - Removes some styling information for the saved text such as click events and hover events reducing file size.
 
 **Output File**
-- The location of the log file is in your .minecraft folder, either in the main directory (*~/.minecraft/logs/*) or profile directory (*~/.minecraft/MC_Profile_Name/logs/*) in the 'logs' folder. 
+- The location of the log file is in your .minecraft folder, either in the main directory (*~/.minecraft/chatlogs/*) or profile directory (*~/.minecraft/MC_Profile_Name/chatlogs/*) in the 'logs' folder. 
 
 ---
 ![ACC-ChatFiltersIcon](./assets/images/ACC-ChatFilters_Icon.png)
