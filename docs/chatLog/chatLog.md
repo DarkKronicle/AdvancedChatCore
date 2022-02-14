@@ -35,7 +35,7 @@ You can configure how many lines of chat are stored, as well as how many of thos
 {:toc}  
 The following section will go over all the available tabs and settings in each tab that you can modify. This information can also be found [here](https://darkkronicle.github.io/AdvancedChatCore/modules/modulesOverview.html), in the Modules Overview section. As well as overviews for all other modules available as of January 31st 2022.  
 
-***In Game Buttons**  
+**In Game Buttons**  
 - The Chatlog module adds an additional button to the right of the UI that looks like 3 stacked bars once the chat is opened. That is used to view and search chat. The search options use the **Filter Type** button that cycles the options;
 	- **Literal**, exact match. 
 	- **Upper-Lower**, literal but not case-sensitive.
