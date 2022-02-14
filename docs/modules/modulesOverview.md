@@ -55,9 +55,9 @@ Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>**
 ![ACC-ChatLogIcon](./assets/images/ACC-ChatLog_Icon.png)
 ### AdvancedChatLog
 {:toc}
-- View and sort through mass amounts of previous messages.
+- View, and sort through mass amounts of previous messages. Plus store previous messages to be loaded next play session.
 
-Once the mod is installed a **<u>Chat Log</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
+Once the mod is installed a **<u>Chat Log</u>** tab will be added to the AdvancedChat Config Menu. As well as a button in the chat GUI that looks like 3 stacked bars. Located in that tab and button are the following;
 
 **In Game Buttons**  
 - The Chatlog module adds an additional button to the right of the UI that looks like 3 stacked bars once the chat is opened. That is used to view and search chat. The search options use the **Filter Type** button that cycles the options;
