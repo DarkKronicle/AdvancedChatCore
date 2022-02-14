@@ -107,7 +107,7 @@ Chat Tabs have the following options to configure as well as the option to expor
 ---
 ## Settings Deep Dive
 {:toc}
-This section will take the above section, Available Tabs and Settings, and break down each one into their own separate sections to help fully understand what each one does respectively and in more easy to understand terms. As well as providing screen shots of their locations and more in-depth media in the Examples Sections located below.
+This section will take the above section, Available Tabs and Settings, and break down each one into their own separate sections to help fully understand what each one does respectively and in more easy to understand terms. As well as providing screenshots of their locations, settings and more located below.
 
 When you get into the game after installing the mod you will have by default have a premade Chat tab and its respective window, plus the vanilla chat box. As well as some buttons that will always be there even if you delete all of your tabs. 
 
