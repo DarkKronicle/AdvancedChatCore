@@ -56,8 +56,7 @@ The following section will go over all the available tabs and settings in each t
 **Output File**
 - It should be noted that the location of the log output file is in your .minecraft folder, either in the directory in the 'chatlogs' folder or in your profiles 'chatlogs' folder. (*~/.minecraft/chatlogs/  -OR-  ~/.minecraft/MC_Profile_Name/chatlogs/*)  
  
-<u>Log Output View</u>
+<u>Log Output View</u>  
 ![Log Output View](./assets/images/logView.png)   
----
 
 <!--This documentation was written by Nomad on February 14th 2022 Happy Valentines Day <3 -->
