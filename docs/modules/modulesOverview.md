@@ -58,14 +58,21 @@ Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>**
 - View and sort through mass amounts of previous messages.
 
 Once the mod is installed a **<u>Chat Log</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
-  
+
+**In Game Buttons**  
+- The Chatlog module adds an additional button to the right of the UI that looks like 3 stacked bars once the chat is opened. That is used to view and search chat. The search options use the **Filter Type** button that cycles the options;
+	- **Literal**, exact match. 
+	- **Upper-Lower**, literal but not case-sensitive.
+	- **RegEx**, Parses the strings as Regular Expression.
+	- **All**, Passes all text through the filter regardless of the string to find.  
+
 ***Chat Log Tab***  
 - Stored Lines - The maximum amount of lines stored in the Chat Log. (Excessively large values may cause memory errors)  
 - Saved Lines - Stores a specific amount of lines into a file and loads it when the game starts.  
 - Clean Saved Lines - Removes some styling information for the saved text such as click events and hover events reducing file size.
 
 **Output File**
-- The location of the log file is in your .minecraft folder, either in the main directory (*~/.minecraft/chatlogs/*) or profile directory (*~/.minecraft/MC_Profile_Name/chatlogs/*) in the 'logs' folder. 
+- The location of the log file is in your .minecraft folder, either in the main directory (*~/.minecraft/chatlogs/*) or profile directory (*~/.minecraft/MC_Profile_Name/chatlogs/*) in the 'chatlogs' folder. 
 
 ---
 ![ACC-ChatFiltersIcon](./assets/images/ACC-ChatFilters_Icon.png)
@@ -163,7 +170,7 @@ For the two buttons, the options are as follows;
 
 Once the mod is installed a **<u>HUD</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following tabs as well buttons outside of the AdvancedChat config menu when opening chat;  
 
-**Chat Buttons** 
+**In Game Buttons** 
 - Exclamation Mark (Location: Chat window) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
 	- Exclamation Mark - Vanilla default.  
 	- Thumbtack - Always focused. 
@@ -171,8 +178,7 @@ Once the mod is installed a **<u>HUD</u>** tab will be added to the AdvancedChat
 - Nested 90° Lines (Location: Chat window) - For resizing the current chatbox.  
 - X (Location: Chat window)- This will remove the respective AdvancedChat Window. 
 - Plus Sign (Location: Relative to listed tabs above player text entry)- Will create a new chat window for the currently selected Tab.
-- Trash Can (Location: Relative to listed tabs above player text entry)- This will remove all currently open AdvancedChat boxes. 
-- Bars (Location: Bottom right)- A chat page with the option to filter at the top with a **Filter Type** button that cycles the options listed under AdvancedChatFilters>Chat Filters Tab>Filter Type.   
+- Trash Can (Location: Relative to listed tabs above player text entry)- This will remove all currently open AdvancedChat boxes.    
 - Cog Wheel (Location: Bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.  
 
 There is also an added right click context menu when your chat is open that has the following options; 
