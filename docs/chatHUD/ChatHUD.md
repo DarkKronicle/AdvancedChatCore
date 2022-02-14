@@ -41,8 +41,7 @@ Pressing the chat key to open the chat, the following buttons will be available;
 - Nested 90° Lines (*Chat window*) - For resizing the current chatbox.  
 - X (*Chat window*)- This will remove the respective AdvancedChat Window. 
 - Plus Sign (*Relative to listed tabs above player text entry*)- Will create a new chat window for the currently selected Tab.
-- Trash Can (*Relative to listed tabs above player text entry*)- This will remove all currently open AdvancedChat boxes. 
-- Bars (*bottom right*)- A chat page with the option to filter at the top with a **Filter Type** button that cycles the options listed under AdvancedChatFilters>Chat Filters Tab>Filter Type.   
+- Trash Can (*Relative to listed tabs above player text entry*)- This will remove all currently open AdvancedChat boxes.   
 - Cog Wheel (*bottom right*)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.
 
 There is also an added right click context menu when your chat is open that has the following options;  
@@ -118,11 +117,6 @@ Pressing your chat key to open the chat, the following buttons will be available
 - <u>X Symbol</u> - Located in the Chat window. This will remove the respective AdvancedChat Window. 
 - <u>Plus Sign</u> - Is relative to listed tabs above where you type your messages. It will create a new chat window for the currently selected Tab.
 - <u>Trash Can</u> - Is relative to listed tabs above where you type your messages. This will remove all currently open AdvancedChat boxes. 
-- <u>Bars</u> - Located in the bottom right of your screen. This will open a chat page with the option to filter at the top with a **Filter Type** button next to the search box that cycles the following options;  (*Pst it's the same ones that are listed under [here](https://darkkronicle.github.io/AdvancedChatCore/modules/modulesOverview.html) AdvancedChat Modules>AdvancedChatFilters>Chat Filters Tab>Filter Type*) 
-	- **Literal**, exact match. 
-	- **Upper-Lower**, literal but not case-sensitive.
-	- **RegEx**, Parses the strings as Regular Expression.
-	- **All**, Passes all text through the filter regardless of the string to find.
 - <u>Cog Wheel</u> (bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.
 
 <u>*Default View*</u>
