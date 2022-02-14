@@ -51,7 +51,7 @@ The following section will go over all the available tabs and settings in each t
 - Clean Saved Lines - When true this will make it so that the log doesn't save things like mouse clicks and movements to help reduce the logs file size.
 
 <u>Log Tab</u>
-![Log Tab](./assets/images/logTAB.png) 
+![Log Tab](./assets/images/LogTAB.png) 
 
 **Output File**
 - It should be noted that the location of the log output file is in your .minecraft folder, either in the directory in the 'chatlogs' folder or in your profiles 'chatlogs' folder. (*~/.minecraft/chatlogs/  -OR-  ~/.minecraft/MC_Profile_Name/chatlogs/*)  
