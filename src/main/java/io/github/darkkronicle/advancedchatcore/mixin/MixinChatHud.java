@@ -42,7 +42,7 @@ public class MixinChatHud {
     @Inject(method = "clear", at = @At("HEAD"), cancellable = true)
     private void clearMessages(boolean clearTextHistory, CallbackInfo ci) {
         if (!clearTextHistory) {
-            // This only get's called if it is the keybind f3 + d
+            // This only gets called if it is the keybind f3 + d
             return;
         }
         if (!ConfigStorage.General.CLEAR_ON_DISCONNECT.config.getBooleanValue()) {

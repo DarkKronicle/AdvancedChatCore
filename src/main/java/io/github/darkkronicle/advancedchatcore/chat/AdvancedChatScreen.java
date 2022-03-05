@@ -247,7 +247,7 @@ public class AdvancedChatScreen extends GuiBase {
         }
 
         // Send to hud to scroll
-        client.inGameHud.getChatHud().scroll(amount);
+        client.inGameHud.getChatHud().scroll((int) amount);
         return true;
     }
 

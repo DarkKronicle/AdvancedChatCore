@@ -2,7 +2,7 @@ import javax.net.ssl.HttpsURLConnection
 import java.nio.file.Files
 
 plugins {
-	id 'fabric-loom' version '0.10.+'
+	id 'fabric-loom' version '0.11-SNAPSHOT'
 	id 'maven-publish'
 	id "io.freefair.lombok" version "6.0.0-m2"
 	id "com.diffplug.spotless" version "5.17.1"
@@ -20,9 +20,6 @@ if (file("extra.properties").exists()) {
 	additionalProperties.load(file("extra.properties").newReader())
 }
 
-minecraft {
-}
-
 repositories {
 	mavenCentral()
 	maven { url 'https://masa.dy.fi/maven' }
@@ -34,7 +31,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.18.1:${project.malilib_version}"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.18.2:${project.malilib_version}"
 	modCompileOnly "io.github.prospector:modmenu:1.16.8"
 
 	modImplementation "com.github.DarkKronicle:KommandLib:${project.kommandlib_version}"
