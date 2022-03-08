@@ -110,7 +110,7 @@ public class ConfigStorage implements IConfigHandler {
                         "messageOwnerRegex",
                         new ConfigString(
                                 translate("messageownerregex"),
-                                "[A-Za-z0-9_§]{3,16}",
+                                "(?<!\\[)\\b[A-Za-z0-9_§]{3,16}\\b(?!\\])",
                                 translate("info.messageownerregex")));
 
         public static final SaveableConfig<ConfigBoolean> FILTER_PROFANITY =
