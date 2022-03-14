@@ -25,7 +25,7 @@ Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>**
 ***General Tab***  
 - Time Format - SimpleDateFormat, 
 - Complete Time Format - How the text surrounding the time is formatted, 
-- Time Color - Color of the time using HEX+Alpha (You can use [this](https://www.hexcolortool.com/) website to make your life easy.) 
+- Time Color - Color of the time. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
 - Show time - Whether or not to show time next to chat messages.  
 - Clear Chat Messages on Disconnect - Whether or not to chat messages are kept when quitting servers or worlds. All messages are cleared regardless of this setting if you quit the game.  
 - Stack Duplicate Messages - How many previous lines are checked for stacking duplicate messages (set to zero to disable.)  
@@ -37,7 +37,7 @@ Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>**
 
 ***Chat Screen Tab***
 - Persistent Text - Whether or not messages that are typed but not sent are kept in the chat box.  
-- Chat Color - Changes the color of the chat box and buttons nearby using HEX+Alpha values.  
+- Chat Color - Changes the color of the chat box and buttons nearby. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)    
 - Extended Text Limit - Whether or not messages that are over the 256 limit are broken into multiple chat messages.
 
 ***Hotkeys Tab***
@@ -55,14 +55,24 @@ Once the mod is installed a **<u>Core</u>** tab as well as a **<u>Hot Keys</u>**
 ![ACC-ChatLogIcon](./assets/images/ACC-ChatLog_Icon.png)
 ### AdvancedChatLog
 {:toc}
-- View and sort through mass amounts of previous messages.
+- View, and sort through mass amounts of previous messages. Plus store previous messages to be loaded next play session.
 
-Once the mod is installed a **<u>Chat Log</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following;
-  
+Once the mod is installed a **<u>Chat Log</u>** tab will be added to the AdvancedChat Config Menu. As well as a button in the chat GUI that looks like 3 stacked bars. Located in that tab and button are the following;
+
+**In Game Buttons**  
+- The Chatlog module adds an additional button to the right of the UI that looks like 3 stacked bars once the chat is opened. That is used to view and search chat. The search options use the **Filter Type** button that cycles the options;
+	- **Literal**, exact match. 
+	- **Upper-Lower**, literal but not case-sensitive.
+	- **RegEx**, Parses the strings as Regular Expression.
+	- **Custom**, Allows for custom search parameters.  
+
 ***Chat Log Tab***  
 - Stored Lines - The maximum amount of lines stored in the Chat Log. (Excessively large values may cause memory errors)  
 - Saved Lines - Stores a specific amount of lines into a file and loads it when the game starts.  
 - Clean Saved Lines - Removes some styling information for the saved text such as click events and hover events reducing file size.
+
+**Output File**
+- The location of the log file is in your .minecraft folder, either in the main directory (*~/.minecraft/chatlogs/*) or profile directory (*~/.minecraft/MC_Profile_Name/chatlogs/*) in the 'chatlogs' folder. 
 
 ---
 ![ACC-ChatFiltersIcon](./assets/images/ACC-ChatFilters_Icon.png)
@@ -88,7 +98,7 @@ When a new filter is configured you are given the following options;
 	- **Upper-Lower**, literal but not case-sensitive.
 	- **RegEx**, Parses the strings as Regular Expression.
 	- **All**, Passes all text through the filter regardless of the string to find.
-- Text Color - The color of the replaced text when the filter is triggered, again using HEX+Alpha channels. (This setting gets overridden by legacy formatting codes)
+- Text Color - The color of the replaced text when the filter is triggered. (*This setting gets overridden by legacy formatting codes. | See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)    
 - Replace Text Color? - Whether or not the custom text color should be used when the filter is triggered.
 - Replace Background Color? - Whether or not the background should be replaced when the filter is triggered.
 - Replace to - The string that replaces what is set for replace type %Match% is replaced by whatever triggered the filter.
@@ -125,27 +135,27 @@ Once the mod is installed a **<u>Box</u>** tab will be added to the AdvancedChat
 
 ***General Tab***  
 Has two available buttons, Configure Suggestors, and Configure Formatters, as well as the following;
-- Highlight Color - What color selected suggestions should be using Hex+Alpha values.
-- Non-Highlighted Color - What color non-selected suggestions should be using Hex+Alpha values.
-- Background Color - What color the background of the Chat Suggestor should be using Hex+Alpha values.
+- Highlight Color - What color selected suggestions should be. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
+- Non-Highlighted Color - What color non-selected suggestions should be. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
+- Background Color - What color the background of the Chat Suggestor should be. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
 - Number of Suggestions - The maximum number of suggestions that the Chat Suggestor should display at once.
 - Remove Namespace - Whether or not the namespace should be omitted from the Chat Suggestor. (The namespace is the part of the ID that precedes the colon and includes the colon, such as 'minecraft:' in minecraft:stone)
 - Prune Player Suggestions - Whether or not non-real players are removed from Chat Suggestor. (Such as the fake players used in BungeeTabListPlus)
-- Available Suggestion Color - What color custom chat suggestors will show up as (Hex+Alpha values.)
+- Available Suggestion Color - What color custom chat suggestors will show up as. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
 
 For the two buttons, the options are as follows;
 
 ***Configure Suggestors Button***
 - Suggest Players - Whether or not player names are suggested in chat. Can be set to on or off.
-- In-Chat Calculator - Whether or not the chat calculator is active. Can be set to on or off. (To use the chat calculator, put a math expression inside of brackets, and press tab in the brackets. Expressions follow the mXParser format.)
+- In-Chat Calculator - Whether or not the chat calculator is active. Can be set to on or off. (*To use the chat calculator, put a math expression inside of brackets, and press tab in the brackets. | See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeMATH.html) page for Maths formatting*) 
 - Suggest Shortcuts - Whether or not shortcuts are suggested as you type. Can be set to on or off as well as configured to add or remove shortcuts. (Shortcuts are a way to bind a memorable phrase to a string of text, such as for emoticons. To use shortcuts, put a colon and the shortcut name, and press tab.)
 - Spell Checker - Whether or not the spell-checker is active. 
 
 ***Configure Formatters Button***
 - Custom Command Highlighting - Whether or not custom colors are used to highlight part of a command in Chat HUD. This may also be configured with; 
-	- **Command Color** - What color a command is by default using Hex+Alpha values. 
-	- **Error Color** - The color that highlights and incorrect command using Hex+Alpha values.
-	- **Default Palette** - The palette the command colorer uses for parts of commands. Custom ones may be declared in the ~/minecraft/config/advancedchat/colors.toml file.
+	- **Command Color** - What color a command is by default. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color format*)  
+	- **Error Color** - The color that highlights and incorrect command. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color format*)  
+	- **Default Palette** - The palette the command colorer uses for parts of commands. (*Custom palettes may be declared in the ~/minecraft/config/advancedchat/colors.toml*)  
 - Highlight JSON in Commands - whether or not JSON is parsed and highlighted in the Chat HUD.
 - Color Code Formatting - Whether or not color codes with & are parsed and highlighted in their respected color.
 
@@ -160,7 +170,7 @@ For the two buttons, the options are as follows;
 
 Once the mod is installed a **<u>HUD</u>** tab will be added to the AdvancedChat Config Menu. Located in that tab are the following tabs as well buttons outside of the AdvancedChat config menu when opening chat;  
 
-**Chat Buttons** 
+**In Game Buttons** 
 - Exclamation Mark (Location: Chat window) - This symbol when clicked has 3 options that modify the windows render of new messages and are as follows;
 	- Exclamation Mark - Vanilla default.  
 	- Thumbtack - Always focused. 
@@ -168,8 +178,7 @@ Once the mod is installed a **<u>HUD</u>** tab will be added to the AdvancedChat
 - Nested 90° Lines (Location: Chat window) - For resizing the current chatbox.  
 - X (Location: Chat window)- This will remove the respective AdvancedChat Window. 
 - Plus Sign (Location: Relative to listed tabs above player text entry)- Will create a new chat window for the currently selected Tab.
-- Trash Can (Location: Relative to listed tabs above player text entry)- This will remove all currently open AdvancedChat boxes. 
-- Bars (Location: Bottom right)- A chat page with the option to filter at the top with a **Filter Type** button that cycles the options listed under AdvancedChatFilters>Chat Filters Tab>Filter Type.   
+- Trash Can (Location: Relative to listed tabs above player text entry)- This will remove all currently open AdvancedChat boxes.    
 - Cog Wheel (Location: Bottom right)- Opens the configuration menu for the AdvancedChatHUD Chat Tabs.  
 
 There is also an added right click context menu when your chat is open that has the following options; 
@@ -200,7 +209,7 @@ There is also an added right click context menu when your chat is open that has 
 - Fade Speed - How quickly a message takes to fade-out.
 - Time Until Fade - The number of ticks before newly received messages begin to disappear.
 - Fade Style - The easing function used for the fade animation. (Vanilla uses linear easing)
-- Empty Text Color - The color of text without formatting using HEX+Alpha values.
+- Empty Text Color - The color of text without formatting. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
 - Background Line Style - How the background of the unfocused Chat HUD is fitted to the messages. 
 	- **Full** - Fits the background width of the Chat HUD. 
 	- **Compact** - Fits the background to the length of each respective line.
@@ -214,9 +223,9 @@ Chat Tabs have the following options to configure as well as the option to expor
 - Tab Name - What the tab shows up as in the config.
 - Starting Message - What text shows up when the tab is focused.
 - Tab HUD Abbreviation - What the tab shows up as on the side of the Chat HUD if Show Chat Tabs is enabled under Chat HUD settings.
-- Accent Color - The accent color of the chat tab using HEX+Alpha values.
-- Border Color - The color of the outline of the chat tab using HEX+Alpha values.
-- Background Color - The color of the background of the chat tab using HEX+Alpha values.
+- Accent Color - The accent color of the chat tab using. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
+- Border Color - The color of the outline of the chat tab. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
+- Background Color - The color of the background of the chat tab. (*See [this](https://darkkronicle.github.io/AdvancedChatCore/commonKnowledge/commonKnowledgeCOLOR.html) page for color formatting.*)   
 - Show Unread Messages - Whether or not the number of unread messages are displayed for the chat tab.
 
 ---
