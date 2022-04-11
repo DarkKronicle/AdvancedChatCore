@@ -20,7 +20,7 @@ import fi.dy.masa.malilib.config.options.ConfigDouble;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.config.options.ConfigString;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
-import io.github.darkkronicle.advancedchatcore.util.Colors;
+import io.github.darkkronicle.advancedchatcore.util.*;
 import io.github.darkkronicle.kommandlib.CommandManager;
 import io.github.darkkronicle.kommandlib.command.ClientCommand;
 import io.github.darkkronicle.kommandlib.command.CommandInvoker;
@@ -28,6 +28,7 @@ import io.github.darkkronicle.kommandlib.invokers.BaseCommandInvoker;
 import io.github.darkkronicle.kommandlib.util.CommandUtil;
 import io.github.darkkronicle.kommandlib.util.InfoUtil;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
 import java.util.List;
@@ -36,6 +37,7 @@ import java.util.Optional;
 public class CommandsHandler {
 
     private static final CommandsHandler INSTANCE = new CommandsHandler();
+    private static String TEST_REGEX = "";
 
     public static CommandsHandler getInstance() {
         return INSTANCE;
@@ -145,6 +147,38 @@ public class CommandsHandler {
                 "advancedchat",
                 CommandUtil.literal("advancedchat").executes(ClientCommand.of(context -> InfoUtil.sendChatMessage("AdvancedChatCore by DarkKronicle"))).build()
         );
+        command.addChild(CommandUtil.literal("setTestRegex").then(
+                CommandUtil.argument(
+                        "value", StringArgumentType.greedyString()
+                ).executes(ClientCommand.of(context -> {
+                    Optional<String> value = CommandUtil.getArgument(context, "value", String.class);
+                    if (value.isPresent()) {
+                        InfoUtil.sendChatMessage("Set!");
+                        TEST_REGEX = value.get();
+                    } else {
+                        InfoUtil.sendChatMessage("Not set!");
+                    }
+                })).build()).build());
+        command.addChild(CommandUtil.literal("testRegex").then(
+                CommandUtil.argument(
+                        "value", StringArgumentType.greedyString()
+                ).executes(ClientCommand.of(context -> {
+                    Optional<String> value = CommandUtil.getArgument(context, "value", String.class);
+                    if (value.isPresent()) {
+                        String val = value.get();
+                        val = val.replace('&', '§');
+                        FluidText text = StyleFormatter.formatText(new FluidText(new RawText(val, Style.EMPTY)));
+                        Optional<List<StringMatch>> matches = SearchUtils.findMatches(text, TEST_REGEX, FindType.REGEX);
+                        InfoUtil.sendChatMessage(text);
+                        if (matches.isEmpty()) {
+                            InfoUtil.sendChatMessage("None!");
+                            return;
+                        }
+                        InfoUtil.sendChatMessage(String.join(", ", matches.get().stream().map(match -> match.match).toList()));
+                    } else {
+                        InfoUtil.sendChatMessage("Not there!");
+                    }
+                })).build()).build());
         command.addChild(CommandUtil.literal("reloadColors").executes(ClientCommand.of((context) -> {
             InfoUtil.sendChatMessage("Reloading colors...");
             Colors.getInstance().load();

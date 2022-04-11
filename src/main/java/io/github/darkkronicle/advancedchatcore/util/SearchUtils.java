@@ -23,6 +23,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.text.Text;
 
 /**
  * A class used for helping filters find matches and act on them. Helps with Regular Expressions and
@@ -43,6 +44,24 @@ public class SearchUtils {
      * @return If a match is found.
      */
     public boolean isMatch(String input, String toMatch, FindType type) {
+        IFinder finder = type.getFinder();
+        if (finder == null) {
+            return false;
+        }
+        return finder.isMatch(input, toMatch);
+    }
+
+    /**
+     * Method to see if there is a match somewhere with a string with an expression. Is similar to
+     * {@link #findMatches(String, String, FindType)} just less expensive since it doesn't need to
+     * find every match.
+     *
+     * @param input String to search.
+     * @param toMatch Expression to find.
+     * @param type How toMatch should be interpreted.
+     * @return If a match is found.
+     */
+    public boolean isMatch(Text input, String toMatch, FindType type) {
         IFinder finder = type.getFinder();
         if (finder == null) {
             return false;
@@ -106,7 +125,28 @@ public class SearchUtils {
     }
 
     /**
-     * Get's first match found based off of conditions
+     * Method to find all matches within a text. Is similar to {@link #isMatch(Text, String,
+     * FindType)}}. This method just finds every match and returns it.
+     *
+     * @param input Text to search.
+     * @param toMatch Expression to find.
+     * @param type How toMatch should be interpreted.
+     * @return An Optional containing a list of {@link StringMatch}
+     */
+    public Optional<List<StringMatch>> findMatches(Text input, String toMatch, FindType type) {
+        IFinder finder = type.getFinder();
+        if (finder == null) {
+            return Optional.empty();
+        }
+        Set<StringMatch> matches = new TreeSet<>(finder.getMatches(input, toMatch));
+        if (matches.size() != 0) {
+            return Optional.of(new ArrayList<>(matches));
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Gets first match found based off of conditions
      *
      * @param input String to search
      * @param toMatch Search content
@@ -114,6 +154,28 @@ public class SearchUtils {
      * @return Optional of a {@link StringMatch} if found
      */
     public Optional<StringMatch> getMatch(String input, String toMatch, FindType type) {
+        IFinder finder = type.getFinder();
+        if (finder == null) {
+            return Optional.empty();
+        }
+        // Use treeset to sort the matches
+        Set<StringMatch> matches = new TreeSet<>(finder.getMatches(input, toMatch));
+        // Add and sort matches
+        if (matches.size() != 0) {
+            return Optional.of(matches.toArray(new StringMatch[0])[0]);
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Gets first match found based off of conditions
+     *
+     * @param input String to search
+     * @param toMatch Search content
+     * @param type {@link FindType} way to search
+     * @return Optional of a {@link StringMatch} if found
+     */
+    public Optional<StringMatch> getMatch(Text input, String toMatch, FindType type) {
         IFinder finder = type.getFinder();
         if (finder == null) {
             return Optional.empty();

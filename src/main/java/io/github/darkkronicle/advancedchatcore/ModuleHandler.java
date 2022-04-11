@@ -19,7 +19,6 @@ import lombok.Value;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.CustomValue;
-import org.jetbrains.annotations.NotNull;
 
 public class ModuleHandler {
 
@@ -88,7 +87,7 @@ public class ModuleHandler {
         IInitializationHandler handler;
 
         @Override
-        public int compareTo(@NotNull ModuleHandler.LoadOrder o) {
+        public int compareTo(ModuleHandler.LoadOrder o) {
             int compared = order.compareTo(o.order);
             if (compared == 0) {
                 return name.compareTo(o.getName());

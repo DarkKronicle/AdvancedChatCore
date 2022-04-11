@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
+import java.util.function.BiFunction;
+
 import lombok.Getter;
 import lombok.Setter;
 import net.fabricmc.api.EnvType;
@@ -331,6 +333,63 @@ public class FluidText implements MutableText {
     public FluidText append(Text text) {
         append(new RawText(text.getString(), text.getStyle()), false);
         return this;
+    }
+
+    /**
+     * Checks to see if the style changes from the starting index to the end index
+     * @param start Index to start check
+     * @param end Ending to stop
+     * @return If style changes
+     */
+    public boolean styleChanges(int start, int end) {
+        if (end <= start) {
+            return false;
+        }
+        return FluidText.styleChanges(truncate(new StringMatch("", start, end)));
+    }
+
+    /**
+     * See's if style changes for specified fluid text
+     * @param text Text to test
+     * @return If style changes
+     */
+    public static boolean styleChanges(FluidText text) {
+        Style style = null;
+        if (text.getRawTexts().size() == 1) {
+            return false;
+        }
+        for (RawText raw : text.getRawTexts()) {
+            if (style == null) {
+                style = raw.getStyle();
+            } else if (!style.equals(raw.getStyle())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * See's if style changes for specified fluid text
+     * @param text Text to test
+     * @param predicate Predicate to see if style has changed enough. Previous, current, different
+     * @return If style changes
+     */
+    public static boolean styleChanges(FluidText text, BiFunction<Style, Style, Boolean> predicate) {
+        Style previous = null;
+        if (text.getRawTexts().size() == 1) {
+            return !predicate.apply(text.getRawTexts().get(0).getStyle(), text.getRawTexts().get(0).getStyle());
+        }
+        for (RawText raw : text.getRawTexts()) {
+            if (previous == null) {
+                previous = raw.getStyle();
+            } else if (!previous.equals(raw.getStyle())) {
+                if (!predicate.apply(previous, raw.getStyle())) {
+                    return true;
+                }
+                previous = raw.getStyle();
+            }
+        }
+        return false;
     }
 
     /**
