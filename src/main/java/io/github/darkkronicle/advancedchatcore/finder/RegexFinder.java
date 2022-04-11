@@ -39,7 +39,7 @@ public class RegexFinder extends PatternFinder {
         Pattern pattern = getPattern(toMatch);
         Matcher matcher = pattern.matcher(string);
 
-        List<String> groups = optionalGroups.get().stream().map((match) -> match.match.substring(3, match.end - match.start - 1)).filter((match) -> match.startsWith("c")).toList();
+        List<String> groups = optionalGroups.get().stream().map((match) -> match.match.substring(3, match.end - match.start - 1)).filter((match) -> match.startsWith("adv")).toList();
         List<StringMatch> matches = new ArrayList<>();
 
         while (matcher.find()) {
@@ -73,7 +73,7 @@ public class RegexFinder extends PatternFinder {
     public static boolean isAllowed(FluidText input, String group, Matcher matcher) {
         group = group.toLowerCase(Locale.ROOT);
         String groupText = matcher.group(group);
-        String groupCondition = group.substring(1);
+        String groupCondition = group.substring(3);
         if (groupText == null || groupCondition.isEmpty() || groupText.isEmpty()) {
             return true;
         }
