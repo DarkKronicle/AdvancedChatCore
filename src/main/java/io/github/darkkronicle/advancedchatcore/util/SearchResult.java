@@ -16,6 +16,7 @@ import java.util.regex.Matcher;
 import lombok.Getter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.text.Text;
 
 /** An object that holds information about a search. */
 @Environment(EnvType.CLIENT)
@@ -125,5 +126,19 @@ public class SearchResult {
         IFinder finder = type.getFinder();
         List<StringMatch> matches = finder.getMatches(input, match);
         return new SearchResult(input, match, finder, matches);
+    }
+
+    /**
+     * A method to construct a SearchResult based off of an input, condition, and {@link FindType}
+     *
+     * @param input Input string to match from
+     * @param match Search text
+     * @param type {@link FindType} way to search
+     * @return SearchResult with compiled searches
+     */
+    public static SearchResult searchOf(Text input, String match, FindType type) {
+        IFinder finder = type.getFinder();
+        List<StringMatch> matches = finder.getMatches(input, match);
+        return new SearchResult(input.getString(), match, finder, matches);
     }
 }
