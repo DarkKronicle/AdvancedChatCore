@@ -53,11 +53,7 @@ Reference the [example mod](https://github.com/DarkKronicle/AdvancedChatModuleTe
 
 ## Development
 
-To develop, all dependencies should automatically be processed through gradle. To ensure code consistency the hook pre-commit.sh can be used. To install the pre-commit hook run:
-
-`ln -s ../../pre-commit.sh .git/hooks/pre-commit`
-
-To run spotless at any point it's recommended to execute `pre-commit.sh`.
+To develop, all dependencies should automatically be processed through gradle. 
 
 ## Credits n' more
 

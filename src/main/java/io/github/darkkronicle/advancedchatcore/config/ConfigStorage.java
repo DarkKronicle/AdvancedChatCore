@@ -196,16 +196,33 @@ public class ConfigStorage implements IConfigHandler {
             return StringUtils.translate("advancedchat.config.hotkeys." + key);
         }
 
+        public static final SaveableConfig<ConfigHotkey> OPEN_CHAT = SaveableConfig.fromConfig("openChat",
+                new ConfigHotkey(translate("openchat"), "", KeybindSettings.create(
+                        KeybindSettings.Context.INGAME, KeyAction.PRESS, false, true, false, true
+                ), translate("info.openchat")));
+
+        public static final SaveableConfig<ConfigHotkey> TOGGLE_PERMANENT = SaveableConfig.fromConfig("togglePermanent",
+                new ConfigHotkey(translate("togglepermanentfocus"), "", KeybindSettings.create(
+                        KeybindSettings.Context.INGAME, KeyAction.PRESS, false, true, false, true
+                ), translate("info.togglepermanentfocus")));
+
+        public static final SaveableConfig<ConfigHotkey> OPEN_CHAT_WITH_LAST = SaveableConfig.fromConfig("openChatWithLast",
+                new ConfigHotkey(translate("openchatwithlast"), "UP", KeybindSettings.create(
+                        KeybindSettings.Context.INGAME, KeyAction.PRESS, true, true, false, true
+                ), translate("info.openchatwithlast")));
+
+        public static final SaveableConfig<ConfigHotkey> OPEN_CHAT_FREE_MOVEMENT = SaveableConfig.fromConfig("openChatFreeMovement",
+                new ConfigHotkey(translate("openchatfreemovement"), "", KeybindSettings.create(
+                        KeybindSettings.Context.INGAME, KeyAction.PRESS, true, true, false, true
+                ), translate("info.openchatfreemovement")));
+
         public static final SaveableConfig<ConfigHotkey> OPEN_SETTINGS = SaveableConfig.fromConfig("openSettings",
                 new ConfigHotkey(translate("opensettings"), "", KeybindSettings.create(
                         KeybindSettings.Context.ANY, KeyAction.PRESS, false, true, false, true
                 ), translate("info.opensettings")));
 
-        public static final ImmutableList<ConfigHotkey> HOTKEYS =
-                ImmutableList.of(OPEN_SETTINGS.config);
-
         public static final ImmutableList<SaveableConfig<? extends IConfigBase>> OPTIONS =
-                ImmutableList.of(OPEN_SETTINGS);
+                ImmutableList.of(OPEN_SETTINGS, OPEN_CHAT, OPEN_CHAT_FREE_MOVEMENT, TOGGLE_PERMANENT);
     }
 
     public static void loadFromFile() {

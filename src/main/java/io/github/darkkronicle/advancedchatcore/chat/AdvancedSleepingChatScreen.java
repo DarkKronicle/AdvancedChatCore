@@ -47,6 +47,8 @@ public class AdvancedSleepingChatScreen extends AdvancedChatScreen {
 
             this.chatField.setText("");
             this.client.inGameHud.getChatHud().resetScroll();
+            // Prevents really weird interactions with chat history
+            resetCurrentMessage();
             return true;
         }
 

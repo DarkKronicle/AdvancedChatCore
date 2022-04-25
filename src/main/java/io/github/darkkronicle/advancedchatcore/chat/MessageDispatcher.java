@@ -109,8 +109,9 @@ public class MessageDispatcher {
      */
     public void handleText(Text text) {
         FluidText fluidText = new FluidText(text);
+        boolean previouslyBlank = fluidText.getString().length() == 0;
         fluidText = preFilter(fluidText);
-        if (fluidText.getString().length() == 0) {
+        if (fluidText.getString().length() == 0 && !previouslyBlank) {
             // No more
             return;
         }

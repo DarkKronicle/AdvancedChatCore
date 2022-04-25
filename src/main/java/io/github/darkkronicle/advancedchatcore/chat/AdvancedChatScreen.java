@@ -17,7 +17,6 @@ import io.github.darkkronicle.advancedchatcore.gui.IconButton;
 import io.github.darkkronicle.advancedchatcore.interfaces.AdvancedChatScreenSection;
 import io.github.darkkronicle.advancedchatcore.util.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
@@ -25,6 +24,9 @@ import io.github.darkkronicle.advancedchatcore.util.RowList;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
+import net.minecraft.client.input.Input;
+import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -34,8 +36,12 @@ import net.minecraft.util.math.MathHelper;
 
 public class AdvancedChatScreen extends GuiBase {
 
+    public static boolean PERMANENT_FOCUS = false;
+
     private String finalHistory = "";
     private int messageHistorySize = -1;
+    private int startHistory = -1;
+    private boolean passEvents = false;
 
     /** Chat field at the bottom of the screen */
     @Getter protected AdvancedTextField chatField;
@@ -60,11 +66,25 @@ public class AdvancedChatScreen extends GuiBase {
         super.closeGui(showParent);
     }
 
+    public AdvancedChatScreen(boolean passEvents) {
+        this.passEvents = passEvents;
+    }
+
+    public AdvancedChatScreen(int indexOfLast) {
+        super();
+        this.originalChatText = "";
+        setupSections();
+        startHistory = indexOfLast;
+    }
+
     public AdvancedChatScreen(String originalChatText) {
         super();
         this.originalChatText = originalChatText;
-        for (Function<AdvancedChatScreen, AdvancedChatScreenSection> supplier :
-                ChatScreenSectionHolder.getInstance().getSectionSuppliers()) {
+        setupSections();
+    }
+
+    private void setupSections() {
+        for (Function<AdvancedChatScreen, AdvancedChatScreenSection> supplier : ChatScreenSectionHolder.getInstance().getSectionSuppliers()) {
             AdvancedChatScreenSection section = supplier.apply(this);
             if (section != null) {
                 sections.add(section);
@@ -76,12 +96,16 @@ public class AdvancedChatScreen extends GuiBase {
         return ConfigStorage.ChatScreen.COLOR.config.get();
     }
 
+    public void resetCurrentMessage() {
+        this.messageHistorySize = this.client.inGameHud.getChatHud().getMessageHistory().size();
+    }
+
     public void initGui() {
         super.initGui();
         this.rightSideButtons.clear();
         this.leftSideButtons.clear();
         this.client.keyboard.setRepeatEvents(true);
-        this.messageHistorySize = this.client.inGameHud.getChatHud().getMessageHistory().size();
+        resetCurrentMessage();
         this.chatField =
                 new AdvancedTextField(
                         this.textRenderer,
@@ -147,6 +171,9 @@ public class AdvancedChatScreen extends GuiBase {
             }
             y -= maxHeight + 1;
         }
+        if (startHistory >= 0) {
+            setChatFromHistory(-startHistory - 1);
+        }
     }
 
     public void resize(MinecraftClient client, int width, int height) {
@@ -177,14 +204,25 @@ public class AdvancedChatScreen extends GuiBase {
         }
     }
 
+    @Override
+    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
+        if (passEvents) {
+            InputUtil.Key key = InputUtil.fromKeyCode(keyCode, scanCode);
+            KeyBinding.setKeyPressed(key, false);
+        }
+        return false;
+    }
+
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        for (AdvancedChatScreenSection section : sections) {
-            if (section.keyPressed(keyCode, scanCode, modifiers)) {
+        if (!passEvents) {
+            for (AdvancedChatScreenSection section : sections) {
+                if (section.keyPressed(keyCode, scanCode, modifiers)) {
+                    return true;
+                }
+            }
+            if (super.keyPressed(keyCode, scanCode, modifiers)) {
                 return true;
             }
-        }
-        if (super.keyPressed(keyCode, scanCode, modifiers)) {
-            return true;
         }
         if (keyCode == KeyCodes.KEY_ESCAPE) {
             // Exit out
@@ -223,6 +261,13 @@ public class AdvancedChatScreen extends GuiBase {
             client.inGameHud
                     .getChatHud()
                     .scroll(-this.client.inGameHud.getChatHud().getVisibleLineCount() + 1);
+            return true;
+        }
+        if (passEvents) {
+            this.chatField.setText("");
+            InputUtil.Key key = InputUtil.fromKeyCode(keyCode, scanCode);
+            KeyBinding.setKeyPressed(key, true);
+            KeyBinding.onKeyPressed(key);
             return true;
         }
         return false;
@@ -315,8 +360,7 @@ public class AdvancedChatScreen extends GuiBase {
                     this.finalHistory = this.chatField.getText();
                 }
 
-                String hist =
-                        this.client.inGameHud.getChatHud().getMessageHistory().get(targetIndex);
+                String hist = this.client.inGameHud.getChatHud().getMessageHistory().get(targetIndex);
                 this.chatField.setText(hist);
                 for (AdvancedChatScreenSection section : sections) {
                     section.setChatFromHistory(hist);

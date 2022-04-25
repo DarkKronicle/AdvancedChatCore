@@ -13,10 +13,8 @@ import fi.dy.masa.malilib.config.options.ConfigHotkey;
 import fi.dy.masa.malilib.event.InputEventHandler;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.interfaces.IInitializationHandler;
-import io.github.darkkronicle.advancedchatcore.chat.ChatHistoryProcessor;
-import io.github.darkkronicle.advancedchatcore.chat.ChatScreenSectionHolder;
-import io.github.darkkronicle.advancedchatcore.chat.DefaultChatSuggestor;
-import io.github.darkkronicle.advancedchatcore.chat.MessageDispatcher;
+import fi.dy.masa.malilib.util.InfoUtils;
+import io.github.darkkronicle.advancedchatcore.chat.*;
 import io.github.darkkronicle.advancedchatcore.config.CommandsHandler;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfig;
@@ -33,6 +31,8 @@ import java.util.*;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.BufferRenderer;
 
 @Environment(EnvType.CLIENT)
 public class InitHandler implements IInitializationHandler {
@@ -101,13 +101,47 @@ public class InitHandler implements IInitializationHandler {
                         "advancedchatcore.findtype.custom.info.profanity");
 
         CommandsHandler.getInstance().setup();
-        ModuleHandler.getInstance().load();
         InputHandler.getInstance().addDisplayName("core_general", "advancedchatcore.config.tab.hotkeysgeneral");
+        InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.OPEN_CHAT.config, (action, key) -> {
+            if (MinecraftClient.getInstance().world == null) {
+                return true;
+            }
+            GuiBase.openGui(new AdvancedChatScreen(""));
+            return true;
+        });
+        InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.OPEN_CHAT_WITH_LAST.config, (action, key) -> {
+            if (MinecraftClient.getInstance().world == null) {
+                return true;
+            }
+            GuiBase.openGui(new AdvancedChatScreen(0));
+            return true;
+        });
+        InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.OPEN_CHAT_FREE_MOVEMENT.config, (action, key) -> {
+            if (MinecraftClient.getInstance().world == null) {
+                return true;
+            }
+            // Manually update stuff so that movement keys are continued to be pressed
+            MinecraftClient client = MinecraftClient.getInstance();
+            if (client.currentScreen != null) {
+                client.currentScreen.removed();
+            }
+            client.currentScreen = new AdvancedChatScreen(true);
+            BufferRenderer.unbindAll();
+            client.mouse.unlockCursor();
+            client.currentScreen.init(client, client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight());
+            client.skipGameRender = false;;
+            return true;
+        });
+        InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.TOGGLE_PERMANENT.config, (action, key) -> {
+            AdvancedChatScreen.PERMANENT_FOCUS = !AdvancedChatScreen.PERMANENT_FOCUS;
+            InfoUtils.printActionbarMessage("advancedchatcore.message.togglepermanent");
+            return true;
+        });
         InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.OPEN_SETTINGS.config, (action, key) -> {
             GuiBase.openGui(new GuiConfig());
             return true;
         });
-
+        ModuleHandler.getInstance().load();
         InputEventHandler.getKeybindManager().registerKeybindProvider(InputHandler.getInstance());
         InputEventHandler.getInputManager().registerKeyboardInputHandler(InputHandler.getInstance());
         InputEventHandler.getInputManager().registerMouseInputHandler(InputHandler.getInstance());

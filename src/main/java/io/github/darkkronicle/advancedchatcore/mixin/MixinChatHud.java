@@ -54,6 +54,6 @@ public class MixinChatHud {
     @Inject(method = "isChatFocused", at = @At("HEAD"), cancellable = true)
     private void isChatFocused(CallbackInfoReturnable<Boolean> ci) {
         // If the chat is focused
-        ci.setReturnValue(client.currentScreen instanceof AdvancedChatScreen);
+        ci.setReturnValue(AdvancedChatScreen.PERMANENT_FOCUS || client.currentScreen instanceof AdvancedChatScreen);
     }
 }
