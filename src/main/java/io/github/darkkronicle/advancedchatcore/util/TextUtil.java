@@ -292,8 +292,12 @@ public class TextUtil {
             totalchar = totalchar + length;
         }
 
-        // At the end we take the siblings created in this method and override the old ones.
-        return null;
+        // At the end we take the siblings created in this method and return them.
+        MutableText newtext = Text.empty();
+        for (Text sibling : newSiblings) {
+            newtext.append(sibling);
+        }
+        return newtext;
     }
 
     /**
