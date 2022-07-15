@@ -18,8 +18,6 @@ import java.time.format.DateTimeFormatter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -58,7 +56,7 @@ public class ChatHistoryProcessor implements IMessageProcessor {
             Style style = Style.EMPTY;
             TextColor textColor = TextColor.fromRgb(color.color());
             style = style.withColor(textColor);
-            text.getSiblings().add(0, MutableText.of(new LiteralTextContent(replaceFormat.replaceAll("%TIME%", time.format(format)))).fillStyle(style));
+            text.getSiblings().add(0, Text.literal(replaceFormat.replaceAll("%TIME%", time.format(format))).fillStyle(style));
         }
 
         int width = 0;

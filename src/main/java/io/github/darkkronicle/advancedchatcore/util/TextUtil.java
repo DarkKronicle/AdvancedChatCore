@@ -16,11 +16,9 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.BiFunction;
 import lombok.experimental.UtilityClass;
-import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextContent;
 
 @UtilityClass
 public class TextUtil {
@@ -174,7 +172,7 @@ public class TextUtil {
             int last = 0;
             while (true) {
                 if (length + totalchar <= match.getKey().start) {
-                    newSiblings.add(MutableText.of(new LiteralTextContent((text.getString().substring(last)))).fillStyle(text.getStyle()));
+                    newSiblings.add(Text.literal((text.getString().substring(last))).fillStyle(text.getStyle()));
                     break;
                 }
                 int start = match.getKey().start - totalchar;
@@ -182,7 +180,7 @@ public class TextUtil {
                 if (inMatch) {
                     if (end <= length) {
                         inMatch = false;
-                        newSiblings.add(MutableText.of(new LiteralTextContent((text.getString().substring(end)))).fillStyle(text.getStyle()));
+                        newSiblings.add(Text.literal((text.getString().substring(end))).fillStyle(text.getStyle()));
                         last = end;
                         if (!sortedMatches.hasNext()) {
                             match = null;
@@ -196,7 +194,7 @@ public class TextUtil {
                     // End will go onto another string
                     if (start > 0) {
                         // Add previous string section
-                        newSiblings.add(MutableText.of(new LiteralTextContent((text.getString().substring(last, start)))).fillStyle(text.getStyle()));
+                        newSiblings.add(Text.literal(text.getString().substring(last, start)).fillStyle(text.getStyle()));
                     }
                     if (end >= length) {
                         newSiblings.addAll(
@@ -221,7 +219,7 @@ public class TextUtil {
                     }
                     last = end;
                     if (match == null || match.getKey().start - totalchar > length) {
-                        newSiblings.add(MutableText.of(new LiteralTextContent((text.getString().substring(end)))).fillStyle(text.getStyle()));
+                        newSiblings.add(Text.literal(text.getString().substring(end)).fillStyle(text.getStyle()));
                         break;
                     }
                 } else {
@@ -234,7 +232,7 @@ public class TextUtil {
             totalchar = totalchar + length;
         }
 
-        MutableText newtext = MutableText.of(TextContent.EMPTY);
+        MutableText newtext = Text.empty();
         for (Text sibling : newSiblings) {
             newtext.append(sibling);
         }
@@ -264,17 +262,17 @@ public class TextUtil {
                 if (totalchar + length >= match.end) {
                     if (!start) {
                         newSiblings.add(
-                                MutableText.of(new LiteralTextContent(
+                                Text.literal(
                                         text.getString()
                                                 .substring(
                                                         match.start - totalchar,
-                                                        match.end - totalchar))).fillStyle(text.getStyle()));
+                                                        match.end - totalchar)).fillStyle(text.getStyle()));
                     } else {
                         newSiblings.add(
-                            MutableText.of(new LiteralTextContent(
-                                        text.getString().substring(0, match.end - totalchar))).fillStyle(text.getStyle()));
+                                Text.literal(
+                                        text.getString().substring(0, match.end - totalchar)).fillStyle(text.getStyle()));
                     }
-                    MutableText newtext = MutableText.of(TextContent.EMPTY);
+                    MutableText newtext = Text.empty();
                     for (Text sibling : newSiblings) {
                         newtext.append(sibling);
                     }
@@ -282,8 +280,8 @@ public class TextUtil {
                 } else {
                     if (!start) {
                         newSiblings.add(
-                            MutableText.of(new LiteralTextContent(
-                                        text.getString().substring(match.start - totalchar))).fillStyle(text.getStyle()));
+                                Text.literal(
+                                        text.getString().substring(match.start - totalchar)).fillStyle(text.getStyle()));
                         start = true;
                     } else {
                         newSiblings.add(text);

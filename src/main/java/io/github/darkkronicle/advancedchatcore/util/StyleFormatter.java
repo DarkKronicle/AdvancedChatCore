@@ -192,12 +192,12 @@ public class StyleFormatter {
      * @return Formatted text
      */
     public static MutableText formatText(Text text) {
-        MutableText t = MutableText.of(TextContent.EMPTY);
+        MutableText t = Text.empty();
         int length = text.getString().length();
         StyleFormatter formatter =
                 new StyleFormatter(
                         (c, index, formattedIndex, style, formattedStyle) -> {
-                            t.append(MutableText.of(new LiteralTextContent(String.valueOf(c))).fillStyle(formattedStyle));
+                            t.append(Text.literal(String.valueOf(c)).fillStyle(formattedStyle));
                             return true;
                         },
                         length);
@@ -226,7 +226,7 @@ public class StyleFormatter {
                     }  
                 });
 
-                lines.add(MutableText.of(new LiteralTextContent(breakRenderedChatMessageLineString.toString())));
+                lines.add(Text.literal(breakRenderedChatMessageLineString.toString()));
         }
         return lines;
     }

@@ -23,7 +23,6 @@ import java.util.Optional;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.ClickEvent;
-import net.minecraft.text.LiteralTextContent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
@@ -74,7 +73,7 @@ public class MessageDispatcher {
                                         url = "https://" + url;
                                     }
                                     if (current.getStyle().getClickEvent() == null) {
-                                        return MutableText.of(new LiteralTextContent(match1.match)).fillStyle(current.getStyle().withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url)));
+                                        return Text.literal(match1.match).fillStyle(current.getStyle().withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url)));
                                     }
                                     return MutableText.of(current.getContent()).fillStyle(current.getStyle());
                                 });

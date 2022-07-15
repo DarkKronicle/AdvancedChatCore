@@ -33,8 +33,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferRenderer;
-import net.minecraft.text.LiteralTextContent;
-import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class InitHandler implements IInitializationHandler {
@@ -76,7 +75,7 @@ public class InitHandler implements IInitializationHandler {
                         new HashMap<>();
                 for (StringMatch bad : profanity) {
                     insertions.put(bad, (current, match) ->
-                            MutableText.of(new LiteralTextContent("*".repeat(bad.end - bad.start))).fillStyle(current.getStyle())
+                            Text.literal("*".repeat(bad.end - bad.start)).fillStyle(current.getStyle())
                     );
                 }
                 TextUtil.replaceStrings(text, insertions);
