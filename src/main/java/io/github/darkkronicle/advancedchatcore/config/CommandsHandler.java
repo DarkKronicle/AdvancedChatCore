@@ -28,7 +28,7 @@ import io.github.darkkronicle.kommandlib.invokers.BaseCommandInvoker;
 import io.github.darkkronicle.kommandlib.util.CommandUtil;
 import io.github.darkkronicle.kommandlib.util.InfoUtil;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.List;
@@ -167,7 +167,7 @@ public class CommandsHandler {
                     if (value.isPresent()) {
                         String val = value.get();
                         val = val.replace('&', '§');
-                        FluidText text = StyleFormatter.formatText(new FluidText(new RawText(val, Style.EMPTY)));
+                        Text text = StyleFormatter.formatText(Text.literal(val));
                         Optional<List<StringMatch>> matches = SearchUtils.findMatches(text, TEST_REGEX, FindType.REGEX);
                         InfoUtil.sendChatMessage(text);
                         if (matches.isEmpty()) {

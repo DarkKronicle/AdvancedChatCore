@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -7,7 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatcore.interfaces;
 
-import io.github.darkkronicle.advancedchatcore.util.FluidText;
+import net.minecraft.text.Text;
 import java.util.Optional;
 
 /** An interface to modify text. */
@@ -18,5 +18,5 @@ public interface IMessageFilter {
      * @param text Text to modify
      * @return Modified text. If empty, the text won't be changed.
      */
-    Optional<FluidText> filter(FluidText text);
+    Optional<Text> filter(Text text);
 }

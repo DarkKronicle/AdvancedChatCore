@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -7,8 +7,8 @@
  */
 package io.github.darkkronicle.advancedchatcore.interfaces;
 
-import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.SearchResult;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -43,7 +43,7 @@ public interface IMatchProcessor extends IMessageProcessor {
     }
 
     @Override
-    default boolean process(FluidText text, FluidText unfiltered) {
+    default boolean process(Text text, Text unfiltered) {
         return processMatches(text, unfiltered, null).success;
     }
 
@@ -56,7 +56,7 @@ public interface IMatchProcessor extends IMessageProcessor {
      * @return The {@link Result} that the method performed
      */
     Result processMatches(
-            FluidText text, @Nullable FluidText unfiltered, @Nullable SearchResult search);
+            Text text, @Nullable Text unfiltered, @Nullable SearchResult search);
 
     /**
      * Whether or not this processor should only trigger when matches are present. If false {@link

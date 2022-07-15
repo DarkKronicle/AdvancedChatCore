@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -191,13 +191,13 @@ public class StyleFormatter {
      * @param text Text to reformat
      * @return Formatted text
      */
-    public static FluidText formatText(FluidText text) {
-        FluidText t = new FluidText();
+    public static MutableText formatText(Text text) {
+        MutableText t = Text.empty();
         int length = text.getString().length();
         StyleFormatter formatter =
                 new StyleFormatter(
                         (c, index, formattedIndex, style, formattedStyle) -> {
-                            t.append(new RawText(String.valueOf(c), formattedStyle), false);
+                            t.append(Text.literal(String.valueOf(c)).fillStyle(formattedStyle));
                             return true;
                         },
                         length);
@@ -217,7 +217,16 @@ public class StyleFormatter {
         ArrayList<Text> lines = new ArrayList<>();
         for (OrderedText breakRenderedChatMessageLine :
                 ChatMessages.breakRenderedChatMessageLines(text, scaledWidth, textRenderer)) {
-            lines.add(new FluidText(breakRenderedChatMessageLine));
+                StringBuilder breakRenderedChatMessageLineString = new StringBuilder();
+                breakRenderedChatMessageLine.accept(new CharacterVisitor() {
+                    public boolean accept(int index, net.minecraft.text.Style style, int codePoint) {
+                        breakRenderedChatMessageLineString.append((char) codePoint);
+
+                        return true;
+                    }  
+                });
+
+                lines.add(Text.literal(breakRenderedChatMessageLineString.toString()));
         }
         return lines;
     }

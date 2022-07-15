@@ -10,7 +10,6 @@ package io.github.darkkronicle.advancedchatcore;
 import fi.dy.masa.malilib.event.InitializationHandler;
 import fi.dy.masa.malilib.gui.GuiBase;
 import io.github.darkkronicle.advancedchatcore.chat.AdvancedSleepingChatScreen;
-import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
 import io.github.darkkronicle.advancedchatcore.util.Colors;
 import io.github.darkkronicle.advancedchatcore.util.SyncTaskQueue;
 import java.io.FileInputStream;
@@ -24,13 +23,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class AdvancedChatCore implements ClientModInitializer {

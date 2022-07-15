@@ -8,7 +8,6 @@ import io.github.darkkronicle.Konstruct.parser.Result;
 import io.github.darkkronicle.Konstruct.type.IntegerObject;
 import io.github.darkkronicle.Konstruct.type.KonstructObject;
 import io.github.darkkronicle.Konstruct.type.StringObject;
-import io.github.darkkronicle.advancedchatcore.util.SearchResult;
 import io.github.darkkronicle.advancedchatcore.util.StringMatch;
 
 import java.util.List;

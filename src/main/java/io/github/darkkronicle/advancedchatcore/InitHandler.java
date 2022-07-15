@@ -23,16 +23,17 @@ import io.github.darkkronicle.advancedchatcore.config.gui.TabSupplier;
 import io.github.darkkronicle.advancedchatcore.finder.CustomFinder;
 import io.github.darkkronicle.advancedchatcore.finder.custom.ProfanityFinder;
 import io.github.darkkronicle.advancedchatcore.hotkeys.InputHandler;
-import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.ProfanityUtil;
+import io.github.darkkronicle.advancedchatcore.util.StringInsert;
 import io.github.darkkronicle.advancedchatcore.util.StringMatch;
-
+import io.github.darkkronicle.advancedchatcore.util.TextUtil;
 import java.util.*;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferRenderer;
+import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class InitHandler implements IInitializationHandler {
@@ -70,14 +71,14 @@ public class InitHandler implements IInitializationHandler {
                 if (profanity.size() == 0) {
                     return Optional.empty();
                 }
-                Map<StringMatch, FluidText.StringInsert> insertions =
+                Map<StringMatch, StringInsert> insertions =
                         new HashMap<>();
                 for (StringMatch bad : profanity) {
                     insertions.put(bad, (current, match) ->
-                            new FluidText(current.withMessage("*".repeat(bad.end - bad.start)))
+                            Text.literal("*".repeat(bad.end - bad.start)).fillStyle(current.getStyle())
                     );
                 }
-                text.replaceStrings(insertions);
+                text = TextUtil.replaceStrings(text, insertions);
                 return Optional.of(text);
             }
             return Optional.empty();
