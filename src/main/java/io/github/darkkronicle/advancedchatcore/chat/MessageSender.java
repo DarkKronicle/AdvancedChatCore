@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 import org.apache.logging.log4j.Level;
 
 public class MessageSender {
@@ -37,6 +38,10 @@ public class MessageSender {
     }
 
     public void sendMessage(String string) {
+        sendMessage(string, null);
+    }
+
+    public void sendMessage(String string, Text text) {
         String unfiltered = string;
         for (IStringFilter filter : filters) {
             Optional<String> filtered = filter.filter(string);
@@ -55,7 +60,11 @@ public class MessageSender {
         }
 
         if (client.player != null) {
-            this.client.player.sendChatMessage(string);
+            if (string.startsWith("/")) {
+                this.client.player.sendCommand(string.substring(1), text);
+            } else {
+                this.client.player.sendChatMessage(string, text);
+            }
         }
     }
 }

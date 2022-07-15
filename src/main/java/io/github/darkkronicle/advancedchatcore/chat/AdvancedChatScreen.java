@@ -7,6 +7,8 @@
  */
 package io.github.darkkronicle.advancedchatcore.chat;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.brigadier.tree.CommandNode;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.util.KeyCodes;
@@ -24,12 +26,20 @@ import io.github.darkkronicle.advancedchatcore.util.RowList;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
+import net.minecraft.client.network.ChatPreviewer;
+import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.option.ServerList;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.command.CommandSource;
+import net.minecraft.command.argument.DecoratableArgumentType;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
@@ -56,6 +66,14 @@ public class AdvancedChatScreen extends GuiBase {
 
     @Getter
     private final RowList<ButtonBase> leftSideButtons = new RowList<>();
+
+    // TODO chat preview somewhere else
+    private static final Text CHAT_PREVIEW_WARNING_TOAST_TITLE = Text.translatable("chatPreview.warning.toast.title");
+    private static final Text CHAT_PREVIEW_WARNING_TOAST_TEXT = Text.translatable("chatPreview.warning.toast");
+    private static final Text CHAT_PREVIEW_PLACEHOLDER_TEXT = Text.translatable("chat.preview").formatted(Formatting.DARK_GRAY);
+
+    @Getter
+    private ChatPreviewer chatPreviewer;
 
     @Override
     protected void closeGui(boolean showParent) {
@@ -101,6 +119,7 @@ public class AdvancedChatScreen extends GuiBase {
 
     public void initGui() {
         super.initGui();
+        this.chatPreviewer = new ChatPreviewer(this.client);
         this.rightSideButtons.clear();
         this.leftSideButtons.clear();
         this.client.keyboard.setRepeatEvents(true);
@@ -173,6 +192,13 @@ public class AdvancedChatScreen extends GuiBase {
         if (startHistory >= 0) {
             setChatFromHistory(-startHistory - 1);
         }
+        ServerInfo serverInfo = this.client.getCurrentServerEntry();
+        if (serverInfo != null && this.client.options.getChatPreview().getValue()) {
+            ServerInfo.ChatPreview chatPreview = serverInfo.getChatPreview();
+            if (chatPreview != null && serverInfo.shouldPreviewChat() && chatPreview.showToast()) {
+                ServerList.updateServerListEntry(serverInfo);
+            }
+        }
     }
 
     public void resize(MinecraftClient client, int width, int height) {
@@ -194,6 +220,44 @@ public class AdvancedChatScreen extends GuiBase {
 
     public void tick() {
         this.chatField.tick();
+        this.chatPreviewer.tryRequestPending();
+    }
+
+    private void updatePreviewer(String string) {
+        String text = string.trim();
+        if (this.shouldPreviewChat()) {
+            this.tryRequestPreview(text);
+        } else {
+            this.chatPreviewer.disablePreview();
+        }
+    }
+
+    private void tryRequestPreview(String string) {
+        if (string.startsWith("/")) {
+            this.tryRequestCommandPreview(string);
+        } else {
+            this.tryRequestChatPreview(string);
+        }
+    }
+
+    private void tryRequestChatPreview(String string) {
+        this.chatPreviewer.tryRequest(string);
+    }
+
+    private void tryRequestCommandPreview(String chatText) {
+        // TODO fix this
+        this.chatPreviewer.disablePreview();
+    }
+
+    private boolean shouldPreviewChat() {
+        if (this.client.player == null) {
+            return false;
+        } else if (!this.client.options.getChatPreview().getValue()) {
+            return false;
+        } else {
+            ServerInfo serverInfo = this.client.getCurrentServerEntry();
+            return serverInfo != null && serverInfo.shouldPreviewChat();
+        }
     }
 
     private void onChatFieldUpdate(String chatText) {
@@ -231,7 +295,8 @@ public class AdvancedChatScreen extends GuiBase {
         if (keyCode == KeyCodes.KEY_ENTER || keyCode == KeyCodes.KEY_KP_ENTER) {
             String string = this.chatField.getText().trim();
             // Strip message and send
-            MessageSender.getInstance().sendMessage(string);
+            Text text = this.chatPreviewer.tryConsumeResponse(this.chatField.getText());
+            MessageSender.getInstance().sendMessage(string, text);
             this.chatField.setText("");
             last = "";
             // Exit
@@ -384,6 +449,59 @@ public class AdvancedChatScreen extends GuiBase {
         if (style != null && style.getHoverEvent() != null) {
             this.renderTextHoverEffect(matrixStack, style, mouseX, mouseY);
         }
+        if (this.chatPreviewer.shouldRenderPreview()) {
+            this.renderChatPreview(matrixStack);
+        }
+    }
+
+    public void renderChatPreview(MatrixStack matrices) {
+        int i = (int)(255.0 * (this.client.options.getChtOpacity().getValue() * 0.9F + 0.1F));
+        int j = (int)(255.0 * this.client.options.getTextBackgroundOpacity().getValue());
+        int k = this.getPreviewWidth();
+        List<OrderedText> list = this.getPreviewText();
+        int l = this.getPreviewHeight(list);
+        RenderSystem.enableBlend();
+        matrices.push();
+        matrices.translate((double)this.getPreviewLeft(), (double)this.getPreviewTop(l), 0.0);
+        fill(matrices, 0, 0, k, l, j << 24);
+        matrices.translate(2.0, 2.0, 0.0);
+
+        for(int m = 0; m < list.size(); ++m) {
+            OrderedText orderedText = list.get(m);
+            this.client.textRenderer.drawWithShadow(matrices, orderedText, 0.0F, (float)(m * 9), i << 24 | 16777215);
+        }
+
+        matrices.pop();
+        RenderSystem.disableBlend();
+    }
+
+    private List<OrderedText> getPreviewText() {
+        Text text = this.chatPreviewer.getPreviewText();
+        return text != null ? this.textRenderer.wrapLines(text, this.getPreviewWidth()) : List.of(CHAT_PREVIEW_PLACEHOLDER_TEXT.asOrderedText());
+    }
+
+    private int getPreviewWidth() {
+        return this.client.currentScreen.width - 4;
+    }
+
+    private int getPreviewHeight(List<OrderedText> lines) {
+        return Math.max(lines.size(), 1) * 9 + 4;
+    }
+
+    private int getPreviewBottom() {
+        return this.client.currentScreen.height - 15;
+    }
+
+    private int getPreviewTop(int previewHeight) {
+        return this.getPreviewBottom() - previewHeight;
+    }
+
+    private int getPreviewLeft() {
+        return 2;
+    }
+
+    private int getPreviewRight() {
+        return this.client.currentScreen.width - 2;
     }
 
     @Override
