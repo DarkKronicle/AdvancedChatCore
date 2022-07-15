@@ -2,7 +2,6 @@ package io.github.darkkronicle.advancedchatcore.mixin;
 
 import io.github.darkkronicle.advancedchatcore.chat.AdvancedChatScreen;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

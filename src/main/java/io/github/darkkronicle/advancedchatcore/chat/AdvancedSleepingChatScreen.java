@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -42,7 +42,7 @@ public class AdvancedSleepingChatScreen extends AdvancedChatScreen {
         } else if (keyCode == KeyCodes.KEY_ENTER || keyCode == KeyCodes.KEY_KP_ENTER) {
             String string = this.chatField.getText().trim();
             if (!string.isEmpty()) {
-                this.sendMessage(string);
+                MessageSender.getInstance().sendMessage(string);
             }
 
             this.chatField.setText("");

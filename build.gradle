@@ -31,7 +31,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.18.2:${project.malilib_version}"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.19.0:${project.malilib_version}"
 	modCompileOnly "io.github.prospector:modmenu:1.16.8"
 
 	modImplementation "com.github.DarkKronicle:KommandLib:${project.kommandlib_version}"

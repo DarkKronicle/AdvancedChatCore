@@ -24,13 +24,12 @@ import io.github.darkkronicle.advancedchatcore.util.RowList;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.input.Input;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
@@ -113,7 +112,7 @@ public class AdvancedChatScreen extends GuiBase {
                         this.height - 12,
                         this.width - 4,
                         12,
-                        new TranslatableText("chat.editBox")) {
+                        Text.translatable("chat.editBox")) {
                     protected MutableText getNarrationMessage() {
                         return null;
                     }
@@ -307,7 +306,7 @@ public class AdvancedChatScreen extends GuiBase {
         if (hud.mouseClicked(mouseX, mouseY)) {
             return true;
         }
-        Style style = hud.getText(mouseX, mouseY);
+        Style style = hud.getTextStyleAt(mouseX, mouseY);
         if (style != null && style.getClickEvent() != null) {
             if (this.handleTextClick(style)) {
                 return true;
@@ -381,7 +380,7 @@ public class AdvancedChatScreen extends GuiBase {
         for (AdvancedChatScreenSection section : sections) {
             section.render(matrixStack, mouseX, mouseY, partialTicks);
         }
-        Style style = hud.getText(mouseX, mouseY);
+        Style style = hud.getTextStyleAt(mouseX, mouseY);
         if (style != null && style.getHoverEvent() != null) {
             this.renderTextHoverEffect(matrixStack, style, mouseX, mouseY);
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -7,7 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatcore.interfaces;
 
-import io.github.darkkronicle.advancedchatcore.util.FluidText;
+import net.minecraft.text.Text;
 import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,7 +24,7 @@ public interface IMessageProcessor extends IMessageFilter {
      */
     @Deprecated
     @Override
-    default Optional<FluidText> filter(FluidText text) {
+    default Optional<Text> filter(Text text) {
         process(text, null);
         return Optional.empty();
     }
@@ -36,5 +36,5 @@ public interface IMessageProcessor extends IMessageFilter {
      * @param unfiltered Original text (if available)
      * @return If the processing was a success
      */
-    boolean process(FluidText text, @Nullable FluidText unfiltered);
+    boolean process(Text text, @Nullable Text unfiltered);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -10,11 +10,12 @@ package io.github.darkkronicle.advancedchatcore.chat;
 import io.github.darkkronicle.advancedchatcore.interfaces.IMessageFilter;
 import io.github.darkkronicle.advancedchatcore.interfaces.IMessageProcessor;
 import io.github.darkkronicle.advancedchatcore.util.FindType;
-import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.SearchResult;
 import io.github.darkkronicle.advancedchatcore.util.SearchUtils;
+import io.github.darkkronicle.advancedchatcore.util.StringInsert;
 import io.github.darkkronicle.advancedchatcore.util.StringMatch;
 import io.github.darkkronicle.advancedchatcore.util.StyleFormatter;
+import io.github.darkkronicle.advancedchatcore.util.TextUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,8 @@ import java.util.Optional;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.ClickEvent;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 
@@ -60,7 +63,7 @@ public class MessageDispatcher {
                     if (search.size() == 0) {
                         return Optional.empty();
                     }
-                    Map<StringMatch, FluidText.StringInsert> insert = new HashMap<>();
+                    Map<StringMatch, StringInsert> insert = new HashMap<>();
                     for (StringMatch match : search.getMatches()) {
                         insert.put(
                                 match,
@@ -71,16 +74,12 @@ public class MessageDispatcher {
                                         url = "https://" + url;
                                     }
                                     if (current.getStyle().getClickEvent() == null) {
-                                        return new FluidText(
-                                                current.withStyle(current.getStyle().withClickEvent(
-                                                        new ClickEvent(ClickEvent.Action.OPEN_URL, url)
-                                                )).withMessage(match1.match)
-                                        );
+                                        return MutableText.of(new LiteralTextContent(match1.match)).fillStyle(current.getStyle().withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url)));
                                     }
-                                    return new FluidText(current);
+                                    return MutableText.of(current.getContent()).fillStyle(current.getStyle());
                                 });
                     }
-                    text.replaceStrings(insert);
+                    TextUtil.replaceStrings(text, insert);
                     return Optional.of(text);
                 },
                 -1);
@@ -108,19 +107,18 @@ public class MessageDispatcher {
      * @param text Text that is received
      */
     public void handleText(Text text) {
-        FluidText fluidText = new FluidText(text);
-        boolean previouslyBlank = fluidText.getString().length() == 0;
-        fluidText = preFilter(fluidText);
-        if (fluidText.getString().length() == 0 && !previouslyBlank) {
+        boolean previouslyBlank = text.getString().length() == 0;
+        text = preFilter(text);
+        if (text.getString().length() == 0 && !previouslyBlank) {
             // No more
             return;
         }
-        process(fluidText);
+        process(text);
     }
 
-    private FluidText preFilter(FluidText text) {
+    private Text preFilter(Text text) {
         for (IMessageFilter f : preFilters) {
-            Optional<FluidText> t = f.filter(text);
+            Optional<Text> t = f.filter(text);
             if (t.isPresent()) {
                 text = t.get();
             }
@@ -128,7 +126,7 @@ public class MessageDispatcher {
         return text;
     }
 
-    private void process(FluidText text) {
+    private void process(Text text) {
         for (IMessageFilter f : processors) {
             f.filter(text);
         }

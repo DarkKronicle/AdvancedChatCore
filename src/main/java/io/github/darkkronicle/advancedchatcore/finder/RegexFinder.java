@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,6 +9,7 @@ package io.github.darkkronicle.advancedchatcore.finder;
 
 import io.github.darkkronicle.advancedchatcore.util.*;
 import net.minecraft.text.ClickEvent;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -33,8 +34,7 @@ public class RegexFinder extends PatternFinder {
             // No named groups, go back to just text
             return getMatches(input.getString(), toMatch);
         }
-        FluidText text = new FluidText(input);
-        String string = text.getString();
+        String string = input.getString();
 
         Pattern pattern = getPattern(toMatch);
         Matcher matcher = pattern.matcher(string);
@@ -53,7 +53,7 @@ public class RegexFinder extends PatternFinder {
             boolean stillMatches = true;
             for (String group : groups) {
                 try {
-                    if (!isAllowed(text, group, matcher)) {
+                    if (!isAllowed(input, group, matcher)) {
                         stillMatches = false;
                         break;
                     }
@@ -70,7 +70,7 @@ public class RegexFinder extends PatternFinder {
         return matches;
     }
 
-    public static boolean isAllowed(FluidText input, String group, Matcher matcher) {
+    public static boolean isAllowed(Text input, String group, Matcher matcher) {
         group = group.toLowerCase(Locale.ROOT);
         String groupText = matcher.group(group);
         String groupCondition = group.substring(3);
@@ -82,41 +82,41 @@ public class RegexFinder extends PatternFinder {
         if (groupCondition.startsWith("0")) {
             groupCondition = groupCondition.substring(1);
             while (groupCondition.length() != 0) {
-                FluidText truncated = input.truncate(new StringMatch("", start, end));
+                MutableText truncated = TextUtil.truncate(input, new StringMatch("", start, end));
                 char val = groupCondition.charAt(0);
                 groupCondition = groupCondition.substring(1);
                 if (val == 'l') {
-                    if (!FluidText.styleChanges(truncated, (style1, style2) -> style1.isBold() && style2.isBold())) {
+                    if (!TextUtil.styleChanges(truncated, (style1, style2) -> style1.isBold() && style2.isBold())) {
                         return true;
                     }
                     continue;
                 }
                 if (val == 'o') {
-                    if (!FluidText.styleChanges(truncated, (style1, style2) -> style1.isItalic() && style2.isItalic())) {
+                    if (!TextUtil.styleChanges(truncated, (style1, style2) -> style1.isItalic() && style2.isItalic())) {
                         return true;
                     }
                     continue;
                 }
                 if (val == 'k') {
-                    if (!FluidText.styleChanges(truncated, (style1, style2) -> style1.isObfuscated() && style2.isObfuscated())) {
+                    if (!TextUtil.styleChanges(truncated, (style1, style2) -> style1.isObfuscated() && style2.isObfuscated())) {
                         return true;
                     }
                     continue;
                 }
                 if (val == 'n') {
-                    if (!FluidText.styleChanges(truncated, (style1, style2) -> style1.isUnderlined() && style2.isUnderlined())) {
+                    if (!TextUtil.styleChanges(truncated, (style1, style2) -> style1.isUnderlined() && style2.isUnderlined())) {
                         return true;
                     }
                     continue;
                 }
                 if (val == 'm') {
-                    if (!FluidText.styleChanges(truncated, (style1, style2) -> style1.isStrikethrough() && style2.isStrikethrough())) {
+                    if (!TextUtil.styleChanges(truncated, (style1, style2) -> style1.isStrikethrough() && style2.isStrikethrough())) {
                         return true;
                     }
                     continue;
                 }
                 if (val == 'z') {
-                    if (!FluidText.styleChanges(
+                    if (!TextUtil.styleChanges(
                             truncated, (style1, style2) -> style1.getClickEvent() != null && style1.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL
                                     && style2.getClickEvent() != null && style2.getClickEvent().getAction() == ClickEvent.Action.OPEN_URL)
                     ) {
@@ -125,7 +125,7 @@ public class RegexFinder extends PatternFinder {
                     continue;
                 }
                 if (val == 'x') {
-                    if (!FluidText.styleChanges(
+                    if (!TextUtil.styleChanges(
                             truncated, (style1, style2) -> style1.getClickEvent() != null && style1.getClickEvent().getAction() == ClickEvent.Action.COPY_TO_CLIPBOARD
                                     && style2.getClickEvent() != null && style2.getClickEvent().getAction() == ClickEvent.Action.COPY_TO_CLIPBOARD)
                     ) {
@@ -134,7 +134,7 @@ public class RegexFinder extends PatternFinder {
                     continue;
                 }
                 if (val == 'y') {
-                    if (!FluidText.styleChanges(
+                    if (!TextUtil.styleChanges(
                             truncated, (style1, style2) -> style1.getClickEvent() != null && style1.getClickEvent().getAction() == ClickEvent.Action.OPEN_FILE
                                     && style2.getClickEvent() != null && style2.getClickEvent().getAction() == ClickEvent.Action.OPEN_FILE)
                     ) {
@@ -143,7 +143,7 @@ public class RegexFinder extends PatternFinder {
                     continue;
                 }
                 if (val == 'w') {
-                    if (!FluidText.styleChanges(
+                    if (!TextUtil.styleChanges(
                             truncated, (style1, style2) -> style1.getClickEvent() != null && style1.getClickEvent().getAction() == ClickEvent.Action.RUN_COMMAND
                                     && style2.getClickEvent() != null && style2.getClickEvent().getAction() == ClickEvent.Action.RUN_COMMAND)
                     ) {
@@ -152,7 +152,7 @@ public class RegexFinder extends PatternFinder {
                     continue;
                 }
                 if (val == 'v') {
-                    if (!FluidText.styleChanges(
+                    if (!TextUtil.styleChanges(
                             truncated, (style1, style2) -> style1.getClickEvent() != null && style1.getClickEvent().getAction() == ClickEvent.Action.SUGGEST_COMMAND
                                     && style2.getClickEvent() != null && style2.getClickEvent().getAction() == ClickEvent.Action.SUGGEST_COMMAND)
                     ) {
@@ -161,7 +161,7 @@ public class RegexFinder extends PatternFinder {
                     continue;
                 }
                 if (val == 'h') {
-                    if (!FluidText.styleChanges(
+                    if (!TextUtil.styleChanges(
                             truncated, (style1, style2) -> style1.getHoverEvent() != null
                                     && style2.getHoverEvent() != null)
                     ) {
@@ -169,7 +169,7 @@ public class RegexFinder extends PatternFinder {
                     }
                     continue;
                 }
-                if (FluidText.styleChanges(truncated, (style1, style2) -> Objects.equals(style1.getColor(), style2.getColor()))) {
+                if (TextUtil.styleChanges(truncated, (style1, style2) -> Objects.equals(style1.getColor(), style2.getColor()))) {
                     continue;
                 }
                 Style current = truncated.getStyle();

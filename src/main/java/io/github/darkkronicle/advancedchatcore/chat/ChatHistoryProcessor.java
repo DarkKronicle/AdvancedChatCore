@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 DarkKronicle
+ * Copyright (C) 2021-2022 DarkKronicle
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -12,14 +12,17 @@ import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.interfaces.IMessageProcessor;
 import io.github.darkkronicle.advancedchatcore.mixin.MixinChatHudInvoker;
 import io.github.darkkronicle.advancedchatcore.util.Color;
-import io.github.darkkronicle.advancedchatcore.util.FluidText;
 import io.github.darkkronicle.advancedchatcore.util.SearchUtils;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.LiteralTextContent;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextColor;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
@@ -35,11 +38,10 @@ public class ChatHistoryProcessor implements IMessageProcessor {
     }
 
     @Override
-    public boolean process(FluidText text, @Nullable FluidText unfiltered) {
+    public boolean process(Text text, @Nullable Text unfiltered) {
         if (unfiltered == null) {
             unfiltered = text;
         }
-        Color backcolor = text.getBackground();
 
         // Put the time in
         LocalTime time = LocalTime.now();
@@ -50,7 +52,13 @@ public class ChatHistoryProcessor implements IMessageProcessor {
             DateTimeFormatter format =
                     DateTimeFormatter.ofPattern(
                             ConfigStorage.General.TIME_FORMAT.config.getStringValue());
-            text.addTime(format, time);
+            String replaceFormat =
+                    ConfigStorage.General.TIME_TEXT_FORMAT.config.getStringValue().replaceAll("&", "§");
+            Color color = ConfigStorage.General.TIME_COLOR.config.get();
+            Style style = Style.EMPTY;
+            TextColor textColor = TextColor.fromRgb(color.color());
+            style = style.withColor(textColor);
+            text.getSiblings().add(0, MutableText.of(new LiteralTextContent(replaceFormat.replaceAll("%TIME%", time.format(format)))).fillStyle(style));
         }
 
         int width = 0;
@@ -66,7 +74,7 @@ public class ChatHistoryProcessor implements IMessageProcessor {
                 .width(width)
                 .creationTick(MinecraftClient.getInstance().inGameHud.getTicks())
                 .time(time)
-                .backgroundColor(backcolor)
+                .backgroundColor(new Color(0, 0, 0, 100))
                 .build();
         if (ChatHistory.getInstance().add(line)) {
             sendToHud(line.getDisplayText());

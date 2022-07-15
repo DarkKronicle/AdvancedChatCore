@@ -5,6 +5,7 @@
 lib/
 run/
 out/
+bin/
 build/
 .gradle/
 classes/
