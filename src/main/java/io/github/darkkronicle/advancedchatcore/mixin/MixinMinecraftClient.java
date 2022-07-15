@@ -36,11 +36,11 @@ public class MixinMinecraftClient {
         }
     }
 
-    @ModifyArgs(method = "openChatScreen(Ljava/lang/String;)V",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/MinecraftClient;setScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 0))
-    public void openChatScreen(Args args, String text) {
-        args.set(0, new AdvancedChatScreen(text));
+    @Inject(method = "openChatScreen(Ljava/lang/String;)V",
+            at = @At(value = "HEAD"), cancellable = true)
+    public void openChatScreen(String text, CallbackInfo ci) {
+        MinecraftClient.getInstance().setScreen(new AdvancedChatScreen(text));
+        ci.cancel();
     }
 
     @ModifyArg(method = "tick()V",
