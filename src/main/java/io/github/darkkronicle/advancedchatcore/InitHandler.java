@@ -78,7 +78,7 @@ public class InitHandler implements IInitializationHandler {
                             Text.literal("*".repeat(bad.end - bad.start)).fillStyle(current.getStyle())
                     );
                 }
-                TextUtil.replaceStrings(text, insertions);
+                text = TextUtil.replaceStrings(text, insertions);
                 return Optional.of(text);
             }
             return Optional.empty();

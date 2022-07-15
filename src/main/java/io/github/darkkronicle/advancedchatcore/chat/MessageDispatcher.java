@@ -78,7 +78,7 @@ public class MessageDispatcher {
                                     return MutableText.of(current.getContent()).fillStyle(current.getStyle());
                                 });
                     }
-                    TextUtil.replaceStrings(text, insert);
+                    text = TextUtil.replaceStrings(text, insert);
                     return Optional.of(text);
                 },
                 -1);
