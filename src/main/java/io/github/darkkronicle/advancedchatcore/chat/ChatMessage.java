@@ -7,7 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatcore.chat;
 
-import io.github.darkkronicle.advancedchatcore.util.Color;
+import io.github.darkkronicle.darkkore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.StyleFormatter;
 import java.time.LocalTime;
 import java.util.ArrayList;

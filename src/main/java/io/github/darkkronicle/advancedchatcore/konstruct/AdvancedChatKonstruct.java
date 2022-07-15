@@ -10,7 +10,7 @@ import io.github.darkkronicle.Konstruct.type.IntegerObject;
 import io.github.darkkronicle.Konstruct.type.StringObject;
 import io.github.darkkronicle.addons.*;
 import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
-import io.github.darkkronicle.advancedchatcore.util.Color;
+import io.github.darkkronicle.darkkore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.Colors;
 import io.github.darkkronicle.advancedchatcore.util.TextUtil;
 import lombok.Getter;

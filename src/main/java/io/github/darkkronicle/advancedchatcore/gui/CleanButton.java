@@ -9,7 +9,7 @@ package io.github.darkkronicle.advancedchatcore.gui;
 
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.render.RenderUtils;
-import io.github.darkkronicle.advancedchatcore.util.Color;
+import io.github.darkkronicle.darkkore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.Colors;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

@@ -7,13 +7,6 @@
  */
 package io.github.darkkronicle.advancedchatcore;
 
-import fi.dy.masa.malilib.config.ConfigManager;
-import fi.dy.masa.malilib.config.IConfigBase;
-import fi.dy.masa.malilib.config.options.ConfigHotkey;
-import fi.dy.masa.malilib.event.InputEventHandler;
-import fi.dy.masa.malilib.gui.GuiBase;
-import fi.dy.masa.malilib.interfaces.IInitializationHandler;
-import fi.dy.masa.malilib.util.InfoUtils;
 import io.github.darkkronicle.advancedchatcore.chat.*;
 import io.github.darkkronicle.advancedchatcore.config.CommandsHandler;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
@@ -29,16 +22,16 @@ import io.github.darkkronicle.advancedchatcore.util.StringMatch;
 
 import java.util.*;
 
+import io.github.darkkronicle.darkkore.intialization.Initializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferRenderer;
 
-@Environment(EnvType.CLIENT)
-public class InitHandler implements IInitializationHandler {
+public class InitHandler implements Initializer {
 
     @Override
-    public void registerModHandlers() {
+    public void init() {
         // Setup modules
         ModuleHandler.getInstance().registerModules();
         ConfigManager.getInstance()

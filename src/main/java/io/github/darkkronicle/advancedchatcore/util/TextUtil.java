@@ -7,11 +7,13 @@
  */
 package io.github.darkkronicle.advancedchatcore.util;
 
-import fi.dy.masa.malilib.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import io.github.darkkronicle.darkkore.util.StringUtil;
 import lombok.experimental.UtilityClass;
+import net.minecraft.client.MinecraftClient;
 
 @UtilityClass
 public class TextUtil {
@@ -88,7 +90,7 @@ public class TextUtil {
     public int getMaxLengthTranslation(String... translations) {
         List<String> translated = new ArrayList<>();
         for (String translation : translations) {
-            translated.add(StringUtils.translate(translation));
+            translated.add(StringUtil.translate(translation));
         }
         return getMaxLengthString(translated);
     }
@@ -102,7 +104,7 @@ public class TextUtil {
     public int getMaxLengthString(String... strings) {
         int max = 0;
         for (String text : strings) {
-            int width = StringUtils.getStringWidth(text);
+            int width = MinecraftClient.getInstance().textRenderer.getWidth(text);
             if (width > max) {
                 max = width;
             }

@@ -1,7 +1,7 @@
 package io.github.darkkronicle.advancedchatcore.gui;
 
 import fi.dy.masa.malilib.gui.widgets.WidgetBase;
-import io.github.darkkronicle.advancedchatcore.util.Color;
+import io.github.darkkronicle.darkkore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.TextUtil;
 import lombok.Getter;
 import lombok.Setter;

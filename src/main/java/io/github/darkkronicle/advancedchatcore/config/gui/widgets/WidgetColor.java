@@ -10,7 +10,7 @@ package io.github.darkkronicle.advancedchatcore.config.gui.widgets;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
-import io.github.darkkronicle.advancedchatcore.util.Color;
+import io.github.darkkronicle.darkkore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.Colors;
 import java.util.Optional;
 import net.minecraft.client.font.TextRenderer;
