@@ -159,7 +159,9 @@ public class TextUtil {
         // Total number of chars went through. Used to find where the match end and beginning is.
         int totalchar = 0;
         boolean inMatch = false;
-        for (Text text : input.getSiblings()) {
+        List<Text> siblings = input.getSiblings();
+        siblings.add(0, MutableText.of(input.getContent()).fillStyle(input.getStyle()));
+        for (Text text : siblings) {
             if (text.getString() == null || text.getString().length() <= 0) {
                 continue;
             }
@@ -250,7 +252,9 @@ public class TextUtil {
         boolean start = false;
         // Total number of chars went through. Used to find where the match end and beginning is.
         int totalchar = 0;
-        for (Text text : input.getSiblings()) {
+        List<Text> siblings = input.getSiblings();
+        siblings.add(0, MutableText.of(input.getContent()).fillStyle(input.getStyle()));
+        for (Text text : siblings) {
             if (text.getContent() == null || text.getString().length() <= 0) {
                 continue;
             }
