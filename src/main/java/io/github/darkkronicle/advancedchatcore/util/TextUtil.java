@@ -25,8 +25,8 @@ public class TextUtil {
 
     private final char[] SUPERSCRIPTS =
             new char[] {
-                '\u2070', '\u00B9', '\u00B2', '\u00B3', '\u2074', '\u2075', '\u2076', '\u2077',
-                '\u2078', '\u2079'
+                    '\u2070', '\u00B9', '\u00B2', '\u00B3', '\u2074', '\u2075', '\u2076', '\u2077',
+                    '\u2078', '\u2079'
             };
 
     /**
@@ -159,7 +159,9 @@ public class TextUtil {
         // Total number of chars went through. Used to find where the match end and beginning is.
         int totalchar = 0;
         boolean inMatch = false;
-        for (Text text : input.getSiblings()) {
+        List<Text> siblings = input.getSiblings();
+        siblings.add(0, MutableText.of(input.getContent()).fillStyle(input.getStyle()));
+        for (Text text : siblings) {
             if (text.getString() == null || text.getString().length() <= 0) {
                 continue;
             }
@@ -250,7 +252,9 @@ public class TextUtil {
         boolean start = false;
         // Total number of chars went through. Used to find where the match end and beginning is.
         int totalchar = 0;
-        for (Text text : input.getSiblings()) {
+        List<Text> siblings = input.getSiblings();
+        siblings.add(0, MutableText.of(input.getContent()).fillStyle(input.getStyle()));
+        for (Text text : siblings) {
             if (text.getContent() == null || text.getString().length() <= 0) {
                 continue;
             }
@@ -292,8 +296,12 @@ public class TextUtil {
             totalchar = totalchar + length;
         }
 
-        // At the end we take the siblings created in this method and override the old ones.
-        return null;
+        // At the end we take the siblings created in this method and return them.
+        MutableText newtext = Text.empty();
+        for (Text sibling : newSiblings) {
+            newtext.append(sibling);
+        }
+        return newtext;
     }
 
     /**
