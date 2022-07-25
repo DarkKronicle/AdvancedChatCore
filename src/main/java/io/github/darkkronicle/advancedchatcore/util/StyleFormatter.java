@@ -205,6 +205,27 @@ public class StyleFormatter {
         return t;
     }
 
+    public static MutableText flattenText(Text text) {
+        List<Text> newSiblings = new ArrayList<>();
+        Style last = text.getStyle();
+        StringBuilder content = new StringBuilder(TextUtil.getContent(text.getContent()));
+        for (Text t : text.getSiblings()) {
+            if (t.getStyle().equals(last)) {
+                content.append(TextUtil.getContent(t.getContent()));
+                continue;
+            }
+            newSiblings.add(Text.literal(content.toString()).fillStyle(last));
+            content = new StringBuilder(TextUtil.getContent(t.getContent()));
+            last = t.getStyle();
+        }
+        newSiblings.add(Text.literal(content.toString()).fillStyle(last));
+        MutableText newText = Text.empty();
+        for (Text sibling : newSiblings) {
+            newText.append(sibling);
+        }
+        return newText;
+    }
+
     /**
      * Wraps text into multiple lines
      *

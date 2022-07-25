@@ -8,17 +8,14 @@
 package io.github.darkkronicle.advancedchatcore.util;
 
 import fi.dy.masa.malilib.util.StringUtils;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+
+import java.util.*;
 import java.util.function.BiFunction;
 import lombok.experimental.UtilityClass;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextContent;
 
 @UtilityClass
 public class TextUtil {
@@ -152,29 +149,27 @@ public class TextUtil {
             return input;
         }
         // List of new RawText to form a new FluidText.
-        ArrayList<Text> newSiblings = new ArrayList<>();
+        TextBuilder newSiblings = new TextBuilder();
         // What match this is currently on.
         Map.Entry<StringMatch, StringInsert> match = sortedMatches.next();
 
         // Total number of chars went through. Used to find where the match end and beginning is.
         int totalchar = 0;
         boolean inMatch = false;
-        List<Text> siblings = input.getSiblings();
-        siblings.add(0, MutableText.of(input.getContent()).fillStyle(input.getStyle()));
-        for (Text text : siblings) {
+        for (RawText text : new TextBuilder().append(input).getTexts()) {
             if (text.getString() == null || text.getString().length() <= 0) {
                 continue;
             }
             if (match == null) {
                 // No more replacing...
-                newSiblings.add(text);
+                newSiblings.append(text);
                 continue;
             }
             int length = text.getString().length();
             int last = 0;
             while (true) {
                 if (length + totalchar <= match.getKey().start) {
-                    newSiblings.add(Text.literal((text.getString().substring(last))).fillStyle(text.getStyle()));
+                    newSiblings.append(text.getString().substring(last), text.getStyle());
                     break;
                 }
                 int start = match.getKey().start - totalchar;
@@ -182,7 +177,7 @@ public class TextUtil {
                 if (inMatch) {
                     if (end <= length) {
                         inMatch = false;
-                        newSiblings.add(Text.literal((text.getString().substring(end))).fillStyle(text.getStyle()));
+                        newSiblings.append(text.getString().substring(end), text.getStyle());
                         last = end;
                         if (!sortedMatches.hasNext()) {
                             match = null;
@@ -196,11 +191,10 @@ public class TextUtil {
                     // End will go onto another string
                     if (start > 0) {
                         // Add previous string section
-                        newSiblings.add(Text.literal(text.getString().substring(last, start)).fillStyle(text.getStyle()));
+                        newSiblings.append(text.getString().substring(last, start), text.getStyle());
                     }
                     if (end >= length) {
-                        newSiblings.addAll(
-                                match.getValue().getText(text, match.getKey()).getSiblings());
+                        newSiblings.append(match.getValue().getText(text, match.getKey()));
                         if (end == length) {
                             if (!sortedMatches.hasNext()) {
                                 match = null;
@@ -212,8 +206,7 @@ public class TextUtil {
                         }
                         break;
                     }
-                    newSiblings.addAll(
-                            match.getValue().getText(text, match.getKey()).getSiblings());
+                    newSiblings.append(match.getValue().getText(text, match.getKey()));
                     if (!sortedMatches.hasNext()) {
                         match = null;
                     } else {
@@ -221,7 +214,7 @@ public class TextUtil {
                     }
                     last = end;
                     if (match == null || match.getKey().start - totalchar > length) {
-                        newSiblings.add(Text.literal(text.getString().substring(end)).fillStyle(text.getStyle()));
+                        newSiblings.append(text.getString().substring(end), text.getStyle());
                         break;
                     }
                 } else {
@@ -234,11 +227,7 @@ public class TextUtil {
             totalchar = totalchar + length;
         }
 
-        MutableText newtext = Text.empty();
-        for (Text sibling : newSiblings) {
-            newtext.append(sibling);
-        }
-        return newtext;
+        return newSiblings.build();
     }
 
     /**
@@ -346,5 +335,14 @@ public class TextUtil {
             }
         }
         return false;
+    }
+
+    public static String getContent(TextContent content) {
+        StringBuilder builder = new StringBuilder();
+        content.visit((s) -> {
+            builder.append(s);
+            return Optional.empty();
+        });
+        return builder.toString();
     }
 }
