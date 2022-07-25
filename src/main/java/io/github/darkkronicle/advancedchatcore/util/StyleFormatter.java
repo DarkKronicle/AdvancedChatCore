@@ -236,18 +236,8 @@ public class StyleFormatter {
      */
     public static List<Text> wrapText(TextRenderer textRenderer, int scaledWidth, Text text) {
         ArrayList<Text> lines = new ArrayList<>();
-        for (OrderedText breakRenderedChatMessageLine :
-                ChatMessages.breakRenderedChatMessageLines(text, scaledWidth, textRenderer)) {
-                StringBuilder breakRenderedChatMessageLineString = new StringBuilder();
-                breakRenderedChatMessageLine.accept(new CharacterVisitor() {
-                    public boolean accept(int index, net.minecraft.text.Style style, int codePoint) {
-                        breakRenderedChatMessageLineString.append((char) codePoint);
-
-                        return true;
-                    }  
-                });
-
-                lines.add(Text.literal(breakRenderedChatMessageLineString.toString()));
+        for (OrderedText breakRenderedChatMessageLine : ChatMessages.breakRenderedChatMessageLines(text, scaledWidth, textRenderer)) {
+            lines.add(new TextBuilder().append(breakRenderedChatMessageLine).build());
         }
         return lines;
     }

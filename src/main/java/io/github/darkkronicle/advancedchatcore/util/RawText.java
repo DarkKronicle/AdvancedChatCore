@@ -34,6 +34,10 @@ public record RawText(String content, Style style) implements Text {
         return language.reorder(this);
     }
 
+    public RawText withString(String string) {
+        return RawText.of(string, style);
+    }
+
     public static RawText of(String string) {
         return RawText.of(string, Style.EMPTY);
     }

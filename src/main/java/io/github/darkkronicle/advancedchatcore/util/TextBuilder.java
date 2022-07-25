@@ -25,6 +25,29 @@ public class TextBuilder {
         return siblings;
     }
 
+    public TextBuilder append(OrderedText text) {
+        AtomicReference<Style> last = new AtomicReference<>(null);
+        AtomicReference<StringBuilder> builder = new AtomicReference<>(new StringBuilder());
+        text.accept((index, style, codePoint) -> {
+            if (last.get() == null) {
+                last.set(style);
+                builder.get().append(Character.toChars(codePoint));
+                return true;
+            } else if (last.get().equals(style)) {
+                builder.get().append(Character.toChars(codePoint));
+                return true;
+            }
+            append(builder.get().toString(), last.get());
+            last.set(style);
+            builder.set(new StringBuilder().append(Character.toChars(codePoint)));
+            return true;
+        });
+        if (!builder.get().isEmpty()) {
+            append(builder.get().toString(), last.get());
+        }
+        return this;
+    }
+
     public TextBuilder append(Text text) {
         AtomicReference<Style> last = new AtomicReference<>(null);
         AtomicReference<StringBuilder> builder = new AtomicReference<>(new StringBuilder());
