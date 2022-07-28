@@ -15,7 +15,6 @@ import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.interfaces.IInitializationHandler;
 import fi.dy.masa.malilib.util.InfoUtils;
 import io.github.darkkronicle.advancedchatcore.chat.*;
-import io.github.darkkronicle.advancedchatcore.config.CommandsHandler;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfig;
 import io.github.darkkronicle.advancedchatcore.config.gui.GuiConfigHandler;
@@ -101,7 +100,6 @@ public class InitHandler implements IInitializationHandler {
                         "advancedchatcore.findtype.custom.profanity",
                         "advancedchatcore.findtype.custom.info.profanity");
 
-        CommandsHandler.getInstance().setup();
         InputHandler.getInstance().addDisplayName("core_general", "advancedchatcore.config.tab.hotkeysgeneral");
         InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.OPEN_CHAT.config, (action, key) -> {
             if (MinecraftClient.getInstance().world == null) {

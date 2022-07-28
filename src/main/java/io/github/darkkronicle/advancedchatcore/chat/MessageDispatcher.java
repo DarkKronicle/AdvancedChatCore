@@ -22,10 +22,13 @@ import java.util.Map;
 import java.util.Optional;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.hud.MessageIndicator;
+import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A class to handle chat events.
@@ -105,17 +108,17 @@ public class MessageDispatcher {
      *
      * @param text Text that is received
      */
-    public void handleText(Text text) {
+    public void handleText(Text text, @Nullable MessageSignatureData signature, @Nullable MessageIndicator indicator) {
         boolean previouslyBlank = text.getString().length() == 0;
-        text = preFilter(text);
+        text = preFilter(text, signature, indicator);
         if (text.getString().length() == 0 && !previouslyBlank) {
             // No more
             return;
         }
-        process(text);
+        process(text, signature, indicator);
     }
 
-    private Text preFilter(Text text) {
+    private Text preFilter(Text text, @Nullable MessageSignatureData signature, @Nullable MessageIndicator indicator) {
         for (IMessageFilter f : preFilters) {
             Optional<Text> t = f.filter(text);
             if (t.isPresent()) {
@@ -125,7 +128,7 @@ public class MessageDispatcher {
         return text;
     }
 
-    private void process(Text text) {
+    private void process(Text text, @Nullable MessageSignatureData signature, @Nullable MessageIndicator indicator) {
         for (IMessageFilter f : processors) {
             f.filter(text);
         }

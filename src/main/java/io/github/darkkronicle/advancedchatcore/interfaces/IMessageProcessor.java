@@ -7,6 +7,8 @@
  */
 package io.github.darkkronicle.advancedchatcore.interfaces;
 
+import net.minecraft.client.gui.hud.MessageIndicator;
+import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.Text;
 import java.util.Optional;
 import org.jetbrains.annotations.Nullable;
@@ -37,4 +39,8 @@ public interface IMessageProcessor extends IMessageFilter {
      * @return If the processing was a success
      */
     boolean process(Text text, @Nullable Text unfiltered);
+
+    default boolean process(Text text, @Nullable Text unfilterered, @Nullable MessageSignatureData signature, @Nullable MessageIndicator indicator) {
+        return process(text, unfilterered);
+    }
 }

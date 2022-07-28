@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.MessageIndicator;
+import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -26,10 +28,10 @@ import org.jetbrains.annotations.Nullable;
 @Environment(EnvType.CLIENT)
 public class ChatHistoryProcessor implements IMessageProcessor {
 
-    private static boolean sendToHud(Text text) {
+    private static boolean sendToHud(Text text, @Nullable MessageSignatureData signature, MessageIndicator indicator) {
         if (AdvancedChatCore.FORWARD_TO_HUD) {
             ((MixinChatHudInvoker) MinecraftClient.getInstance().inGameHud.getChatHud()).invokeAddMessage(
-                    text, 0, MinecraftClient.getInstance().inGameHud.getTicks(), false);
+                    text, signature, MinecraftClient.getInstance().inGameHud.getTicks(), indicator, false);
             return true;
         }
         return false;
@@ -37,6 +39,11 @@ public class ChatHistoryProcessor implements IMessageProcessor {
 
     @Override
     public boolean process(Text text, @Nullable Text unfiltered) {
+        return process(text, unfiltered, null, MessageIndicator.system());
+    }
+
+    @Override
+    public boolean process(Text text, @Nullable Text unfiltered, @Nullable MessageSignatureData signature, @Nullable MessageIndicator indicator) {
         if (unfiltered == null) {
             unfiltered = text;
         }
@@ -75,7 +82,7 @@ public class ChatHistoryProcessor implements IMessageProcessor {
                 .backgroundColor(new Color(0, 0, 0, 100))
                 .build();
         if (ChatHistory.getInstance().add(line)) {
-            sendToHud(line.getDisplayText());
+            sendToHud(line.getDisplayText(), line.getSignature(), line.getIndicator());
         }
         return true;
     }

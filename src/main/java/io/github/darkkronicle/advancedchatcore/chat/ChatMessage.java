@@ -18,6 +18,8 @@ import lombok.Data;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.MessageIndicator;
+import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,6 +58,11 @@ public class ChatMessage {
     /** Split up lines for line breaks. */
     protected List<AdvancedChatLine> lines;
 
+    @Nullable
+    protected MessageSignatureData signature;
+
+    protected MessageIndicator indicator;
+
     /**
      * Set's the display text of the message and formats the line breaks.
      *
@@ -83,7 +90,9 @@ public class ChatMessage {
                         time,
                         backgroundColor,
                         width,
-                        owner);
+                        owner,
+                        signature,
+                        indicator);
         message.setStacks(getStacks());
         return message;
     }
@@ -119,7 +128,9 @@ public class ChatMessage {
             LocalTime time,
             Color backgroundColor,
             int width,
-            MessageOwner owner) {
+            MessageOwner owner,
+            @Nullable MessageSignatureData signature,
+            @Nullable MessageIndicator indicator) {
         this.creationTick = creationTick;
         this.displayText = displayText;
         this.id = id;
@@ -129,6 +140,8 @@ public class ChatMessage {
         this.uuid = UUID.randomUUID();
         this.owner = owner;
         this.originalText = originalText == null ? displayText : originalText;
+        this.signature = signature;
+        this.indicator = indicator == null ? MessageIndicator.system() : indicator;
         formatChildren(width);
     }
 

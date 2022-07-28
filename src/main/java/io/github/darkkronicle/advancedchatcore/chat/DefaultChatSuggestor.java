@@ -11,14 +11,14 @@ import io.github.darkkronicle.advancedchatcore.interfaces.AdvancedChatScreenSect
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.CommandSuggestor;
+import net.minecraft.client.gui.screen.ChatInputSuggestor;
 import net.minecraft.client.util.math.MatrixStack;
 
 /** Handles the CommandSuggestor for the chat */
 @Environment(EnvType.CLIENT)
 public class DefaultChatSuggestor extends AdvancedChatScreenSection {
 
-    private CommandSuggestor commandSuggestor;
+    private ChatInputSuggestor commandSuggestor;
 
     public DefaultChatSuggestor(AdvancedChatScreen screen) {
         super(screen);
@@ -65,7 +65,7 @@ public class DefaultChatSuggestor extends AdvancedChatScreenSection {
         MinecraftClient client = MinecraftClient.getInstance();
         AdvancedChatScreen screen = getScreen();
         this.commandSuggestor =
-                new CommandSuggestor(
+                new ChatInputSuggestor(
                         client,
                         screen,
                         screen.chatField,

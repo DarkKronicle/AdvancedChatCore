@@ -11,7 +11,8 @@
     "MixinChatScreen",
     "MixinKeyboard",
     "MixinMinecraftClient",
-    "MixinSleepingChatScreen"
+    "MixinSleepingChatScreen",
+    "MixinMessageIndicator"
   ],
   "injectors": {
     "defaultRequire": 1

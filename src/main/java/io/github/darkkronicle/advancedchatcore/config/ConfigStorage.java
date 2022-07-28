@@ -26,6 +26,7 @@ import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 import io.github.darkkronicle.advancedchatcore.config.options.ConfigColor;
 import io.github.darkkronicle.advancedchatcore.interfaces.ConfigRegistryOption;
 import io.github.darkkronicle.advancedchatcore.util.AbstractRegistry;
+import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.Colors;
 import io.github.darkkronicle.advancedchatcore.util.EasingMethod;
 import java.io.File;
@@ -185,8 +186,39 @@ public class ConfigStorage implements IConfigHandler {
                         new ConfigBoolean(
                                 translate("moretext"), false, translate("info.moretext")));
 
+        public static final SaveableConfig<ConfigBoolean> SHOW_CHAT_ICONS =
+                SaveableConfig.fromConfig(
+                        "showChatIcons",
+                        new ConfigBoolean(
+                                translate("showchaticons"), true, translate("info.showchaticons")));
+
+        public static final SaveableConfig<ConfigColor> MODIFIED =
+                SaveableConfig.fromConfig(
+                        "modified",
+                        new ConfigColor(
+                                translate("modified"), new Color(15386724), translate("info.modified")));
+
+        public static final SaveableConfig<ConfigColor> SYSTEM =
+                SaveableConfig.fromConfig(
+                        "system",
+                        new ConfigColor(
+                                translate("system"), new Color(10526880), translate("info.system")));
+
+        public static final SaveableConfig<ConfigColor> FILTERED =
+                SaveableConfig.fromConfig(
+                        "filtered",
+                        new ConfigColor(
+                                translate("filtered"), new Color(15386724), translate("info.filtered")));
+
+        public static final SaveableConfig<ConfigColor> NOT_SECURE =
+                SaveableConfig.fromConfig(
+                        "notSecure",
+                        new ConfigColor(
+                                translate("notsecure"), new Color(15224664), translate("info.notsecure")));
+
+
         public static final ImmutableList<SaveableConfig<? extends IConfigBase>> OPTIONS =
-                ImmutableList.of(PERSISTENT_TEXT, COLOR, MORE_TEXT);
+                ImmutableList.of(PERSISTENT_TEXT, COLOR, MORE_TEXT, SHOW_CHAT_ICONS, MODIFIED, SYSTEM, FILTERED, NOT_SECURE);
     }
 
     public static class Hotkeys {

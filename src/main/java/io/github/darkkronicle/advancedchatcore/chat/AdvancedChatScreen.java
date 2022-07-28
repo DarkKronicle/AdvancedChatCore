@@ -20,14 +20,17 @@ import io.github.darkkronicle.advancedchatcore.interfaces.AdvancedChatScreenSect
 import io.github.darkkronicle.advancedchatcore.util.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 
 import io.github.darkkronicle.advancedchatcore.util.RowList;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
+import net.minecraft.client.gui.screen.ChatPreviewBackground;
 import net.minecraft.client.network.ChatPreviewer;
 import net.minecraft.client.network.ServerInfo;
+import net.minecraft.client.option.ChatPreviewMode;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.option.ServerList;
 import net.minecraft.client.toast.SystemToast;
@@ -41,7 +44,9 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.Nullable;
 
 public class AdvancedChatScreen extends GuiBase {
 
@@ -68,12 +73,16 @@ public class AdvancedChatScreen extends GuiBase {
     private final RowList<ButtonBase> leftSideButtons = new RowList<>();
 
     // TODO chat preview somewhere else
-    private static final Text CHAT_PREVIEW_WARNING_TOAST_TITLE = Text.translatable("chatPreview.warning.toast.title");
-    private static final Text CHAT_PREVIEW_WARNING_TOAST_TEXT = Text.translatable("chatPreview.warning.toast");
-    private static final Text CHAT_PREVIEW_PLACEHOLDER_TEXT = Text.translatable("chat.preview").formatted(Formatting.DARK_GRAY);
+    private static final Text CHAT_PREVIEW_INPUT_TEXT = Text.translatable("chat.previewInput", Text.translatable("key.keyboard.enter"));
+
 
     @Getter
     private ChatPreviewer chatPreviewer;
+
+    @Getter
+    private boolean missingPreview;
+
+    private final ChatPreviewBackground chatPreviewBackground = new ChatPreviewBackground();
 
     @Override
     protected void closeGui(boolean showParent) {
@@ -193,11 +202,15 @@ public class AdvancedChatScreen extends GuiBase {
             setChatFromHistory(-startHistory - 1);
         }
         ServerInfo serverInfo = this.client.getCurrentServerEntry();
-        if (serverInfo != null && this.client.options.getChatPreview().getValue()) {
+        if (serverInfo != null && this.client.options.getChatPreview().getValue() == ChatPreviewMode.LIVE) {
             ServerInfo.ChatPreview chatPreview = serverInfo.getChatPreview();
             if (chatPreview != null && serverInfo.shouldPreviewChat() && chatPreview.showToast()) {
                 ServerList.updateServerListEntry(serverInfo);
             }
+        }
+
+        if (client.options.getChatPreview().getValue() == ChatPreviewMode.CONFIRM) {
+            this.missingPreview = this.originalChatText.startsWith("/") && !this.client.player.hasSignedArgument(this.originalChatText.substring(1));
         }
     }
 
@@ -252,7 +265,7 @@ public class AdvancedChatScreen extends GuiBase {
     private boolean shouldPreviewChat() {
         if (this.client.player == null) {
             return false;
-        } else if (!this.client.options.getChatPreview().getValue()) {
+        } else if (this.client.options.getChatPreview().getValue() == ChatPreviewMode.OFF) {
             return false;
         } else {
             ServerInfo serverInfo = this.client.getCurrentServerEntry();
@@ -264,6 +277,12 @@ public class AdvancedChatScreen extends GuiBase {
         String string = this.chatField.getText();
         for (AdvancedChatScreenSection section : sections) {
             section.onChatFieldUpdate(chatText, string);
+        }
+        if (client.options.getChatPreview().getValue() == ChatPreviewMode.LIVE) {
+            this.updatePreviewer(string);
+        } else if (client.options.getChatPreview().getValue() == ChatPreviewMode.CONFIRM && !this.chatPreviewer.equalsLastPreviewed(string)) {
+            this.missingPreview = string.startsWith("/") && !this.client.player.hasSignedArgument(string.substring(1));
+            this.chatPreviewer.tryRequest("");
         }
     }
 
@@ -295,7 +314,13 @@ public class AdvancedChatScreen extends GuiBase {
         if (keyCode == KeyCodes.KEY_ENTER || keyCode == KeyCodes.KEY_KP_ENTER) {
             String string = this.chatField.getText().trim();
             // Strip message and send
-            Text text = this.chatPreviewer.tryConsumeResponse(this.chatField.getText());
+            if (this.client.options.getChatPreview().getValue() == ChatPreviewMode.CONFIRM && !this.missingPreview) {
+                if (!this.chatPreviewer.equalsLastPreviewed(string)) {
+                    this.updatePreviewer(string);
+                    return false;
+                }
+            }
+            Text text = getPreviewText();
             MessageSender.getInstance().sendMessage(string, text);
             this.chatField.setText("");
             last = "";
@@ -449,35 +474,69 @@ public class AdvancedChatScreen extends GuiBase {
         if (style != null && style.getHoverEvent() != null) {
             this.renderTextHoverEffect(matrixStack, style, mouseX, mouseY);
         }
-        if (this.chatPreviewer.shouldRenderPreview()) {
-            this.renderChatPreview(matrixStack);
+        ChatPreviewBackground.RenderData renderData = this.chatPreviewBackground.computeRenderData(Util.getMeasuringTimeMs(), this.getPreviewScreenText());
+        if (renderData.preview() != null) {
+            this.renderChatPreview(matrixStack, renderData.preview(), renderData.alpha(), client.getProfileKeys().getSigner() != null);
         }
     }
 
-    public void renderChatPreview(MatrixStack matrices) {
-        int i = (int)(255.0 * (this.client.options.getChtOpacity().getValue() * 0.9F + 0.1F));
-        int j = (int)(255.0 * this.client.options.getTextBackgroundOpacity().getValue());
-        int k = this.getPreviewWidth();
-        List<OrderedText> list = this.getPreviewText();
-        int l = this.getPreviewHeight(list);
+    @Nullable
+    protected Text getPreviewScreenText() {
+        String string = this.chatField.getText();
+        if (string.isBlank()) {
+            return null;
+        } else {
+            Text text = this.getPreviewText();
+            return client.options.getChatPreview().getValue() == ChatPreviewMode.CONFIRM && !this.missingPreview
+                    ? (Text) Objects.requireNonNullElse(
+                    text, this.chatPreviewer.equalsLastPreviewed(string) && !string.startsWith("/") ? Text.literal(string) : CHAT_PREVIEW_INPUT_TEXT
+            )
+                    : text;
+        }
+    }
+
+    public void renderChatPreview(MatrixStack matrices, Text previewText, float alpha, boolean signable) {
+        int opacity = (int)(255.0 * (this.client.options.getChatOpacity().getValue() * 0.9F + 0.1F) * (double)alpha);
+        int j = (int)(
+                (double)(this.chatPreviewer.cannotConsumePreview() ? 127 : 255) * this.client.options.getTextBackgroundOpacity().getValue() * (double)alpha
+        );
+        int width = this.getPreviewWidth();
+        List<OrderedText> list = this.wrapPreviewText(previewText);
+        int height = this.getPreviewHeight(list);
+        int topY = this.getPreviewTop(height);
         RenderSystem.enableBlend();
         matrices.push();
-        matrices.translate((double)this.getPreviewLeft(), (double)this.getPreviewTop(l), 0.0);
-        fill(matrices, 0, 0, k, l, j << 24);
-        matrices.translate(2.0, 2.0, 0.0);
+        matrices.translate(this.getPreviewLeft(), topY, 0.0);
+        fill(matrices, 0, 0, width, height, j << 24);
+        if (opacity > 0) {
+            matrices.translate(2.0, 2.0, 0.0);
 
-        for(int m = 0; m < list.size(); ++m) {
-            OrderedText orderedText = list.get(m);
-            this.client.textRenderer.drawWithShadow(matrices, orderedText, 0.0F, (float)(m * 9), i << 24 | 16777215);
+            for (int n = 0; n < list.size(); ++n) {
+                OrderedText orderedText = list.get(n);
+                int o = n * 9;
+                this.textRenderer.drawWithShadow(matrices, orderedText, 0.0F, (float)o, opacity << 24 | 16777215);
+            }
         }
 
         matrices.pop();
         RenderSystem.disableBlend();
+        if (signable && this.chatPreviewer.getPreviewText() != null) {
+            int n = this.chatPreviewer.cannotConsumePreview() ? 15118153 : 7844841;
+            int p = (int)(255.0F * alpha);
+            matrices.push();
+            fill(matrices, 0, topY, 2, this.getPreviewBottom(), p << 24 | n);
+            matrices.pop();
+        }
+
     }
 
-    private List<OrderedText> getPreviewText() {
-        Text text = this.chatPreviewer.getPreviewText();
-        return text != null ? this.textRenderer.wrapLines(text, this.getPreviewWidth()) : List.of(CHAT_PREVIEW_PLACEHOLDER_TEXT.asOrderedText());
+    @Nullable
+    private Text getPreviewText() {
+        return Util.map(this.chatPreviewer.getPreviewText(), ChatPreviewer.Response::previewText);
+    }
+
+    private List<OrderedText> wrapPreviewText(Text preview) {
+        return this.textRenderer.wrapLines(preview, this.getPreviewWidth());
     }
 
     private int getPreviewWidth() {

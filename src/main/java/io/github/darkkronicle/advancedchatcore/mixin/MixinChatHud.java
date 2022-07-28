@@ -14,7 +14,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
+import net.minecraft.client.gui.hud.MessageIndicator;
+import net.minecraft.network.message.MessageSignatureData;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,12 +33,12 @@ public class MixinChatHud {
     @Shadow @Final private MinecraftClient client;
 
     @Inject(
-            method = "addMessage(Lnet/minecraft/text/Text;I)V",
+            method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V",
             at = @At("HEAD"),
             cancellable = true)
-    private void addMessage(Text text, int id, CallbackInfo ci) {
+    private void addMessage(Text message, @Nullable MessageSignatureData signature, @Nullable MessageIndicator indicator, CallbackInfo ci) {
         // Pass forward messages to dispatcher
-        MessageDispatcher.getInstance().handleText(text);
+        MessageDispatcher.getInstance().handleText(message, signature, indicator);
         ci.cancel();
     }
 
