@@ -254,7 +254,7 @@ public class ConfigStorage implements IConfigHandler {
                 ), translate("info.opensettings")));
 
         public static final ImmutableList<SaveableConfig<? extends IConfigBase>> OPTIONS =
-                ImmutableList.of(OPEN_SETTINGS, OPEN_CHAT, OPEN_CHAT_FREE_MOVEMENT, TOGGLE_PERMANENT);
+                ImmutableList.of(OPEN_SETTINGS, OPEN_CHAT, OPEN_CHAT_FREE_MOVEMENT, TOGGLE_PERMANENT, OPEN_CHAT_WITH_LAST);
     }
 
     public static void loadFromFile() {
