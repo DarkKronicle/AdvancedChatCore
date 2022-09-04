@@ -1,12 +1,11 @@
-import javax.net.ssl.HttpsURLConnection
-import java.nio.file.Files
-
 plugins {
 	id 'fabric-loom' version '0.11-SNAPSHOT'
 	id 'maven-publish'
 	id "io.freefair.lombok" version "6.0.0-m2"
 	id "com.diffplug.spotless" version "5.17.1"
 }
+
+apply from: 'https://raw.githubusercontent.com/DarkKronicle/GradleScripts/main/gradle/publish.gradle'
 
 sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
@@ -56,7 +55,6 @@ dependencies {
 	include 'org.apache.commons:commons-csv:1.8'
 
 }
-
 
 processResources {
 	inputs.property "version", project.version
@@ -123,54 +121,4 @@ publishing {
 		// uncomment to publish to the local maven
 		// mavenLocal()
 	}
-}
-
-task discord {
-	dependsOn build
-
-	doLast {
-		String webhook
-		if (additionalProperties["discord_webhook"] != null) {
-			webhook = additionalProperties["discord_webhook"]
-		} else if (System.getenv("discord_webhook") != null) {
-			webhook = System.getenv("discord_webhook")
-		} else {
-			System.out.println("No webhook found...")
-			return
-		}
-
-		String commitHash = 'git rev-parse --verify --short HEAD'.execute().text.trim()
-
-		File file = remapJar.archiveFile.get().asFile
-		String fileName = "$project.archives_base_name}-${project.mod_version}-${commitHash}.jar"
-		String text = "<:Kronos:799707832399691867> **${project.archives_base_name} v${project.mod_version}-${commitHash} for ${project.minecraft_version}**"
-		URL url = new URL(webhook)
-		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection()
-
-		def cmdLine = "git log --format=%B -n 1"
-		def procCommit = cmdLine.execute()
-		String changeLog = procCommit.in.getText()
-		text = text + "\n" + changeLog
-
-		String boundary = UUID.randomUUID().toString()
-		connection.setRequestMethod("POST")
-		connection.setDoOutput(true)
-		connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary)
-		DataOutputStream stream = new DataOutputStream(connection.getOutputStream());
-
-		stream.writeBytes("--" + boundary + "\r\n")
-		stream.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + fileName + "\"\r\n\r\n")
-		stream.write(Files.readAllBytes(file.toPath()))
-		stream.writeBytes("\r\n")
-		stream.writeBytes("--" + boundary + "\r\n");
-		stream.writeBytes('Content-Disposition: form-data; name="content"\r\n\r\n' + text + '\r\n')
-		stream.writeBytes("--" + boundary + "--\r\n")
-
-		stream.flush()
-		stream.close()
-
-		connection.getInputStream().close()
-		connection.disconnect()
-	}
-
 }

@@ -79,7 +79,7 @@ public class ChatHistoryProcessor implements IMessageProcessor {
                 .width(width)
                 .creationTick(MinecraftClient.getInstance().inGameHud.getTicks())
                 .time(time)
-                .backgroundColor(new Color(0, 0, 0, 100))
+                .backgroundColor(null)
                 .build();
         if (ChatHistory.getInstance().add(line)) {
             sendToHud(line.getDisplayText(), line.getSignature(), line.getIndicator());
