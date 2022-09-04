@@ -2,6 +2,8 @@
   "advancedchat.config.yes": "Correct!",
   "advancedchat.gui.button.back": "Back",
   "advancedchat.gui.button.settings": "Settings",
+  
+  "advancedchat.gui.message.sucessful": "Success!",
 
   "advancedchat.screen.main": "§3Advanced§5Chat§f Config",
   "advancedchatcore.tab.general": "§7General",
