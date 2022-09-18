@@ -202,7 +202,7 @@ public class StyleFormatter {
                         },
                         length);
         text.visit(formatter::updateStyle, Style.EMPTY);
-        return t;
+        return flattenText(t);
     }
 
     public static MutableText flattenText(Text text) {

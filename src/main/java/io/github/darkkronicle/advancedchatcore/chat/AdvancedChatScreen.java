@@ -92,21 +92,24 @@ public class AdvancedChatScreen extends GuiBase {
         super.closeGui(showParent);
     }
 
+    public AdvancedChatScreen() {
+        super();
+        setupSections();
+    }
+
     public AdvancedChatScreen(boolean passEvents) {
+        this();
         this.passEvents = passEvents;
     }
 
     public AdvancedChatScreen(int indexOfLast) {
-        super();
-        this.originalChatText = "";
-        setupSections();
+        this();
         startHistory = indexOfLast;
     }
 
     public AdvancedChatScreen(String originalChatText) {
-        super();
+        this();
         this.originalChatText = originalChatText;
-        setupSections();
     }
 
     private void setupSections() {
@@ -124,6 +127,14 @@ public class AdvancedChatScreen extends GuiBase {
 
     public void resetCurrentMessage() {
         this.messageHistorySize = this.client.inGameHud.getChatHud().getMessageHistory().size();
+    }
+
+    @Override
+    public boolean charTyped(char charIn, int modifiers) {
+        if (passEvents) {
+            return true;
+        }
+        return super.charTyped(charIn, modifiers);
     }
 
     public void initGui() {
@@ -464,7 +475,6 @@ public class AdvancedChatScreen extends GuiBase {
         ChatHud hud = client.inGameHud.getChatHud();
         this.setFocused(this.chatField);
         this.chatField.setTextFieldFocused(true);
-        fill(matrixStack, 2, this.height - 14, this.width - 2, this.height - 2, getColor().color());
         this.chatField.render(matrixStack, mouseX, mouseY, partialTicks);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         for (AdvancedChatScreenSection section : sections) {
