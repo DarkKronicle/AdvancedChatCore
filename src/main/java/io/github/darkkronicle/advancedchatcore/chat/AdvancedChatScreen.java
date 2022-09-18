@@ -149,7 +149,7 @@ public class AdvancedChatScreen extends GuiBase {
                         this.textRenderer,
                         4,
                         this.height - 12,
-                        this.width - 4,
+                        this.width - 10,
                         12,
                         Text.translatable("chat.editBox")) {
                     protected MutableText getNarrationMessage() {
