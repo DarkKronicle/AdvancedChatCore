@@ -10,8 +10,6 @@ package io.github.darkkronicle.advancedchatcore.mixin;
 import io.github.darkkronicle.advancedchatcore.chat.AdvancedChatScreen;
 import io.github.darkkronicle.advancedchatcore.chat.MessageDispatcher;
 import io.github.darkkronicle.advancedchatcore.config.ConfigStorage;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.MessageIndicator;
@@ -26,7 +24,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Environment(EnvType.CLIENT)
 @Mixin(value = ChatHud.class, priority = 1050)
 public class MixinChatHud {
 

@@ -9,14 +9,16 @@ package io.github.darkkronicle.advancedchatcore.util;
 
 import io.github.darkkronicle.advancedchatcore.finder.RegexFinder;
 import io.github.darkkronicle.advancedchatcore.interfaces.IFinder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.regex.Matcher;
 import lombok.Getter;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.Text;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** An object that holds information about a search. */
 @Environment(EnvType.CLIENT)
@@ -69,9 +71,12 @@ public class SearchResult {
             return match;
         }
         try {
-            // TODO abstract in some way to make it not cast a ton
             RegexFinder regex = (RegexFinder) finder;
-            Matcher matcher = regex.getPattern(input).matcher(match.match);
+            Pattern p = regex.getPattern(input);
+            if (p == null) {
+                return null;
+            }
+            Matcher matcher = p.matcher(match.match);
             String group = matcher.group(num);
             int start = matcher.start(num);
             int end = matcher.start(num);
@@ -92,21 +97,27 @@ public class SearchResult {
      */
     public String getGroupReplacements(String string, int matchIndex) {
         if (matchIndex >= 0) {
-            if (finder instanceof RegexFinder) {
+            if (finder instanceof RegexFinder regex) {
                 try {
-                    return ((RegexFinder) finder)
-                            .getPattern(search)
-                            .matcher(matches.get(matchIndex).match)
-                            .replaceAll(string);
+                    Pattern p = regex.getPattern(search);
+                    if (p != null) {
+                        return
+                                p
+                                        .matcher(matches.get(matchIndex).match)
+                                        .replaceAll(string);
+                    }
                 } catch (Exception e) {
                     // Didn't work
                 }
             }
             return SearchUtils.replaceGroups(Collections.singletonList(matches.get(0)), string);
         }
-        if (finder instanceof RegexFinder) {
+        if (finder instanceof RegexFinder regex) {
             try {
-                ((RegexFinder) finder).getPattern(search).matcher(input).replaceAll(string);
+                Pattern p = regex.getPattern(search);
+                if (p != null) {
+                    return p.matcher(input).replaceAll(string);
+                }
             } catch (Exception e) {
                 // Did not work
             }

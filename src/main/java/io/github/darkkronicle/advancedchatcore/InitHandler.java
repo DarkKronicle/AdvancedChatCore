@@ -26,13 +26,12 @@ import io.github.darkkronicle.advancedchatcore.util.ProfanityUtil;
 import io.github.darkkronicle.advancedchatcore.util.StringInsert;
 import io.github.darkkronicle.advancedchatcore.util.StringMatch;
 import io.github.darkkronicle.advancedchatcore.util.TextUtil;
-import java.util.*;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.text.Text;
+
+import java.util.*;
 
 @Environment(EnvType.CLIENT)
 public class InitHandler implements IInitializationHandler {
@@ -125,10 +124,10 @@ public class InitHandler implements IInitializationHandler {
                 client.currentScreen.removed();
             }
             client.currentScreen = new AdvancedChatScreen(true);
-            BufferRenderer.unbindAll();
             client.mouse.unlockCursor();
             client.currentScreen.init(client, client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight());
             client.skipGameRender = false;;
+            client.updateWindowTitle();
             return true;
         });
         InputHandler.getInstance().add("core_general", ConfigStorage.Hotkeys.TOGGLE_PERMANENT.config, (action, key) -> {

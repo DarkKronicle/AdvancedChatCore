@@ -15,13 +15,10 @@ import io.github.darkkronicle.advancedchatcore.util.StringMatch;
 import io.github.darkkronicle.advancedchatcore.util.StyleFormatter;
 import io.github.darkkronicle.advancedchatcore.util.TextBuilder;
 import io.github.darkkronicle.advancedchatcore.util.TextUtil;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BiFunction;
-
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -30,6 +27,10 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiFunction;
 
 public class AdvancedTextField extends TextFieldWidget {
 
@@ -144,8 +145,8 @@ public class AdvancedTextField extends TextFieldWidget {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
 
-        int renderY = y - (renderLines.size() - 1) * (textRenderer.fontHeight + 2);
-        if (mouseY < renderY - 2 || mouseY > y + height + 2 || mouseX < x - 2 || mouseX > x + width + 4) {
+        int renderY = getY() - (renderLines.size() - 1) * (textRenderer.fontHeight + 2);
+        if (mouseY < renderY - 2 || mouseY > getY() + height + 2 || mouseX < getX() - 2 || mouseX > getX() + width + 4) {
             return false;
         }
         return super.mouseClicked(mouseX, mouseY, button);
@@ -157,7 +158,7 @@ public class AdvancedTextField extends TextFieldWidget {
         int cursor = getCursor();
         int cursorRow = renderLines.size() - 1;
         boolean renderCursor = this.isFocused() && focusedTicks / 6 % 2 == 0;
-        int renderY = y - (renderLines.size() - 1) * (textRenderer.fontHeight + 2);
+        int renderY = getY() - (renderLines.size() - 1) * (textRenderer.fontHeight + 2);
         int endX = 0;
         int charCount = 0;
         int cursorX = -1;
@@ -173,7 +174,9 @@ public class AdvancedTextField extends TextFieldWidget {
             selStart = this.selectionEnd;
             selEnd = this.selectionStart;
         }
-        fill(matrices, x - 2, renderY - 2, x + width + 4, y + height + 4, ConfigStorage.ChatScreen.COLOR.config.get().color());
+        int x = getX();
+        int y = getY()    ;
+        fill(matrices, getX() - 2, renderY - 2, getX() + width + 4, getY() + height + 4, ConfigStorage.ChatScreen.COLOR.config.get().color());
         for (int line = 0; line < renderLines.size(); line++) {
             Text text = renderLines.get(line);
             if (cursor >= charCount && cursor < text.getString().length() + charCount) {
@@ -225,6 +228,8 @@ public class AdvancedTextField extends TextFieldWidget {
     }
 
     private void drawSelectionHighlight(int x1, int y1, int x2, int y2) {
+        int x = getX();
+        int y = getY();
         int i;
         if (x1 < x2) {
             i = x1;
@@ -236,15 +241,15 @@ public class AdvancedTextField extends TextFieldWidget {
             y1 = y2;
             y2 = i;
         }
-        if (x2 > this.x + this.width) {
-            x2 = this.x + this.width;
+        if (x2 > x + this.width) {
+            x2 = x + this.width;
         }
-        if (x1 > this.x + this.width) {
-            x1 = this.x + this.width;
+        if (x1 > x + this.width) {
+            x1 = x + this.width;
         }
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
-        RenderSystem.setShader(GameRenderer::getPositionShader);
+        RenderSystem.setShader(GameRenderer::getPositionProgram);
         RenderSystem.setShaderColor(0.0f, 0.0f, 1.0f, 1.0f);
         RenderSystem.disableTexture();
         RenderSystem.enableColorLogicOp();
@@ -355,5 +360,10 @@ public class AdvancedTextField extends TextFieldWidget {
             undo();
         }
         return true;
+    }
+
+    @Override
+    public void appendClickableNarrations(NarrationMessageBuilder builder) {
+        // Crashes here because Text is null
     }
 }

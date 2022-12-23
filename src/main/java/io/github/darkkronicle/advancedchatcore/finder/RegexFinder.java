@@ -7,6 +7,7 @@
  */
 package io.github.darkkronicle.advancedchatcore.finder;
 
+import io.github.darkkronicle.advancedchatcore.AdvancedChatCore;
 import io.github.darkkronicle.advancedchatcore.util.*;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.MutableText;
@@ -18,12 +19,18 @@ import net.minecraft.util.Formatting;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class RegexFinder extends PatternFinder {
 
     @Override
     public Pattern getPattern(String toMatch) {
-        return Pattern.compile(toMatch);
+        try {
+            return Pattern.compile(toMatch);
+        } catch (PatternSyntaxException e) {
+            AdvancedChatCore.LOGGER.error("The regex " + toMatch + " is invalid!");
+            return null;
+        }
     }
 
     @Override
@@ -37,6 +44,9 @@ public class RegexFinder extends PatternFinder {
         String string = input.getString();
 
         Pattern pattern = getPattern(toMatch);
+        if (pattern == null) {
+            return new ArrayList<>();
+        }
         Matcher matcher = pattern.matcher(string);
 
         List<String> groups = optionalGroups.get().stream().map((match) -> match.match.substring(3, match.end - match.start - 1)).filter((match) -> match.startsWith("adv")).toList();
