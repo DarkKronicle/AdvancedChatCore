@@ -251,7 +251,7 @@ public class AdvancedTextField extends TextFieldWidget {
         BufferBuilder bufferBuilder = tessellator.getBuffer();
         RenderSystem.setShader(GameRenderer::getPositionProgram);
         RenderSystem.setShaderColor(0.0f, 0.0f, 1.0f, 1.0f);
-        RenderSystem.disableTexture();
+//        RenderSystem.disableTexture();
         RenderSystem.enableColorLogicOp();
         RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION);
@@ -262,7 +262,7 @@ public class AdvancedTextField extends TextFieldWidget {
         tessellator.draw();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.disableColorLogicOp();
-        RenderSystem.enableTexture();
+//        RenderSystem.enableTexture();
     }
 
     @Override

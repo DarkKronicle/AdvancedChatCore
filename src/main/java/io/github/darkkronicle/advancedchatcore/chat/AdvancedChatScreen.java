@@ -383,7 +383,7 @@ public class AdvancedChatScreen extends GuiBase {
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         ChatHud hud = client.inGameHud.getChatHud();
         this.setFocused(this.chatField);
-        this.chatField.setTextFieldFocused(true);
+        this.chatField.setFocused(true);
         this.chatField.render(matrixStack, mouseX, mouseY, partialTicks);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         for (AdvancedChatScreenSection section : sections) {

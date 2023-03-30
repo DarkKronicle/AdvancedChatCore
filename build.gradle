@@ -30,7 +30,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.19.3:${project.malilib_version}"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.19.4:${project.malilib_version}"
 	modCompileOnly "com.terraformersmc:modmenu:5.0.1"
 
 	implementation "com.github.DarkKronicle.Konstruct:addons:${project.konstruct_version}"
