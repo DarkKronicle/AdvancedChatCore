@@ -77,7 +77,7 @@ public class IconButton extends CleanButton {
                 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
 
         if (hovered && onHover != null) {
-            DrawableHelper.drawStringWithShadow(
+            DrawableHelper.drawCenteredTextWithShadow(
                     matrixStack,
                     MinecraftClient.getInstance().textRenderer,
                     onHover,
