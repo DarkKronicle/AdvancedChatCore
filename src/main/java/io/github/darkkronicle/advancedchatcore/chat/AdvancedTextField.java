@@ -16,7 +16,7 @@ import io.github.darkkronicle.advancedchatcore.util.StyleFormatter;
 import io.github.darkkronicle.advancedchatcore.util.TextBuilder;
 import io.github.darkkronicle.advancedchatcore.util.TextUtil;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -153,7 +153,7 @@ public class AdvancedTextField extends TextFieldWidget {
     }
 
     @Override
-    public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
         int color = 0xE0E0E0;
         int cursor = getCursor();
         int cursorRow = renderLines.size() - 1;
@@ -176,14 +176,14 @@ public class AdvancedTextField extends TextFieldWidget {
         }
         int x = getX();
         int y = getY()    ;
-        fill(matrices, getX() - 2, renderY - 2, getX() + width + 4, getY() + height + 4, ConfigStorage.ChatScreen.COLOR.config.get().color());
+        context.fill(getX() - 2, renderY - 2, getX() + width + 4, getY() + height + 4, ConfigStorage.ChatScreen.COLOR.config.get().color());
         for (int line = 0; line < renderLines.size(); line++) {
             Text text = renderLines.get(line);
             if (cursor >= charCount && cursor < text.getString().length() + charCount) {
                 cursorX = textRenderer.getWidth(text.getString().substring(0, cursor - charCount));
                 cursorRow = line;
             }
-            endX = textRenderer.drawWithShadow(matrices, text, x, renderY, color);
+            endX = context.drawTextWithShadow(textRenderer, text, x, renderY, color);
             if (selection) {
                 if (!started && selStart >= charCount && selStart <= text.getString().length() + charCount) {
                     started = true;
@@ -215,14 +215,14 @@ public class AdvancedTextField extends TextFieldWidget {
         }
         boolean cursorAtEnd = getCursor() == getText().length();
         if (!cursorAtEnd && this.suggestion != null) {
-            this.textRenderer.drawWithShadow(matrices, this.suggestion, endX - 1, y, -8355712);
+            context.drawTextWithShadow(textRenderer, this.suggestion, endX - 1, y, -8355712);
         }
         if (renderCursor) {
             int cursorY = y - (renderLines.size() - 1 - cursorRow) * (textRenderer.fontHeight + 2);
             if (cursorAtEnd) {
-                DrawableHelper.fill(matrices, cursorX, cursorY - 1, cursorX + 1, cursorY + 1 + this.textRenderer.fontHeight, -3092272);
+                context.fill(cursorX, cursorY - 1, cursorX + 1, cursorY + 1 + this.textRenderer.fontHeight, -3092272);
             } else {
-                this.textRenderer.drawWithShadow(matrices, "_", x + cursorX, cursorY, color);
+                context.drawTextWithShadow(textRenderer, "_", x + cursorX, cursorY, color);
             }
         }
     }

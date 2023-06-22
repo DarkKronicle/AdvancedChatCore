@@ -21,8 +21,9 @@ if (file("extra.properties").exists()) {
 repositories {
 	mavenCentral()
 	maven { url 'https://masa.dy.fi/maven' }
-    maven { url 'https://maven.terraformersmc.com/releases/' }
+	maven { url 'https://maven.terraformersmc.com/releases/' }
 	maven { url 'https://jitpack.io' }
+	maven { url 'https://maven.wispforest.io' }
 }
 
 dependencies {
@@ -30,8 +31,8 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.19.4:${project.malilib_version}"
-	modCompileOnly "com.terraformersmc:modmenu:5.0.1"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.20.1:${project.malilib_version}"
+	modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
 
 	implementation "com.github.DarkKronicle.Konstruct:addons:${project.konstruct_version}"
 	implementation "com.github.DarkKronicle.Konstruct:core:${project.konstruct_version}"

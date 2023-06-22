@@ -19,6 +19,7 @@ import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.RowList;
 import lombok.Getter;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -380,18 +381,19 @@ public class AdvancedChatScreen extends GuiBase {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(DrawContext context, int mouseX, int mouseY, float partialTicks) {
         ChatHud hud = client.inGameHud.getChatHud();
         this.setFocused(this.chatField);
         this.chatField.setFocused(true);
-        this.chatField.render(matrixStack, mouseX, mouseY, partialTicks);
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.chatField.render(context, mouseX, mouseY, partialTicks);
+        super.render(context, mouseX, mouseY, partialTicks);
         for (AdvancedChatScreenSection section : sections) {
-            section.render(matrixStack, mouseX, mouseY, partialTicks);
+            section.render(context, mouseX, mouseY, partialTicks);
         }
         Style style = hud.getTextStyleAt(mouseX, mouseY);
         if (style != null && style.getHoverEvent() != null) {
-            this.renderTextHoverEffect(matrixStack, style, mouseX, mouseY);
+            context.drawHoverEvent(textRenderer, style, mouseX, mouseY);
+            //this.renderTextHoverEffect(context, style, mouseX, mouseY);
         }
     }
 
