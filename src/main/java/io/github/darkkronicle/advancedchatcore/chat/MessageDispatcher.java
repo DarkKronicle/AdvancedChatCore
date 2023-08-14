@@ -9,17 +9,7 @@ package io.github.darkkronicle.advancedchatcore.chat;
 
 import io.github.darkkronicle.advancedchatcore.interfaces.IMessageFilter;
 import io.github.darkkronicle.advancedchatcore.interfaces.IMessageProcessor;
-import io.github.darkkronicle.advancedchatcore.util.FindType;
-import io.github.darkkronicle.advancedchatcore.util.SearchResult;
-import io.github.darkkronicle.advancedchatcore.util.SearchUtils;
-import io.github.darkkronicle.advancedchatcore.util.StringInsert;
-import io.github.darkkronicle.advancedchatcore.util.StringMatch;
-import io.github.darkkronicle.advancedchatcore.util.StyleFormatter;
-import io.github.darkkronicle.advancedchatcore.util.TextUtil;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import io.github.darkkronicle.advancedchatcore.util.*;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.hud.MessageIndicator;
@@ -29,6 +19,11 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * A class to handle chat events.
@@ -54,25 +49,18 @@ public class MessageDispatcher {
         registerPreFilter(
                 text -> {
                     String string = text.getString();
-                    if (string.isEmpty()) {
-                        return Optional.empty();
-                    }
-                    SearchResult search =
-                            SearchResult.searchOf(
-                                    string,
-                                    "(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/=]*)",
-                                    FindType.REGEX);
-                    if (search.size() == 0) {
-                        return Optional.empty();
-                    }
+                    if (string.isEmpty()) return Optional.empty();
+
+                    SearchResult search = SearchResult.searchOf(string, "(http(s)?:\\/\\/.)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/=]*)", FindType.REGEX);
+                    if (search.size() == 0) return Optional.empty();
+
                     Map<StringMatch, StringInsert> insert = new HashMap<>();
                     for (StringMatch match : search.getMatches()) {
                         insert.put(
                                 match,
                                 (current, match1) -> {
                                     String url = match1.match;
-                                    if (!SearchUtils.isMatch(
-                                            match1.match, "(http(s)?:\\/\\/.)", FindType.REGEX)) {
+                                    if (!SearchUtils.isMatch(match1.match, "(http(s)?:\\/\\/.)", FindType.REGEX)) {
                                         url = "https://" + url;
                                     }
                                     if (current.getStyle().getClickEvent() == null) {
@@ -81,7 +69,6 @@ public class MessageDispatcher {
                                     return MutableText.of(current.getContent()).fillStyle(current.getStyle());
                                 });
                     }
-                    text = TextUtil.replaceStrings(text, insert);
                     return Optional.of(text);
                 },
                 -1);
@@ -145,7 +132,7 @@ public class MessageDispatcher {
      * registerProcess
      *
      * @param processor IMessageFilter to modify text
-     * @param index Index to add it. Supplying a negative value will put it at the end.
+     * @param index     Index to add it. Supplying a negative value will put it at the end.
      */
     public void registerPreFilter(IMessageFilter processor, int index) {
         if (index < 0) {
@@ -161,8 +148,8 @@ public class MessageDispatcher {
      * preprocessed.
      *
      * @param processor IMessageProcessor to get called back
-     * @param index Index that it will be added to. Supplying a negative value will put it at the
-     *     end.
+     * @param index     Index that it will be added to. Supplying a negative value will put it at the
+     *                  end.
      */
     public void register(IMessageProcessor processor, int index) {
         if (index < 0) {
