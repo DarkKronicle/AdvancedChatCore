@@ -21,7 +21,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.render.*;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -44,7 +43,6 @@ public class AdvancedTextField extends TextFieldWidget {
 
     /** Snapshots of chat box */
     private final List<String> history = new ArrayList<>();
-
     private int focusedTicks = 0;
     private List<Text> renderLines = new ArrayList<>();
     private TextRenderer textRenderer;
@@ -75,7 +73,6 @@ public class AdvancedTextField extends TextFieldWidget {
         updateRender();
     }
 
-    @Override
     public void tick() {
         focusedTicks++;
     }

@@ -23,7 +23,6 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -283,26 +282,26 @@ public class AdvancedChatScreen extends GuiBase {
         return false;
     }
 
-    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
-        if (amount > 1.0D) {
-            amount = 1.0D;
+    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
+        if (verticalAmount > 1.0D) {
+            verticalAmount = 1.0D;
         }
 
-        if (amount < -1.0D) {
-            amount = -1.0D;
+        if (verticalAmount < -1.0D) {
+            verticalAmount = -1.0D;
         }
 
         for (AdvancedChatScreenSection section : sections) {
-            if (section.mouseScrolled(mouseX, mouseY, amount)) {
+            if (section.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount)) {
                 return true;
             }
         }
         if (!hasShiftDown()) {
-            amount *= 7.0D;
+            verticalAmount *= 7.0D;
         }
 
         // Send to hud to scroll
-        client.inGameHud.getChatHud().scroll((int) amount);
+        client.inGameHud.getChatHud().scroll((int) verticalAmount);
         return true;
     }
 
