@@ -14,6 +14,7 @@ import io.github.darkkronicle.advancedchatcore.util.Color;
 import io.github.darkkronicle.advancedchatcore.util.Colors;
 import java.util.Optional;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class WidgetColor extends GuiTextFieldGeneric {
@@ -30,8 +31,8 @@ public class WidgetColor extends GuiTextFieldGeneric {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
+    public void render(DrawContext context, int mouseX, int mouseY, float partialTicks) {
+        super.render(context, mouseX, mouseY, partialTicks);
         int y = this.y;
         RenderUtils.drawRect(this.colorX, y, 19, 19, 0xFFFFFFFF);
         RenderUtils.drawRect(this.colorX + 1, y + 1, 17, 17, 0xFF000000);

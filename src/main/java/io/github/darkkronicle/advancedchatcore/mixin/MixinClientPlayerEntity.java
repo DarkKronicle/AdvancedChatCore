@@ -18,7 +18,7 @@ public abstract class MixinClientPlayerEntity extends Entity {
 
     @Shadow @Final protected MinecraftClient client;
 
-    @Shadow public float nextNauseaStrength;
+    @Shadow public float nauseaIntensity;
 
     public MixinClientPlayerEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -32,9 +32,9 @@ public abstract class MixinClientPlayerEntity extends Entity {
     public void updateNauseaHook(CallbackInfo ci) {
         if (client.currentScreen instanceof AdvancedChatScreen) {
             ci.cancel();
-            nextNauseaStrength += 0.0125f;
-            if (this.nextNauseaStrength >= 1.0f) {
-                this.nextNauseaStrength = 1.0f;
+            nauseaIntensity += 0.0125f;
+            if (this.nauseaIntensity >= 1.0f) {
+                this.nauseaIntensity = 1.0f;
             }
             inNetherPortal = false;
         }

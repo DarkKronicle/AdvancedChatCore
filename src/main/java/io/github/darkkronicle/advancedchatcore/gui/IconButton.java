@@ -6,7 +6,7 @@ import io.github.darkkronicle.advancedchatcore.util.Colors;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.sound.SoundEvents;
@@ -59,7 +59,7 @@ public class IconButton extends CleanButton {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean unused, MatrixStack matrixStack) {
+    public void render(int mouseX, int mouseY, boolean unused, DrawContext context) {
         int relMX = mouseX - x;
         int relMY = mouseY - y;
         hovered = relMX >= 0 && relMX <= width && relMY >= 0 && relMY <= height;
@@ -73,12 +73,11 @@ public class IconButton extends CleanButton {
 
         RenderUtils.color(1, 1, 1, 1);
         RenderUtils.bindTexture(icon);
-        DrawableHelper.drawTexture(matrixStack, x + padding, y + padding, width - (padding * 2), height - (padding * 2),
+        context.drawTexture(icon, x + padding, y + padding, width - (padding * 2), height - (padding * 2),
                 0, 0, iconWidth, iconHeight, iconWidth, iconHeight);
 
         if (hovered && onHover != null) {
-            DrawableHelper.drawCenteredTextWithShadow(
-                    matrixStack,
+            context.drawCenteredTextWithShadow(
                     MinecraftClient.getInstance().textRenderer,
                     onHover,
                     mouseX + 4,

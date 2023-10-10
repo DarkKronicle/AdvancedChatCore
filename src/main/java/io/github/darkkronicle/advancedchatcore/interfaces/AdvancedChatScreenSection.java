@@ -68,7 +68,7 @@ public abstract class AdvancedChatScreenSection implements Drawable {
      * @param amount Scroll amount
      * @return If it was handled and should stop.
      */
-    public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount){
         return false;
     }
 
