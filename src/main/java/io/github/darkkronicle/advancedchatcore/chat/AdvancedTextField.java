@@ -75,7 +75,7 @@ public class AdvancedTextField extends TextFieldWidget {
         updateRender();
     }
 
-    @Override
+    //@Override
     public void tick() {
         focusedTicks++;
     }
