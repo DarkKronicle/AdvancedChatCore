@@ -11,6 +11,8 @@ import fi.dy.masa.malilib.gui.widgets.WidgetLabel;
 import fi.dy.masa.malilib.render.RenderUtils;
 import java.util.Arrays;
 import java.util.List;
+
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class WidgetLabelHoverable extends WidgetLabel {
@@ -33,8 +35,8 @@ public class WidgetLabelHoverable extends WidgetLabel {
 
     @Override
     public void postRenderHovered(
-            int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
-        super.postRenderHovered(mouseX, mouseY, selected, matrixStack);
+            int mouseX, int mouseY, boolean selected, DrawContext context) {
+        super.postRenderHovered(mouseX, mouseY, selected, context);
 
         if (hoverLines == null) {
             return;
@@ -44,7 +46,7 @@ public class WidgetLabelHoverable extends WidgetLabel {
                 && mouseX < this.x + this.width
                 && mouseY >= this.y
                 && mouseY <= this.y + this.height) {
-            RenderUtils.drawHoverText(mouseX, mouseY, this.hoverLines, matrixStack);
+            RenderUtils.drawHoverText(mouseX, mouseY, this.hoverLines, context);
         }
     }
 }

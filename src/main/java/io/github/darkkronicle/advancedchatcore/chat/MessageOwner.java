@@ -34,6 +34,6 @@ public class MessageOwner {
      * @return Identifier with texture data
      */
     public Identifier getTexture() {
-        return entry.getSkinTexture();
+        return entry.getSkinTextures().texture();
     }
 }

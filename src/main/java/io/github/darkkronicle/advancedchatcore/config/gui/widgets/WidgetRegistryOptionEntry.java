@@ -21,6 +21,7 @@ import io.github.darkkronicle.advancedchatcore.util.Colors;
 import java.util.List;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 
@@ -75,7 +76,7 @@ public class WidgetRegistryOptionEntry<T extends ConfigRegistryOption<?>>
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext context) {
         RenderUtils.color(1f, 1f, 1f, 1f);
 
         // Draw a lighter background for the hovered and the selected entry
@@ -107,20 +108,20 @@ public class WidgetRegistryOptionEntry<T extends ConfigRegistryOption<?>>
                 this.y + 7,
                 Colors.getInstance().getColorOrWhite("white").color(),
                 name,
-                matrixStack);
+                context);
 
         RenderUtils.color(1f, 1f, 1f, 1f);
         RenderSystem.disableBlend();
 
-        super.render(mouseX, mouseY, selected, matrixStack);
+        super.render(mouseX, mouseY, selected, context);
 
         RenderUtils.disableDiffuseLighting();
     }
 
     @Override
     public void postRenderHovered(
-            int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
-        super.postRenderHovered(mouseX, mouseY, selected, matrixStack);
+            int mouseX, int mouseY, boolean selected, DrawContext context) {
+        super.postRenderHovered(mouseX, mouseY, selected, context);
 
         if (hoverLines == null) {
             return;
@@ -129,7 +130,7 @@ public class WidgetRegistryOptionEntry<T extends ConfigRegistryOption<?>>
                 && mouseX < this.buttonStartX
                 && mouseY >= this.y
                 && mouseY <= this.y + this.height) {
-            RenderUtils.drawHoverText(mouseX, mouseY, this.hoverLines, matrixStack);
+            RenderUtils.drawHoverText(mouseX, mouseY, this.hoverLines, context);
         }
     }
 
