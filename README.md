@@ -1,3 +1,7 @@
+# Important
+
+I have no real interest in mod development at the moment, so I am archiving this. Feel free to fork, and consider some of the community forks/
+
 # AdvancedChatCore
 
 This is the base mod of all AdvancedChat modules and features. This mod provides the necessary foundation and framework for AdvancedChat mod's to work.
@@ -66,5 +70,3 @@ Logo & Proofreading: Chronos22
 Libraries:
 - [MathParser](http://mathparser.org/)
 - [OwO](https://github.com/maowcraft/owo)
-
-For more help join the [Discord](https://discord.gg/WnaE3uZxDA)
