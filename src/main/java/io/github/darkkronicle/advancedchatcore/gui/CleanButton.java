@@ -16,6 +16,7 @@ import lombok.ToString;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
 /** A simple button */
@@ -46,7 +47,7 @@ public class CleanButton extends ButtonBase {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack) {
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext context) {
         int relMX = mouseX - x;
         int relMY = mouseY - y;
         hovered = relMX >= 0 && relMX <= width && relMY >= 0 && relMY <= height;
@@ -60,6 +61,6 @@ public class CleanButton extends ButtonBase {
                 (y + (height / 2) - 3),
                 Colors.getInstance().getColorOrWhite("white").color(),
                 displayString,
-                matrixStack);
+                context);
     }
 }

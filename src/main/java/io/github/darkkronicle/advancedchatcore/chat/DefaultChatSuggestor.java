@@ -11,6 +11,7 @@ import io.github.darkkronicle.advancedchatcore.interfaces.AdvancedChatScreenSect
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatInputSuggestor;
 import net.minecraft.client.util.math.MatrixStack;
 
@@ -36,8 +37,8 @@ public class DefaultChatSuggestor extends AdvancedChatScreenSection {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.commandSuggestor.render(matrixStack, mouseX, mouseY);
+    public void render(DrawContext context, int mouseX, int mouseY, float partialTicks) {
+        this.commandSuggestor.render(context, mouseX, mouseY);
     }
 
     @Override
